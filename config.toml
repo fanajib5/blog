@@ -13,6 +13,11 @@ name = "Faiq Najib"
 [markup]
 defaultMarkdownHandler = "goldmark"
 
+[markup.tableOfContents]
+endLevel = 4
+ordered = false
+startLevel = 2
+
 [markup.goldmark.renderer]
 unsafe = true
 [markup.goldmark.parser]
@@ -70,7 +75,9 @@ description = "关于"
 
 [comment]
 enable = true
-[comment.giscus]
+provider = "giscus"
+
+[[params.comment.giscus]]
 repo = "fanajib5/hugo-site"
 repoId = "MDEwOlJlcG9zaXRvcnkzODcxMjM2NDU="
 category = "Comments"
