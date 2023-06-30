@@ -1,0 +1,14 @@
+{{ define "main" }}
+	<main class="wrapper">
+		<h1><a href="/" class="home">{{.Title}}</a></h1>
+		{{ if .Content -}}
+		<div class="content">
+			{{ .Content }}
+		</div>
+		{{- end }}
+		{{ with .Params.comments -}}
+		{{ partialCached "comments.html" . }}
+		{{- end }}
+	</main>
+	<hr>
+{{- end }}

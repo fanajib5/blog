@@ -1,4 +1,81 @@
-baseURL = 'http://hugo-quickstart-template.netlify.com'
-languageCode = 'en-us'
-title = 'Netlify + Hugo Quickstart'
+baseURL = "https://najib.id"
+#title = "Blogfolio Najib"
+staticDir = ["static", "content-static"]
+languageCode = "id-ID"
+defaultContentLanguage = 'id'
+hasCJKLanguage = true
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 theme = 'netlify-basic'
+
+[author]
+name = "Faiq Najib"
+
+[markup]
+defaultMarkdownHandler = "goldmark"
+
+[markup.goldmark.renderer]
+unsafe = true
+[markup.goldmark.parser]
+wrapStandAloneImageWithinParagraph = false
+[markup.goldmark.parser.attribute]
+block = true
+title = true
+[markup.highlight]
+codeFences = true
+guessSyntax = false
+noClasses = false
+
+# [taxonomies]
+#   tag = "tags"
+
+[params]
+images = ["apple-touch-icon.png"]
+
+[menu]
+
+[[menu.main]]
+name = "Home"
+pageref = "/"
+weight = 1
+[menu.main.params]
+description = "主页"
+
+[[menu.main]]
+name = "Writing"
+pageref = "/writing"
+weight = 10
+[menu.main.params]
+description = "文章归档"
+
+[[menu.main]]
+name = "Gallery"
+pageref = "/gallery"
+weight = 20
+[menu.main.params]
+description = "相册"
+
+[[menu.main]]
+name = "Link"
+pageref = "/link"
+weight = 30
+[menu.main.params]
+description = "链接与留言板"
+
+[[menu.main]]
+name = "About"
+pageref = "/about"
+weight = 40
+[menu.main.params]
+description = "关于"
+
+[comment]
+enable = true
+[comment.giscus]
+repo = "fanajib5/hugo-site"
+repoId = "MDEwOlJlcG9zaXRvcnkzODcxMjM2NDU="
+category = "Comments"
+categoryId = "DIC_kwDOFxMJvc4CScQm"
+mapping = "pathname"
+inputPosition = "buttom"
+reactions = true
+metadata = false

@@ -1,0 +1,30 @@
+{{ define "main" }}
+	<main class="wrapper">
+		<h1><a href="/" class="home">{{.Title}}</a></h1>
+		<div class="dim post-info">
+			{{ dateFormat ":date_long" .Date.Local }}
+		</div>
+		{{ if .Content -}}
+		<div class="content">
+			{{ .Content }}
+		</div>
+		{{- end }}
+		<ul class="lsn dim post-footer">
+			<li>Diterbitkan: {{ dateFormat "2006-01-02 15:04 MST" .Date.UTC }}</li>
+			<li>Diperbarui: {{ dateFormat "2006-01-02 15:04 MST" .Lastmod.UTC }}</li>
+			<li>Jumlah kata：{{ .WordCount }}</li>
+			{{- with .Params.tags }}
+			<li>Label：{{- range . -}}<a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="post-tag">{{.}}</a>{{ end }}</li>
+			{{- end }}
+			<li></li>
+			{{- with .PrevInSection }}
+			<li>Sebelumnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			{{- end }}
+			{{- with .NextInSection }}
+			<li>Selanjutnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			{{- end }}
+		</ul>
+		{{ partialCached "comments.html" . }}
+	</main>
+	<hr>
+{{- end }}
