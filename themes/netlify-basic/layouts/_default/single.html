@@ -6,7 +6,9 @@
 			{{ .Content }}
 		</div>
 		{{- end }}
+
 		{{ with .Params.comments -}}
+		<br>
 		{{ partialCached "comments.html" . }}
 		{{- end }}
 	</main>
