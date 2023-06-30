@@ -12,3 +12,7 @@ images:
 ---
 
 ![demo](https://placehold.co/600x400/webp)
+
+{{< photo src="DSCF0180_3000.webp" alt="建筑" caption="" >}}
+
+{{< figure src="https://via.placeholder.com/1600x800" alt="image" caption="figure-big" class="big" >}}
