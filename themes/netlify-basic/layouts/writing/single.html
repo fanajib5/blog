@@ -4,6 +4,22 @@
 		<div class="dim post-info">
 			{{ dateFormat ":date_long" .Date.Local }}
 		</div>
+
+		<div>
+			<p style="font-style: italic;">
+				{{ .Description }}
+			</p>
+		</div>
+
+		{{ if .Params.toc }}
+		<hr />
+		<aside id="toc">
+			<div class="toc-title" style="font-style: italic;"><h2>Table of Contents</h2></div>
+			{{ .TableOfContents }}
+		</aside>
+		<hr />
+		{{ end }}
+
 		{{ if .Content -}}
 		<div class="content">
 			{{ .Content }}
@@ -16,15 +32,19 @@
 			{{- with .Params.tags }}
 			<li>Label：{{- range . -}}<a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="post-tag">{{.}}</a>{{ end }}</li>
 			{{- end }}
-			<li></li>
+			<br>
 			{{- with .PrevInSection }}
-			<li>Sebelumnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			<li>Artikel sebelumnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
 			{{- end }}
 			{{- with .NextInSection }}
-			<li>Selanjutnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			<li>Artikel selanjutnya：<a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
 			{{- end }}
 		</ul>
+
+		{{ with .Params.comments -}}
+		<br>
 		{{ partialCached "comments.html" . }}
+		{{- end }}
 	</main>
 	<hr>
 {{- end }}
