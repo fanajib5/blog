@@ -25,6 +25,23 @@
 	{{ $style := resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "css/style.css" . | toCSS | minify |
 	fingerprint -}}
 	<link rel="stylesheet" href="{{ $style.RelPermalink }}" {{ printf "integrity=%q" $style.Data.Integrity | safeHTMLAttr}}>
+
+	<script>
+		// default to system color scheme.
+		let default_theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+		try {
+			const local = localStorage.getItem('theme')
+			if (local) {
+				default_theme = local
+			}
+			localStorage.setItem('theme', default_theme);
+			window.site_theme = default_theme;
+			document.querySelector('html').classList.add(default_theme);
+		} catch (e) {
+			console.error(e);
+		}
+	</script>
 </head>
 
 <body>
@@ -40,6 +57,7 @@
 			{{- end }}
 		</ul>
 	</nav>
+
 	<footer class="wrapper">
 		<h2>About</h2>
 		<ul class="lsn dim site-footer">
