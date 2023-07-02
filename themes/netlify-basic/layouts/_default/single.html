@@ -7,11 +7,6 @@
 		</div>
 		{{- end }}
 
-		{{ with .Params.contacts -}}
-		<br>
-		{{ partialCached "contact.html" . }}
-		{{- end }}
-
 		{{ with .Params.comments -}}
 		<br>
 		{{ partialCached "comments.html" . }}
