@@ -1,13 +1,13 @@
 {{ define "main" }}
 	<main class="wrapper">
 		<h1><a href="/" class="home">{{.Title}}</a></h1>
-		<p>服务器找不到请求的页面，可能原因有:</p>
+		<p>Peladen tidak dapat menemukan halaman yang diminta karena alasan berikut:</p>
 		<ul class="lsc">
-			<li>您可能输入了错误的网址;</li>
-			<li>网址已被转移;</li>
-			<li>网址从未存在。</li>
+			<li>Anda mungkin memasukkan URL yang salah;</li>
+			<li>URL telah ditransfer;</li>
+			<li>URL tidak pernah ada.</li>
 		</ul>
-		<!-- <img src="{{ "img/404.png" | relURL }}" alt="Nothing Found"> -->
+		<p>Silakan kembali ke <a href="/">Beranda</a> atau menu yang lain.</p>
 	</main>
 	<hr>
 {{- end }}
