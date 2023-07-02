@@ -7,6 +7,8 @@ hasCJKLanguage = true
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 theme = 'netlify-basic'
 
+enableGitInfo = true
+
 [author]
 name = "Faiq Najib"
 
@@ -43,46 +45,36 @@ name = "Home"
 pageref = "/"
 weight = 1
 [menu.main.params]
-description = "主页"
+description = "Beranda"
 
 [[menu.main]]
 name = "Writing"
 pageref = "/writing"
 weight = 10
 [menu.main.params]
-description = "文章归档"
+description = "Arsip artikel"
 
 [[menu.main]]
 name = "Gallery"
 pageref = "/gallery"
 weight = 20
 [menu.main.params]
-description = "相册"
+description = "Album foto"
 
 [[menu.main]]
 name = "Link"
 pageref = "/link"
 weight = 30
 [menu.main.params]
-description = "链接与留言板"
+description = "Tautan dan papan pesan"
 
 [[menu.main]]
 name = "About"
 pageref = "/about"
 weight = 40
 [menu.main.params]
-description = "关于"
+description = "Tentang"
 
 [comment]
 enable = true
 provider = "giscus"
-
-[[params.comment.giscus]]
-repo = "fanajib5/hugo-site"
-repoId = "MDEwOlJlcG9zaXRvcnkzODcxMjM2NDU="
-category = "Comments"
-categoryId = "DIC_kwDOFxMJvc4CScQm"
-mapping = "pathname"
-inputPosition = "buttom"
-reactions = true
-metadata = false
