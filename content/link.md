@@ -6,4 +6,6 @@ draft: false
 comments: true
 ---
 
-Baru-baru ini, saya mengubah judul dan alamat halaman ini menjadi `link`, yang tidak hanya berarti "hyperlink" sebagai kata benda, tetapi juga berarti "koneksi" dan "koneksi" sebagai kata kerja. Tidak hanya tautan teman, tetapi juga blog-blog menarik yang telah saya kumpulkan, dan yang lebih penting, itu juga papan pesan.
+Baru-baru ini, saya mengubah judul dan alamat halaman ini menjadi `link`, yang tidak hanya berarti "_hyperlink_" sebagai kata benda, tetapi juga berarti "koneksi" itu sendiri dan "koneksi" sebagai kata kerja. Tidak hanya tautan teman, tetapi juga blog-blog menarik yang telah saya kumpulkan, dan yang lebih penting, juga sebagai papan pesan.
+
+
