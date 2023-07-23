@@ -4,7 +4,7 @@ date: 2019-04-20T17:34:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
 location: Jl. Parahyangan KM. 2,7, Kota Baru Parahyangan, Cipeundeuy, Kec. Padalarang, Kabupaten Bandung Barat, Jawa Barat 40553
 author: "Faiq Najib"
-shot_date: 2021-03-20
+shot_date: 2019-04-20
 shot_with: Xiaomi Redmi Note 5
 description:
 draft: false
