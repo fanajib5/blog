@@ -1,5 +1,5 @@
 ---
-title: "Studi tamasya bagian 1"
+title: "Studi tamasya bagian 2"
 date: 2017-01-26T07:31:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
 location: N/A (sekitar Jawa Tengah)
