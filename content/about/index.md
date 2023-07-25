@@ -8,7 +8,7 @@ comments: true
 
 Lahir pada tahun 1997, berlokasi di Jombang, Jawa Timur. Saya mempunyai minat seperti dalam hal teknologi digital, bisa menulis sedikit kode, dan ingin belajar segalanya meskipun sama-sama mempunyai waktu 24 jam, tapi ~~tidak~~ masih belum mahir dalam beberapa hal. Sesekali ~~bermain game~~ membaca webtoon/manhwa dan mendengarkan musik.
 
-Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di [GitHub](https://github.com/fanajib5/hugo-site) sekaligus dengan file sumber Markdown artikel. Anda dapat menggunakan kode sumber situs ini di bawah persetujuan [Mozilla Public License 2.0](https://opensource.org/license/mpl-2-0/). Artikel, gambar, dan konten lainnya mengikuti [CC BY- NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh) perjanjian.
+Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di [GitHub](https://github.com/fanajib5/hugo-site) sekaligus dengan file sumber Markdown artikel. Anda dapat menggunakan kode sumber situs ini di bawah persetujuan [Mozilla Public License 2.0](https://opensource.org/license/mpl-2-0/). Artikel, gambar, dan konten lainnya mengikuti perjanjian [CC BY- NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh).
 
 ## Find me on…
 
