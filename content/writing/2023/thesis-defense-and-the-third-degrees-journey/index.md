@@ -24,7 +24,7 @@ Saya pun resmi menjadi mahasiswa bimbingan [Prof. Erma Suryani, ST., MT., Ph.D.]
 
 Setelah meminta kontak beliau lewat staf tata usaha jurusan, saya menghubungi Prof. Erma dengan sigap. Memperkenalkan diri saya sebagai mahasiswa bimbingan beliau yang baru sekaligus menanyakan terkait perwalian dan pengisian Formulir Rencana Studi (FRS).
 
-Beliau pun membalas pesan saya tanpa menunggu waktu lama. Pengalaman yang cukup berbeda dibandingkan saat D3&mdash;_Ehem_. Omong-omong, Prof. Erma pun langsung menyetujinya. (Sebuah pertanda ke-1 &#x2705;)
+Beliau pun membalas pesan saya tanpa menunggu waktu lama. Pengalaman yang cukup berbeda dibandingkan saat D3&mdash;_Ehem_. Omong-omong, Prof. Erma pun langsung menyetujinya.
 
 Orang tua menanyakan kemungkinan saya menyelesaikan studi dalam tiga semester. Sehingga membuat saya harus melaksakan ujian proposal tesis di semester dua ini.
 
@@ -50,9 +50,9 @@ Hingga tepat pekan perkuliahan ke-12, saya menyelesaikan draft awal proposal tes
 
 Kedua teman saya, Titan dan Fadlil, ikut berkomentar bahwa saya sudah cukup terlambat untuk memulai penyusunan proposal tesis. _Masa bodoh. Toh emang nyoba. Kalau ditolak beliau, ya sudah_, begitulah pikir saya.
 
-Tanpa diduga, Prof. Erma malah memberikan saran dan secara garis besar masih memberikan lampu hijau pada draft proposal saya. Sepertinya beliau mencontohkan ungkapan beliau, _nggak usah takut, dicoba dulu aja_. (Sebuah pertanda ke-2 &#x2705;)
+Tanpa diduga, Prof. Erma malah memberikan saran dan secara garis besar masih memberikan lampu hijau pada draft proposal saya. Sepertinya beliau mencontohkan ungkapan beliau, _nggak usah takut, dicoba dulu aja_.
 
-Hari-hari dengan beberapa sesi bimbingan denan beliau pun terlewat. Tepat sebelum ujian akhir semester, beliau mengizinkan saya untuk maju seminar proposal tesis. Pada tahap ini sedikit demi sedikit, ungkapan bahwa penelitian S2 adalah mayoritas menjadi tanggung jawab mahasiswanya, mulai terasa. (Sebuah pertanda ke-3 &#x2705;)
+Hari-hari dengan beberapa sesi bimbingan denan beliau pun terlewat. Tepat sebelum ujian akhir semester, beliau mengizinkan saya untuk maju seminar proposal tesis. Pada tahap ini sedikit demi sedikit, ungkapan bahwa penelitian S2 adalah mayoritas menjadi tanggung jawab mahasiswanya, mulai terasa.
 
 Akhirnya, seminar proposal saya pun berhasil dilaksanakan dengan hasil revisi pada metode penelitian secara besar-besaran haha. Apa mau dikata, itulah hasil pengerjaan yang setengah hati (maaf ya, Prof!).
 
@@ -72,13 +72,13 @@ Rentetan kegiatan seperti mencari hiburan, menghilangkan lelah/stres, menenangka
 
 Alhasil, saya lagi-lagi mengerjakan tesis dengan setengah hati namun dengan penuh kesadaran bahwa penelitian tesis adalah hampir sepenuhnya menjadi tanggung jawab saya.
 
-Di sini juga saya merasakan pengalaman dosen pembimbing yang memberikan kebebasan pada mahasiswanya. Kebebasan dalam artian apa pun, mau mengerjakan tesis seperti apa, bahkan tidak mengerjakan pun sepertinya tidak apa-apa. (Sebuah pertanda ke-4 &#x2705;)
+Di sini juga saya merasakan pengalaman dosen pembimbing yang memberikan kebebasan pada mahasiswanya. Kebebasan dalam artian apa pun, mau mengerjakan tesis seperti apa, bahkan tidak mengerjakan pun sepertinya tidak apa-apa.
 
 Apa yang saya alami itu berdampak proses pengerjaan saya pun jadi sangat lambat. Terasa saya melakukan bimbingan tesis hanya dua pekan hingga sebulan sekali.
 
 Ketika melihat kesempatan dalam mengatasi hambatan dalam pengerjaan tesis pun, saya dengan polosnya berkata bahwa harus melakukan studi lapangan sebelum ujian tengah semester. Tidak menyadari seberapa lambat progres pengerjaan tesis saya sendiri.
 
-Tepat setelah libur Hari Raya Idul Fitri, saya melakukan bimbingan pengerjaan tesis sekaligus melaporkan progres saya sejauh ini. Namun sebuah ucapan keluar, _sepertinya banyak progres yang akan disampaikan, nih_. Ucap pembimbing saya dengan senyum. (Sebuah pertanda ke-5 &#x2705;)
+Tepat setelah libur Hari Raya Idul Fitri, saya melakukan bimbingan pengerjaan tesis sekaligus melaporkan progres saya sejauh ini. Namun sebuah ucapan keluar, _sepertinya banyak progres yang akan disampaikan, nih_. Ucap pembimbing saya dengan senyum.
 
 Lepas itu, saya kembali berusaha menata hati dan niat dalam pengerjaan tesis dengan perlahan. Mengurangi kegiatan penuh dalih sebelumnya, walaupun susah.
 
@@ -90,11 +90,11 @@ Kegiatan dengan fase-fase yang berulang seperti itu terus terjadi. Progres penge
 
 Dengan saya yang mempercepat pengerjaan tesis dengan gila-gilaan, model penelitian tesis saya pun selesai tepat dua pekan sebelum batas akhir pendaftaran. Bersamaan dengan sesi bimbingan tesis terakhir dengan Prof. Erma.
 
-Hingga pada tahap draft buku tesis selesai dan diperiksa oleh beliau pun, masih tidak ada komentar apapun dari beliau. Entah sekadar komentar atau bahkan persetujuan beliau agar saya maju sidang jika saya tidak menanyakannya secara langsung. (Sebuah pertanda ke-6 &#x2705;)
+Hingga pada tahap draft buku tesis selesai dan diperiksa oleh beliau pun, masih tidak ada komentar apapun dari beliau. Entah sekadar komentar atau bahkan persetujuan beliau agar saya maju sidang jika saya tidak menanyakannya secara langsung.
 
 Hal itu tentu sangat berbeda dengan semua pengalaman saya yang sudah melaksanakan dua kali sidang akhir. Meskipun itu saat D3 dan S1. 
 
-Dosen pembimbing yang sangat ketat dan memberikan "simulasi dunia nyata" (D3), hingga dosen pembimbing yang sibuk namun masih berusaha membagi waktu dengan mahasiswa yang beliau bimbing (S1). Keduanya sangat berbeda dengan dosen pembimbing saya sekarang. Entah itu karena sebagai _treatment_ beliau atau karena saya yang sudah pernah bekerja, jadi saya dianggap lebih bisa bertanggung jawab dibandingkan teman seangkatan yang rata-rata baru lulus semua. Ah tidak, itu sih saya yang _ge-er_. (Sebuah pertanda ke-7 &#x2705;)
+Dosen pembimbing yang sangat ketat dan memberikan "simulasi dunia nyata" (D3), hingga dosen pembimbing yang sibuk namun masih berusaha membagi waktu dengan mahasiswa yang beliau bimbing (S1). Keduanya sangat berbeda dengan dosen pembimbing saya sekarang. Entah itu karena sebagai _treatment_ beliau atau karena saya yang sudah pernah bekerja, jadi saya dianggap lebih bisa bertanggung jawab dibandingkan teman seangkatan yang rata-rata baru lulus semua. Ah tidak, itu sih saya yang _ge-er_.
 
 ## Sidang Tesis (Ke-3)
 
