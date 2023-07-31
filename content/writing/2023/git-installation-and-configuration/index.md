@@ -9,13 +9,13 @@ draft: false
 toc: true
 comments: true
 images:
-  - https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/git-installation-and-configuration/git-and-github.webp
+  - git-and-github.webp
 tags:
   - catatan
   - personal
 ---
 
-![Logo Git-scm dan GitHub](https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/git-installation-and-configuration/git-and-github.webp)
+![Logo Git-scm dan GitHub](git-and-github.webp)
 
 ## Perkenalan
 
@@ -73,7 +73,7 @@ Buka [GitHub.com](https://github.com/signup) dan buat akun! Selama pengaturan ak
 
 Kekuatiran akan privasi, atau hanya tidak ingin alamat email diketahui publik, maka dapat dicentang dua kotak berikut di halaman Pengaturan Email setelah masuk ke [pengaturan akun GitHub](https://github.com/settings/emails):
 
-![pengaturan email pada akun GitHub](https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/git-installation-and-configuration/pengaturan-email-akun-github.webp)
+![pengaturan email pada akun GitHub](pengaturan-email-akun-github.webp)
 
 Jadi, email seperti ```34987164+fanajib5@users.noreply.github.com``` akan digunakan untuk konfigurasi Git.
 
@@ -137,7 +137,7 @@ Sekarang, salin **kunci SSH publik** yang tadi sudah disimpan (Perhatikan bahwa 
 
 Sekarang, kembali ke GitHub di jendela browser tadi dan _paste_ kunci yang disalin ke _key field_. [Pertahankan jenis kunci](https://nishtahir.com/how-to-enable-ssh-key-verification-with-git-and-github/#adding-your-key-to-github) sebagai ```Authentication Key```, lalu klik ```Add SSH key```. Sudah selesai! Kunci SSH telah berhasil ditambahkan!
 
-![pengaturan kunci ssh pada akun GitHub](https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/git-installation-and-configuration/pengaturan-kunci-ssh-akun-github.webp)
+![pengaturan kunci ssh pada akun GitHub](pengaturan-kunci-ssh-akun-github.webp)
 
 ### Langkah 2.5 Menguji kunci SSH
 
