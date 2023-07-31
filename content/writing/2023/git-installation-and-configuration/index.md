@@ -3,7 +3,7 @@ title: "Catatan Git: instalasi, konfigurasi, dan contohnya"
 url: ""
 description: "Catatan yang berisikan tentang instalasi, konfigurasi, dan contoh dari Git dan Github"
 author: "Faiq Najib"
-date: 2023-07-23T18:55:34.039+07:00
+date: 2023-07-31T22:00:01.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false
 toc: true
