@@ -9,13 +9,13 @@ draft: false
 toc: true
 comments: true
 images:
-  - git-and-github.webp
+  - git-and-github_50_1_80.webp
 tags:
   - catatan
   - personal
 ---
 
-![Logo Git-scm dan GitHub](git-and-github.webp)
+![Logo Git-scm dan GitHub](git-and-github_50_1_80.webp)
 
 ## Perkenalan
 
