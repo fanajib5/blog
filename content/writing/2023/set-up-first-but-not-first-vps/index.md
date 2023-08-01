@@ -202,7 +202,7 @@ sudo mariadb
 Setelah masuk ke _prompt_ ```MariaDB&nbsp;[(none)]>```, buat _user_ baru tersebut dan menyetel _privilege_-nya.
 
 ```bash
-GRANT ALL ON *.* TO 'budi'@'localhost' IDENTIFIED BY 'BudiTanpoHutan619' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'budi'@'localhost' IDENTIFIED BY 'BudiTanpoHutang619' WITH GRANT OPTION;
 ```
 
 Lakukan _flush privileges_ untuk memastikan konfigurasi _user_ baru tersebut.
