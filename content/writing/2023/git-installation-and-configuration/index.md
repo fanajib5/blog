@@ -12,7 +12,8 @@ images:
   - git-and-github_50_1_80.webp
 tags:
   - catatan
-  - personal
+  - git
+  - github
 ---
 
 ![Logo Git-scm dan GitHub](git-and-github_50_1_80.webp)
