@@ -24,51 +24,51 @@ tags:
 
 Sedangkan, [GitHub](https://github.com/about) [adalah](https://en.wikipedia.org/wiki/GitHub) platform dan layanan _developer_ yang lengkap untuk membangun, menskalakan, dan mengirimkan perangkat lunak yang aman menggunakan Git.
 
-## Langkah 1: Instalasi Git
+## Instalasi Git
 
 Instalasi Git untuk Windows yaitu,
 
 <details>
 <summary><strong>Windows</strong></summary>
 
-1. Download installer_ Git terlebih dahulu pada [```https://git-scm.com/downloads```](https://git-scm.com/downloads). Kemudian buka installer tersebut.
+_Download installer_ Git terlebih dahulu pada [https://git-scm.com/downloads](https://git-scm.com/downloads). Kemudian buka installer tersebut.
 
-2. Ikuti langkah [selanjutnya](https://www.nesabamedia.com/cara-install-git-di-windows-10/). Tinggal _Next_, pastikan _default_ aja, lalu _next_ lagi. Seperti biasa~~
+Ikuti langkah [selanjutnya](https://www.nesabamedia.com/cara-install-git-di-windows-10/). Tinggal klik _Next_, pastikan _default_ aja, lalu _next_ lagi. Seperti biasa~~
 
 </details>
 <br/>
 <details>
 <summary><strong>Linux (Ubuntu)</strong></summary>
 
-1. Lakukan _update_ dan _upgrade_ pada sistem dengan perintah berikut:
-   ```bash
-   sudo apt update && sudo apt upgrade -y
-   ```
+Lakukan _update_ dan _upgrade_ pada sistem dengan perintah berikut:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
-2. Install _package_ Git:
-   ```bash
-   sudo add-apt-repository ppa:git-core/ppa
-   sudo apt update
-   sudo apt install Git
-   ```
+Install _package_ Git:
+```bash
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install Git
+```
 
-3. Verifikasi versi Git dan pastikan bahwa **minimal** versi 2.28[^1]
-   ```bash
-   git --version
-   ```
+Verifikasi versi Git dan pastikan bahwa **minimal** versi 2.28[^1]
+```bash
+git --version
+```
 
 </details>
 <br/>
 <details>
 <summary><strong>MacOS</strong></summary>
 
-1. Ikuti langkah [ini](https://www.theodinproject.com/lessons/foundations-setting-up-git#step-1-install-git) hehehe
+Ikuti langkah [ini](https://www.theodinproject.com/lessons/foundations-setting-up-git#step-1-install-git) hehehe
 
 </details>
 
-## Langkah 2: Konfigurasikan Git dan GitHub
+## Konfigurasikan Git dan GitHub
 
-### Langkah 2.1: Buat akun GitHub
+### Buat akun GitHub
 
 Buka [GitHub.com](https://github.com/signup) dan buat akun! Selama pengaturan akun nanti, alamat email akan diminta oleh Git. Dan harus berupa email asli. Karena kontribusi akan diidentifikasi secara _default_ oleh email yang akan digunakan.
 
@@ -78,7 +78,7 @@ Kekuatiran akan privasi, atau hanya tidak ingin alamat email diketahui publik, m
 
 Jadi, email seperti ```34987164+fanajib5@users.noreply.github.com``` akan digunakan untuk konfigurasi Git.
 
-### Langkah 2.2: Siapkan Git
+### Siapkan Git
 
 Agar Git berfungsi dengan baik, pengguna harus memberi tahu sehingga pengguna Git lokal dapat ditautkan ke GitHub. Saat bekerja dalam tim, orang lain mungkin melihat apa yang telah dilakukan dan siapa yang melakukan pada setiap baris kode.
 
@@ -122,13 +122,13 @@ git config --get user.name
 git config --get user.email
 ```
 
-### Langkah 2.3: Buat kunci SSH
+### Buat kunci SSH
 
 Kunci SSH adalah pengenal yang aman secara kriptografis yang mana seperti kata sandi yang sangat panjang untuk mengidentifikasi mesin pengguna. GitHub menggunakan kunci SSH sehingga pengguna tanpa harus mengetik _username_ dan _password_ setiap saat.
 
 Pada Windows, dapat digunkan [PuTTYgen.exe](https://www.ssh.com/academy/ssh/putty/windows/puttygen) atau [OpenSSH](https://askme4tech.com/how-configure-ssh-key-based-authentication-windows) untuk melakukan _generate_ [kunci SSH](https://phoenixnap.com/kb/generate-ssh-key-windows-10). Lalu [simpan](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/create-with-putty/) kedua _public key_ dan _private key_ tersebut.
 
-### Langkah 2.4: Tautkan kunci SSH dengan GitHub
+### Tautkan kunci SSH dengan GitHub
 
 Pertama, masuk ke GitHub dan klik gambar profil di pojok kanan atas. Kemudian, klik _Settings_ di menu _drop-down_.
 
@@ -140,7 +140,7 @@ Sekarang, kembali ke GitHub di jendela browser tadi dan _paste_ kunci yang disal
 
 ![pengaturan kunci ssh pada akun GitHub](pengaturan-kunci-ssh-akun-github.webp)
 
-### Langkah 2.5 Menguji kunci SSH
+### Menguji kunci SSH
 
 Ikuti petunjuk dalam [artikel dari GitHub ini](https://help.github.com/en/articles/testing-your-ssh-connection) untuk memverifikasi koneksi SSH (**Jangan lupa menghilangkan** ```$``` **kode disalin!**). Respon ini dapat dilihat di terminal Anda: **Hi username! You’ve successfully authenticated, but GitHub does not provide shell access**. Jika pesan ini muncul, kunci SSH berhasil ditambahkan. Jika luaran tidak sesuai, coba lakukan langkah-langkah ini lagi atau [buka referensi ini](https://www.theodinproject.com/lessons/foundations-setting-up-git#step-25-testing-your-key).
 
