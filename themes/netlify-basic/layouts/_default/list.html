@@ -1,6 +1,8 @@
 {{ define "main" }}
 	<main class="wrapper">
-		<h1><a href="/" class="home">{{.Title}}</a></h1>
+		<h1><a href="/" class="home">
+      {{ cond (eq (strings.Contains .RelPermalink "tags") true) (print "Tulisan tentang #" .Title) .Title }}
+    </a></h1>
 		{{ if .Content -}}
 		<div class="content">
 			{{ .Content }}
