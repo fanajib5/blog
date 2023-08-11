@@ -19,6 +19,7 @@ Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di 
 ## Trivia
 
 * [/uses](/uses)
+* [/komik](/komik)
 
 <br/></br>
 
