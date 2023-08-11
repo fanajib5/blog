@@ -13,12 +13,12 @@ html {
 }
 
 body {
-  --c-bg: #f5f8ff;
-  --c-bg-alt: #dee8e5;
-  --c-txt: #545250;
-  --c-txt-alt: #72706e;
-  --c-txt-alt2: rgba(114, 112, 110, .3);
-  --c-txt-em: #000;
+  --c-bg: #fafafa;
+  --c-bg-alt: #FCBAAD;
+  --c-txt: #002B5B;
+  --c-txt-alt: #916DB3;
+  --c-txt-alt2: #EA5455;
+  --c-txt-em: #F45050;
   margin: 0;
   padding: 1.5rem;
   line-height: 1.6;
@@ -337,6 +337,7 @@ textarea {
   hr::after {
     content: "# FOOTNOTES #";
     font-size: 1rem;
+    font-style: italic;
   }
 }
 
