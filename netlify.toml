@@ -1,8 +1,14 @@
 # example netlify.toml
 [build]
-  command = "hugo"
-  functions = "netlify/functions"
-  publish = "public"
+command = "hugo"
+functions = "netlify/functions"
+publish = "public"
 
 [build.environment]
-  HUGO_VERSION = "0.101.0"
+HUGO_VERSION = "0.101.0"
+
+[[redirects]]
+from = "/resume"
+to = "/docs/faiq-resume.pdf"
+status = 301
+force = false
