@@ -5,6 +5,8 @@ lastmod: 2023-03-13T23:00:33.7204314+08:00
 draft: false
 toc: false
 comments: false
+aliases:
+- komik
 ---
 
 Daftar kumpulan komik _manga_[^1], _manhwa_[^2], maupun _manhua_[^3] dengan beragam _genre_ yang saya baca sampai selesai atau _dropped_ di tengah perjalan dan sisanya dibaca cepat (_skimming_). Saya baca komik baik di _platform_ [resmi](#_platform_-webtoonhttpswebtoonscomid) maupun [non-resmi](#_platform_-non-resmilink-mangapark).
