@@ -3,7 +3,7 @@ title = "Blogfolio Najib"
 staticDir = "static"
 languageCode = "id-ID"
 defaultContentLanguage = 'id'
-hasCJKLanguage = true
+# defaultContentLanguageInSubdir = true
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 theme = 'netlify-basic'
 canonifyURLs = true
@@ -13,6 +13,16 @@ enableGitInfo = true
 
 [author]
 name = "Faiq Najib"
+
+[languages]
+[languages.id]
+languageName = "Bahasa Indonesia"
+languageCode = "id-ID"
+weight = 1
+[languages.en]
+languageName = "English"
+languageCode = "en-US"
+weight = 2
 
 [markup]
 defaultMarkdownHandler = "goldmark"
@@ -30,19 +40,19 @@ wrapStandAloneImageWithinParagraph = false
 block = true
 title = true
 [markup.highlight]
-anchorLineNos= false
-codeFences= true
-guessSyntax= false
-hl_Lines= ""
-hl_inline= false
-lineAnchors= ""
-lineNoStart= 1
-lineNos= false
-lineNumbersInTable= true
-noClasses= true
-noHl= false
-style= "modus-vivendi"
-tabWidth= 4
+anchorLineNos = false
+codeFences = true
+guessSyntax = false
+hl_Lines = ""
+hl_inline = false
+lineAnchors = ""
+lineNoStart = 1
+lineNos = false
+lineNumbersInTable = true
+noClasses = true
+noHl = false
+style = "modus-vivendi"
+tabWidth = 4
 
 # [taxonomies]
 #   tag = "tags"
@@ -86,7 +96,3 @@ pageref = "/about"
 weight = 40
 [menu.main.params]
 description = "Tentang"
-
-[comment]
-enable = true
-provider = "giscus"
