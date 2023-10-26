@@ -1,4 +1,4 @@
-baseURL = "https://najib.id"
+baseURL = "/"
 title = "Blogfolio Najib"
 staticDir = "static"
 languageCode = "id-ID"
