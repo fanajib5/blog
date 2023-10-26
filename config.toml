@@ -1,46 +1,98 @@
 baseURL = "https://najib.id"
-languageCode = "en-us"
-title = "Archie"
-theme = "archie"
-copyright = "© Athul"
-pygmentsstyle = "monokai"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
+title = "Blogfolio Najib"
+staticDir = "static"
+languageCode = "id-ID"
+defaultContentLanguage = "id"
+# defaultContentLanguageInSubdir = true
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+theme = "retro-jib"
+canonifyURLs = true
+enableRobotsTXT = true
+
+enableGitInfo = true
+
+[author]
+name = "Faiq Najib"
+
+[languages]
+[languages.id]
+languageName = "Bahasa Indonesia"
+languageCode = "id-ID"
+weight = 1
+[languages.en]
+languageName = "English"
+languageCode = "en-US"
+weight = 2
+
+[markup]
+defaultMarkdownHandler = "goldmark"
+
+[markup.tableOfContents]
+endLevel = 4
+ordered = false
+startLevel = 2
+
+[markup.goldmark.renderer]
+unsafe = true
+[markup.goldmark.parser]
+wrapStandAloneImageWithinParagraph = false
+[markup.goldmark.parser.attribute]
+block = true
+title = true
+[markup.highlight]
+anchorLineNos = false
+codeFences = true
+guessSyntax = false
+hl_Lines = ""
+hl_inline = false
+lineAnchors = ""
+lineNoStart = 1
+lineNos = false
+lineNumbersInTable = true
+noClasses = true
+noHl = false
+style = "modus-vivendi"
+tabWidth = 4
+
+# [taxonomies]
+#   tag = "tags"
+
 [params]
-mode = "auto"
-useCDN = false
-subtitle = "Minimal and Clean [blog theme for Hugo](https://github.com/athul/archie)"
+images = ["apple-touch-icon.png"]
 
-[[params.social]]
-name = "GitHub"
-icon = "github"
-url = "https://github.com/athul/archie"
+[menu]
 
-[[params.social]]
-name = "Twitter"
-icon = "twitter"
-url = "https://github.com/athulcajay/"
-
-[[params.social]]
-name = "GitLab"
-icon = "gitlab"
-url = "https://gitlab.com/athul/"
 [[menu.main]]
 name = "Home"
-url = "/"
+pageref = "/"
 weight = 1
+[menu.main.params]
+description = "Beranda"
 
 [[menu.main]]
-name = "All posts"
-url = "/posts"
-weight = 2
+name = "Writing"
+pageref = "/writing"
+weight = 10
+[menu.main.params]
+description = "Arsip artikel"
+
+[[menu.main]]
+name = "Gallery"
+pageref = "/gallery"
+weight = 20
+[menu.main.params]
+description = "Album foto"
+
+[[menu.main]]
+name = "Link"
+pageref = "/link"
+weight = 30
+[menu.main.params]
+description = "Tautan dan papan pesan"
 
 [[menu.main]]
 name = "About"
-url = "/about"
-weight = 3
-
-[[menu.main]]
-name = "Tags"
-url = "/tags"
-weight = 4
+pageref = "/about"
+weight = 40
+[menu.main.params]
+description = "Tentang"

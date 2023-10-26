@@ -1,0 +1,76 @@
+{{ define "main" }}
+<main class="wrapper">
+  <h1><a href="/" class="home">{{.Title}}</a></h1>
+  {{ if .Content -}}
+  <div class="content">
+    {{ .Content }}
+  </div>
+  {{- end }}
+
+  {{- range (.Pages.ByParam "shot_date").Reverse}}
+  <div class="album">
+    {{ $abulmLink := .RelPermalink -}}
+    <h2><a href="{{ $abulmLink }}" class="tdln">{{.Title}}</a></h2>
+    <a href="{{ $abulmLink }}" class="album-row">
+      {{- range .Params.images -}}
+      <div class="img-tile"><img src="{{. | relURL}}" height="130px" width="auto"></div>
+      {{- end -}}
+    </a>
+  </div>
+  {{- end }}
+</main>
+<hr>
+
+<!-- Using the Intersection Observer API to lazy load images: -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var lazyloadImages;
+
+    if ("IntersectionObserver" in window) {
+      lazyloadImages = document.querySelectorAll(".lazy");
+      var imageObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var image = entry.target;
+            image.src = image.dataset.src;
+            image.classList.remove("lazy");
+            imageObserver.unobserve(image);
+          }
+        });
+      });
+
+      lazyloadImages.forEach(function (image) {
+        imageObserver.observe(image);
+      });
+    } else {
+      var lazyloadThrottleTimeout;
+      lazyloadImages = document.querySelectorAll(".lazy");
+
+      function lazyload() {
+        if (lazyloadThrottleTimeout) {
+          clearTimeout(lazyloadThrottleTimeout);
+        }
+
+        lazyloadThrottleTimeout = setTimeout(function () {
+          var scrollTop = window.pageYOffset;
+          lazyloadImages.forEach(function (img) {
+            if (img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+          });
+          if (lazyloadImages.length == 0) {
+            document.removeEventListener("scroll", lazyload);
+            window.removeEventListener("resize", lazyload);
+            window.removeEventListener("orientationChange", lazyload);
+          }
+        }, 20);
+      }
+
+      document.addEventListener("scroll", lazyload);
+      window.addEventListener("resize", lazyload);
+      window.addEventListener("orientationChange", lazyload);
+    }
+  })
+</script>
+{{- end }}
