@@ -1,11 +1,11 @@
-baseURL = "/"
+baseURL = "https://najib.id"
 title = "Blogfolio Najib"
 staticDir = "static"
 languageCode = "id-ID"
-defaultContentLanguage = "id"
+defaultContentLanguage = 'id'
 # defaultContentLanguageInSubdir = true
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-theme = "retro-jib"
+theme = 'netlify-basic'
 canonifyURLs = true
 enableRobotsTXT = true
 

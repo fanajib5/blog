@@ -1,5 +1,3 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/91f6561b-352b-4843-a5c6-d884ecebfe03/deploy-status)](https://app.netlify.com/sites/animated-youtiao-1107bf/deploys)
-
 [![hugo](https://user-images.githubusercontent.com/43764894/223559747-e9d7f19d-91bf-46a9-a0cb-8d6a40d3cfa3.png)](https://ntl.fyi/3P9w1mr)
 
 # Hugo Quickstart Template
@@ -28,6 +26,12 @@ Love reading, here's blog post: <https://www.netlify.com/blog/deploy-your-hugo-a
 Click this button and it will help you create a new repo, create a new Netlify project, and deploy!
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/hugo-quickstart)
+
+Or deploy your own Hugo project with Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/hugo&template=hugo)
+
+_Live Example: <https://hugo-template.vercel.app>_
 
 ## Regular Setup
 
