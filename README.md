@@ -64,9 +64,9 @@ Hope this template helps :) Happy coding 👩🏻‍💻!
 
 ---
 
-# Notes
+## Notes
 
-## Color palette
+### Color palette
 
 This site's color palette is Retro style from [Color Hunt](https://colorhunt.co/).
 
