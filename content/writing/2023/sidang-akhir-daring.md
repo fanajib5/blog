@@ -1,5 +1,5 @@
 ---
-title: "Sidang akhir daring. Menjadi angaktan lulusan pandemi"
+title: "Sidang akhir daring dan jadi angaktan lulusan pandemi"
 url: ""
 description: "Sebuah cerita pengalaman penulis dalam melaksanakan sidang akhir secara online."
 author: "Faiq Najib"
@@ -22,11 +22,11 @@ Semua berawal dari gurauan kami (saya dan teman-teman kos) tepat saat pekan ujia
 
 Saya dan ketiga teman yang lain sepertinya sepemikiran. Karena menurut kami akan disayangkan biaya yang harus dikeluarkan kalau saat itu pulang kampung dan nanti selepas ujian akhir juga pulang kampung lagi. Sehingga tanpa sinyal pun, kami sepakat bahwa lebih baik sekalian pulang kampung ketika liburan semester saja.
 
-Namun, Allah berkehendak lain. Malam hari setelah ujian terakhir, sebuah kabar yang sangat asing tiba di telinga kami semua. Ya, berita wabah penyakit. 
+Namun, Allah berkehendak lain. Malam hari setelah ujian terakhir, sebuah kabar yang sangat asing tiba di telinga kami semua. Ya, berita wabah penyakit.
 
 Dunia seakan menjadi seperti apa yang terjadi di dalam film _apocalypse_. Dari mulai info persebaran penyakit yang sangat cepat, hingga barang ajaib yang tiba-tiba menjadi langka dan mahal.
 
-{{< figure src="857420727_345321.webp" class="left" alt="foto hand sanitizer" width="50%" caption="si benda ajaib saat pandemi" >}}
+{{< figure src="images/857420727_345321.webp" class="left" alt="foto hand sanitizer" width="50%" caption="si benda ajaib saat pandemi" >}}
 
 Sudah barangnya langka, sekalinya ketemu langsung dihajar dengan harga Rp 65.000 juga. _Wew_.
 
@@ -36,7 +36,7 @@ Pucuk dicinta, ulam pun tiba. Kampus pun merilis pengumuman bahwa kegiatan perku
 
 Kami pun separuh senang dan separuh lagi kuatir. Karena, jika memang kondisi di luar seperti apa yang diberitakan, bukan tidak mungkin kami tidak akan bisa pulang ke rumah jika tetap memaksakan tinggal di Bandung.
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" class="right" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang" width="50%" caption="suhu dicek oleh petugas peron stasiun" >}}
+{{< figure src="images/VID-20200316-WA0015.gif" class="right" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang" width="50%" caption="suhu dicek oleh petugas peron stasiun" >}}
 
 Dengan membawa barang bawaan secukupnya koper dari kos, kami pun segera menuju stasiun Kiaracondong yang ternyata sudah penuh dengan calon penumpang bermasker.
 
@@ -62,7 +62,7 @@ Setelah tubuh terasa kering karena harus mencari agen penjual yang memberikan ha
 
 _Alhamdulillah_ sidang akhir saya pun bisa terlaksana dengan baik pada 2 Juli 2020. Bahkan terasa dimudahkan oleh Allah SWT. Terutama Pak Doan selaku penguji yang tiba-tiba mengakhiri sidang karena beliau harus bersiap untuk menjadi imam di masjid haha. (Terima kasih bapak!)
 
-{{< figure src="IMG-20200702-WA0004.webp" alt="sidang tugas akhir secara daring" width="95%" caption="sidang tugas akhir kedua" >}}
+{{< figure src="/images/IMG-20200702-WA0004.webp" alt="sidang tugas akhir secara daring" width="95%" caption="sidang tugas akhir kedua" >}}
 
 ## Pelajaran yang Dapat Diambil
 
