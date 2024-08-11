@@ -56,7 +56,7 @@ Hari-hari dengan beberapa sesi bimbingan denan beliau pun terlewat. Tepat sebelu
 
 Akhirnya, seminar proposal saya pun berhasil dilaksanakan dengan hasil revisi pada metode penelitian secara besar-besaran haha. Apa mau dikata, itulah hasil pengerjaan yang setengah hati (maaf ya, Prof!).
 
-{{< figure src="seminar-proposal-tesis.webp" alt="foto seminar proposal tesis Faiq" caption="Seminar proposal tesis" >}}
+{{< figure src="images/seminar-proposal-tesis.webp" alt="foto seminar proposal tesis Faiq" caption="Seminar proposal tesis" >}}
 
 ## Menjadi Seorang Deadliner (Lagi) yang Malas
 
@@ -86,13 +86,13 @@ Berkali-kali saya terjebak kegiatan-kegiatan itu lagi dan menunda pengerjaan tes
 
 Kegiatan dengan fase-fase yang berulang seperti itu terus terjadi. Progres pengerjaan tesis masih saya dorong sebisa mungkin agar dapat melakukan sidang tesis di semester ini. Lebih baik selesai dengan hasil seadanya. "Lolos" lebih baik dari "lulus", begitulah pikir saya.
 
-> 'Karena "lolos" berarti hanya sekedar selesai dengan hasil seadanya, sedangkan "lulus" berarti mempunyai hasil yang baik dan dapat dikatakan layak.' <cite>ungkapan konyol teman-teman kelas D3</cite>*
+> Karena "lolos" berarti hanya sekedar selesai dengan hasil seadanya, sedangkan "lulus" berarti mempunyai hasil yang baik dan dapat dikatakan layak. <cite>ungkapan konyol teman-teman kelas D3</cite>*
 
 Dengan saya yang mempercepat pengerjaan tesis dengan gila-gilaan, model penelitian tesis saya pun selesai tepat dua pekan sebelum batas akhir pendaftaran. Bersamaan dengan sesi bimbingan tesis terakhir dengan Prof. Erma.
 
 Hingga pada tahap draft buku tesis selesai dan diperiksa oleh beliau pun, masih tidak ada komentar apapun dari beliau. Entah sekadar komentar atau bahkan persetujuan beliau agar saya maju sidang jika saya tidak menanyakannya secara langsung.
 
-Hal itu tentu sangat berbeda dengan semua pengalaman saya yang sudah melaksanakan dua kali sidang akhir. Meskipun itu saat D3 dan S1. 
+Hal itu tentu sangat berbeda dengan semua pengalaman saya yang sudah melaksanakan dua kali sidang akhir. Meskipun itu saat D3 dan S1.
 
 Dosen pembimbing yang sangat ketat dan memberikan "simulasi dunia nyata" (D3), hingga dosen pembimbing yang sibuk namun masih berusaha membagi waktu dengan mahasiswa yang beliau bimbing (S1). Keduanya sangat berbeda dengan dosen pembimbing saya sekarang. Entah itu karena sebagai _treatment_ beliau atau karena saya yang sudah pernah bekerja, jadi saya dianggap lebih bisa bertanggung jawab dibandingkan teman seangkatan yang rata-rata baru lulus semua. Ah tidak, itu sih saya yang _ge-er_.
 
@@ -112,7 +112,7 @@ Ditambah, saya kembali beruntung saat [Bu Mahe](https://www.its.ac.id/si/profil-
 
 Terlepas dari itu semua, saya bersyukur dapat melewati seminar akhir sidang tesis dengan baik. Terlebih setelah niat dan menata hati lagi dengan perlahan.
 
-{{< figure src="seminar-akhir-tesis.webp" alt="foto seminar akhir tesis Faiq" caption="seminar akhir tesis" >}}
+{{< figure src="images/seminar-akhir-tesis.webp" alt="foto seminar akhir tesis Faiq" caption="seminar akhir tesis" >}}
 
 ## Pelajaran yang Dapat Diambil
 
