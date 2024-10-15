@@ -16,7 +16,7 @@ tags:
   - github
 ---
 
-![Logo Git-scm dan GitHub](images/git-and-github_50_1_80.webp)
+![Logo Git-scm dan GitHub](git-and-github_50_1_80.webp)
 
 ## Perkenalan
 
@@ -41,13 +41,11 @@ Ikuti langkah [selanjutnya](https://www.nesabamedia.com/cara-install-git-di-wind
 <summary><strong>Linux (Ubuntu)</strong></summary>
 
 Lakukan _update_ dan _upgrade_ pada sistem dengan perintah berikut:
-
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
 Install _package_ Git:
-
 ```bash
 sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
@@ -55,7 +53,6 @@ sudo apt install Git
 ```
 
 Verifikasi versi Git dan pastikan bahwa **minimal** versi 2.28[^1]
-
 ```bash
 git --version
 ```
@@ -77,7 +74,7 @@ Buka [GitHub.com](https://github.com/signup) dan buat akun! Selama pengaturan ak
 
 Kekuatiran akan privasi, atau hanya tidak ingin alamat email diketahui publik, maka dapat dicentang dua kotak berikut di halaman Pengaturan Email setelah masuk ke [pengaturan akun GitHub](https://github.com/settings/emails):
 
-![pengaturan email pada akun GitHub](images/pengaturan-email-akun-github.webp)
+![pengaturan email pada akun GitHub](pengaturan-email-akun-github.webp)
 
 Jadi, email seperti ```34987164+fanajib5@users.noreply.github.com``` akan digunakan untuk konfigurasi Git.
 
@@ -141,7 +138,7 @@ Sekarang, salin **kunci SSH publik** yang tadi sudah disimpan (Perhatikan bahwa 
 
 Sekarang, kembali ke GitHub di jendela browser tadi dan _paste_ kunci yang disalin ke _key field_. [Pertahankan jenis kunci](https://nishtahir.com/how-to-enable-ssh-key-verification-with-git-and-github/#adding-your-key-to-github) sebagai ```Authentication Key```, lalu klik ```Add SSH key```. Sudah selesai! Kunci SSH telah berhasil ditambahkan!
 
-![pengaturan kunci ssh pada akun GitHub](images/pengaturan-kunci-ssh-akun-github.webp)
+![pengaturan kunci ssh pada akun GitHub](pengaturan-kunci-ssh-akun-github.webp)
 
 ### Menguji kunci SSH
 

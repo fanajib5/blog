@@ -16,7 +16,7 @@ tags:
   - linux
 ---
 
-![Header image for cloud VPS](images/let-say-it-is-cloud.webp)
+![Header image for cloud VPS](let-say-it-is-cloud.webp)
 
 _Nganu_, jadi maksudnya adalah beberapa tahun lalu saya pernah iseng _wal_ coba membeli layanan [VPS](https://www.hostinger.co.id/tutorial/apa-itu-vps) dari [DigitalOcean](https://www.digitalocean.com/)[^1]. Alasannya ya... nggak ada. Namanya juga iseng, kenapa harus ada alasan hehe~
 
@@ -32,7 +32,7 @@ Hari-hari pun terbagi dengan urusan kerjaan, urusan hati&mdash;_ehem_ perut dan 
 
 VPS Hetzner itu pun akhirnya terbengkalai. Hingga sebuah _email_ aneh masuk. Isinya memberitahukan bahwa alamat tagian (_invoices_) saya sudah berganti. _Ja*cok_. Saya baru tahu rasanya kena retas.
 
-{{< figure src="images/hetzner-account-got-hacked.webp" width="90%" alt="info akun hetzner saya yang diretas melalui email" caption="ancaman kartu debit online hahaha" >}}
+{{< figure src="hetzner-account-got-hacked.webp" width="90%" alt="info akun hetzner saya yang diretas melalui email" caption="ancaman kartu debit online hahaha" >}}
 
 Beruntung tim _support_ sangat tanggap saat saya mengirim email untuk melaporkan insiden itu. Mereka akhirnya membalas: "_As your account got hacked and you had no products (except the ones ordered by the hacker) we have cancelled your account._"
 
@@ -434,11 +434,11 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 Untuk kebutuhan koneksi _database_ secara _remote_ dari perangkat pribadi, maka dapat melakukan pengaturan koneksi melalui ```bind_address=0.0.0.0``` dan menyetel _firewall_. Banyak laah tutorialnya di mbah Google hehehe.
 
-Pada kondisi ini, saya mendapat galat bahwa koneksi _remote_ database tidak bisa dilakukan meskipun konfigurasi sudah sesuai dengan apa yang ada di internet. Ternyata solusi yang harus dilakukan adalah mengatur _firewall_ pada _console dashboard_ Hetzner **juga**. Itu untuk Hetzner, saya tidak tahu bagaimana _provider cloud_ lainnya.
+Pada kondisi ini, saya mendapat galat bahwa koneksi _remote_ database tidak bisa dilakukan meskipun konfigurasi sudah sesuai dengan apa yang ada di internet. Ternyata solusi yang harus dilakukan adalah mengatur _firewall_ pada _console dashboard_ Hetzner **juga**. Itu untuk Hetzner, saya tidak tahu bagaimana _provider cloud_ lainnya. 
 
 Contohnya pada link[https://console.hetzner.cloud/projects/9922305/firewalls/199524/rules](https://console.hetzner.cloud/projects/9922305/firewalls/199524/rules), ini hanya sekedar link contoh.
 
-![Contoh tampilan firewall pada dashboard akun cloud Hetzner](images/dashboard-firewall-hetzner.webp)
+![Contoh tampilan firewall pada dashboard akun cloud Hetzner](dashboard-firewall-hetzner.webp)
 
 ## Pelajaran yang Dapat Diambil
 

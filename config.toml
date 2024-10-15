@@ -1,24 +1,27 @@
 baseURL = "/"
-defaultContentLanguage = "id"
-languageCode = "id-ID"
-staticDir = "static"
 title = "Blogfolio Najib"
+staticDir = "static"
+languageCode = "id-ID"
+defaultContentLanguage = "id"
 # defaultContentLanguageInSubdir = true
-canonifyURLs = true
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-enableRobotsTXT = true
 theme = "retro-jib"
+canonifyURLs = true
+enableRobotsTXT = true
 
 enableGitInfo = true
 
+[author]
+name = "Faiq Najib"
+
 [languages]
 [languages.id]
-languageCode = "id-ID"
 languageName = "Bahasa Indonesia"
+languageCode = "id-ID"
 weight = 1
 [languages.en]
-languageCode = "en-US"
 languageName = "English"
+languageCode = "en-US"
 weight = 2
 
 [markup]
@@ -56,9 +59,6 @@ tabWidth = 4
 
 [params]
 images = ["apple-touch-icon.png"]
-
-[[params.author]]
-name = "Faiq Najib"
 
 [menu]
 
