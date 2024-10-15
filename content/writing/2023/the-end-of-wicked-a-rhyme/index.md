@@ -1,5 +1,5 @@
 ---
-title: "The end of the wicked"
+title: "The end of wicked"
 url: ""
 description: "Sebuah sajak yang terinspirasi dari lirik lagu."
 author: "Faiq Najib"
