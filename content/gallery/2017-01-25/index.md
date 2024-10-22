@@ -10,8 +10,8 @@ description:
 draft: false
 comments: true
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR__thumbnail.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR__thumbnail.webp
 tags:
   - photo
   - natures

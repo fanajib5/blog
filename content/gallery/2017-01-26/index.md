@@ -10,10 +10,10 @@ description:
 draft: false
 comments: true
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_072011_HDR.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073103_HDR.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073105_HDR.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_072011_HDR__thumbnail.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073103_HDR__thumbnail.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073105_HDR__thumbnail.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR__thumbnail.webp
 tags:
   - photo
   - natures

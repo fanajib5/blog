@@ -10,8 +10,8 @@ description:
 draft: false
 comments: true
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_173415.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_193827.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_173415__thumbnail.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_193827__thumbnail.webp
 tags:
   - photo
   - mosque
