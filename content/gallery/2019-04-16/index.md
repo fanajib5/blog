@@ -7,7 +7,7 @@ shot_date: 2019-04-16T06:00:00+07:00
 location: Anywhere
 author: "Faiq Najib"
 shot_with: Xiaomi Mi-4c, Xiaomi Redmi Note 5, Samsung Galaxy A32
-description: "foto-foto kucing, entah di rumah, kosan, atau di manapun"
+description:
 draft: false
 comments: false
 images:
