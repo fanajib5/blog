@@ -1,5 +1,5 @@
 ---
-title: "Sidang akhir daring. Menjadi angaktan lulusan pandemi"
+title: "Sidang akhir daring dan jadi angaktan lulusan pandemi"
 url: ""
 description: "Sebuah cerita pengalaman penulis dalam melaksanakan sidang akhir secara online."
 author: "Faiq Najib"
@@ -22,7 +22,7 @@ Semua berawal dari gurauan kami (saya dan teman-teman kos) tepat saat pekan ujia
 
 Saya dan ketiga teman yang lain sepertinya sepemikiran. Karena menurut kami akan disayangkan biaya yang harus dikeluarkan kalau saat itu pulang kampung dan nanti selepas ujian akhir juga pulang kampung lagi. Sehingga tanpa sinyal pun, kami sepakat bahwa lebih baik sekalian pulang kampung ketika liburan semester saja.
 
-Namun, Allah berkehendak lain. Malam hari setelah ujian terakhir, sebuah kabar yang sangat asing tiba di telinga kami semua. Ya, berita wabah penyakit. 
+Namun, Allah berkehendak lain. Malam hari setelah ujian terakhir, sebuah kabar yang sangat asing tiba di telinga kami semua. Ya, berita wabah penyakit.
 
 Dunia seakan menjadi seperti apa yang terjadi di dalam film _apocalypse_. Dari mulai info persebaran penyakit yang sangat cepat, hingga barang ajaib yang tiba-tiba menjadi langka dan mahal.
 
