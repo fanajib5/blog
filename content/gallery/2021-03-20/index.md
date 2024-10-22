@@ -8,7 +8,7 @@ shot_date: 2021-03-20T06:00:00+07:00
 shot_with: Xiaomi Redmi Note 5
 description:
 draft: false
-comments: true
+comments: false
 images:
   - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2021-03-20/IMG_20210320_181851__thumbnail.webp
 tags:

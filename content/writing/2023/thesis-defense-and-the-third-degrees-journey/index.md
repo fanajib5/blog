@@ -7,7 +7,7 @@ date: 2023-07-23T18:55:34.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false
 toc: true
-comments: true
+comments: false
 images:
 tags:
   - academic
@@ -92,7 +92,7 @@ Dengan saya yang mempercepat pengerjaan tesis dengan gila-gilaan, model peneliti
 
 Hingga pada tahap draft buku tesis selesai dan diperiksa oleh beliau pun, masih tidak ada komentar apapun dari beliau. Entah sekadar komentar atau bahkan persetujuan beliau agar saya maju sidang jika saya tidak menanyakannya secara langsung.
 
-Hal itu tentu sangat berbeda dengan semua pengalaman saya yang sudah melaksanakan dua kali sidang akhir. Meskipun itu saat D3 dan S1. 
+Hal itu tentu sangat berbeda dengan semua pengalaman saya yang sudah melaksanakan dua kali sidang akhir. Meskipun itu saat D3 dan S1.
 
 Dosen pembimbing yang sangat ketat dan memberikan "simulasi dunia nyata" (D3), hingga dosen pembimbing yang sibuk namun masih berusaha membagi waktu dengan mahasiswa yang beliau bimbing (S1). Keduanya sangat berbeda dengan dosen pembimbing saya sekarang. Entah itu karena sebagai _treatment_ beliau atau karena saya yang sudah pernah bekerja, jadi saya dianggap lebih bisa bertanggung jawab dibandingkan teman seangkatan yang rata-rata baru lulus semua. Ah tidak, itu sih saya yang _ge-er_.
 

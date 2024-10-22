@@ -3,7 +3,7 @@ title: "About"
 date: 2018-03-20T20:16:07+08:00
 lastmod: 2023-06-24T19:15:04.4219485+08:00
 draft: false
-comments: true
+comments: false
 ---
 
 Lahir pada tahun 1997, berlokasi di Jombang, Jawa Timur. Saya mempunyai minat seperti dalam hal teknologi digital, bisa menulis sedikit kode, dan ingin belajar segalanya meskipun sama-sama mempunyai waktu 24 jam, tapi ~~tidak~~ masih belum mahir dalam beberapa hal. Sesekali ~~bermain game~~ membaca webtoon/manhwa dan mendengarkan musik.
