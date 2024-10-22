@@ -36,7 +36,7 @@ Pucuk dicinta, ulam pun tiba. Kampus pun merilis pengumuman bahwa kegiatan perku
 
 Kami pun separuh senang dan separuh lagi kuatir. Karena, jika memang kondisi di luar seperti apa yang diberitakan, bukan tidak mungkin kami tidak akan bisa pulang ke rumah jika tetap memaksakan tinggal di Bandung.
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" class="right" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang" width="50%" caption="suhu dicek oleh petugas peron stasiun" >}}
+{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" class="right" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang" width="50%" caption="suhu dicek oleh petugas peron stasiun" >}}
 
 Dengan membawa barang bawaan secukupnya koper dari kos, kami pun segera menuju stasiun Kiaracondong yang ternyata sudah penuh dengan calon penumpang bermasker.
 

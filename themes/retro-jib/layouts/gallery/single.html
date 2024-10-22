@@ -25,7 +25,7 @@
       <line x1="8" y1="2" x2="8" y2="6"></line>
       <line x1="3" y1="10" x2="21" y2="10"></line>
     </svg>{{ dateFormat "2006-01-02 15:04 MST" .Date.UTC }}</li>
-    <li title="terakhir update melalui git"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg>(<a href="https://github.com/fanajib5/hugo-site/commit/{{ .GitInfo.Hash }}" title="commit hash melalui git" rel="noopener">{{ .GitInfo.AbbreviatedHash }}</a>) @ {{ dateFormat "2006-01-02 15:04 MST" .Lastmod.UTC }} by {{ .GitInfo.AuthorName }}
+    <li title="terakhir update melalui git"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg>(<a href="https://github.com/fanajib5/blog/commit/{{ .GitInfo.Hash }}" title="commit hash melalui git" rel="noopener">{{ .GitInfo.AbbreviatedHash }}</a>) @ {{ dateFormat "2006-01-02 15:04 MST" .Lastmod.UTC }} by {{ .GitInfo.AuthorName }}
     </li>
     <br>
     {{- with .PrevInSection }}

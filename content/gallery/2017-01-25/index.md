@@ -10,14 +10,14 @@ description:
 draft: false
 comments: true
 images:
-  - https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR.webp
-  - https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR.webp
+  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR.webp
 tags:
   - photo
   - natures
   - countryside
 ---
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
+{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_055007_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/hugo-site/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
+{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-25/IMG_20170125_053323_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
