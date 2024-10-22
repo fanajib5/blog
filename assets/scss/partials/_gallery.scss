@@ -22,6 +22,10 @@
     object-fit: cover;
     vertical-align: bottom;
   }
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .album-header {
