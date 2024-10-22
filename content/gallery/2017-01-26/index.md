@@ -2,7 +2,7 @@
 title: "Studi ekskursi Teknik Telekomunikasi"
 date: 2017-01-26T07:31:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
-location: N/A (sekitar Jawa Tengah)
+location: Villa Setiabudi, Kota Bandung, Jawa Barat; N/A (sekitar Jawa Tengah)
 author: "Faiq Najib"
 shot_date: 2017-01-26T06:00:00+07:00
 shot_with: Xiaomi Mi-4c

@@ -1,6 +1,6 @@
 ---
 title: "Wisata Paralayang Malang"
-date: 2016-12-03T05:30:00+07:00
+date: 2016-12-03T12:30:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
 location: Wisata Paralayang, Kabupaten Malang, Jawa Timur
 author: "Faiq Najib"
