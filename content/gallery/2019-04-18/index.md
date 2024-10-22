@@ -4,7 +4,7 @@ date: 2019-04-18T15:50:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
 location: Institut Teknologi Bandung, Kota Bandung, Jawa Barat
 author: "Faiq Najib"
-shot_date: 2019-04-18
+shot_date: 2019-04-18T06:00:00+07:00
 shot_with: Xiaomi Redmi Note 5
 description:
 draft: false
