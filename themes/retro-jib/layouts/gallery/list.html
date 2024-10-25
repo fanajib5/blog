@@ -14,7 +14,7 @@
     <h2><a href="{{ $albumLink }}" class="tdln">{{.Title}}</a></h2>
     <a href="{{ $albumLink }}" class="album-row">
       {{- range $image := .Params.images -}}
-      <div class="img-tile"><img src="{{ relURL $image }}" height="130px" width="auto" loading="lazy"></div>
+      <div class="img-tile"><img src="{{ $albumLink }}{{  $image }}" height="130px" width="auto" loading="lazy"></div>
       {{- end -}}
     </a>
   </div>

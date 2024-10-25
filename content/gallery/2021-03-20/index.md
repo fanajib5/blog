@@ -10,7 +10,7 @@ description:
 draft: false
 comments: false
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2021-03-20/IMG_20210320_181851__thumbnail.webp
+  - IMG_20210320_181851__thumbnail.webp
 tags:
   - photo
   - metropolitan-building

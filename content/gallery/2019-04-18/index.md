@@ -10,7 +10,7 @@ description:
 draft: false
 comments: false
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-18/IMG_20190418_155010__thumbnail.webp
+  - IMG_20190418_155010__thumbnail.webp
 tags:
   - photo
   - university-institute
