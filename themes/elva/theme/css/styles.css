@@ -16,6 +16,8 @@ body {
     line-height: 1.4;
     letter-spacing: var(--tracking);
     transition: background var(--transition-base), color var(--transition-base);
+	max-width: 50rem;
+	margin-inline: auto;
 }
 
 [x-cloak] { 
@@ -38,7 +40,7 @@ body {
 :focus:not(:focus-visible) {
     outline: none;
 }
-  
+
 :target {
     scroll-margin-top: 2ex;
 }
@@ -46,7 +48,7 @@ body {
 a {
     color: var(--link);
 }
-  
+
 a:hover {
     color: var(--link-hover);
     text-decoration: none;
@@ -126,7 +128,7 @@ blockquote:not([class]) {
     font-family: var(--font-serif);
     font-size: var(--step-1);
 }
-  
+
 blockquote:not([class]) p:last-of-type {
     font-family: var(--font-base);
     font-size: var(--size-step-1);
@@ -136,7 +138,7 @@ blockquote:not([class]) p:last-of-type {
 blockquote p::before {
     content: open-quote;
 }
-  
+
 blockquote p::after {
     content: close-quote;
 }
@@ -147,7 +149,7 @@ h6,
 p,
 li,
 blockquote:not([class]) {
-  max-width: 65ch;
+	max-width: 65ch;
 }
 
 p:has(> picture) {
@@ -158,7 +160,7 @@ p:has(> picture) {
 h1,
 h2,
 h3 {
-  max-width: 20ch;
+	max-width: 20ch;
 }
 
 mark {
