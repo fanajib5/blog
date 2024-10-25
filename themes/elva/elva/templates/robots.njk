@@ -1,0 +1,17 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+seo:
+  excludeFromSitemap: true
+---
+{%- if settings.isProduction -%}
+Sitemap: {{ "/sitemap.xml" | htmlBaseUrl(settings.url) }}
+
+{{ badbots }}
+User-agent: *
+Disallow:
+Disallow: /404.html
+{%- else -%}
+User-agent: *
+Disallow: /
+{%- endif -%}
