@@ -11,20 +11,20 @@ description:
 draft: false
 comments: false
 images:
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/20230730_161023__thumbnail.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/IMG_20210821_201340__thumbnail.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/VID_20190416_120623-0__thumbnail.webp
-  - https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/VID-20200808-WA0000-0__thumbnail.webp
+  - 20230730_161023__thumbnail.webp
+  - IMG_20210821_201340__thumbnail.webp
+  - VID_20190416_120623-0__thumbnail.webp
+  - VID-20200808-WA0000-0__thumbnail.webp
 tags:
   - photo
   - natures
   - countryside
 ---
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/20230730_161023.webp" alt="kocheng 1">}}
+{{< figure src="20230730_161023.webp" width="60%" alt="kocheng 1">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/IMG_20210821_201340.webp" alt="kocheng 2">}}
+{{< figure src="IMG_20210821_201340.webp" width="60%" alt="kocheng 2">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/VID_20190416_120623-0.webp" alt="kocheng 3">}}
+{{< figure src="VID_20190416_120623-0.webp" width="60%" alt="kocheng 3">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-16/VID-20200808-WA0000-0.webp" alt="kocheng 4">}}
+{{< figure src="VID-20200808-WA0000-0.webp" alt="kocheng 4">}}

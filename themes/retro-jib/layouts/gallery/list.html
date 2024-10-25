@@ -10,11 +10,11 @@
 
   {{- range (.Pages.ByParam "shot_date").Reverse}}
   <div class="album">
-    {{ $abulmLink := .RelPermalink -}}
-    <h2><a href="{{ $abulmLink }}" class="tdln">{{.Title}}</a></h2>
-    <a href="{{ $abulmLink }}" class="album-row">
-      {{- range .Params.images -}}
-      <div class="img-tile"><img src="{{. | relURL}}" height="130px" width="auto" loading="lazy"></div>
+    {{ $albumLink := .RelPermalink -}}
+    <h2><a href="{{ $albumLink }}" class="tdln">{{.Title}}</a></h2>
+    <a href="{{ $albumLink }}" class="album-row">
+      {{- range $image := .Params.images -}}
+      <div class="img-tile"><img src="{{ relURL $image }}" height="130px" width="auto" loading="lazy"></div>
       {{- end -}}
     </a>
   </div>
