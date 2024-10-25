@@ -1,17 +1,18 @@
 ---
-title: "Sidang tesis. Lika-liku perjalanan gelar ketiga"
+title: Sidang tesis. Lika-liku perjalanan gelar ketiga
 url: ""
-description: "Sebuah curahan hati pengalaman penulis dalam menjalani perkuliahan dan sidang akhir yang ketiga untuk mendapatkan gelar akademik."
-author: "Faiq Najib"
+description: Sebuah curahan hati pengalaman penulis dalam menjalani perkuliahan dan sidang akhir yang ketiga untuk mendapatkan gelar akademik.
+author: Faiq Najib
 date: 2023-07-23T18:55:34.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false
 toc: true
 comments: false
-images:
+images: null
 tags:
   - academic
   - personal
+slug: sidang-tesis-lika-liku-perjalanan-gelar-ketiga
 ---
 
 _Alhamdulillah_ berkat ridho Allah SWT, doa keluarga dan teman-teman, saya menyelesikan sidang tesis pada 21 Juli 2023 untuk yang ketiga selama hidup saya. Jadi, begini ceritanya...
