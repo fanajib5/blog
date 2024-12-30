@@ -1,16 +1,20 @@
-lang: en
-
+lang: id
 home:
-  welcome: Hello, I am a person that writes stuff.
-
-menu_links: []
-extra_head: []
-
-# Metas plugin https://lume.land/plugins/metas/#description
+  welcome: Blogfolio Najib
+menu_links:
+  - title: Writing
+    url: writing
+  - title: Gallery
+    url: gallery
+  - title: About
+    url: about
 metas:
-  site: Blog name
-  description: General description of the blog
-  title: "=title"
-  image: "=image"
-  twitter: "@username"
-  lang: en
+  site: Blogfolio Najib
+  description: >-
+    Blog pribadi yang membahas teknologi, bisnis, dan hobi dari sudut pandang
+    pribadi penulis
+  title: =title
+  image: =image
+  twitter: '@FANAJIB5'
+  lang: id
+  generator: true
