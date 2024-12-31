@@ -1,8 +1,5 @@
-# Local Netlify folder
-.netlify
-
-# Package Files
-node_modules/
-.idea/
-.vscode/
-public/
+posts/*.md
+src/uploads
+_site
+_bin
+deno.lock
