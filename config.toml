@@ -12,87 +12,109 @@ theme = "retro-jib"
 enableGitInfo = true
 
 [languages]
+
 [languages.id]
-languageCode = "id-ID"
-languageName = "Bahasa Indonesia"
-weight = 1
+  languageCode = "id-ID"
+  languageName = "Bahasa Indonesia"
+  weight = 1
 [languages.en]
-languageCode = "en-US"
-languageName = "English"
-weight = 2
+  languageCode = "en-US"
+  languageName = "English"
+  weight = 2
 
 [markup]
-defaultMarkdownHandler = "goldmark"
+  defaultMarkdownHandler = "goldmark"
 
 [markup.tableOfContents]
-endLevel = 4
-ordered = false
-startLevel = 2
+  endLevel = 4
+  ordered = false
+  startLevel = 2
 
 [markup.goldmark.renderer]
-unsafe = true
+  unsafe = true
 [markup.goldmark.parser]
-wrapStandAloneImageWithinParagraph = false
+  wrapStandAloneImageWithinParagraph = false
 [markup.goldmark.parser.attribute]
-block = true
-title = true
+  block = true
+  title = true
 [markup.highlight]
-anchorLineNos = false
-codeFences = true
-guessSyntax = false
-hl_Lines = ""
-hl_inline = false
-lineAnchors = ""
-lineNoStart = 1
-lineNos = false
-lineNumbersInTable = true
-noClasses = true
-noHl = false
-style = "modus-vivendi"
-tabWidth = 4
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = false
+  hl_Lines = ""
+  hl_inline = false
+  lineAnchors = ""
+  lineNoStart = 1
+  lineNos = false
+  lineNumbersInTable = true
+  noClasses = true
+  noHl = false
+  style = "modus-vivendi"
+  tabWidth = 4
 
-# [taxonomies]
-#   tag = "tags"
+  # [taxonomies]
+  #   tag = "tags"
 
 [params]
-images = ["apple-touch-icon.png"]
+  images = [
+    "apple-touch-icon.png",
+  ]
 
 [[params.author]]
-name = "Faiq Najib"
+  name = "Faiq Najib"
 
 [menu]
 
 [[menu.main]]
-name = "Home"
-pageref = "/"
-weight = 1
+  name = "Home"
+  pageref = "/"
+  weight = 1
 [menu.main.params]
-description = "Beranda"
+  description = "Beranda"
 
 [[menu.main]]
-name = "Writing"
-pageref = "/writing"
-weight = 10
+  name = "Writing"
+  pageref = "/writing"
+  weight = 10
 [menu.main.params]
-description = "Arsip artikel"
+  description = "Arsip artikel"
 
 [[menu.main]]
-name = "Gallery"
-pageref = "/gallery"
-weight = 20
+  name = "Gallery"
+  pageref = "/gallery"
+  weight = 20
 [menu.main.params]
-description = "Album foto"
+  description = "Album foto"
 
 [[menu.main]]
-name = "Link"
-pageref = "/link"
-weight = 30
+  name = "Link"
+  pageref = "/link"
+  weight = 30
 [menu.main.params]
-description = "Tautan dan papan pesan"
+  description = "Tautan dan papan pesan"
 
 [[menu.main]]
-name = "About"
-pageref = "/about"
-weight = 40
+  name = "About"
+  pageref = "/about"
+  weight = 40
 [menu.main.params]
-description = "Tentang"
+  description = "Tentang"
+
+
+[build]
+[build.buildStats]
+  enable = true
+[[build.cachebusters]]
+  source = 'assets/notwatching/hugo_stats\.json'
+  target = 'css'
+[[build.cachebusters]]
+  source = '(postcss|tailwind)\.config\.js'
+  target = 'css'
+[module]
+[[module.mounts]]
+  source = 'assets'
+  target = 'assets'
+[[module.mounts]]
+  disableWatch = true
+  source = 'hugo_stats.json'
+  target = 'assets/notwatching/hugo_stats.json'
