@@ -1,47 +1,19 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update
+  branch: main # Branch to update (optional; defaults to master)
 
-# When using local development, uncomment this to use local backend
-# local_backend: true
+media_folder: "public/images/uploads" # Media files will be stored in the repo under public/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
-# Media folder where uploads will be stored
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
-
-# Site URL for CMS preview
-site_url: https://blogfolio-najib.vercel.app
-
-# Collection types
 collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "content/blog"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "string", default: "Najib" }
-      - { label: "Cover Image", name: "coverImage", widget: "image" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["AI", "Programming", "Design", "Database", "CMS", "SEO"] }
-      - { label: "Content", name: "content", widget: "markdown" }
-      - { label: "SEO Description", name: "seoDescription", widget: "text" }
-      - { label: "SEO Keywords", name: "seoKeywords", widget: "list" }
-      - { label: "Status", name: "status", widget: "select", options: ["draft", "published"], default: "draft" }
-      - { label: "Comments Count", name: "comments", widget: "number", default: 0 }
-
-  - name: "pages"
-    label: "Pages"
-    folder: "content/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Content", name: "content", widget: "markdown" }
-      - { label: "SEO Description", name: "seoDescription", widget: "text" }
-      - { label: "SEO Keywords", name: "seoKeywords", widget: "list" }
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog Post" # Used in the UI
+    folder: "content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
 
