@@ -2,27 +2,19 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import { type BlogPost, getBlogPosts } from "@/lib/blog"
+import BlogCard from "@/components/blog/blog-card"
+import { useCMSData } from "@/hooks/use-cms-data"
+import LoadingSpinner from "@/components/ui/loading-spinner"
 
 export default function Home() {
-  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const posts = await getBlogPosts()
-        setLatestPosts(posts.slice(0, 3))
-      } catch (error) {
-        console.error("Error loading posts:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadPosts()
-  }, [])
+  const {
+    data: latestPosts,
+    loading,
+    error,
+  } = useCMSData({
+    filterByStatus: "published",
+    limit: 3,
+  })
 
   return (
     <div className="max-w-4xl mx-auto px-4">
@@ -71,35 +63,17 @@ export default function Home() {
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6">Latest Posts</h2>
         {loading ? (
-          <div className="space-y-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="animate-pulse border-b border-gray-800 pb-6">
-                <div className="h-5 bg-gray-700 rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-gray-700 rounded w-1/4 mb-2"></div>
-                <div className="h-4 bg-gray-700 rounded w-full mb-2"></div>
-              </div>
-            ))}
+          <div className="flex justify-center py-8">
+            <LoadingSpinner />
+          </div>
+        ) : error ? (
+          <div className="text-center py-8 text-red-400">
+            <p>Error loading posts: {error.message}</p>
           </div>
         ) : (
           <div className="space-y-6">
             {latestPosts.map((post) => (
-              <article key={post.id} className="border-b border-gray-800 pb-6">
-                <h3 className="text-lg font-medium mb-1">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-orange-500">
-                    {post.title}
-                  </Link>
-                  <span className="text-xs text-gray-500 ml-2">[{post.category}]</span>
-                </h3>
-                <div className="text-xs text-gray-500 mb-2">
-                  By {post.author} • {post.date}
-                </div>
-                <p className="text-gray-300 text-sm mb-2">{post.excerpt}</p>
-                <div className="text-xs">
-                  <Link href={`/blog/${post.slug}`} className="text-orange-500 hover:underline">
-                    Read more →
-                  </Link>
-                </div>
-              </article>
+              <BlogCard key={post.id} post={post} variant="compact" />
             ))}
           </div>
         )}

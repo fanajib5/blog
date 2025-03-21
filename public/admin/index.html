@@ -1,37 +1,86 @@
 <!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogfolio Najib - Content Manager</title>
-    <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
-    <!-- Include Netlify Identity Widget for authentication -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <style>
-      /* Custom styles to ensure dark theme */
-      body {
-        background-color: #000;
-        color: #fff;
-      }
-      
-      /* Additional custom styles can be added here */
-    </style>
-  </head>
-  <body>
-    <!-- Include the script that builds the page and powers DecapCMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      // Initialize the CMS
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
-  </body>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogfolio Najib - Content Manager</title>
+  <!-- Include Netlify Identity Widget for authentication -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    /* Custom styles to ensure dark theme */
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+    
+    /* Loading indicator */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid #ea580c;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading indicator -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Loading CMS...</p>
+  </div>
+
+  <!-- Include the script that builds the page and powers DecapCMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    // Initialize the CMS
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+    
+    // Hide loading indicator when CMS is loaded
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading').style.display = 'none';
+      }, 1000);
+    });
+    
+    // Error handling
+    window.addEventListener('error', function(e) {
+      console.error('CMS loading error:', e);
+      document.getElementById('loading').innerHTML = `
+        <div style="max-width: 500px; margin: 0 auto; text-align: center; padding: 20px; background: rgba(255, 0, 0, 0.1); border: 1px solid #500; border-radius: 5px;">
+          <h2 style="color: #f88; margin-bottom: 15px;">Error Loading CMS</h2>
+          <p style="margin-bottom: 15px;">${e.message || 'An unknown error occurred while loading the CMS.'}</p>
+          <button onclick="window.location.reload()" style="background: #ea580c; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+            Reload Page
+          </button>
+        </div>
+      `;
+    });
+  </script>
+</body>
 </html>
 

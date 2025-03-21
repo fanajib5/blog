@@ -1,46 +1,42 @@
 "use client"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 interface MarkdownContentProps {
   content: string
 }
 
 export default function MarkdownContent({ content }: MarkdownContentProps) {
+  // Simple markdown renderer that handles basic formatting
+  // This is a simplified version to avoid potential issues with the full ReactMarkdown library
+  const formatMarkdown = (text: string) => {
+    // Convert headers
+    text = text.replace(/^# (.*$)/gm, '<h1 class="text-2xl font-bold mt-6 mb-4">$1</h1>')
+    text = text.replace(/^## (.*$)/gm, '<h2 class="text-xl font-bold mt-5 mb-3">$1</h2>')
+    text = text.replace(/^### (.*$)/gm, '<h3 class="text-lg font-bold mt-4 mb-2">$1</h3>')
+
+    // Convert bold
+    text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+
+    // Convert italic
+    text = text.replace(/\*(.*?)\*/g, "<em>$1</em>")
+
+    // Convert lists
+    text = text.replace(/^- (.*$)/gm, '<li class="ml-5">$1</li>')
+    text = text.replace(/(<li.*<\/li>)/s, '<ul class="list-disc mb-4">$1</ul>')
+
+    // Convert paragraphs (must be done last)
+    text = text.replace(/^(?!<[uh]|<li).*$/gm, (match) => {
+      if (match.trim() === "") return ""
+      return `<p class="mb-4">${match}</p>`
+    })
+
+    return text
+  }
+
   return (
-    <ReactMarkdown
+    <div
       className="prose prose-invert prose-orange max-w-none"
-      remarkPlugins={[remarkGfm]}
-      components={{
-        h1: ({ node, ...props }) => <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />,
-        h2: ({ node, ...props }) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
-        h3: ({ node, ...props }) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
-        p: ({ node, ...props }) => <p className="mb-4" {...props} />,
-        ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-4" {...props} />,
-        ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-4" {...props} />,
-        li: ({ node, ...props }) => <li className="mb-1" {...props} />,
-        a: ({ node, ...props }) => <a className="text-orange-500 hover:underline" {...props} />,
-        blockquote: ({ node, ...props }) => (
-          <blockquote className="border-l-4 border-orange-500 pl-4 italic my-4" {...props} />
-        ),
-        code({ node, inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || "")
-          return !inline && match ? (
-            <SyntaxHighlighter style={atomDark} language={match[1]} PreTag="div" className="rounded-md my-4" {...props}>
-              {String(children).replace(/\n$/, "")}
-            </SyntaxHighlighter>
-          ) : (
-            <code className="bg-gray-800 rounded px-1 py-0.5" {...props}>
-              {children}
-            </code>
-          )
-        },
-      }}
-    >
-      {content}
-    </ReactMarkdown>
+      dangerouslySetInnerHTML={{ __html: formatMarkdown(content) }}
+    />
   )
 }
 

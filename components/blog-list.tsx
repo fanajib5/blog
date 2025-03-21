@@ -3,6 +3,7 @@ import Link from "next/link"
 const blogPosts = [
   {
     id: 1,
+    slug: "announcing-openai-sora",
     title: "Announcing OpenAI's Sora",
     date: "February 15, 2024",
     author: "Najib",
@@ -12,6 +13,7 @@ const blogPosts = [
   },
   {
     id: 2,
+    slug: "faster-development-in-ai",
     title: "Faster Development in AI: Pushing to the Edge",
     date: "January 28, 2024",
     author: "Najib",
@@ -22,6 +24,7 @@ const blogPosts = [
   },
   {
     id: 3,
+    slug: "next-frontier-generative-ai",
     title: "The Next Frontier: Rise of Generative AI",
     date: "December 10, 2023",
     author: "Najib",
@@ -31,6 +34,7 @@ const blogPosts = [
   },
   {
     id: 4,
+    slug: "ui-design-and-ux",
     title: "UI Design and UX/UX",
     date: "November 5, 2023",
     author: "Najib",
@@ -41,6 +45,7 @@ const blogPosts = [
   },
   {
     id: 5,
+    slug: "migrating-blog-insights-to-mysql",
     title: "Migrating Blog Insights to MySQL",
     date: "October 22, 2023",
     author: "Najib",
@@ -50,6 +55,7 @@ const blogPosts = [
   },
   {
     id: 6,
+    slug: "headless-cms-alternative",
     title: "Headless CMS: What's an alternative for traditional CMS",
     date: "September 30, 2023",
     author: "Najib",
@@ -59,6 +65,7 @@ const blogPosts = [
   },
   {
     id: 7,
+    slug: "achieving-strong-online-presence",
     title: "Achieving strong online presence SEO and provide value",
     date: "August 18, 2023",
     author: "Najib",
@@ -80,7 +87,7 @@ export default function BlogList({ limit }: BlogListProps) {
       {displayPosts.map((post) => (
         <article key={post.id} className="border-b border-gray-800 pb-8">
           <h2 className="text-lg font-medium mb-1">
-            <Link href={`/blog/${post.id}`} className="hover:text-orange-500">
+            <Link href={`/blog/${post.slug}`} className="hover:text-orange-500">
               {post.title}
             </Link>
             <span className="text-xs text-gray-500 ml-2">[{post.category}]</span>
@@ -90,7 +97,7 @@ export default function BlogList({ limit }: BlogListProps) {
           </div>
           <p className="text-gray-300 text-sm mb-2">{post.excerpt}</p>
           <div className="text-xs">
-            <Link href={`/blog/${post.id}#comments`} className="text-orange-500 hover:underline">
+            <Link href={`/blog/${post.slug}#comments`} className="text-orange-500 hover:underline">
               Comments ({post.comments})
             </Link>
           </div>

@@ -96,7 +96,83 @@ As with any powerful AI technology, there are also concerns about potential misu
       "Learn about OpenAI's groundbreaking Sora model that generates realistic videos from text descriptions and its potential impact on content creation.",
     status: "published",
   },
-  // Add more fallback posts as needed
+  {
+    id: 2,
+    title: "Faster Development in AI: Pushing to the Edge",
+    slug: "faster-development-in-ai",
+    date: "January 28, 2024",
+    author: "Najib",
+    excerpt:
+      "A deep discussion on implementing modern language abstractions to be applied to the future of automation engines.",
+    content: `
+# Faster Development in AI: Pushing to the Edge
+
+The landscape of AI development is rapidly evolving, with a growing emphasis on edge computing and optimized language abstractions. This shift is enabling developers to create more efficient, responsive AI applications that can operate with reduced latency and lower bandwidth requirements.
+
+## The Rise of Edge AI
+
+Edge AI refers to AI algorithms that are processed locally on a hardware device, rather than in the cloud. This approach offers several advantages:
+
+- Reduced latency for real-time applications
+- Enhanced privacy as data doesn't need to leave the device
+- Lower bandwidth usage and operational costs
+- Continued functionality even without internet connectivity
+
+## Modern Language Abstractions
+
+Alongside the hardware advancements, we're seeing the development of new programming paradigms and language abstractions specifically designed for AI development. These abstractions allow developers to express complex AI operations more concisely and with better performance characteristics.
+
+Frameworks like TensorFlow Lite, PyTorch Mobile, and ONNX Runtime are making it easier to deploy sophisticated models to edge devices, while domain-specific languages are emerging to address the unique challenges of AI development.
+
+As these technologies continue to mature, we can expect to see AI capabilities becoming more deeply integrated into our everyday devices and applications, opening up new possibilities for automation and intelligent assistance.
+    `,
+    category: "Programming",
+    comments: 3,
+    coverImage: "https://source.unsplash.com/random/1200x630/?programming,code",
+    seoKeywords: ["AI development", "edge computing", "language abstractions", "TensorFlow", "PyTorch"],
+    seoDescription:
+      "Explore how edge computing and modern language abstractions are accelerating AI development and enabling more efficient, responsive applications.",
+    status: "published",
+  },
+  {
+    id: 3,
+    title: "The Next Frontier: Rise of Generative AI",
+    slug: "next-frontier-generative-ai",
+    date: "December 10, 2023",
+    author: "Najib",
+    excerpt: "My experiences jumping into the AI world and critical takeaways.",
+    content: `
+# The Next Frontier: Rise of Generative AI
+
+My journey into the world of generative AI began about a year ago, and it's been nothing short of transformative. From text-to-image models like DALL-E and Midjourney to large language models like GPT-4, the capabilities of these systems have expanded at a breathtaking pace.
+
+## Key Learnings
+
+Throughout my exploration, I've gathered several critical insights that might be valuable for others entering this space:
+
+1. **Prompt engineering is an art form.** The way you structure and phrase your prompts can dramatically affect the output quality. Being specific, providing context, and understanding the model's strengths and limitations are key.
+2. **Iteration is essential.** Rarely will you get the perfect result on the first try. The best outcomes often come from a process of refinement and experimentation.
+3. **Ethical considerations matter.** As these technologies become more powerful, questions about copyright, bias, and potential misuse become increasingly important.
+
+## Practical Applications
+
+I've found generative AI to be particularly valuable in several areas:
+
+- Content creation and ideation
+- Prototyping designs and concepts
+- Automating repetitive writing tasks
+- Learning and exploring new domains
+
+While there's certainly hype surrounding these technologies, my experience has convinced me that generative AI represents a fundamental shift in how we interact with computers and create content. The potential for both creative expression and productivity enhancement is enormous.
+    `,
+    category: "AI",
+    comments: 7,
+    coverImage: "https://source.unsplash.com/random/1200x630/?artificial,intelligence",
+    seoKeywords: ["generative AI", "DALL-E", "GPT-4", "prompt engineering", "AI ethics"],
+    seoDescription:
+      "Personal insights and key learnings from a year of exploring generative AI technologies, from prompt engineering to practical applications.",
+    status: "published",
+  },
 ]
 
 // Get all blog posts
@@ -155,6 +231,15 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const contentDir = "content/blog"
+
+    // First check if we're in a browser environment
+    if (typeof window !== "undefined") {
+      // In browser, return from fallback data
+      const fallbackPost = fallbackBlogPosts.find((post) => post.slug === slug)
+      return fallbackPost || null
+    }
+
+    // Server-side code
     const files = getMarkdownFiles(contentDir)
 
     if (files.length === 0) {
