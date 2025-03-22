@@ -5,7 +5,7 @@ description: "Sebuah cerita pengalaman penulis dalam melaksanakan sidang akhir s
 author: "Faiq Najib"
 date: 2023-07-24T17:32:00+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
-draft: false
+draft: ture
 toc: true
 comments: false
 images:
