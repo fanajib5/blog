@@ -1,0 +1,40 @@
+// =====================
+// Syntax Highlighting (Modus Vivendi inspired)
+// =====================
+
+// Code blocks are styled in main style.scss
+// This file adds syntax-specific highlighting
+
+.highlight {
+  margin: $spacing-lg 0;
+  border-radius: 6px;
+  overflow: hidden;
+  
+  pre {
+    margin: 0;
+    padding: $spacing-md;
+  }
+}
+
+// Line numbers
+.highlight .ln {
+  color: #6b6b6b;
+  margin-right: $spacing-md;
+  user-select: none;
+}
+
+// Token colors (Modus Vivendi palette)
+.highlight {
+  .c, .ch, .cd, .cm, .c1, .cs { color: #989898; } // Comments
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #b6a0ff; } // Keywords
+  .s, .sa, .sb, .sc, .dl, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss { color: #79a8ff; } // Strings
+  .m, .mb, .mf, .mh, .mi, .mo, .il { color: #00bcff; } // Numbers
+  .na, .nb, .nc, .no, .nd, .ni, .ne, .nf, .nl, .nn, .nt, .nv { color: #00d3d0; } // Names
+  .o, .ow { color: #ffffff; } // Operators
+  .p { color: #ffffff; } // Punctuation
+  .gd { color: #ff8059; } // Deleted
+  .gi { color: #44bc44; } // Inserted
+  .ge { font-style: italic; }
+  .gs { font-weight: bold; }
+  .err { color: #ff8059; }
+}

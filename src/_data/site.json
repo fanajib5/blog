@@ -1,0 +1,53 @@
+{
+  "title": "Blogfolio Najib",
+  "description": "Situs pribadi Faiq Najib",
+  "url": "https://your-domain.com",
+  "language": "id-ID",
+  "author": {
+    "name": "Faiq Najib"
+  },
+  "copyright": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+  "menu": [
+    {
+      "name": "Home",
+      "url": "/",
+      "weight": 1,
+      "description": "Beranda"
+    },
+    {
+      "name": "Projects",
+      "url": "/projects/",
+      "weight": 5,
+      "description": "Portfolio proyek"
+    },
+    {
+      "name": "Writing",
+      "url": "/writing/",
+      "weight": 10,
+      "description": "Arsip artikel"
+    },
+    {
+      "name": "Gallery",
+      "url": "/gallery/",
+      "weight": 20,
+      "description": "Album foto"
+    },
+    {
+      "name": "Link",
+      "url": "/link/",
+      "weight": 30,
+      "description": "Tautan dan papan pesan"
+    },
+    {
+      "name": "About",
+      "url": "/about/",
+      "weight": 40,
+      "description": "Tentang"
+    }
+  ],
+  "social": {
+    "github": "fanajib5",
+    "twitter": "",
+    "email": ""
+  }
+}
