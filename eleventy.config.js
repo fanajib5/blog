@@ -1,6 +1,6 @@
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
-import pluginToc from 'eleventy-plugin-toc';
+import markdownItTocDoneRight from 'markdown-it-toc-done-right';
 
 export default function(eleventyConfig) {
   // Markdown configuration
@@ -18,7 +18,11 @@ export default function(eleventyConfig) {
     })
   });
 
-  // TOC functionality handled by eleventy-plugin-toc
+  md.use(markdownItTocDoneRight, {
+    containerClass: 'toc',
+    listType: 'ul',
+    level: [2, 3]
+  });
 
   eleventyConfig.setLibrary('md', md);
 
@@ -74,11 +78,27 @@ export default function(eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
-  // TOC Plugin
-  eleventyConfig.addPlugin(pluginToc, {
-    tags: ['h2', 'h3'], // Include h2 and h3 headings
-    wrapper: 'div', // Wrapper element
-    wrapperClass: 'toc' // CSS class for wrapper
+  // TOC Filter - extract TOC from markdown content
+  eleventyConfig.addFilter('toc', (content) => {
+    // Create a temporary markdown instance with TOC enabled
+    const md = markdownIt({
+      html: true,
+      breaks: true,
+      linkify: true,
+      typographer: true
+    });
+
+    md.use(markdownItTocDoneRight, {
+      containerClass: 'toc',
+      listType: 'ul',
+      level: [2, 3]
+    });
+
+    // Render content and extract TOC
+    const rendered = md.render(content);
+    const tocMatch = rendered.match(/<div class="toc"[^>]*>[\s\S]*?<\/div>/);
+
+    return tocMatch ? tocMatch[0] : '';
   });
 
   // Pass through copy
