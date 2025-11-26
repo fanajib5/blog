@@ -1,14 +1,26 @@
-# example netlify.toml
 [build]
-command = "hugo"
-functions = "netlify/functions"
-publish = "public"
+  command = "npm run build"
+  publish = "_site"
 
 [build.environment]
-HUGO_VERSION = "0.101.0"
+  NODE_VERSION = "20"
 
-[[redirects]]
-from = "/resume"
-to = "/docs/faiq-resume.pdf"
-status = 301
-force = false
+# Redirect /writing/2023/some-post to /writing/some-post if needed
+# [[redirects]]
+#   from = "/writing/:year/:slug"
+#   to = "/writing/:slug"
+#   status = 301
+
+# Custom headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
