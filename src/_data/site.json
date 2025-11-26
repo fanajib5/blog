@@ -15,6 +15,12 @@
       "description": "Beranda"
     },
     {
+      "name": "Projects",
+      "url": "/projects/",
+      "weight": 5,
+      "description": "Portfolio proyek"
+    },
+    {
       "name": "Writing",
       "url": "/writing/",
       "weight": 10,

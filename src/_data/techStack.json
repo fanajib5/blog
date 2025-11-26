@@ -1,0 +1,95 @@
+{
+  "languages": [
+    {
+      "name": "Go",
+      "level": "Advanced",
+      "icon": "🔷",
+      "category": "Backend"
+    },
+    {
+      "name": "PHP",
+      "level": "Advanced",
+      "icon": "🐘",
+      "category": "Backend"
+    },
+    {
+      "name": "JavaScript",
+      "level": "Intermediate",
+      "icon": "💛",
+      "category": "Frontend"
+    },
+    {
+      "name": "Python",
+      "level": "Intermediate",
+      "icon": "🐍",
+      "category": "Backend"
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Laravel",
+      "level": "Advanced",
+      "icon": "🔺",
+      "category": "Backend"
+    },
+    {
+      "name": "Eleventy",
+      "level": "Intermediate",
+      "icon": "🎈",
+      "category": "Static Site"
+    },
+    {
+      "name": "Vue.js",
+      "level": "Intermediate",
+      "icon": "💚",
+      "category": "Frontend"
+    }
+  ],
+  "databases": [
+    {
+      "name": "PostgreSQL",
+      "level": "Advanced",
+      "icon": "🐘",
+      "category": "Database"
+    },
+    {
+      "name": "MySQL",
+      "level": "Advanced",
+      "icon": "🐬",
+      "category": "Database"
+    },
+    {
+      "name": "Redis",
+      "level": "Intermediate",
+      "icon": "🔴",
+      "category": "Cache"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Docker",
+      "level": "Advanced",
+      "icon": "🐳",
+      "category": "DevOps"
+    },
+    {
+      "name": "Git",
+      "level": "Advanced",
+      "icon": "📚",
+      "category": "Version Control"
+    },
+    {
+      "name": "Linux",
+      "level": "Advanced",
+      "icon": "🐧",
+      "category": "OS"
+    }
+  ],
+  "interests": [
+    "GPS & Location-based Services",
+    "Financial Trading Systems",
+    "Real-time Data Processing",
+    "Backend Architecture",
+    "Open Source Contributions"
+  ]
+}

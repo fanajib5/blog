@@ -182,6 +182,10 @@ hr {
   padding: $spacing-lg 0;
   border-bottom: 3px solid $color-accent;
   margin-bottom: $spacing-xl;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
   .container {
     display: flex;
@@ -270,6 +274,484 @@ hr {
     
     a {
       font-size: $font-size-sm;
+    }
+  }
+}
+
+// =====================
+// Hero Section
+// =====================
+.hero {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  padding: $spacing-2xl 0;
+  text-align: center;
+  border-bottom: 3px solid $color-accent;
+  margin-bottom: $spacing-2xl;
+
+  .hero-title {
+    font-size: 3rem;
+    margin: 0 0 $spacing-sm;
+    color: $color-accent;
+    font-weight: 700;
+  }
+
+  .hero-tagline {
+    font-size: $font-size-xl;
+    color: $color-text;
+    margin: 0 0 $spacing-xs;
+    font-weight: 500;
+  }
+
+  .hero-expertise {
+    font-size: $font-size-lg;
+    color: $color-text-light;
+    margin: 0 0 $spacing-xl;
+    font-family: $font-mono;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+
+  &.btn-primary {
+    background-color: $color-accent;
+    color: white;
+    border-color: $color-accent;
+
+    &:hover {
+      background-color: #6b4359;
+      border-color: #6b4359;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(133, 88, 111, 0.2);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: transparent;
+    color: $color-accent;
+    border-color: $color-accent;
+
+    &:hover {
+      background-color: $color-accent;
+      color: white;
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// =====================
+// Featured Projects
+// =====================
+.featured-projects {
+  padding: $spacing-2xl 0;
+  background-color: $color-bg;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-2xl;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+
+  .view-all {
+    display: block;
+    text-align: center;
+    margin-top: $spacing-xl;
+  }
+}
+
+.project-card {
+  background-color: $color-primary;
+  padding: $spacing-lg;
+  border-radius: 8px;
+  border: 2px solid $color-secondary;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(133, 88, 111, 0.15);
+    border-color: $color-accent;
+  }
+
+  .project-header {
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $color-secondary;
+  }
+
+  .project-title {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-lg;
+    color: $color-accent;
+  }
+
+  .project-role {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+    font-style: italic;
+  }
+
+  .project-description {
+    color: $color-text;
+    line-height: 1.6;
+    margin-bottom: $spacing-md;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-md;
+  }
+
+  .tech-badge {
+    display: inline-block;
+    background-color: $color-secondary;
+    color: $color-accent;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    font-size: $font-size-sm;
+    font-weight: 500;
+  }
+
+  .project-challenges {
+    margin-bottom: $spacing-md;
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: $color-accent;
+      user-select: none;
+      padding: $spacing-xs 0;
+
+      &:hover {
+        color: #6b4359;
+      }
+    }
+
+    ul {
+      margin-top: $spacing-sm;
+      padding-left: $spacing-lg;
+      font-size: $font-size-sm;
+      color: $color-text-light;
+
+      li {
+        margin-bottom: $spacing-xs;
+      }
+    }
+  }
+
+  .project-links {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+
+    a {
+      font-size: $font-size-sm;
+      padding: $spacing-xs $spacing-sm;
+      background-color: $color-secondary;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: $color-accent;
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// =====================
+// Tech Stack
+// =====================
+.tech-stack {
+  padding: $spacing-2xl 0;
+  background-color: $color-primary;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-2xl;
+  }
+
+  .stack-category {
+    margin-bottom: $spacing-xl;
+
+    h3 {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-md;
+      color: $color-accent;
+      border-bottom: 2px solid $color-secondary;
+      padding-bottom: $spacing-xs;
+    }
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: $spacing-md;
+  }
+
+  .stack-item {
+    background-color: $color-bg;
+    padding: $spacing-md;
+    border-radius: 6px;
+    border: 2px solid $color-secondary;
+    text-align: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $color-accent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(133, 88, 111, 0.1);
+    }
+
+    &.stack-advanced {
+      border-color: $color-accent;
+    }
+
+    .stack-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: $spacing-xs;
+    }
+
+    .stack-name {
+      display: block;
+      font-weight: 600;
+      color: $color-text;
+      margin-bottom: $spacing-xs;
+    }
+
+    .stack-level {
+      display: block;
+      font-size: $font-size-sm;
+      color: $color-text-light;
+    }
+  }
+
+  .stack-interests {
+    margin-top: $spacing-xl;
+    padding: $spacing-lg;
+    background-color: $color-bg;
+    border-radius: 6px;
+    border: 2px solid $color-accent;
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: $spacing-md;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: $spacing-sm;
+
+      li {
+        padding: $spacing-xs $spacing-sm;
+        background-color: $color-primary;
+        border-radius: 4px;
+        color: $color-text;
+
+        &::before {
+          content: "→ ";
+          color: $color-accent;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+// =====================
+// Projects Page
+// =====================
+.projects-page {
+  .page-header {
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-md;
+    border-bottom: 2px solid $color-accent;
+    text-align: center;
+
+    .page-title {
+      margin: 0 0 $spacing-sm;
+    }
+
+    .page-description {
+      color: $color-text-light;
+      font-size: $font-size-lg;
+      margin: 0;
+    }
+  }
+
+  .page-content {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+    color: $color-text-light;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2xl;
+  }
+
+  .project-detail {
+    background-color: $color-primary;
+    padding: $spacing-xl;
+    border-radius: 8px;
+    border: 2px solid $color-secondary;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: $color-accent;
+    }
+
+    .project-detail-header {
+      margin-bottom: $spacing-md;
+      padding-bottom: $spacing-sm;
+      border-bottom: 2px solid $color-accent;
+
+      h2 {
+        margin: 0 0 $spacing-xs;
+        font-size: $font-size-xl;
+      }
+
+      .project-role {
+        font-size: $font-size-sm;
+        color: $color-text-light;
+        font-style: italic;
+      }
+    }
+
+    .project-description {
+      font-size: $font-size-lg;
+      color: $color-text;
+      margin-bottom: $spacing-lg;
+    }
+
+    .project-section {
+      margin-bottom: $spacing-lg;
+
+      h3 {
+        font-size: $font-size-base;
+        color: $color-accent;
+        margin: 0 0 $spacing-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        color: $color-text-light;
+      }
+    }
+
+    .project-tech {
+      margin-bottom: $spacing-lg;
+
+      h3 {
+        font-size: $font-size-base;
+        color: $color-accent;
+        margin: 0 0 $spacing-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+
+      .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-xs;
+
+        .tech-badge {
+          background-color: $color-secondary;
+          color: $color-accent;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: 4px;
+          font-size: $font-size-sm;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .challenges-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: $spacing-xs 0;
+        color: $color-text-light;
+        position: relative;
+        padding-left: $spacing-lg;
+
+        &::before {
+          content: "→";
+          position: absolute;
+          left: 0;
+          color: $color-accent;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .project-links {
+      display: flex;
+      gap: $spacing-md;
+      flex-wrap: wrap;
+      margin-top: $spacing-lg;
+      padding-top: $spacing-md;
+      border-top: 2px solid $color-secondary;
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-sm $spacing-md;
+        background-color: $color-secondary;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        span {
+          font-size: $font-size-lg;
+        }
+
+        &:hover {
+          background-color: $color-accent;
+          color: white;
+          text-decoration: none;
+          transform: translateY(-2px);
+        }
+      }
     }
   }
 }
@@ -616,6 +1098,44 @@ hr {
     flex-wrap: wrap;
     justify-content: center;
     gap: $spacing-sm $spacing-md;
+  }
+
+  .hero {
+    padding: $spacing-xl 0;
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-tagline {
+      font-size: $font-size-lg;
+    }
+
+    .hero-expertise {
+      font-size: $font-size-base;
+    }
+  }
+
+  .featured-projects {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tech-stack {
+    .stack-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .stack-interests ul {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .projects-page {
+    .project-detail {
+      padding: $spacing-md;
+    }
   }
 
   .archive-page {
