@@ -1,11 +1,12 @@
 ---
 title: Komik yang...
+layout: layouts/page.njk
 date: 2022-09-20
 lastmod: 2023-03-13
 draft: false
 toc: false
 comments: false
-aliases:
+permalink: /comic/
 ---
 
 Daftar kumpulan komik _manga_[^1], _manhwa_[^2], maupun _manhua_[^3] dengan beragam _genre_ yang saya baca sampai selesai atau _dropped_ di tengah perjalan dan sisanya dibaca cepat (_skimming_). Saya baca komik baik di _platform_ [resmi](#_platform_-webtoonhttpswebtoonscomid) maupun [non-resmi](#_platform_-non-resmilink-mangapark).
