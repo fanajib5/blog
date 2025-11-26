@@ -4,6 +4,12 @@ layout: layouts/base.njk
 {% block title %}{{ site.title }}{% endblock %}
 
 {% block content %}
+{% include "partials/hero.njk" %}
+
+{% include "partials/featured-projects.njk" %}
+
+{% include "partials/tech-stack.njk" %}
+
 <section class="home">
   <div class="home-intro">
     {{ content | safe }}
