@@ -13,7 +13,7 @@ tags:
 ---
 
 <br/>
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_173415.webp" width="75%" alt="foto masjid Al Irsyad Satya, Kota Baru Parahyangan">}}
+<figure><img src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_173415.webp" width="75%" alt="foto masjid Al Irsyad Satya, Kota Baru Parahyangan"></figure>
 
 Man's becoming more corrupt now, godless, wicked, and cruel<br/>
 The soulless man stood silenced, their empty promises rang so true<br/>

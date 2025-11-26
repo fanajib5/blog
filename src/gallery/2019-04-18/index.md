@@ -14,4 +14,4 @@ tags:
   - university-institute
 ---
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-18/IMG_20190418_155010.webp" alt="foto gerbang depan ITB">}}
+<figure><img src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-18/IMG_20190418_155010.webp" alt="foto gerbang depan ITB"></figure>

@@ -13,7 +13,7 @@ tags:
 ---
 
 <br/>
-{{< figure src="IMG_20190418_155010_16-9.webp" width="75%" alt="pemandangan gerbang kampus ITB dan seorang wanita yang seperti menatap kosong ke depan">}}
+<figure><img src="IMG_20190418_155010_16-9.webp" width="75%" alt="pemandangan gerbang kampus ITB dan seorang wanita yang seperti menatap kosong ke depan"></figure>
 
 There was a girl with a sky full of stars in her eyes<br/>
 She was chasing a world that was so fast it left her behind<br/>
@@ -28,7 +28,7 @@ Sing back the melody, a song for the hearts left in the streets<br/>
 A voice for the out of reach<br/>
 The city of angels<br/>
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR.webp" width="75%" alt="pemandangan gunung dan seorang laki-laki yang menatap hampa" >}}
+<figure><img src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR.webp" width="75%" alt="pemandangan gunung dan seorang laki-laki yang menatap hampa"></figure>
 
 There was a boy with the world in the palm of his hand<br/>
 Bright like a star but he burned everything that he had<br/>

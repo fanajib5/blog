@@ -29,7 +29,7 @@ Hari-hari pun terbagi dengan urusan kerjaan, urusan hati&mdash;_ehem_ perut dan 
 
 VPS Hetzner itu pun akhirnya terbengkalai. Hingga sebuah _email_ aneh masuk. Isinya memberitahukan bahwa alamat tagian (_invoices_) saya sudah berganti. _Ja*cok_. Saya baru tahu rasanya kena retas.
 
-{{< figure src="hetzner-account-got-hacked.webp" width="90%" alt="info akun hetzner saya yang diretas melalui email" caption="ancaman kartu debit online hahaha" >}}
+<figure><img src="hetzner-account-got-hacked.webp" width="90%" alt="info akun hetzner saya yang diretas melalui email"><figcaption>ancaman kartu debit online hahaha</figcaption></figure>
 
 Beruntung tim _support_ sangat tanggap saat saya mengirim email untuk melaporkan insiden itu. Mereka akhirnya membalas: "_As your account got hacked and you had no products (except the ones ordered by the hacker) we have cancelled your account._"
 

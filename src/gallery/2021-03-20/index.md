@@ -14,4 +14,4 @@ tags:
   - metropolitan-building
 ---
 
-{{< figure src="/img/IMG_20210320_181851.webp" alt="foto sunset dari JPO Pancoran Barat, Jakarta Selatan" caption="red sunset in Jakarta" >}}
+<figure><img src="/img/IMG_20210320_181851.webp" alt="foto sunset dari JPO Pancoran Barat, Jakarta Selatan"><figcaption>red sunset in Jakarta</figcaption></figure>

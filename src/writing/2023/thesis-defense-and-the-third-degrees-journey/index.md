@@ -54,7 +54,7 @@ Hari-hari dengan beberapa sesi bimbingan denan beliau pun terlewat. Tepat sebelu
 
 Akhirnya, seminar proposal saya pun berhasil dilaksanakan dengan hasil revisi pada metode penelitian secara besar-besaran haha. Apa mau dikata, itulah hasil pengerjaan yang setengah hati (maaf ya, Prof!).
 
-{{< figure src="seminar-proposal-tesis.webp" alt="foto seminar proposal tesis Faiq" caption="Seminar proposal tesis" >}}
+<figure><img src="seminar-proposal-tesis.webp" alt="foto seminar proposal tesis Faiq"><figcaption>Seminar proposal tesis</figcaption></figure>
 
 ## Menjadi Seorang Deadliner (Lagi) yang Malas
 
@@ -110,7 +110,7 @@ Ditambah, saya kembali beruntung saat [Bu Mahe](https://www.its.ac.id/si/profil-
 
 Terlepas dari itu semua, saya bersyukur dapat melewati seminar akhir sidang tesis dengan baik. Terlebih setelah niat dan menata hati lagi dengan perlahan.
 
-{{< figure src="seminar-akhir-tesis.webp" alt="foto seminar akhir tesis Faiq" caption="seminar akhir tesis" >}}
+<figure><img src="seminar-akhir-tesis.webp" alt="foto seminar akhir tesis Faiq"><figcaption>seminar akhir tesis</figcaption></figure>
 
 ## Pelajaran yang Dapat Diambil
 
