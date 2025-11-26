@@ -1,6 +1,6 @@
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
-import markdownItTocDoneRight from 'markdown-it-toc-done-right';
+import pluginToc from 'eleventy-plugin-toc';
 
 export default function(eleventyConfig) {
   // Markdown configuration
@@ -18,11 +18,7 @@ export default function(eleventyConfig) {
     })
   });
 
-  md.use(markdownItTocDoneRight, {
-    containerClass: 'toc',
-    listType: 'ul',
-    level: [2, 3]
-  });
+  // TOC functionality handled by eleventy-plugin-toc
 
   eleventyConfig.setLibrary('md', md);
 
@@ -50,9 +46,7 @@ export default function(eleventyConfig) {
     return `${minutes} menit baca`;
   });
 
-  eleventyConfig.addFilter('toc', (content) => {
-    return md.render('${toc}');
-  });
+  // TOC filter replaced by eleventy-plugin-toc
 
   eleventyConfig.addFilter('slugify', (str) => {
     return str.toString().toLowerCase()
@@ -78,6 +72,13 @@ export default function(eleventyConfig) {
     return collection.getFilteredByTag('gallery')
       .filter(item => item.data.title) // Only items with titles (not the list page)
       .sort((a, b) => b.date - a.date);
+  });
+
+  // TOC Plugin
+  eleventyConfig.addPlugin(pluginToc, {
+    tags: ['h2', 'h3'], // Include h2 and h3 headings
+    wrapper: 'div', // Wrapper element
+    wrapperClass: 'toc' // CSS class for wrapper
   });
 
   // Pass through copy
