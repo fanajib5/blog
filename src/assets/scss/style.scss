@@ -41,6 +41,11 @@ $spacing-2xl: 3rem;
 $max-width: 720px;
 $max-width-wide: 1200px;
 
+// Component Heights
+$header-height: calc(#{$spacing-lg} + 3px + #{$spacing-xl}); // padding + border + margin
+$footer-height: calc(#{$spacing-xl} + 3px + #{$spacing-2xl}); // padding + border + margin
+$layout-offset: calc(#{$header-height} + #{$footer-height});
+
 // =====================
 // Import partials
 // =====================
@@ -243,7 +248,7 @@ hr {
 // Main Content
 // =====================
 .site-main {
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - #{$layout-offset});
   padding-bottom: $spacing-2xl;
 }
 
