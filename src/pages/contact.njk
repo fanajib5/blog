@@ -1,0 +1,107 @@
+---
+title: "Contact"
+description: "Get in touch with Faiq Najib for collaborations, opportunities, or just to say hello"
+layout: layouts/page.njk
+---
+
+<!-- Structured Data for Contact Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Faiq Najib",
+  "description": "Contact Faiq Najib for collaborations, opportunities, or just to say hello",
+  "url": "{{ site.url }}/contact/"
+}
+</script>
+
+<div class="contact-page">
+  <div class="page-header">
+    <h1>Let's Connect</h1>
+    <p>Feel free to reach out for collaborations, opportunities, or just to say hello!</p>
+  </div>
+
+  <div class="contact-content">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+
+      <div class="contact-methods">
+        <div class="contact-method">
+          <h3>📧 Email</h3>
+          <p>Best way to reach me for serious inquiries</p>
+          <a href="mailto:faiq@example.com" class="contact-link">faiq@example.com</a>
+        </div>
+
+        <div class="contact-method">
+          <h3>💼 LinkedIn</h3>
+          <p>Let's connect professionally</p>
+          <a href="https://linkedin.com/in/faiq-najib" class="contact-link" target="_blank" rel="noopener">linkedin.com/in/faiq-najib</a>
+        </div>
+
+        <div class="contact-method">
+          <h3>🔗 GitHub</h3>
+          <p>Check out my open source work</p>
+          <a href="https://github.com/fanajib5" class="contact-link" target="_blank" rel="noopener">github.com/fanajib5</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-section">
+      <h2>Send a Message</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" required placeholder="e.g., Collaboration opportunity, Question about my work">
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="6" required placeholder="Tell me what's on your mind..."></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="consent" name="consent" required>
+            I consent to having this website store my submitted information so they can respond to my inquiry.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          <span>✉️</span> Send Message
+        </button>
+      </form>
+
+      <div id="formStatus" class="form-status"></div>
+    </div>
+  </div>
+
+  <div class="availability">
+    <h2>Current Availability</h2>
+    <div class="status-grid">
+      <div class="status-item">
+        <h3>🏢 Full-time Employment</h3>
+        <p class="status">Not actively looking, but open to interesting opportunities</p>
+      </div>
+
+      <div class="status-item">
+        <h3>🤝 Consulting Projects</h3>
+        <p class="status">Available for short-term backend consulting</p>
+      </div>
+
+      <div class="status-item">
+        <h3>👥 Collaboration</h3>
+        <p class="status">Open to open source collaborations and side projects</p>
+      </div>
+    </div>
+  </div>
+</div>

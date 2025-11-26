@@ -3,6 +3,35 @@ layout: layouts/base.njk
 ---
 {% block ogType %}article{% endblock %}
 
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title | escape }}",
+  "description": "{{ description | escape }}",
+  "image": "{% if images and images.length %}{{ site.url }}{{ images[0] }}{% else %}{{ site.url }}/assets/images/og-default.jpg{% endif %}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ site.author.name }}",
+    "url": "{{ site.url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.author.name }}",
+    "url": "{{ site.url }}"
+  },
+  "datePublished": "{{ date | dateFormat('iso') }}",
+  "dateModified": "{% if lastmod %}{{ lastmod | dateFormat('iso') }}{% else %}{{ date | dateFormat('iso') }}{% endif %}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ page.url }}"
+  },
+  "wordCount": "{{ content | strip_html | split: ' ' | length }}",
+  "keywords": "{% if tags %}{{ tags | join(', ') }}{% endif %}"
+}
+</script>
+
 {% block content %}
 <article class="post h-entry">
   <header class="post-header">

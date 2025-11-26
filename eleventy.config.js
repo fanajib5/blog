@@ -104,6 +104,7 @@ export default function(eleventyConfig) {
   // Pass through copy
   eleventyConfig.addPassthroughCopy('src/assets/images');
   eleventyConfig.addPassthroughCopy('src/assets/fonts');
+  eleventyConfig.addPassthroughCopy('src/assets/js');
   eleventyConfig.addPassthroughCopy('src/gallery/**/*.{jpg,jpeg,png,gif,webp,svg}');
 
   // Watch targets

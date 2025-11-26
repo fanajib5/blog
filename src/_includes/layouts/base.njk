@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ title }} | {{ site.title }}{% endblock %}</title>
-  
+
   <meta name="description" content="{{ description or site.description }}">
   <meta name="author" content="{{ site.author.name }}">
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="{{ title or site.title }}">
   <meta property="og:description" content="{{ description or site.description }}">
@@ -16,13 +16,24 @@
   {% if images and images.length %}
   <meta property="og:image" content="{{ site.url }}{{ images[0] }}">
   {% endif %}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or site.title }}">
+  <meta name="twitter:description" content="{{ description or site.description }}">
+  {% if images and images.length %}
+  <meta name="twitter:image" content="{{ site.url }}{{ images[0] }}">
+  {% endif %}
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/style.css">
-  
+
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
-  
+
   {% block head %}{% endblock %}
 </head>
 <body>
@@ -61,5 +72,24 @@
   </footer>
 
   {% block scripts %}{% endblock %}
+
+  <!-- Load search script only on writing pages -->
+  {% if page.url == '/writing/' or page.url.startsWith('/writing/') %}
+  <script src="/assets/js/search.js"></script>
+  <script src="/assets/js/tag-filter.js"></script>
+  {% endif %}
+
+  <!-- Load lazy loading script on all pages -->
+  <script src="/assets/js/lazy-loading.js"></script>
+
+  <!-- Load contact form script only on contact page -->
+  {% if page.url == '/contact/' %}
+  <script src="/assets/js/contact-form.js"></script>
+  {% endif %}
+
+  <!-- Load GitHub API script only on homepage -->
+  {% if page.url == '/' %}
+  <script src="/assets/js/github-api.js"></script>
+  {% endif %}
 </body>
 </html>

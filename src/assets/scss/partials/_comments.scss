@@ -5,10 +5,11 @@
 .comments {
   margin-top: $spacing-2xl;
   padding-top: $spacing-xl;
-  border-top: 2px solid $color-secondary;
-  
+  border-top: 1px solid var(--color-border);
+
   h2 {
     margin-top: 0;
     margin-bottom: $spacing-lg;
+    color: var(--color-text);
   }
 }

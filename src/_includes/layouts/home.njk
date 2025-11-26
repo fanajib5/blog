@@ -1,6 +1,36 @@
 ---
 layout: layouts/base.njk
 ---
+
+<!-- Structured Data for Homepage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Faiq Najib",
+  "jobTitle": "Backend Engineer & System Architect",
+  "description": "Backend Engineer & System Architect specializing in Go, Laravel, GPS tracking, and trading platforms",
+  "url": "{{ site.url }}",
+  "sameAs": [
+    "https://github.com/fanajib5"
+  ],
+  "knowsAbout": [
+    "Go Programming",
+    "Laravel",
+    "PostgreSQL",
+    "GPS Tracking Systems",
+    "Trading Platforms",
+    "Real-time Data Processing",
+    "Backend Architecture"
+  ],
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Universitas Islam Indonesia"
+    }
+  ]
+}
+</script>
 {% block title %}{{ site.title }}{% endblock %}
 
 {% block content %}
@@ -10,13 +40,15 @@ layout: layouts/base.njk
 
 {% include "partials/tech-stack.njk" %}
 
+{% include "partials/github-stats.njk" %}
+
 <section class="home">
   <div class="home-intro">
     {{ content | safe }}
   </div>
 
   <section class="recent-posts">
-    <h2>Tulisan Terbaru</h2>
+    <h2>Latest Blog Posts</h2>
     <ul class="post-list">
       {% for post in collections.writing | limit(5) %}
       <li>
@@ -24,15 +56,27 @@ layout: layouts/base.njk
           <time datetime="{{ post.date | dateFormat('iso') }}">
             {{ post.date | dateFormat('short') }}
           </time>
-          <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+          <div class="post-header">
+            <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+            <div class="post-meta">
+              <span class="reading-time">{{ post.templateContent | readingTime }}</span>
+            </div>
+          </div>
           {% if post.data.description %}
           <p>{{ post.data.description }}</p>
+          {% endif %}
+          {% if post.data.tags %}
+          <div class="post-tags">
+            {% for tag in post.data.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
           {% endif %}
         </article>
       </li>
       {% endfor %}
     </ul>
-    <a href="/writing/" class="view-all">Lihat semua tulisan →</a>
+    <a href="/writing/" class="view-all">View all posts →</a>
   </section>
 
   <section class="recent-gallery">

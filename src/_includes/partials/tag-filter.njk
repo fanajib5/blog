@@ -1,0 +1,23 @@
+<div class="tag-filter">
+  <h3>Filter by Tags</h3>
+  <div class="tag-cloud">
+    <button class="tag-btn active" data-tag="all">All Posts</button>
+    {% set allTags = [] %}
+
+    {# Collect all unique tags #}
+    {% for post in collections.writing %}
+      {% if post.data.tags %}
+        {% for tag in post.data.tags %}
+          {% if tag not in allTags %}
+            {% set allTags = allTags.concat([tag]) %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    {# Display tag buttons #}
+    {% for tag in allTags | sort %}
+      <button class="tag-btn" data-tag="{{ tag | lower }}">{{ tag }}</button>
+    {% endfor %}
+  </div>
+</div>
