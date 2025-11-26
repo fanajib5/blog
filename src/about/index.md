@@ -25,6 +25,6 @@ Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di 
 
 <br/></br>
 
-<img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="tanda tangan dibuat di canva.com" title="Faiq Najib Al-Aziz">
+<img style="max-width: 30%; float: left;" src="Faiqnajib-handwriting-_1_.webp" alt="tanda tangan dibuat di canva.com" title="Faiq Najib Al-Aziz">
 
 <br/></br>
