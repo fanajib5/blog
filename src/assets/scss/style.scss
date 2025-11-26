@@ -1,0 +1,432 @@
+// =====================
+// Retro Color Palette from Color Hunt
+// =====================
+$color-bg: #FFFDF4;
+$color-primary: #E4D4C8;
+$color-secondary: #D0B8A8;
+$color-accent: #85586F;
+$color-text: #333333;
+$color-text-light: #666666;
+$color-link: #85586F;
+$color-link-hover: darken($color-accent, 10%);
+
+// =====================
+// Typography
+// =====================
+$font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-serif: Georgia, "Times New Roman", serif;
+$font-mono: "JetBrains Mono", "Fira Code", Consolas, Monaco, monospace;
+
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+
+$line-height: 1.7;
+
+// =====================
+// Spacing
+// =====================
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+// =====================
+// Layout
+// =====================
+$max-width: 720px;
+$max-width-wide: 1200px;
+
+// =====================
+// Import partials
+// =====================
+@import "partials/gallery";
+@import "partials/comments";
+@import "syntax";
+
+// =====================
+// Base Styles
+// =====================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: $line-height;
+  color: $color-text;
+  background-color: $color-bg;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+// =====================
+// Typography
+// =====================
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-md;
+  color: $color-text;
+}
+
+h1 { font-size: $font-size-2xl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: $color-link-hover;
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+blockquote {
+  border-left: 4px solid $color-accent;
+  margin: $spacing-lg 0;
+  padding: $spacing-sm $spacing-lg;
+  background-color: $color-primary;
+  font-style: italic;
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  background-color: $color-primary;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: $font-mono;
+  font-size: $font-size-sm;
+  background-color: #282c34;
+  color: #abb2bf;
+  padding: $spacing-md;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: $spacing-lg 0;
+  
+  code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $color-secondary;
+  margin: $spacing-xl 0;
+}
+
+// =====================
+// Header
+// =====================
+.site-header {
+  background-color: $color-primary;
+  padding: $spacing-md 0;
+  border-bottom: 2px solid $color-secondary;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+}
+
+.site-title {
+  font-family: $font-serif;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: $color-accent;
+  text-decoration: none;
+  
+  &:hover {
+    color: $color-link-hover;
+    text-decoration: none;
+  }
+}
+
+.main-nav {
+  ul {
+    display: flex;
+    gap: $spacing-lg;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    color: $color-text;
+    font-weight: 500;
+    
+    &:hover,
+    &[aria-current="page"] {
+      color: $color-accent;
+    }
+  }
+}
+
+// =====================
+// Main Content
+// =====================
+.site-main {
+  min-height: calc(100vh - 200px);
+  padding: $spacing-xl 0;
+}
+
+// =====================
+// Post Styles
+// =====================
+.post-header {
+  margin-bottom: $spacing-xl;
+}
+
+.post-title {
+  margin-top: 0;
+  margin-bottom: $spacing-sm;
+}
+
+.post-meta {
+  color: $color-text-light;
+  font-size: $font-size-sm;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.post-tags {
+  margin-top: $spacing-sm;
+  
+  .tag {
+    display: inline-block;
+    background-color: $color-secondary;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 3px;
+    font-size: $font-size-sm;
+    margin-right: $spacing-xs;
+    
+    &:hover {
+      background-color: $color-accent;
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.post-content {
+  h2, h3, h4 {
+    margin-top: $spacing-2xl;
+  }
+  
+  figure {
+    margin: $spacing-lg 0;
+    
+    img {
+      border-radius: 4px;
+    }
+    
+    figcaption {
+      font-size: $font-size-sm;
+      color: $color-text-light;
+      text-align: center;
+      margin-top: $spacing-sm;
+    }
+  }
+}
+
+// =====================
+// Table of Contents
+// =====================
+.table-of-contents {
+  background-color: $color-primary;
+  padding: $spacing-md;
+  border-radius: 6px;
+  margin-bottom: $spacing-xl;
+  
+  h2 {
+    font-size: $font-size-base;
+    margin-top: 0;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .toc {
+    ul {
+      margin: 0;
+      padding-left: $spacing-lg;
+    }
+    
+    li {
+      margin: $spacing-xs 0;
+    }
+    
+    a {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// =====================
+// Post List
+// =====================
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-item,
+.post-preview {
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-lg;
+  border-bottom: 1px solid $color-secondary;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  time {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+  
+  h3 {
+    margin: $spacing-xs 0;
+    font-size: $font-size-lg;
+  }
+  
+  p {
+    color: $color-text-light;
+    margin: 0;
+  }
+}
+
+.year-heading {
+  font-size: $font-size-xl;
+  border-bottom: 2px solid $color-accent;
+  padding-bottom: $spacing-sm;
+  margin-top: $spacing-xl;
+}
+
+.posts-in-year {
+  list-style: none;
+  padding: 0;
+  
+  li {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+    
+    time {
+      flex-shrink: 0;
+      width: 100px;
+      color: $color-text-light;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// =====================
+// Footer
+// =====================
+.site-footer {
+  background-color: $color-primary;
+  padding: $spacing-lg 0;
+  border-top: 2px solid $color-secondary;
+  text-align: center;
+  
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+}
+
+// =====================
+// Home Page
+// =====================
+.home {
+  .home-intro {
+    margin-bottom: $spacing-2xl;
+  }
+  
+  section {
+    margin-bottom: $spacing-2xl;
+  }
+  
+  h2 {
+    border-bottom: 2px solid $color-accent;
+    padding-bottom: $spacing-sm;
+  }
+  
+  .view-all {
+    display: inline-block;
+    margin-top: $spacing-md;
+    font-weight: 500;
+  }
+}
+
+// =====================
+// Responsive
+// =====================
+@media (max-width: 600px) {
+  .site-header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-sm $spacing-md;
+  }
+  
+  .posts-in-year li {
+    flex-direction: column;
+    gap: $spacing-xs;
+    
+    time {
+      width: auto;
+    }
+  }
+}

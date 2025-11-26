@@ -1,0 +1,152 @@
+// =====================
+// Gallery Styles
+// =====================
+
+.gallery-page {
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    margin-top: $spacing-xl;
+  }
+}
+
+.gallery-card {
+  background-color: $color-primary;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .gallery-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .gallery-info {
+    padding: $spacing-md;
+    
+    h2 {
+      font-size: $font-size-base;
+      margin: 0 0 $spacing-xs;
+    }
+    
+    time {
+      font-size: $font-size-sm;
+      color: $color-text-light;
+    }
+  }
+}
+
+// Single gallery page
+.gallery-single {
+  .gallery-header {
+    margin-bottom: $spacing-xl;
+    
+    h1 {
+      margin-bottom: $spacing-sm;
+    }
+    
+    time {
+      color: $color-text-light;
+    }
+  }
+  
+  .gallery-description {
+    font-size: $font-size-lg;
+    color: $color-text-light;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+// Photo grid
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+}
+
+.photo-item {
+  margin: 0;
+  
+  a {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  figcaption {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+    text-align: center;
+    padding: $spacing-sm;
+  }
+}
+
+// Photo shortcode figure
+figure.photo {
+  margin: $spacing-lg 0;
+  
+  img {
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  figcaption {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+    text-align: center;
+    margin-top: $spacing-sm;
+    font-style: italic;
+  }
+}
+
+// Gallery preview on home page
+.gallery-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-thumb {
+    display: block;
+    text-align: center;
+    
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: $spacing-xs;
+    }
+    
+    span {
+      font-size: $font-size-sm;
+    }
+  }
+}
