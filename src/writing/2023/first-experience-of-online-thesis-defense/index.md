@@ -24,7 +24,7 @@ Namun, Allah berkehendak lain. Malam hari setelah ujian terakhir, sebuah kabar y
 
 Dunia seakan menjadi seperti apa yang terjadi di dalam film _apocalypse_. Dari mulai info persebaran penyakit yang sangat cepat, hingga barang ajaib yang tiba-tiba menjadi langka dan mahal.
 
-{{< figure src="857420727_345321.webp" class="left" alt="foto hand sanitizer" width="50%" caption="si benda ajaib saat pandemi" >}}
+<figure><img src="857420727_345321.webp" width="50%" alt="foto hand sanitizer"><figcaption>si benda ajaib saat pandemi</figcaption></figure>
 
 Sudah barangnya langka, sekalinya ketemu langsung dihajar dengan harga Rp 65.000 juga. _Wew_.
 
@@ -34,7 +34,7 @@ Pucuk dicinta, ulam pun tiba. Kampus pun merilis pengumuman bahwa kegiatan perku
 
 Kami pun separuh senang dan separuh lagi kuatir. Karena, jika memang kondisi di luar seperti apa yang diberitakan, bukan tidak mungkin kami tidak akan bisa pulang ke rumah jika tetap memaksakan tinggal di Bandung.
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" class="right" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang" width="50%" caption="suhu dicek oleh petugas peron stasiun" >}}
+<figure><img src="https://cdn.statically.io/gh/fanajib5/blog/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" width="50%" alt="video gif saat petugas peron stasiun memeriksa suhu penumpang"><figcaption>suhu dicek oleh petugas peron stasiun</figcaption></figure>
 
 Dengan membawa barang bawaan secukupnya koper dari kos, kami pun segera menuju stasiun Kiaracondong yang ternyata sudah penuh dengan calon penumpang bermasker.
 
@@ -60,7 +60,7 @@ Setelah tubuh terasa kering karena harus mencari agen penjual yang memberikan ha
 
 _Alhamdulillah_ sidang akhir saya pun bisa terlaksana dengan baik pada 2 Juli 2020. Bahkan terasa dimudahkan oleh Allah SWT. Terutama Pak Doan selaku penguji yang tiba-tiba mengakhiri sidang karena beliau harus bersiap untuk menjadi imam di masjid haha. (Terima kasih bapak!)
 
-{{< figure src="IMG-20200702-WA0004.webp" alt="sidang tugas akhir secara daring" width="95%" caption="sidang tugas akhir kedua" >}}
+<figure><img src="IMG-20200702-WA0004.webp" width="95%" alt="sidang tugas akhir secara daring"><figcaption>sidang tugas akhir kedua</figcaption></figure>
 
 ## Pelajaran yang Dapat Diambil
 

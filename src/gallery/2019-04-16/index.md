@@ -15,10 +15,10 @@ tags:
   - countryside
 ---
 
-{{< figure src="20230730_161023.webp" width="60%" alt="kocheng 1">}}
+<figure><img src="20230730_161023.webp" width="60%" alt="kocheng 1"></figure>
 
-{{< figure src="IMG_20210821_201340.webp" width="60%" alt="kocheng 2">}}
+<figure><img src="IMG_20210821_201340.webp" width="60%" alt="kocheng 2"></figure>
 
-{{< figure src="VID_20190416_120623-0.webp" width="60%" alt="kocheng 3">}}
+<figure><img src="VID_20190416_120623-0.webp" width="60%" alt="kocheng 3"></figure>
 
-{{< figure src="VID-20200808-WA0000-0.webp" alt="kocheng 4">}}
+<figure><img src="VID-20200808-WA0000-0.webp" alt="kocheng 4"></figure>
