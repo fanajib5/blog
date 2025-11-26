@@ -12,7 +12,7 @@
   <meta property="og:title" content="{{ title or site.title }}">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:type" content="{% block ogType %}website{% endblock %}">
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:url" content="{{ site.url }}{{ url }}">
   {% if images and images.length %}
   <meta property="og:image" content="{{ site.url }}{{ images[0] }}">
   {% endif %}
@@ -26,7 +26,7 @@
   {% endif %}
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="canonical" href="{{ site.url }}{{ url }}">
   
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/style.css">
@@ -74,7 +74,7 @@
   {% block scripts %}{% endblock %}
 
   <!-- Load search script only on writing pages -->
-  {% if page.url == '/writing/' or page.url.startsWith('/writing/') %}
+  {% if url == '/writing/' or url startsWith('/writing/') %}
   <script src="/assets/js/search.js"></script>
   <script src="/assets/js/tag-filter.js"></script>
   {% endif %}
@@ -83,12 +83,12 @@
   <script src="/assets/js/lazy-loading.js"></script>
 
   <!-- Load contact form script only on contact page -->
-  {% if page.url == '/contact/' %}
+  {% if url == '/contact/' %}
   <script src="/assets/js/contact-form.js"></script>
   {% endif %}
 
   <!-- Load GitHub API script only on homepage -->
-  {% if page.url == '/' %}
+  {% if url == '/' %}
   <script src="/assets/js/github-api.js"></script>
   {% endif %}
 </body>

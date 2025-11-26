@@ -25,7 +25,7 @@ layout: layouts/base.njk
   "dateModified": "{% if lastmod %}{{ lastmod | dateFormat('iso') }}{% else %}{{ date | dateFormat('iso') }}{% endif %}",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "{{ site.url }}{{ page.url }}"
+    "@id": "{{ site.url }}{{ url }}"
   },
   "wordCount": "{{ content | strip_html | split: ' ' | length }}",
   "keywords": "{% if tags %}{{ tags | join(', ') }}{% endif %}"
