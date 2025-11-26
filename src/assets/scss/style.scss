@@ -901,7 +901,8 @@ hr {
       margin-top: $spacing-2xl;
     }
 
-    img {
+    // Only style images that are direct children of post-content
+    > img {
       border-radius: 4px;
       margin: $spacing-lg auto;
       border: 2px solid $color-secondary;
@@ -912,6 +913,7 @@ hr {
 
       img {
         border-radius: 4px;
+        // No margin here since figure already handles spacing
       }
 
       figcaption {
