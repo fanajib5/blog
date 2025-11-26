@@ -1,6 +1,7 @@
 {
   "name": "blogfolio-najib",
   "version": "1.0.0",
+  "type": "module",
   "description": "Situs pribadi Faiq Najib - built with Eleventy",
   "main": "index.js",
   "scripts": {

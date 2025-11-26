@@ -1,10 +1,12 @@
 ---
 title: Faiq uses...
+layout: layouts/page.njk
 date: 2022-09-20
 lastmod: 2023-03-13
 draft: false
 toc: false
 comments: false
+permalink: /uses/
 ---
 
 Saya pernah tidak sengaja menemukan halaman web [victoria.dev](https://victoria.dev/uses/), yang mana setelah dicari tau lebih jauh ternyata seperti proyek [wesbos/awesome-uses](https://github.com/wesbos/awesome-uses) di GitHub. Setelah membaca banyak halaman `/uses` orang lain, sepertinya seru jika ikutan.
