@@ -65,6 +65,18 @@ export default function(eleventyConfig) {
     return array.slice(0, limit);
   });
 
+  // Shortcodes
+  eleventyConfig.addShortcode('figure', function(src, alt = '', width = '', caption = '') {
+    const widthAttr = width ? ` width="${width}"` : '';
+    const altAttr = alt ? ` alt="${alt}"` : '';
+    let html = `<figure><img src="${src}"${widthAttr}${altAttr}>`;
+    if (caption) {
+      html += `<figcaption>${caption}</figcaption>`;
+    }
+    html += '</figure>';
+    return html;
+  });
+
   // Collections
   eleventyConfig.addCollection('posts', (collection) => {
     return collection.getFilteredByTag('writing')
