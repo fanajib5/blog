@@ -3,47 +3,65 @@
 // =====================
 
 .gallery-page {
+  .page-header {
+    margin-bottom: 2rem;
+
+    .page-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .page-description {
+      color: #666666;
+      font-size: 1.125rem;
+    }
+  }
+
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: $spacing-lg;
-    margin-top: $spacing-xl;
+    gap: 1.5rem;
+    margin-top: 2rem;
   }
 }
 
 .gallery-card {
-  background-color: $color-primary;
+  background-color: #E4D4C8;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
+  border: 2px solid #D0B8A8;
+
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(133, 88, 111, 0.15);
+    border-color: #85586F;
   }
-  
+
   a {
     text-decoration: none;
     color: inherit;
   }
-  
+
   .gallery-thumbnail {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    display: block;
   }
-  
+
   .gallery-info {
-    padding: $spacing-md;
-    
+    padding: 1rem;
+
     h2 {
-      font-size: $font-size-base;
-      margin: 0 0 $spacing-xs;
+      font-size: 1rem;
+      margin: 0 0 0.25rem;
+      color: #85586F;
+      font-weight: 600;
     }
-    
+
     time {
-      font-size: $font-size-sm;
-      color: $color-text-light;
+      font-size: 0.875rem;
+      color: #666666;
     }
   }
 }
@@ -51,21 +69,22 @@
 // Single gallery page
 .gallery-single {
   .gallery-header {
-    margin-bottom: $spacing-xl;
-    
+    margin-bottom: 2rem;
+
     h1 {
-      margin-bottom: $spacing-sm;
+      margin-bottom: 0.5rem;
     }
-    
+
     time {
-      color: $color-text-light;
+      color: #666666;
+      font-size: 0.875rem;
     }
   }
-  
+
   .gallery-description {
-    font-size: $font-size-lg;
-    color: $color-text-light;
-    margin-bottom: $spacing-xl;
+    font-size: 1.125rem;
+    color: #666666;
+    margin-bottom: 2rem;
   }
 }
 
@@ -73,52 +92,60 @@
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: $spacing-md;
-  margin-top: $spacing-xl;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .photo-item {
   margin: 0;
-  
+
   a {
     display: block;
     overflow: hidden;
     border-radius: 4px;
+    border: 2px solid #D0B8A8;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: #85586F;
+    }
   }
-  
+
   img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     transition: transform 0.3s ease;
-    
+    display: block;
+
     &:hover {
       transform: scale(1.05);
     }
   }
-  
+
   figcaption {
-    font-size: $font-size-sm;
-    color: $color-text-light;
+    font-size: 0.875rem;
+    color: #666666;
     text-align: center;
-    padding: $spacing-sm;
+    padding: 0.5rem;
   }
 }
 
 // Photo shortcode figure
 figure.photo {
-  margin: $spacing-lg 0;
-  
+  margin: 1.5rem 0;
+
   img {
     border-radius: 4px;
     width: 100%;
+    border: 2px solid #D0B8A8;
   }
-  
+
   figcaption {
-    font-size: $font-size-sm;
-    color: $color-text-light;
+    font-size: 0.875rem;
+    color: #666666;
     text-align: center;
-    margin-top: $spacing-sm;
+    margin-top: 0.5rem;
     font-style: italic;
   }
 }
@@ -127,26 +154,41 @@ figure.photo {
 .gallery-preview {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-md;
-  
+  gap: 1rem;
+
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
   }
-  
+
   .gallery-thumb {
     display: block;
     text-align: center;
-    
+    text-decoration: none;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+
+      img {
+        border-color: #85586F;
+      }
+    }
+
     img {
       width: 100%;
       height: 150px;
       object-fit: cover;
       border-radius: 4px;
-      margin-bottom: $spacing-xs;
+      margin-bottom: 0.25rem;
+      border: 2px solid #D0B8A8;
+      transition: border-color 0.2s ease;
     }
-    
+
     span {
-      font-size: $font-size-sm;
+      font-size: 0.875rem;
+      color: #333333;
+      font-weight: 500;
     }
   }
 }
