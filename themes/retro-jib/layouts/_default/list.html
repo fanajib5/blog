@@ -1,0 +1,27 @@
+{{ define "main" }}
+	<main class="wrapper">
+		<h1><a href="/" class="home">
+      {{ cond (eq (strings.Contains .RelPermalink "tags") true) (print "Tulisan tentang #" .Title) .Title }}
+    </a></h1>
+		{{ if .Content -}}
+		<div class="content">
+			{{ .Content }}
+		</div>
+		{{- end }}
+
+		{{ range .Pages.GroupByDate "2006" -}}
+		<div class="post-group">
+			<div class="dim post-year" id="{{ .Key }}">{{ .Key }}</div>
+			<ul class="lsn post-list">
+				{{ range .Pages -}}
+				<li class="post-item">
+					<span class="dim post-day">{{ .Date.Format "Jan 02" }}</span>
+					<a href="{{.RelPermalink}}" class="post-title">{{.Title}}</a>
+				</li>
+				{{- end }}
+			</ul>
+		</div>
+		{{ end }}
+	</main>
+	<hr>
+{{- end }}

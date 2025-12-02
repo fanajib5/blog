@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /donate
+Allow: /
+Sitemap: https://najib.id/sitemap.xml
