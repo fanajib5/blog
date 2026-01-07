@@ -45,6 +45,7 @@ module.exports = function (eleventyConfig) {
 
   // --- Passthrough Copy ---
   eleventyConfig.addPassthroughCopy("./src/static");
+  eleventyConfig.addPassthroughCopy("./src/assets");
   eleventyConfig.addPassthroughCopy("./src/**/*.webp");
   eleventyConfig.addPassthroughCopy("./src/**/*.gif");
   eleventyConfig.addPassthroughCopy("./src/**/*.jpg");
