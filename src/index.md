@@ -1,5 +1,6 @@
 ---
 title: Blogfolio Najib
+layout: layouts/home.njk
 date: 2023-06-24T07:01:44.444Z
 lastmod: 2023-06-24T07:01:44.444Z
 description: Blog pribadi dan portofolio Faiq Najib

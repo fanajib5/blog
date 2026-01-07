@@ -1,5 +1,6 @@
 ---
 title: "Komik yang..."
+layout: layouts/page.njk
 date: 2022-09-20T21:15:19+08:00
 lastmod: 2023-03-13T23:00:33.7204314+08:00
 draft: false

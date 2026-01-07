@@ -1,5 +1,6 @@
 ---
 title: Link
+layout: layouts/page.njk
 date: 2018-03-20T12:16:19.000Z
 lastmod: 2023-05-03T15:04:14.466Z
 draft: false

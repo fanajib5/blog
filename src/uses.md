@@ -1,5 +1,6 @@
 ---
 title: Faiq uses...
+layout: layouts/page.njk
 date: 2022-09-20T13:15:19.000Z
 lastmod: 2023-03-13T15:00:33.720Z
 draft: false

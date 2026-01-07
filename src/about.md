@@ -1,28 +1,21 @@
-+++
-title = "About"
-description = "Hugo, the world’s fastest framework for building websites"
-date = "2019-02-28"
-aliases = ["about-us","about-hugo","contact"]
-author = "Hugo Authors"
-+++
+---
+title: About
+layout: layouts/page.njk
+description: About Faiq Najib and this blog
+date: 2019-02-28
+lastmod: 2023-06-24
+draft: false
+comments: false
+---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Hi! I'm **Faiq Najib** (also known as fanajib5), a backend developer who mostly uses Go for work. Currently, my main task is converting PHP (CodeIgniter 3 and Laravel) to Go, as well as converting MySQL to PostgreSQL.
 
-Hugo makes use of a variety of open source projects including:
+This is my personal blog where I write about programming, technology, and random things that interest me.
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+Previously hosted on Hugo, now migrated to Eleventy with a modern frontend stack.
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+## Find me on
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
-
-
-
+- [Twitter](https://twitter.com/fanajib5)
+- [Telegram](http://t.me/fanajib)
+- [GitHub](https://github.com/fanajib5)
