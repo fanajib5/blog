@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run test:*)",
+      "Bash(git diff:*)",
+      "Bash(git status)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(npm install --dry-run)",
+      "Python(pip list)",
+      "Read(*.txt)",
+      "Read(*.js)",
+      "Write(temp/*.tmp)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(npm publish:*)",
+      "Bash(git commit *)",
+      "Bash(npm install *)",
+      "Bash(pip install *)",
+      "Write(*.py)",
+      "Edit(*.json)",
+      "Bash(git pull)",
+      "Bash(rm *)",
+      "Network(http://localhost*)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo *)",
+      "Read(/etc/*)",
+      "Write(/system/*)",
+      "Network(*)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Read(~/.ssh/*)",
+      "Exec(*.exe)"
+    ]
+  }
+}
