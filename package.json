@@ -1,7 +1,7 @@
 {
-  "name": "blog",
-  "version": "1.0.0",
-  "description": "Migrasi dari Hugo ke Eleventy.",
+  "name": "najib_blog",
+  "version": "3.0.0",
+  "description": "Blog pribadi faiq",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf _site",
@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/fanajib5/blog/issues"
@@ -29,7 +29,9 @@
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/postcss": "4.1.18",
     "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "4.1.18",
     "alpinejs": "^3.15.3",
     "autoprefixer": "^10.4.23",
     "cssnano": "^7.1.2",
@@ -42,6 +44,6 @@
     "markdown-it-toc-done-right": "^4.2.0",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "4.1.18"
   }
 }

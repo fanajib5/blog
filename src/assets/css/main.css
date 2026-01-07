@@ -1,16 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 theme configuration */
+@theme {
+  /* Custom colors */
+  --color-c-bg: #f9fafb;
+  --color-c-bg-alt: #f3f4f6;
+  --color-c-txt: #1f2937;
+  --color-c-txt-alt: #6b7280;
+  --color-c-txt-em: #111827;
+  --color-primary: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-code-bg: #f3f4f6;
+
+  /* Custom max-width */
+  --max-width-wrapper: 65rem;
+  --max-width-prose-custom: 65ch;
+}
 
 /* Dark mode color overrides */
 .dark {
-  --c-bg: #111827;
-  --c-bg-alt: #1f2937;
-  --c-txt: #e5e7eb;
-  --c-txt-alt: #9ca3af;
-  --c-txt-em: #f3f4f6;
-  --primary: #38bdf8;
-  --code-bg: #1f2937;
+  --color-c-bg: #111827;
+  --color-c-bg-alt: #1f2937;
+  --color-c-txt: #e5e7eb;
+  --color-c-txt-alt: #9ca3af;
+  --color-c-txt-em: #f3f4f6;
+  --color-primary: #38bdf8;
+  --color-code-bg: #1f2937;
 }
 
 /* Base styles */
@@ -28,7 +43,8 @@
   }
 
   body {
-    @apply bg-c-bg text-c-txt;
+    background-color: var(--color-c-bg);
+    color: var(--color-c-txt);
     margin: 0;
     padding: 1.5rem;
     line-height: 1.6;
@@ -37,14 +53,18 @@
   }
 
   body > main {
-    @apply max-w-wrapper mx-auto;
+    max-width: var(--max-width-wrapper);
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 5rem;
   }
 
   body > section,
   body > nav,
   body > footer {
-    @apply max-w-wrapper mx-auto;
+    max-width: var(--max-width-wrapper);
+    margin-left: auto;
+    margin-right: auto;
     margin-block: 3rem;
   }
 }
@@ -53,150 +73,273 @@
 @layer components {
   /* Wrapper */
   .wrapper {
-    @apply max-w-wrapper mx-auto px-4;
+    max-width: var(--max-width-wrapper);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   /* Home link */
   .home-link {
-    @apply text-c-txt no-underline hover:text-primary;
+    color: var(--color-c-txt);
     text-decoration: none;
+  }
+  .home-link:hover {
+    color: var(--color-primary);
   }
 
   /* Post info */
   .post-info {
-    @apply text-sm text-c-txt-alt italic -mt-6 mb-6;
+    font-size: 0.875rem;
+    color: var(--color-c-txt-alt);
+    font-style: italic;
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   /* Post footer */
   .post-footer {
-    @apply mt-12 text-xs text-c-txt-alt space-y-2;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    color: var(--color-c-txt-alt);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   /* Post tags */
   .post-tag {
-    @apply inline-block mr-2 mb-2 text-primary hover:underline;
-    &::before {
-      content: "#";
-    }
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+  }
+  .post-tag:hover {
+    text-decoration: underline;
+  }
+  .post-tag::before {
+    content: "#";
   }
 
   /* Dim text */
   .dim {
-    @apply text-c-txt-alt;
+    color: var(--color-c-txt-alt);
   }
 
   .dimmer {
-    @apply text-c-txt-alt opacity-75;
+    color: var(--color-c-txt-alt);
+    opacity: 0.75;
   }
 
   /* TOC styles */
   #toc {
-    @apply py-4 px-6 bg-c-bg-alt rounded-lg my-6;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-c-bg-alt);
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .toc-title h2 {
-    @apply italic text-lg mb-2;
+    font-style: italic;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
   }
 
   #toc ul {
-    @apply space-y-1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-left: 0;
+    list-style: none;
   }
 
   #toc a {
-    @apply text-primary hover:underline;
+    color: var(--color-primary);
+  }
+  #toc a:hover {
+    text-decoration: underline;
   }
 
   /* HR separator */
   hr {
-    @apply w-auto h-8 my-8 border-0 text-center text-c-bg-alt;
-    &::after {
-      content: "* * *";
-      @apply block text-xl text-c-txt-alt;
-    }
+    width: auto;
+    height: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 0;
+    text-align: center;
+    color: var(--color-c-bg-alt);
+  }
+  hr::after {
+    content: "* * *";
+    display: block;
+    font-size: 1.25rem;
+    color: var(--color-c-txt-alt);
   }
 
   /* Code blocks */
   pre {
-    @apply bg-code-bg p-4 overflow-auto text-sm leading-tight rounded-lg my-4;
+    background-color: var(--color-code-bg);
+    padding: 1rem;
+    overflow: auto;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   code {
-    @apply bg-code-bg px-1 py-0.5 rounded font-mono text-sm;
+    background-color: var(--color-code-bg);
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.875rem;
   }
 
   pre code {
-    @apply bg-transparent p-0 m-0;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
   }
 
   /* Gallery grid */
   .gallery-grid {
-    @apply grid grid-cols-2 md:grid-cols-3 gap-4 my-6;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .gallery-item {
-    @apply aspect-square overflow-hidden rounded-lg cursor-pointer;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    cursor: pointer;
   }
 
   .gallery-item img {
-    @apply w-full h-full object-cover transition-transform duration-300;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
   }
 
   .gallery-item:hover img {
-    @apply scale-105;
+    transform: scale(1.05);
   }
 
   /* Figure styles */
   figure.big {
-    @apply my-8;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   figure.big img {
-    @apply w-full rounded-lg shadow-md;
+    width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
   figure.big figcaption {
-    @apply text-center text-sm text-c-txt-alt mt-3;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-c-txt-alt);
+    margin-top: 0.75rem;
   }
 
   .image_meta {
-    @apply block mt-1 font-mono text-xs;
+    display: block;
+    margin-top: 0.25rem;
+    font-family: monospace;
+    font-size: 0.75rem;
   }
 
   /* Lightbox */
   .lightbox {
-    @apply fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4;
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.9);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
   }
 
   .lightbox img {
-    @apply max-w-full max-h-full object-contain;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   /* Navigation */
   .nav-list {
-    @apply flex flex-wrap gap-4 list-none p-0 m-0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .nav-list a {
-    @apply text-c-txt hover:text-primary transition-colors;
+    color: var(--color-c-txt);
+    transition: color 0.15s;
+  }
+  .nav-list a:hover {
+    color: var(--color-primary);
   }
 
   /* Footer */
   .footer-list {
-    @apply list-none p-0 m-0 space-y-2 text-sm text-c-txt-alt;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-c-txt-alt);
   }
 
   /* Card styles */
   .card {
-    @apply bg-c-bg-alt rounded-lg p-6 my-4;
+    background-color: var(--color-c-bg-alt);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .card:hover {
-    @apply shadow-md transition-shadow;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.15s;
   }
 
   /* Badge */
   .badge {
-    @apply inline-block px-2 py-1 text-xs font-medium rounded-full bg-primary text-white;
+    display: inline-block;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: var(--color-primary);
+    color: white;
   }
 }
 
