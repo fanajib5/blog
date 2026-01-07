@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+---
+
+<main class="wrapper" x-data="gallery">
+  <h1 class="text-3xl md:text-4xl font-bold mb-2">
+    <a href="/" class="home-link">{{ title }}</a>
+  </h1>
+
+  <ul class="list-none dim space-y-2 mb-6">
+    {% if location %}
+    <li class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      {{ location }}
+    </li>
+    {% endif %}
+
+    {% if shot_date %}
+    <li class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      {{ shot_date | displayDate }}
+    </li>
+    {% endif %}
+
+    {% if shot_with %}
+    <li class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+        <circle cx="12" cy="13" r="4"></circle>
+      </svg>
+      {{ shot_with }}
+    </li>
+    {% endif %}
+
+    {% if description %}
+    <li class="album-desc">{{ description }}</li>
+    {% endif %}
+  </ul>
+
+  {% if content %}
+  <div class="content prose prose-custom max-w-none mb-8">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+
+  <!-- Gallery grid with Alpine lightbox -->
+  <div class="gallery-grid">
+    {% if images %}
+      {% for image in images %}
+      <div class="gallery-item" @click="openLightbox('{{ image }}')">
+        <img src="{{ image }}" alt="{{ title }}" loading="lazy" />
+      </div>
+      {% endfor %}
+    {% else %}
+      <!-- Fallback: check for page bundle images -->
+      {% for image in page.inputPath | getImageFiles %}
+      <div class="gallery-item" @click="openLightbox('{{ image.url }}')">
+        <img src="{{ image.url }}" alt="{{ title }}" loading="lazy" />
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Lightbox modal -->
+  <div
+    x-show="lightboxOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="lightbox"
+    @click="closeLightbox()"
+    @keydown.escape.window="closeLightbox()"
+    x-cloak>
+    <img :src="currentImage" class="max-w-full max-h-full object-contain" @click.stop />
+  </div>
+</main>
+<hr>

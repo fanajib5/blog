@@ -1,0 +1,31 @@
+---
+permalink: "/writing/feed.xml"
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.defaultLanguage }}">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/writing/feed.xml" rel="self" />
+  <link href="{{ site.url }}/" />
+  <updated>{{ collections.writing | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ site.url }}/</id>
+  <author>
+    <name>{{ site.author.name }}</name>
+  </author>
+
+  {% for post in collections.writing %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ post.url | absoluteUrl(site.url) }}" />
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ post.url | absoluteUrl(site.url) }}</id>
+    <content type="html">{{ post.templateContent }}</content>
+    {% if post.data.description %}
+    <summary>{{ post.data.description }}</summary>
+    {% endif %}
+    {% for tag in post.data.tags %}
+    <category term="{{ tag }}" />
+    {% endfor %}
+  </entry>
+  {% endfor %}
+</feed>

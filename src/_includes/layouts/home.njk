@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+---
+
+<main class="wrapper">
+  <h1 class="text-4xl md:text-5xl font-bold mb-8">{{ site.title }}</h1>
+
+  {% if content %}
+  <div class="content prose prose-custom max-w-none mb-12">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+
+  <!-- Recent posts -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6">Recent Writing</h2>
+    <div class="space-y-4">
+      {% for post in collections.writing.slice(0, 5) %}
+      <article class="card">
+        <h3 class="text-xl font-semibold mb-2">
+          <a href="{{ post.url }}" class="home-link">{{ post.data.title }}</a>
+        </h3>
+        <p class="text-sm dim mb-2">{{ post.date | displayDate }}</p>
+        {% if post.data.description %}
+        <p class="text-[var(--c-txt-alt)]">{{ post.data.description }}</p>
+        {% endif %}
+        {% if post.data.tags %}
+        <div class="mt-3">
+          {% for tag in post.data.tags %}
+          <a href="/tags/{{ tag | slugify }}/" class="post-tag text-sm">{{ tag }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <p class="mt-6">
+      <a href="/writing/" class="text-[var(--primary)] hover:underline">View all writing &rarr;</a>
+    </p>
+  </section>
+
+  <!-- Recent galleries -->
+  {% if collections.gallery.length %}
+  <section>
+    <h2 class="text-2xl font-semibold mb-6">Recent Galleries</h2>
+    <div class="space-y-4">
+      {% for gallery in collections.gallery.slice(0, 3) %}
+      <article class="card">
+        <h3 class="text-xl font-semibold mb-2">
+          <a href="{{ gallery.url }}" class="home-link">{{ gallery.data.title }}</a>
+        </h3>
+        {% if gallery.data.location %}
+        <p class="text-sm dim">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mr-1">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          {{ gallery.data.location }}
+        </p>
+        {% endif %}
+        {% if gallery.data.shot_date %}
+        <p class="text-sm dim">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mr-1">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          {{ gallery.data.shot_date | displayDate }}
+        </p>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+    <p class="mt-6">
+      <a href="/gallery/" class="text-[var(--primary)] hover:underline">View all galleries &rarr;</a>
+    </p>
+  </section>
+  {% endif %}
+</main>

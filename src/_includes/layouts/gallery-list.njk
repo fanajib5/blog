@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.gallery
+  size: 10
+  alias: galleries
+permalink: "gallery/{% if pagination.href.previous %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+
+<main class="wrapper">
+  <h1 class="text-3xl md:text-4xl font-bold mb-6">
+    <a href="/" class="home-link">{{ title }}</a>
+  </h1>
+
+  {% if content %}
+  <div class="content prose prose-custom max-w-none mb-8">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+
+  <div class="space-y-8" id="gallery-container">
+    {% for gallery in galleries %}
+    <div class="card">
+      <h2 class="text-xl font-semibold mb-4">
+        <a href="{{ gallery.url }}" class="home-link">{{ gallery.data.title }}</a>
+      </h2>
+
+      {% if gallery.data.images %}
+      <a href="{{ gallery.url }}" class="album-row flex gap-2 overflow-x-auto pb-2">
+        {% for image in gallery.data.images %}
+        <div class="flex-shrink-0 w-32 h-32">
+          <img src="{{ gallery.url }}/{{ image }}" alt="{{ gallery.data.title }}" class="w-full h-full object-cover rounded" loading="lazy" />
+        </div>
+        {% endfor %}
+      </a>
+      {% endif %}
+
+      {% if gallery.data.location %}
+      <p class="text-sm dim mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mr-1">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        {{ gallery.data.location }}
+      </p>
+      {% endif %}
+
+      {% if gallery.data.shot_date %}
+      <p class="text-sm dim">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline mr-1">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        {{ gallery.data.shot_date | displayDate }}
+      </p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  <nav class="flex justify-between items-center mt-8">
+    {% if pagination.href.previous %}
+    <a
+      href="{{ pagination.href.previous }}"
+      class="px-4 py-2 rounded border border-[var(--c-txt-alt)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">
+      &larr; Previous
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    <span class="text-sm dim">
+      Page {{ pagination.pageNumber + 1 }} of {{ pagination.links.length }}
+    </span>
+
+    {% if pagination.href.next %}
+    <a
+      href="{{ pagination.href.next }}"
+      class="px-4 py-2 rounded border border-[var(--c-txt-alt)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors">
+      Next &rarr;
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+  </nav>
+</main>
+<hr>

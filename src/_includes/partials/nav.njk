@@ -1,0 +1,21 @@
+<nav class="wrapper">
+  <h2 class="sr-only">Menu</h2>
+  <ul class="nav-list">
+    {% for item in navigation.main %}
+    <li>
+      <a href="{{ item.url }}">{{ item.name }}</a>
+    </li>
+    {% endfor %}
+
+    <!-- Dark mode toggle with Alpine -->
+    <li>
+      <button
+        @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)"
+        class="text-sm px-3 py-1 rounded border border-[var(--c-txt-alt)] hover:border-[var(--primary)] transition-colors"
+        aria-label="Toggle dark mode">
+        <span x-show="!darkMode">Dark</span>
+        <span x-show="darkMode">Light</span>
+      </button>
+    </li>
+  </ul>
+</nav>

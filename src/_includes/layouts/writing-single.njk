@@ -1,0 +1,112 @@
+---
+layout: layouts/base.njk
+---
+
+<main class="wrapper">
+  <h1 class="text-3xl md:text-4xl font-bold mb-2">
+    <a href="/" class="home-link">{{ title }}</a>
+  </h1>
+
+  <div class="post-info">
+    {{ date | displayDate }} oleh {{ author or site.author.name }}
+  </div>
+
+  {% if toc %}
+  <hr />
+  <aside id="toc">
+    <div class="toc-title">
+      <h2>Daftar Isi</h2>
+    </div>
+    {{ content | toc | safe }}
+  </aside>
+  <hr />
+  {% endif %}
+
+  {% if content %}
+  <div class="content prose prose-custom max-w-none">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+
+  <ul class="post-footer">
+    <li title="tanggal artikel dibuat" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      {{ date | date("2006-01-02 15:04 MST") }}
+    </li>
+
+    <li title="jumlah kata artikel" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      {{ content | wordCount }} kata
+    </li>
+
+    <li title="perkiraan waktu membaca artikel" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      {{ content | readingTime }} menit
+    </li>
+
+    {% if tags %}
+    <li title="label artikel" class="flex items-center gap-2 flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+        <line x1="7" y1="7" x2="7" y2="7"></line>
+      </svg>
+      {% for tag in tags %}
+      <a href="/tags/{{ tag | slugify }}/" class="post-tag">{{ tag }}</a>
+      {% endfor %}
+    </li>
+    {% endif %}
+
+    {% if lastmod %}
+    <li title="terakhir update" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      </svg>
+      {{ lastmod | date("2006-01-02 15:04 MST") }}
+    </li>
+    {% endif %}
+
+    <br>
+
+    <!-- Prev/Next navigation -->
+    {% set allPosts = collections.writing %}
+    {% set currentIndex = allPosts.findIndex(p => p.url == page.url) %}
+    {% set prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null %}
+    {% set nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null %}
+
+    {% if prevPost %}
+    <li title="tulisan sebelumnya" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <a href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
+    </li>
+    {% endif %}
+
+    {% if nextPost %}
+    <li title="tulisan selanjutnya" class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+      <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+    </li>
+    {% endif %}
+  </ul>
+</main>
+<hr>

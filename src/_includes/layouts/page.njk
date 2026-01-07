@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+
+<main class="wrapper">
+  <h1 class="text-3xl md:text-4xl font-bold mb-6">
+    <a href="/" class="home-link">{{ title }}</a>
+  </h1>
+
+  {% if content %}
+  <div class="content prose prose-custom max-w-none">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+</main>
+<hr>

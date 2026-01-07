@@ -1,0 +1,22 @@
+{
+  "title": "Blogfolio Najib",
+  "description": "Blog pribadi Faiq Najib - Tulisan, galeri foto, dan catatan",
+  "url": "https://fanajib5.github.io",
+  "author": {
+    "name": "Faiq Najib"
+  },
+  "defaultLanguage": "id",
+  "languages": {
+    "id": {
+      "code": "id-ID",
+      "name": "Bahasa Indonesia",
+      "weight": 1
+    },
+    "en": {
+      "code": "en-US",
+      "name": "English",
+      "weight": 2
+    }
+  },
+  "copyright": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+}
