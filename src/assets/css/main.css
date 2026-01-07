@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-/* Tell Tailwind v4 which files to scan for class names */
-@source "../**/*.md";
-@source "../**/*.njk";
-@source "../_includes/**/*.njk";
-
 /* Tailwind v4 theme configuration */
 @theme {
   /* Custom colors */
