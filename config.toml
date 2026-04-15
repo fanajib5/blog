@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://najib.id"
 defaultContentLanguage = "id"
 languageCode = "id-ID"
 staticDir = "static"
@@ -51,10 +51,11 @@ noHl = false
 style = "modus-vivendi"
 tabWidth = 4
 
-# [taxonomies]
-#   tag = "tags"
+[taxonomies]
+  tag = "tags"
 
 [params]
+description = "Faiq Najib — Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
 images = ["apple-touch-icon.png"]
 
 [[params.author]]
@@ -70,29 +71,94 @@ weight = 1
 description = "Beranda"
 
 [[menu.main]]
+name = "Services"
+pageref = "/services"
+weight = 5
+[menu.main.params]
+description = "Layanan"
+
+[[menu.main]]
+name = "Projects"
+pageref = "/projects"
+weight = 10
+[menu.main.params]
+description = "Proyek"
+
+[[menu.main]]
 name = "Writing"
 pageref = "/writing"
-weight = 10
+weight = 15
 [menu.main.params]
 description = "Arsip artikel"
 
 [[menu.main]]
-name = "Gallery"
-pageref = "/gallery"
+name = "Teaching"
+pageref = "/teaching"
 weight = 20
 [menu.main.params]
-description = "Album foto"
-
-[[menu.main]]
-name = "Link"
-pageref = "/link"
-weight = 30
-[menu.main.params]
-description = "Tautan dan papan pesan"
+description = "Pengajaran"
 
 [[menu.main]]
 name = "About"
 pageref = "/about"
-weight = 40
+weight = 25
 [menu.main.params]
 description = "Tentang"
+
+[[menu.main]]
+name = "Contact"
+pageref = "/contact"
+weight = 30
+[menu.main.params]
+description = "Kontak"
+
+[languages.en.menu]
+
+[[languages.en.menu.main]]
+name = "Home"
+pageref = "/"
+weight = 1
+[languages.en.menu.main.params]
+description = "Homepage"
+
+[[languages.en.menu.main]]
+name = "Services"
+pageref = "/services"
+weight = 5
+[languages.en.menu.main.params]
+description = "Services"
+
+[[languages.en.menu.main]]
+name = "Projects"
+pageref = "/projects"
+weight = 10
+[languages.en.menu.main.params]
+description = "Projects"
+
+[[languages.en.menu.main]]
+name = "Writing"
+pageref = "/writing"
+weight = 15
+[languages.en.menu.main.params]
+description = "Blog archive"
+
+[[languages.en.menu.main]]
+name = "Teaching"
+pageref = "/teaching"
+weight = 20
+[languages.en.menu.main.params]
+description = "Teaching"
+
+[[languages.en.menu.main]]
+name = "About"
+pageref = "/about"
+weight = 25
+[languages.en.menu.main.params]
+description = "About"
+
+[[languages.en.menu.main]]
+name = "Contact"
+pageref = "/contact"
+weight = 30
+[languages.en.menu.main.params]
+description = "Contact"

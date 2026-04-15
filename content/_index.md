@@ -1,16 +1,26 @@
 ---
-title: "Blogfolio Najib"
+title: "Hai, Saya Faiq Najib"
 date: 2023-06-24T15:01:44.4447251+08:00
 lastmod: 2023-06-24T15:01:44.4447251+08:00
-description: "Blog pribadi dan portofolio Faiq Najib"
-keywords: "Faiq Najib,Fanajib5,blog,situs web pribadi,blog independen Indonesia"
+description: "Faiq Najib — Backend Developer (Go), Independent Builder & Educator. Blog personal dan portofolio profesional."
+keywords: "Faiq Najib,Fanajib5,backend developer,Go,Golang,PostgreSQL,freelance programmer,independent builder,educator"
 draft: false
 comments: false
 ---
 
-Halo! Selamat datang. Di sinilah saya membuat blog semua yang saya inginkan, lihat halaman “[About](/about/)” untuk info lebih lanjut. Jika Anda punya ide, jangan ragu untuk [hubungi saya](/about/#find-me-on) atau tinggalkan komentar di halaman “[Link](/link/)”.
+<div class="hero">
+<p class="hero-tagline">Engineer &bull; Builder &bull; Educator</p>
+</div>
 
-Hello! Welcome to my little corner of the Internet where I blog about anything I like. You can check "[About](/about/)" to learn more about me and this site. If you have something to say, feel free to [reach out](/about/#find-me-on) to me or leave a comment in the "[Link](/link/)" page.
+Saya adalah **backend developer** yang berfokus pada **Go (Golang)** dan **PostgreSQL**, dengan pengalaman membangun sistem yang scalable dan melakukan migrasi dari legacy code (PHP/Laravel) ke arsitektur modern.
+
+## Apa yang Saya Lakukan
+
+- **Software Development** — Membangun REST API, microservices, dan sistem backend yang handal. Lihat [layanan](/services/) saya.
+- **Independent Building** — Membuat produk digital dan proyek open source. Lihat [proyek](/projects/) saya.
+- **Teaching & Mentoring** — Berbagi pengetahuan melalui workshop, guest lecture, dan mentoring. Lihat [pengajaran](/teaching/) saya.
+
+Tulisan terbaru saya ada di bawah. Untuk info lebih lanjut tentang saya, kunjungi halaman [About](/about/). Jika Anda ingin berkolaborasi atau berdiskusi, [hubungi saya](/contact/).
 
 <div id="home-social" style="font-size: 150%">
 <a href=https://twitter.com/fanajib5 target=_blank rel="me noopener" title=Twitter><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>

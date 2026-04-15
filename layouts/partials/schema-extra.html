@@ -1,0 +1,67 @@
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ .Site.BaseURL }}#website",
+      "url": "{{ .Site.BaseURL }}",
+      "name": "{{ .Site.Title }}",
+      "description": "{{ .Site.Params.description }}",
+      "inLanguage": ["id", "en"]
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ .Site.BaseURL }}#person",
+      "name": "Faiq Najib",
+      "url": "{{ .Site.BaseURL }}",
+      "jobTitle": "Backend Developer",
+      "description": "Backend Developer (Go), Independent Builder & Educator",
+      "sameAs": [
+        "https://twitter.com/fanajib5",
+        "https://github.com/fanajib5",
+        "http://t.me/fanajib5"
+      ]
+    }
+  ]
+}
+</script>
+{{- else if and .IsPage (eq .Type "writing") -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z" }}",
+  "author": {
+    "@type": "Person",
+    "name": "Faiq Najib"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Faiq Najib"
+  },
+  "url": "{{ .Permalink }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  }
+}
+</script>
+{{- else -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ .Title }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
+  "url": "{{ .Permalink }}",
+  "isPartOf": {
+    "@id": "{{ .Site.BaseURL }}#website"
+  }
+}
+</script>
+{{- end -}}

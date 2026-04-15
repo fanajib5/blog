@@ -1,0 +1,12 @@
+// Service cards — used on /services/ page
+// Relies on markdown headings and horizontal rules for visual structure
+// since content pages use the default list.html template
+
+.content {
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--c-bg-alt);
+  }
+}

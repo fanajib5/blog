@@ -5,7 +5,6 @@ lastmod: 2022-05-04T20:53:51+08:00
 author: "Faiq Najib"
 shot_date: 2019-04-16T06:00:00+07:00
 location: Anywhere
-author: "Faiq Najib"
 shot_with: Xiaomi Mi-4c, Xiaomi Redmi Note 5, Samsung Galaxy A32
 description:
 draft: false

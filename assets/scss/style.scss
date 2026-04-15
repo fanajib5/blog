@@ -401,7 +401,7 @@ a.footnote-ref {
   min-width: 4.5em;
 }
 
-@import "partials/comments.scss",  "partials/gallery";
+@import "partials/comments.scss", "partials/gallery", "partials/hero", "partials/services", "partials/contact";
 
 @media all and (min-width: 550px) {
   .post-group {
