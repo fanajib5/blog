@@ -7,7 +7,10 @@ comments: false
 
 Have an interesting project or want to discuss something? I'm open for collaboration, technical consulting, or just chatting about technology.
 
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+<form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+  <input type="hidden" name="access_key" value="685bcedc-c53d-4b76-ac5d-e3b336056d10">
+  <input type="hidden" name="subject" value="Message from najib.id">
+  <input type="checkbox" name="botcheck" style="display:none">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" id="name" name="name" required placeholder="Your full name">
@@ -15,10 +18,6 @@ Have an interesting project or want to discuss something? I'm open for collabora
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" id="email" name="email" required placeholder="email@example.com">
-  </div>
-  <div class="form-group">
-    <label for="subject">Subject</label>
-    <input type="text" id="subject" name="subject" required placeholder="Your message topic">
   </div>
   <div class="form-group">
     <label for="message">Message</label>
