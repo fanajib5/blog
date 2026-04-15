@@ -30,6 +30,9 @@
 </head>
 
 <body>
+	<div class="wrapper lang-bar">
+		{{- partial "lang-switcher.html" . -}}
+	</div>
 	{{ block "main" . }}
 	{{ end }}
 	<nav class="wrapper">

@@ -1,0 +1,13 @@
+{{- if .IsTranslated -}}
+<ul class="lang-switcher lsn">
+{{- range .AllTranslations -}}
+  <li>
+    {{- if (eq .Lang $.Page.Lang) -}}
+    <span class="lang-active">{{ .Language.LanguageName }}</span>
+    {{- else -}}
+    <a href="{{ .RelPermalink }}" lang="{{ .Lang }}">{{ .Language.LanguageName }}</a>
+    {{- end -}}
+  </li>
+{{- end -}}
+</ul>
+{{- end -}}
