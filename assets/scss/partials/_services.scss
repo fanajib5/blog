@@ -10,3 +10,51 @@
     border-bottom: 1px solid var(--c-bg-alt);
   }
 }
+
+// Project cards — used on /projects/ list page
+.project-card {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--c-bg-alt);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    border-bottom: none;
+    font-size: 1.3rem;
+  }
+}
+
+.project-type {
+  font-size: 80%;
+  font-style: italic;
+}
+
+.project-desc {
+  margin-top: 0.5rem;
+  font-size: 95%;
+}
+
+.project-tech {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  font-size: 80%;
+  border: 1px solid var(--c-txt-alt);
+  color: var(--c-txt-alt);
+}
+
+.project-links {
+  margin-top: 0.75rem;
+  font-size: 90%;
+
+  a {
+    margin-right: 1rem;
+  }
+}
