@@ -2,6 +2,7 @@
 title: "GPS Fleet Tracking API — Laravel ke Go"
 description: "Konversi full-stack backend GPS fleet tracking dari Laravel (PHP) ke Go dengan PostgreSQL — 370+ endpoint, 33 entity, clean architecture."
 date: 2024-06-01
+lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Production System"

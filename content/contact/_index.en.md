@@ -3,6 +3,7 @@ title: "Contact"
 description: "Get in touch with Faiq Najib for collaboration, technical consulting, or just a chat."
 draft: false
 comments: false
+lastmod: 2026-04-15T00:00:00+07:00
 ---
 
 Have an interesting project or want to discuss something? I'm open for collaboration, technical consulting, or just chatting about technology.

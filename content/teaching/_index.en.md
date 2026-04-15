@@ -3,6 +3,7 @@ title: "Teaching"
 description: "Teaching and mentoring experience by Faiq Najib — online tutor at Universitas Terbuka, workshops, and technical coaching."
 draft: false
 comments: false
+lastmod: 2026-04-15T00:00:00+07:00
 ---
 
 I believe that sharing knowledge is the best way to learn. Beyond working as a developer, I'm also active in teaching and mentoring.

@@ -2,6 +2,7 @@
 title: "URL Shortener REST API"
 description: "Open source URL shortener backend menggunakan Go, Echo, dan MySQL dengan arsitektur modular."
 date: 2021-12-01
+lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Open Source"

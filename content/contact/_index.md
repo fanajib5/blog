@@ -3,6 +3,7 @@ title: "Kontak"
 description: "Hubungi Faiq Najib untuk kolaborasi, konsultasi teknis, atau sekadar berdiskusi."
 draft: false
 comments: false
+lastmod: 2026-04-15T00:00:00+07:00
 ---
 
 Punya proyek menarik atau ingin berdiskusi? Saya terbuka untuk kolaborasi, konsultasi teknis, atau sekadar ngobrol soal teknologi.

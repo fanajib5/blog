@@ -2,6 +2,7 @@
 title: "Multi-Site Inventory Management System"
 description: "Sistem manajemen inventaris multi-lokasi untuk perusahaan konstruksi jembatan dan jalan — mengurangi stock discrepancy dari 10-20% menjadi under 2%."
 date: 2022-02-01
+lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Freelance"

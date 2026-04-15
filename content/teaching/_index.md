@@ -3,6 +3,7 @@ title: "Pengajaran"
 description: "Pengalaman mengajar dan mentoring oleh Faiq Najib — dosen online Universitas Terbuka, workshop, dan pendampingan teknis."
 draft: false
 comments: false
+lastmod: 2026-04-15T00:00:00+07:00
 ---
 
 Saya percaya bahwa berbagi pengetahuan adalah cara terbaik untuk belajar. Selain bekerja sebagai developer, saya juga aktif mengajar dan mentoring.

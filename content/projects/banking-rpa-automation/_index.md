@@ -2,6 +2,7 @@
 title: "Banking Process Automation & Open API Portal"
 description: "Otomasi proses Treasury dan International Banking di bank nasional menggunakan RPA dan pengembangan Mega Open API portal — menghemat IDR 12 juta/bulan."
 date: 2020-11-01
+lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Internal System"

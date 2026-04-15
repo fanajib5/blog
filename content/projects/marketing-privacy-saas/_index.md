@@ -2,6 +2,7 @@
 title: "SaaS Marketing & Privacy Compliance Backend"
 description: "Refactoring backend marketing dan data privacy compliance untuk klien Eropa — meningkatkan test coverage ke 75% dan mengurangi production bugs 40%."
 date: 2023-10-01
+lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Production System"
