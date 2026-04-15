@@ -1,8 +1,9 @@
 {{- $key := os.Getenv "WEB3FORMS_KEY" -}}
 {{- if not $key -}}
-{{- warnf "WEB3FORMS_KEY env var is not set — contact form will not work" -}}
+{{- errorf "WEB3FORMS_KEY env var is not set — contact form will not work. Set it in Netlify Dashboard > Site settings > Environment variables." -}}
 {{- end -}}
 {{- $isID := eq .Page.Lang "id" -}}
+{{- if $key -}}
 <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
   <input type="hidden" name="access_key" value="{{ $key }}">
   <input type="hidden" name="subject" value="{{ if $isID }}Pesan dari najib.id{{ else }}Message from najib.id{{ end }}">
@@ -23,3 +24,8 @@
   <div class="h-captcha" data-captcha="true"></div>
 </form>
 <script src="https://web3forms.com/client/script.js" async defer></script>
+{{- else -}}
+<div class="contact-form-notice">
+  <p>{{ if $isID }}Form kontak sedang tidak tersedia. Silakan hubungi saya langsung via <a href="mailto:faiq.najib@gmail.com">email</a>.{{ else }}The contact form is currently unavailable. Please reach out directly via <a href="mailto:faiq.najib@gmail.com">email</a>.{{ end }}</p>
+</div>
+{{- end -}}
