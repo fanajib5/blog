@@ -39,7 +39,9 @@ Tertarik untuk bekerja sama? Lihat halaman [Layanan](/services/) untuk melihat a
 * Telegram: [@fanajib5](http://t.me/fanajib5)
 * Twitter: [@fanajib5](https://twitter.com/fanajib5)
 * GitHub: [fanajib5](https://github.com/fanajib5)
+* LinkedIn: [Faiq Najib](https://linkedin.com/in/fanajib5)
 * Email: [faiq.najib@gmail.com](mailto:faiq.najib@gmail.com)
+* CV: [faiq-resume.pdf](/cv/faiq-resume.pdf)
 
 ## Trivia
 
