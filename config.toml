@@ -11,6 +11,9 @@ theme = "retro-jib"
 
 enableGitInfo = true
 
+[security.funcs]
+getenv = ['^HUGO_', '^CI$', '^WEB3FORMS_KEY$']
+
 [languages]
 [languages.id]
 languageCode = "id-ID"

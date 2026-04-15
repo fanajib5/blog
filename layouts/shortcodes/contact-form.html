@@ -1,0 +1,25 @@
+{{- $key := os.Getenv "WEB3FORMS_KEY" -}}
+{{- if not $key -}}
+{{- warnf "WEB3FORMS_KEY env var is not set — contact form will not work" -}}
+{{- end -}}
+{{- $isID := eq .Page.Lang "id" -}}
+<form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+  <input type="hidden" name="access_key" value="{{ $key }}">
+  <input type="hidden" name="subject" value="{{ if $isID }}Pesan dari najib.id{{ else }}Message from najib.id{{ end }}">
+  <input type="checkbox" name="botcheck" style="display:none">
+  <div class="form-group">
+    <label for="name">{{ if $isID }}Nama{{ else }}Name{{ end }}</label>
+    <input type="text" id="name" name="name" required placeholder="{{ if $isID }}Nama lengkap Anda{{ else }}Your full name{{ end }}">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="{{ if $isID }}email@contoh.com{{ else }}email@example.com{{ end }}">
+  </div>
+  <div class="form-group">
+    <label for="message">{{ if $isID }}Pesan{{ else }}Message{{ end }}</label>
+    <textarea id="message" name="message" rows="6" required placeholder="{{ if $isID }}Tulis pesan Anda di sini...{{ else }}Write your message here...{{ end }}"></textarea>
+  </div>
+  <button type="submit">{{ if $isID }}Kirim Pesan{{ else }}Send Message{{ end }}</button>
+  <div class="h-captcha" data-captcha="true"></div>
+</form>
+<script src="https://web3forms.com/client/script.js" async defer></script>
