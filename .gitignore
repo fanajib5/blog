@@ -9,3 +9,6 @@ public/
 
 # Environment variables
 .env
+
+# Internal planning documents
+docs/
