@@ -15,21 +15,21 @@ tags:
 
 There was a moment where I stopped typing, leaned back in my chair, and realized: _"This isn't about refactoring anymore."_
 
-I was debugging a bug in a GPS tracker system that had been running for years. The bug was simple — vehicle position reports weren't updating on the dashboard. But to fix it, I had to trace through four different files, two business logic layers tangled together, and one query written without an index. An hour later, the fix was two lines. Two lines.
+I was debugging a bug in a GPS tracker system that had been running for years[^1]. The bug was simple — vehicle position reports weren't updating on the dashboard. But to fix it, I had to trace through four different files, two business logic layers tangled together, and one query written without an index. An hour later, the fix was two lines. Two lines.
 
-It wasn't the bug that made me reconsider. It was **the time it took to find those two lines**.
+It wasn't the bug that made me reconsider. It was **the time it took to find those two lines**. It felt like looking for a needle in a haystack, only to find it was in my own pocket the whole time hehe~
 
-So, this article isn't about a specific programming language or a specific technical solution. This is a personal journal about the **thinking process** behind a tech stack migration decision — when it's time, when it's not yet, and how I evaluated it from a perspective that goes beyond just the technical side.
+_So anyway_, this article isn't about a specific programming language or a specific technical solution. This is a personal journal about the **thinking process** behind a tech stack migration decision — when it's time, when it's not yet, and how I evaluated it from a perspective that goes beyond just the technical side. Because honestly, how often do we hear technical discussions that devolve into Language A vs Language B debates, when that's not even the real problem hahaha.
 
 ## What the System Looked Like
 
-The GPS tracker project I was handling wasn't small. The numbers were roughly:
+The GPS tracker project I was handling wasn't ~~exactly~~ small. The numbers were roughly:
 
 - **370+ API endpoints** serving various needs — from real-time tracking to report generation
 - **33 database entities** with complex relationships
-- **~194,000 lines of code** written over several years by multiple developers
+- **~194,000 lines of code** written over several years by multiple developers[^2]
 
-But those numbers weren't really the problem. The problem was in the **symptoms** that emerged:
+But those numbers weren't really the problem. Sure, that line count looks intimidating, but believe me that wasn't what was causing the headache. The problem was in the **symptoms** that emerged:
 
 ### 1. Features That Should Be Fast, Became Slow
 
@@ -39,21 +39,21 @@ From a business perspective, this meant **the speed of delivering value to users
 
 ### 2. Bugs That Only Appeared in Production
 
-_If it works locally but errors in production — where do I even start looking?_
+_If it works locally but errors in production — where do I even start looking?_ (A question that's kept me up late scrolling Stack Overflow more times than I'd like to admit hahaha)
 
-This is a classic symptom of a tightly coupled system. Code that runs in one environment doesn't behave the same in another because of unexpected side effects. Debugging wasn't about logic — it was about _why_ the production context differed from expectations.
+This is a classic symptom of a tightly coupled system. Code that runs in one environment doesn't behave the same in another because of unexpected side effects. Debugging wasn't about logic — it was about _why_ the production context differed from expectations. Once I even had to remote into the production server at 2 AM just to check one environment variable that turned out to... simply not be set yet. Facepalm.
 
 From a business perspective, this meant **no certainty**. A client could get a wrong report in the morning, and nobody would know why until noon.
 
 ### 3. New Developer Onboarding Took Longer
 
-Back then, a new developer could start contributing within a week. At that point, it took almost a month before they were comfortable coding without fear of breaking something. Not because they lacked skill — but because the codebase required a lot of **context** to understand.
+Back then, a new developer could start contributing within a week. At that point, it took almost a month before they were comfortable coding without fear of breaking something. Not because they lacked skill — but because the codebase required a lot of **context** to understand. I still remember the expression on one new developer's face when they first opened the codebase. It was... well, like someone who just woke up and was immediately asked to run a marathon hehe~
 
 From a business perspective, this meant **the cost of adding team capacity was increasing**. Every new developer needed more time before becoming productive.
 
 ### 4. Fear With Every Deploy
 
-Every time we were about to deploy, there was this feeling of "hope nothing breaks this time." Not because there was no testing — but because the existing tests didn't cover all edge cases. And in a tightly coupled system, one small change could have a domino effect.
+Every time we were about to deploy, there was this feeling of "hope nothing breaks this time." Not because there was no testing — but because the existing tests didn't cover all edge cases. And in a tightly coupled system, one small change could have a domino effect. Like pulling one thread from a sweater and watching everything else unravel. Friday afternoon deploys? _God forbid_, don't even think about it hahaha.
 
 From a business perspective, this meant **the team became conservative**. Features that were actually safe to ship got delayed because of fear of side effects. Innovation slowed down not because of a lack of ideas, but because of fear of breaking things.
 
@@ -65,7 +65,7 @@ After realizing that the symptoms above weren't _normal_, I started asking mysel
 
 This is the first and most important question. If the problem is in how we write code — for example, no layering, no testing, no code review — then migrating tech stacks won't solve anything. We'd just be moving the problem to a new tool.
 
-In this GPS tracker case, the answer was: **both**. The way code was written did need improvement — but the language and framework being used also had limitations that made writing clean code harder than it should be. A dynamically typed language without runtime enforcement meant type-related bugs surfaced in production, not during development.
+In this GPS tracker case, the answer was: **both**. The way code was written did need improvement — but the language and framework being used also had limitations that made writing clean code harder than it should be. A dynamically typed language[^3] without runtime enforcement meant type-related bugs surfaced in production, not during development. And type-related bugs in production... ugh, every error notification made my heart skip a beat hehe.
 
 ### "If We Just Refactor, Would That Be Enough?"
 
@@ -73,13 +73,14 @@ The second question: if we invested time in cleaning up the architecture on the 
 
 In this case, I did a rough calculation: to refactor 370+ endpoints with proper architecture in PHP would take almost the same time as migrating to a new stack. The difference was, if we refactored in PHP, we'd still be stuck with some fundamental limitations (type safety, concurrency, deployment complexity). If we migrated, we'd unlock new capabilities.
 
-But this was **my case**. It doesn't mean refactoring is always the wrong choice. If the system is smaller, or if the stack's limitations aren't too constraining, refactoring is a far wiser choice.
+But this was **my case**, right. It doesn't mean refactoring is always the wrong choice. If the system is smaller, or if the stack's limitations aren't too constraining, refactoring is a far wiser choice. Don't read this and immediately start migrating your whole system without thinking it through. You don't want to end up like a horror story I once heard — 2 years of migration work, and they ended up reverting to the old system hahaha.
 
 ### "What's the Cost of Doing Nothing?"
 
 This is the question that often gets missed. We often calculate the cost of migration — time, money, risk — but rarely calculate **the cost of standing still**.
 
 In the GPS tracker case:
+
 - Features shipping slower = clients might switch to competitors
 - Bugs appearing in production = client trust decreases
 - Longer onboarding = effective recruitment costs increase
@@ -93,7 +94,7 @@ Tech stack migration requires new skills. The team needs to learn a stack they m
 
 The question isn't "can we?" but "do we have the **room** to do it?" If the team is already overwhelmed with deadlines and bug fixes, migration will only add burden. But if there's a window — whether between projects, or when capacity is sufficient — that's the right time to start.
 
-In my case, we didn't migrate everything at once. We started with one module, one endpoint at a time — while still running business as usual. The technical details are in [my separate migration notes](/en/writing/legacy-php-to-go-migration/).
+In my case, we didn't migrate everything at once. We started with one module, one endpoint at a time — while still running business as usual. _Slow and steady wins the race_, as my colleague put it hehe. The technical details are in [my separate migration notes](/en/writing/legacy-php-to-go-migration/).
 
 ### "How Do We Know the Migration Succeeded?"
 
@@ -128,9 +129,9 @@ If all three conditions are met: **migration makes sense**. If even one isn't me
 
 ## The Decision and What Happened
 
-I decided to migrate. Not a decision made overnight — but a process of several weeks after gathering data and discussing with the team.
+I decided to migrate. Not a decision made overnight — but a process of several weeks after gathering data and discussing with the team. There was a moment where I wavered, honestly — _"Do we really need to migrate? Can't we just refactor?"_ But after looking at the data, the decision was made.
 
-The result? Features that used to take two weeks could now be shipped in days. Production bugs decreased. New developer onboarding was faster. And most importantly: deploys were no longer feared.
+The result? _Alhamdulillah_. Features that used to take two weeks could now be shipped in days. Production bugs decreased. New developer onboarding was faster. And most importantly: deploys were no longer feared. Now even Friday afternoon deploys are... well, still a little nerve-wracking, but nowhere near as bad as before hahaha.
 
 For the technical details of how the migration was done — the per-module approach, patterns used, and technical lessons learned — there's a [separate write-up](/en/writing/legacy-php-to-go-migration/) I wrote specifically for the implementation side.
 
@@ -138,25 +139,35 @@ For the technical details of how the migration was done — the per-module appro
 
 ### 1. Collect Data First, Decide Later
 
-Don't migrate because "it feels like we need to" or because a new tech stack is trending. Collect the data — how long new features take to ship, how often bugs appear, how long onboarding takes. When the data supports it, the decision is far easier to sell to stakeholders.
+Don't migrate because "it feels like we need to" or because a new tech stack is trending[^4]. Collect the data — how long new features take to ship, how often bugs appear, how long onboarding takes. When the data supports it, the decision is far easier to sell to stakeholders. Trust me, telling your boss _"we should migrate because Go is cool"_ won't work. But _"features that used to take 2 days now take 2 weeks, here's the data"_? Now that's a conversation hehe.
 
 ### 2. Migration Is a Business Decision, Not Just a Technical One
 
-Migration discussions often get stuck on "language A is better than language B." But the question that should be asked is: "does the current tech stack still allow us to deliver value at the speed we need?" If the answer is no — then it's time to talk migration.
+Migration discussions often get stuck on "language A is better than language B." But the question that should be asked is: "does the current tech stack still allow us to deliver value at the speed we need?" If the answer is no — then it's time to talk migration. Because the end goal is to build something useful for users, not to win arguments on developer forums hahaha.
 
 ### 3. Refactoring vs Migration Isn't Binary
 
-It's not a choice between "refactor everything" or "migrate everything." Sometimes the answer is refactor first, then migrate incrementally. Sometimes refactoring alone is enough. Context and system scale determine the answer.
+It's not a choice between "refactor everything" or "migrate everything." Sometimes the answer is refactor first, then migrate incrementally. Sometimes refactoring alone is enough. Context and system scale determine the answer. Life isn't always black and white, and neither are technical decisions hehe~
 
 ### 4. Also Calculate the Cost of Doing Nothing
 
-We often focus on "how much does migration cost" and forget to ask "how much does it cost if we don't migrate?" Sometimes, the cost of standing still is far more expensive in the long run.
+We often focus on "how much does migration cost" and forget to ask "how much does it cost if we don't migrate?" Sometimes, the cost of standing still is far more expensive in the long run. Like the saying goes — better to visit the dentist early than to tough it out until it's serious. Is that actually a saying? Well, you get the point hahaha.
 
 ## Closing Thoughts
 
 The decision to migrate a tech stack is personal — it depends on context, team, timeline, and many other factors. There's no framework that can answer every situation. But by asking the right questions and gathering enough data, the decision made is far more sound than following hype.
 
-If you're facing a similar dilemma and want to discuss it, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
+Hope these notes are useful for anyone wrestling with whether to migrate or not. If you're facing a similar dilemma and want to discuss it, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
+
+That's all. Cheers.
+
+[^1]: A GPS tracker system that had been running for several years, with various feature additions and patches layered on top over time.
+
+[^2]: Many developers had come and gone over the years, each with their own coding style. So the result was... well, a mixed bag hehe.
+
+[^3]: Not saying dynamically typed languages are bad, of course. It's just that for certain cases, static typing really helps a lot.
+
+[^4]: Tech FOMO (_Fear of Missing Out_) is real. But don't let technical decisions be driven by fear of being left behind on the latest trend.
 
 ---
 

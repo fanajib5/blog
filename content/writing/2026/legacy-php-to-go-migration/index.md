@@ -31,7 +31,7 @@ Masalah sebenarnya bukan di bahasa pemrogramannya. PHP itu bagus kok. Masalahnya
 
 1. **Tidak ada pemisahan layer** — _controller_ langsung query ke database, _business logic_ bercampur dengan _presentation logic_. Pokoknya kayak nasi goreng yang isinya macem-macem, tapi nggak tau mana nasi mana sayurnya hahaha.
 2. **Sulit di-_test_** — kode yang tightly coupled bikin unit testing jadi _nightmare_. Mau _test_ satu function, eh harus _setup_ database, _mock_ tiga dependency, dan berdoa semoga berhasil.
-3. **_Developer experience_ menurun** — onboarding _developer_ baru makin lama, _bug fix_ makin berisiko. Terakhir ada _developer_ baru yang sampai bilang, _"Mas, ini kodenya... \_ehem_, menarik sekali arsitekturnya."\_ _Translation_: _chaotic_ hehe~
+3. **_Developer experience_ menurun** — onboarding _developer_ baru makin lama, _bug fix_ makin berisiko. Terakhir ada _developer_ baru yang sampai bilang, _"Mas, ini kodenya... ehem, menarik sekali arsitekturnya."_ — _Translation_: _chaotic_ hehe~
 
 Intinya, sistem ini butuh bukan sekadar ganti bahasa, tapi **re-architect**.
 
@@ -59,7 +59,7 @@ Bukan berarti Go sempurna — _error handling_-nya _verbose_ (semua `if err != n
 
 ## Pendekatan Migrasi: Per-_Module_, Bukan _Big Bang_
 
-Salah satu kesalahan terbesar dalam migrasi adalah _"kita \_rewrite_ semuanya dari nol"_. Saya pernah dengar cerita \_horor_ tentang tim yang _spend_ 2 tahun untuk _big-bang rewrite_ dan akhirnya... tidak jadi. Alasannya macem-macem: _burn out_, _scope creep_, atau _business requirement_ yang berubah di tengah jalan. _Amit-amit_ deh kalau sampai kejadian kayak gitu hahaha.
+Salah satu kesalahan terbesar dalam migrasi adalah _"kita rewrite semuanya dari nol"_. Saya pernah dengar cerita _horor_ tentang tim yang _spend_ 2 tahun untuk _big-bang rewrite_ dan akhirnya... tidak jadi. Alasannya macem-macem: _burn out_, _scope creep_, atau _business requirement_ yang berubah di tengah jalan. _Amit-amit_ deh kalau sampai kejadian kayak gitu hahaha.
 
 Pendekatan yang saya pakai:
 
@@ -81,10 +81,6 @@ Kenapa dipisah? Karena dengan pemisahan ini:
 - Penambahan fitur tidak merusak bagian lain
 
 Sederhananya, kita bikin _layer_ yang jelas sehingga _concern_ masing-masing bagian tidak _mixed up_. Awalnya sih terasa _over-engineering_, tapi setelah jalan beberapa bulan, _oh man_, ini sangat membantu hehe~
-
-- _Repository_ bisa di-_mock_ saat testing _service_
-- _Business logic_ bisa diuji tanpa database
-- Penambahan fitur tidak merusak bagian lain
 
 ### 3. Satu _Endpoint_ pada Satu Waktu
 
