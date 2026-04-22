@@ -42,8 +42,8 @@ Universitas Terbuka adalah universitas terbuka dan jarak jauh terkemuka di Indon
 
 ## Latar Belakang Akademik
 
-- **Sarjana Teknik (S.T.)** — Teknik Telekomunikasi, Telkom University (CGPA: 3.49/4.00)
 - **Diploma (A.Md.)** — Teknik Telekomunikasi, Politeknik Elektronika Negeri Surabaya (CGPA: 3.42/4.00)
+- **Sarjana Teknik (S.T.)** — Teknik Telekomunikasi, Telkom University (CGPA: 3.49/4.00)
 - **Magister Komputer (M.Com.)** — Sistem Informasi, Institut Teknologi Sepuluhuh Nopember (CGPA: 3.81/4.00)
   - Tesis: *Pemodelan sistem dinamika rantai pasok cabai di Jawa Timur* (Best Master Thesis)
 - **Insinyur Profesional (Ir.)** — Teknik Informatika, Institut Teknologi Indonesia (CGPA: 3.9/4.00)

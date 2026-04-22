@@ -32,9 +32,9 @@ Need a solution for your business? Check out the [Services](/en/services/) page.
 
 Online tutor at **Universitas Terbuka** for the Information Systems program, with a strong academic background:
 
+- **Ir. (Computer Engineering)** — Institut Teknologi Indonesia (CGPA: 3.90/4.00)
 - **M.Com. (Information Systems)** — Institut Teknologi Sepuluh Nopember (CGPA: 3.81/4.00, Best Master Thesis)
 - **B.Eng. (Telecommunications Engineering)** — Telkom University (CGPA: 3.49/4.00)
-- **Ir. (Computer Engineering)** — Institut Teknologi Indonesia (CGPA: 3.90/4.00)
 - **A.A.S. (Telecommunications Engineering)** — Politeknik Elektronika Negeri Surabaya (CGPA: 3.42/4.00)
 
 My teaching focus: ensuring every participant **understands fundamental concepts**, not just follows tutorials — because a strong foundation enables adaptation to any technology in the future.

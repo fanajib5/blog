@@ -42,8 +42,8 @@ Universitas Terbuka is Indonesia's leading open and distance learning university
 
 ## Academic Background
 
-- **Bachelor of Engineering (S.T.)** — Telecommunication Engineering, Telkom University (CGPA: 3.49/4.00)
 - **Diploma (A.Md.)** — Telecommunication Engineering, Politeknik Elektronika Negeri Surabaya (CGPA: 3.42/4.00)
+- **Bachelor of Engineering (S.T.)** — Telecommunication Engineering, Telkom University (CGPA: 3.49/4.00)
 - **Master of Computer (M.Com.)** — Information Systems, Institut Teknologi Sepuluh Nopember (CGPA: 3.81/4.00)
   - Thesis: *System dynamics modeling of chili supply chains in East Java* (Best Master Thesis)
 - **Professional Engineer (Ir.)** — IT Engineering, Institut Teknologi Indonesia (CGPA: 3.9/4.00)

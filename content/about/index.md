@@ -32,9 +32,9 @@ Butuh solusi untuk bisnis Anda? Lihat halaman [Layanan](/services/).
 
 Tutor online di **Universitas Terbuka** untuk Program Studi Sistem Informasi, dengan latar belakang akademik yang kuat:
 
+- **Ir. (Teknik Informatika)** — Institut Teknologi Indonesia (CGPA: 3.90/4.00)
 - **M.Com. (Sistem Informasi)** — Institut Teknologi Sepuluh Nopember (CGPA: 3.81/4.00, Best Master Thesis)
 - **S.T. (Teknik Telekomunikasi)** — Telkom University (CGPA: 3.49/4.00)
-- **Ir. (Teknik Informatika)** — Institut Teknologi Indonesia (CGPA: 3.90/4.00)
 - **A.Md. (Teknik Telekomunikasi)** — Politeknik Elektronika Negeri Surabaya (CGPA: 3.42/4.00)
 
 Fokus saya dalam mengajar: memastikan setiap peserta **memahami konsep fundamental**, bukan sekadar mengikuti tutorial — karena fondasi yang kuat memungkinkan seseorang beradaptasi dengan teknologi apapun.
