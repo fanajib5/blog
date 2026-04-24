@@ -132,6 +132,8 @@ They run the process daily. Their insights are often more accurate than technica
 
 For me, UiPath RPA was never about "replacing people." It was about giving people their time back for work that actually needs human thinking. Repetitive tasks still need to be done, but not always manually.
 
+If you want the messier field version of this story, I also wrote a [separate case study](/en/writing/2026/miss-calculation-in-business-process-automation/) about how a bond-workpaper miscalculation of around Rp8 billion reminded me that overly manual processes can slowly dull our sensitivity to risk.
+
 If you're evaluating a business process automation initiative and want to discuss a practical implementation approach, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
 
 ---

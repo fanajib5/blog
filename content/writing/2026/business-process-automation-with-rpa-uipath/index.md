@@ -132,6 +132,8 @@ Mereka yang menjalankan proses tiap hari. Insight mereka sering lebih akurat dar
 
 Buat saya, RPA UiPath bukan soal "menggantikan manusia", tapi soal mengembalikan waktu manusia ke pekerjaan yang lebih bernilai. Pekerjaan repetitif tetap harus selesai, tapi tidak selalu harus dikerjakan manual.
 
+Kalau kamu ingin lihat sisi yang lebih "lapangan", saya juga menulis [studi kasus lain](/writing/2026/miss-calculation-in-business-process-automation/) tentang bagaimana miss kalkulasi kertas kerja obligasi sampai Rp8 miliar justru menyadarkan saya bahwa proses yang terlalu manual bisa mengikis sensitivitas kita terhadap risiko.
+
 Kalau kamu sedang mengevaluasi inisiatif otomasi proses bisnis dan ingin diskusi dari sisi implementasi yang realistis, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 
 ---
