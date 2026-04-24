@@ -1,6 +1,6 @@
 ---
 title: "Why One Bug Can Take Three Days"
-description: "Why fixing one small bug can take days — and how to explain it to non-technical people so misunderstandings don't happen."
+description: "Why fixing one small bug can take days, and how to explain it to non-technical people so misunderstandings don't happen."
 author: "Faiq Najib"
 date: 2026-04-16
 lastmod: 2026-04-16
@@ -17,21 +17,21 @@ _"This is just a small bug, right? Should take 5 minutes."_
 
 Ever heard this one? Or maybe its variants: _"Just change one line of code, right?"_, _"How can it take a whole day to fix this?"_
 
-If you're a developer, you almost certainly have. And that line usually comes from a boss, project manager, or client — someone who doesn't need to know what an N+1 query is, but needs to understand **why something that looks simple takes a non-simple amount of time**.
+If you're a developer, you almost certainly have. And that line usually comes from a boss, project manager, or client, someone who doesn't need to know what an N+1 query is, but needs to understand **why something that looks simple takes a non-simple amount of time**.
 
 This isn't about blaming anyone. It's about **why this communication gap happens and how to bridge it**.
 
 ## Anatomy of "1 Bug = 3 Days"
 
-Here's the story. There's a bug: **report data isn't showing up on the dashboard**. On the surface, it looks simple — just fix the display, right?
+Here's the story. There's a bug: **report data isn't showing up on the dashboard**. On the surface, it looks simple, just fix the display, right?
 
 Turns out, after investigation:
 
-1. **The data doesn't exist** — it's not a display issue, but a query that should be saving data to the database isn't running under certain conditions
-2. **The query has a problem** — there's a race condition that appears when 2 users access simultaneously
-3. **The database schema needs to change** — to handle that race condition, a new constraint is needed
-4. **Existing data must be migrated** — schema changes mean data that's already there needs to be adjusted
-5. **It needs testing** — and not just new test cases, but also making sure existing features don't break
+1. **The data doesn't exist**: it's not a display issue, but a query that should be saving data to the database isn't running under certain conditions
+2. **The query has a problem**: there's a race condition that appears when 2 users access simultaneously
+3. **The database schema needs to change**: to handle that race condition, a new constraint is needed
+4. **Existing data must be migrated**: schema changes mean data that's already there needs to be adjusted
+5. **It needs testing**: and not just new test cases, but also making sure existing features don't break
 
 So what looks like _"data not showing up"_ is actually: **bug in query → race condition → schema change → data migration → end-to-end testing**. From "change one line" to "touch 4 layers of the system."
 
@@ -66,7 +66,7 @@ The most common mistake: explaining technical problems using technical terms.
 Your boss doesn't care about the number of queries. What they care about: **what's the business impact?**
 
 **More effective:**
-> _"The system currently fetches data one at a time, but there could be hundreds of records. So the more data, the slower it gets. If left unfixed, when users reach a thousand, the report page could take 30 seconds to load — users will think the system is broken and leave the app."_
+> _"The system currently fetches data one at a time, but there could be hundreds of records. So the more data, the slower it gets. If left unfixed, when users reach a thousand, the report page could take 30 seconds to load, users will think the system is broken and leave the app."_
 
 Notice the shift:
 
@@ -76,7 +76,7 @@ Notice the shift:
 | 1001 queries | Load time up to 30 seconds |
 | Needs refactoring | If left alone, users will leave |
 
-It doesn't mean you're oversimplifying — you're **translating the consequences**.
+It doesn't mean you're oversimplifying, you're **translating the consequences**.
 
 ### 2. Visualize: Use Analogies, Not Architecture Diagrams
 
@@ -85,7 +85,7 @@ Architecture diagrams are great for fellow developers. For non-technical people,
 Some analogies I frequently use:
 
 - **Refactoring** = renovating a standing house. You can't just replace the floor without checking the foundation first.
-- **Technical debt** = bank loan. You can take a shortcut now (debt), but someday it must be paid — with interest.
+- **Technical debt** = bank loan. You can take a shortcut now (debt), but someday it must be paid, with interest.
 - **Testing** = seatbelt. It doesn't make the car faster, but it prevents accidents from becoming disasters.
 - **Race condition** = two people trying to enter the same door from opposite directions. Without rules on who goes first, they block each other.
 - **Deployment** = changing a car tire while driving. You have to be careful so passengers don't feel it.
@@ -99,10 +99,10 @@ Bosses have different priorities than developers. Our priorities: clean code, ma
 So when explaining, connect to their priorities:
 
 - _"If we fix this now with 2 days, we prevent downtime that could cost 10x more later."_
-- _"This isn't about building new features — it's about making sure existing features don't suddenly stop working."_
+- _"This isn't about building new features, it's about making sure existing features don't suddenly stop working."_
 - _"The risk: if left unhandled, report data could be inaccurate. And that report data is what drives business decisions."_
 
-The phrase _"technical debt"_ might not move your boss. But _"if we don't handle this now, we could lose transaction data"_ — that gets heard.
+The phrase _"technical debt"_ might not move your boss. But _"if we don't handle this now, we could lose transaction data"_, that gets heard.
 
 ## A Practical Template
 
@@ -130,15 +130,15 @@ Example:
 >
 > **Risk of delaying?** More data could go missing, and the fix could take longer because there's more data to adjust.
 
-Short, clear, and — most importantly — **no technical terms**.
+Short, clear, and, most importantly, **no technical terms**.
 
 ## Communication Is a Skill
 
-Many developers — including me, back then — think that if the code is good, the work is done. But the reality is, **if it can't be explained, it won't be supported**. And without support — whether it's time, resources, or trust — even the best code will never get deployed.
+Many developers, including me, back then, think that if the code is good, the work is done. But the reality is, **if it can't be explained, it won't be supported**. And without support, whether it's time, resources, or trust, even the best code will never get deployed.
 
 Communication isn't a talent. It's a skill that can be trained, exactly like writing code. Every time you explain a technical problem to a non-technical person, you sharpen that skill. It might feel awkward at first. But over time, it becomes a reflex.
 
-And that reflex is incredibly useful — not just at work, but also when teaching. Because teaching, fundamentally, is explaining complex things in an accessible way.
+And that reflex is incredibly useful, not just at work, but also when teaching. Because teaching, fundamentally, is explaining complex things in an accessible way.
 
 If you're interested in teaching and technical communication, or have similar experiences you'd like to discuss, [get in touch](/contact/).
 

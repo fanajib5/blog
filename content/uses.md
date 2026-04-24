@@ -24,6 +24,6 @@ Berikut ini adalah _hardware_, _software_, dan layanan yang saya gunakan sehari-
 - **AI Agents**:
   - [Kilo.ai](https://kilo.ai) dengan Kilo Gateway
   - [Z.ai GLM](https://z.ai) dengan Harness Droid CLI
-  - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic's official CLI
+  - [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Anthropic's official CLI
   - [OpenCode](https://opencode.ai)
 - **Lainnya**: [Excalidraw](https://excalidraw.com)

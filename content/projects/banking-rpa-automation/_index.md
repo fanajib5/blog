@@ -1,6 +1,6 @@
 ---
 title: "Banking Process Automation & Open API Portal"
-description: "Otomasi proses Treasury dan International Banking di bank nasional menggunakan RPA dan pengembangan Mega Open API portal — menghemat IDR 12 juta/bulan."
+description: "Otomasi proses Treasury dan International Banking di bank nasional menggunakan RPA dan pengembangan Mega Open API portal, menghemat IDR 12 juta/bulan."
 date: 2020-11-01
 lastmod: 2026-04-15T00:00:00+07:00
 draft: false
@@ -27,15 +27,15 @@ Dua track parallel: **otomasi RPA** untuk proses backend dan **Open API portal**
 ### Track 1: Process Automation (RPA)
 
 Menggunakan **UiPath** untuk mengotomasi:
-- Tax reporting workflow — dari data gathering hingga report generation
-- Bond settlement process — dari instruction hingga confirmation
-- Credit card dispute workflows — processing otomatis untuk selected use cases
+- Tax reporting workflow, dari data gathering hingga report generation
+- Bond settlement process, dari instruction hingga confirmation
+- Credit card dispute workflows, processing otomatis untuk selected use cases
 
 ### Track 2: Internal Dashboard & Open API
 
 - **Internal dashboard** menggunakan Laravel + SQL Server untuk visibility operasional
-- **Mega Open API portal** — memperkenalkan akses terstandarisasi ke layanan banking untuk penggunaan internal dan eksternal
-- **Linux server configuration** — setup dan maintenance environment deployment
+- **Mega Open API portal**: memperkenalkan akses terstandarisasi ke layanan banking untuk penggunaan internal dan eksternal
+- **Linux server configuration**: setup dan maintenance environment deployment
 
 ## Hasil
 
@@ -46,6 +46,6 @@ Menggunakan **UiPath** untuk mengotomasi:
 
 ## Pelajaran
 
-1. **RPA bukan solusi untuk semua** — cocok untuk proses berulang dengan aturan jelas, tapi untuk proses yang butuh judgment, automation parsial lebih realistis daripada full automation
-2. **Kalkulasi ROI penting** — mengukur impact dalam rupiah (IDR 12 juta/bulan) membuat stakeholder non-teknis memahami nilai dari investasi teknologi
-3. **Banking domain knowledge** — memahami regulasi dan proses Treasury/Banking sama pentingnya dengan skill teknis di sektor finansial
+1. **RPA bukan solusi untuk semua**: cocok untuk proses berulang dengan aturan jelas, tapi untuk proses yang butuh judgment, automation parsial lebih realistis daripada full automation
+2. **Kalkulasi ROI penting**: mengukur impact dalam rupiah (IDR 12 juta/bulan) membuat stakeholder non-teknis memahami nilai dari investasi teknologi
+3. **Banking domain knowledge**: memahami regulasi dan proses Treasury/Banking sama pentingnya dengan skill teknis di sektor finansial

@@ -2,7 +2,7 @@
 title: "Hai, Saya Faiq Najib"
 date: 2023-06-24T15:01:44.4447251+08:00
 lastmod: 2026-04-15T00:00:00+07:00
-description: "Faiq Najib — Backend Developer (Go), Independent Builder & Educator. Blog personal dan portofolio profesional."
+description: "Faiq Najib, Backend Developer (Go), Independent Builder & Educator. Blog personal dan portofolio profesional."
 keywords: "Faiq Najib,Fanajib5,backend developer,Go,Golang,PostgreSQL,freelance programmer,independent builder,educator"
 draft: false
 comments: false
@@ -16,9 +16,9 @@ Saya adalah **backend developer** yang berfokus pada **Go (Golang)** dan **Postg
 
 ## Apa yang Saya Lakukan
 
-- **Software Development** — Membangun REST API, microservices, dan sistem backend yang handal. Lihat [layanan](/services/) saya.
-- **Independent Building** — Membuat produk digital dan proyek open source. Lihat [proyek](/projects/) saya.
-- **Teaching & Mentoring** — Berbagi pengetahuan melalui workshop, guest lecture, dan mentoring. Lihat [pengajaran](/teaching/) saya.
+- **Software Development:** Membangun REST API, microservices, dan sistem backend yang handal. Lihat [layanan](/services/) saya.
+- **Independent Building:** Membuat produk digital dan proyek open source. Lihat [proyek](/projects/) saya.
+- **Teaching & Mentoring:** Berbagi pengetahuan melalui workshop, guest lecture, dan mentoring. Lihat [pengajaran](/teaching/) saya.
 
 Tulisan terbaru saya ada di bawah. Untuk info lebih lanjut tentang saya, kunjungi halaman [About](/about/). Jika Anda ingin berkolaborasi atau berdiskusi, [hubungi saya](/contact/).
 
