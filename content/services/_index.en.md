@@ -1,6 +1,6 @@
 ---
 title: "Services"
-description: "Professional services by Faiq Najib — software development, technical consulting, teaching, and technical writing."
+description: "Professional services by Faiq Najib, software development, technical consulting, teaching, and technical writing."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

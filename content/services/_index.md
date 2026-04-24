@@ -1,6 +1,6 @@
 ---
 title: "Layanan"
-description: "Layanan profesional Faiq Najib — pengembangan software, konsultasi teknis, pengajaran, dan technical writing."
+description: "Layanan profesional Faiq Najib, pengembangan software, konsultasi teknis, pengajaran, dan technical writing."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

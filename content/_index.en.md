@@ -2,7 +2,7 @@
 title: "Hi, I'm Faiq Najib"
 date: 2023-06-24T15:01:44.4447251+08:00
 lastmod: 2026-04-15T00:00:00+07:00
-description: "Faiq Najib — Backend Developer (Go), Independent Builder & Educator. Personal blog and professional portfolio."
+description: "Faiq Najib, Backend Developer (Go), Independent Builder & Educator. Personal blog and professional portfolio."
 keywords: "Faiq Najib,Fanajib5,backend developer,Go,Golang,PostgreSQL,freelance programmer,independent builder,educator"
 draft: false
 comments: false
@@ -16,9 +16,9 @@ I'm a **backend developer** focused on **Go (Golang)** and **PostgreSQL**, with 
 
 ## What I Do
 
-- **Software Development** — Building REST APIs, microservices, and robust backend systems. See my [services](/en/services/).
-- **Independent Building** — Creating digital products and open source projects. See my [projects](/en/projects/).
-- **Teaching & Mentoring** — Sharing knowledge through workshops, guest lectures, and mentoring. See my [teaching](/en/teaching/).
+- **Software Development:** Building REST APIs, microservices, and robust backend systems. See my [services](/en/services/).
+- **Independent Building:** Creating digital products and open source projects. See my [projects](/en/projects/).
+- **Teaching & Mentoring:** Sharing knowledge through workshops, guest lectures, and mentoring. See my [teaching](/en/teaching/).
 
 My latest writing is below. To learn more about me, visit the [About](/en/about/) page. If you'd like to collaborate or chat, [get in touch](/en/contact/).
 

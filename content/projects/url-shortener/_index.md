@@ -13,20 +13,20 @@ repo_url: "https://github.com/fanajib5/url_shortener_PA"
 
 ## Masalah
 
-Butuh backend URL shortener yang sederhana tapi terstruktur — bukan sekadar proof of concept, tapi kode yang bisa jadi referensi arsitektur untuk proyek Go lainnya.
+Butuh backend URL shortener yang sederhana tapi terstruktur, bukan sekadar proof of concept, tapi kode yang bisa jadi referensi arsitektur untuk proyek Go lainnya.
 
 ## Solusi
 
 Dibangun menggunakan **Go dengan Echo framework** dan **MySQL**, dengan struktur modular yang clean:
 
-- **Link creation** — generate short code untuk URL panjang
-- **Redirect handling** — resolve short code ke URL asli
-- **Basic analytics** — tracking jumlah klik per link
-- **RESTful API** — endpoint yang mengikuti best practices
+- **Link creation**: generate short code untuk URL panjang
+- **Redirect handling**: resolve short code ke URL asli
+- **Basic analytics**: tracking jumlah klik per link
+- **RESTful API**: endpoint yang mengikuti best practices
 
 ### Arsitektur
 
-Struktur modular yang memisahkan handler, service, dan repository — memudahkan testing dan extend untuk fitur baru.
+Struktur modular yang memisahkan handler, service, dan repository, memudahkan testing dan extend untuk fitur baru.
 
 ## Hasil
 
@@ -36,5 +36,5 @@ Struktur modular yang memisahkan handler, service, dan repository — memudahkan
 
 ## Pelajaran
 
-1. **Framework selection matters** — Echo memberikan routing dan middleware yang ringan tanpa overhead, cocok untuk API kecil-menengah
-2. **Modular structure sejak awal** — meskipun proyek kecil, struktur yang benar membuat penambahan fitur (analytics, auth) jadi straightforward tanpa refactor besar
+1. **Framework selection matters**: Echo memberikan routing dan middleware yang ringan tanpa overhead, cocok untuk API kecil-menengah
+2. **Modular structure sejak awal**: meskipun proyek kecil, struktur yang benar membuat penambahan fitur (analytics, auth) jadi straightforward tanpa refactor besar
