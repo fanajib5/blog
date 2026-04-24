@@ -2,8 +2,8 @@
 title: "Business Process Automation with UiPath RPA: When an Rp8 Billion Difference Starts Feeling Normal"
 description: "Field notes on using UiPath RPA to reduce manual-process risk after a bond worksheet miscalculation of around Rp8 billion stopped feeling as alarming as it should have."
 author: "Faiq Najib"
-date: 2020-10-12
-lastmod: 2020-10-12
+date: 2026-03-20
+lastmod: 2026-03-20
 draft: false
 toc: true
 comments: false

@@ -2,8 +2,8 @@
 title: "Otomasi Proses Bisnis dengan RPA UiPath: Ketika Selisih Rp8 Miliar Mulai Terlihat Normal"
 description: "Catatan pengalaman menggunakan RPA UiPath untuk mengurangi risiko proses manual setelah miss kalkulasi kertas kerja obligasi hingga Rp8 miliar terasa seperti angka yang biasa saja."
 author: "Faiq Najib"
-date: 2020-10-12
-lastmod: 2020-10-12
+date: 2026-03-20
+lastmod: 2026-03-20
 draft: false
 toc: true
 comments: false
