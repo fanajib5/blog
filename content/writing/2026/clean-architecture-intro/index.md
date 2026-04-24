@@ -76,7 +76,7 @@ Intinya: **ubah satu hal, risiko hal lain ikut rusak**.
 
 ## Clean Architecture: Intinya Sederhana Kok
 
-Istilah "Clean Architecture" populer lewat Robert C. Martin (_Uncle Bob_). Tapi jangan keterangan dulu, kamu tidak perlu baca bukunya untuk mulai memahami idenya.
+Istilah "Clean Architecture" populer lewat Robert C. Martin (_Uncle Bob_). Tapi tenang aja, kamu tidak perlu baca bukunya untuk mulai memahami idenya.
 
 Intinya cuma satu kalimat: **kode yang penting (logika bisnis) tidak boleh tergantung pada detail teknis (database, _framework_, API).**
 
@@ -303,7 +303,7 @@ Clean Architecture itu _tool_, bukan agama. Kalau konteksnya tidak membutuhkan, 
 
 Clean Architecture, pada intinya, bukan soal jumlah _layer_ atau pattern yang fancy. Ini soal **menulis kode yang bisa dipahami, diubah, dan di-_test_, oleh diri kamu sendiri maupun orang lain**. Bahkan kalau itu 3 bulan kemudian hehe.
 
-Kalau kamu tertarik melihat bagaimana Clean Architecture ini diterapkan di proyek nyata (migrasi dari PHP ke Go, 370+ _endpoint_), saya punya [catatan terpisah](/writing/legacy-php-to-go-migration/) untuk sisi implementasinya.
+Kalau kamu tertarik melihat bagaimana Clean Architecture ini diterapkan di proyek nyata (migrasi dari PHP ke Go, 370+ _endpoint_), saya punya [catatan terpisah](/writing/2026/legacy-php-to-go-migration/) untuk sisi implementasinya.
 
 Kalau ada pertanyaan atau mau diskusi lebih lanjut, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 

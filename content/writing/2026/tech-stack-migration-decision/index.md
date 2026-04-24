@@ -93,7 +93,7 @@ Migrasi _tech stack_ butuh _skill_ baru. Tim harus belajar _stack_ yang mungkin 
 
 Pertanyaannya bukan "bisakah?" tapi "apakah kita punya **ruang** untuk melakukannya?" Kalau tim sudah _overwhelmed_ dengan _deadline_ dan _bug fix_, migrasi hanya akan menambah beban. Tapi kalau ada _window_, entah itu antar proyek, atau saat kapasitas sedang cukup, itu saat yang tepat untuk mulai.
 
-Dalam kasus saya, kami tidak migrasi semua sekaligus. Kami mulai dari satu _module_, satu _endpoint_ pada satu waktu, sambil tetap menjalankan _business as usual_. _Pelan-pelan asal kenceng_, begitu kata teman saya hehe. Detail teknisnya ada di [catatan migrasi saya yang lain](/writing/legacy-php-to-go-migration/).
+Dalam kasus saya, kami tidak migrasi semua sekaligus. Kami mulai dari satu _module_, satu _endpoint_ pada satu waktu, sambil tetap menjalankan _business as usual_. _Pelan-pelan asal kenceng_, begitu kata teman saya hehe. Detail teknisnya ada di [catatan migrasi saya yang lain](/writing/2026/legacy-php-to-go-migration/).
 
 ### "Kapan Kita Tahu Migrasi Itu Berhasil?"
 
@@ -132,7 +132,7 @@ Saya memutuskan untuk migrasi. Bukan keputusan dalam semalam, tapi proses bebera
 
 Hasilnya? _Alhamdulillah_. Fitur baru yang dulu butuh dua minggu sekarang bisa dikirim dalam hitungan hari. _Bug_ _production_ menurun. Onboarding _developer_ baru lebih cepat. Dan yang paling penting: _deploy_ tidak lagi ditakuti. Sekarang _deploy_ di hari Jumat sore pun... _yah_, masih agak deg-degan sih, tapi nggak separah dulu hahaha.
 
-Untuk detail teknis bagaimana migrasi dilakukan, pendekatan per-_module_, _pattern_ yang dipakai, dan pelajaran teknisnya, ada di [catatan terpisah](/writing/legacy-php-to-go-migration/) yang saya tulis khusus untuk sisi implementasinya.
+Untuk detail teknis bagaimana migrasi dilakukan, pendekatan per-_module_, _pattern_ yang dipakai, dan pelajaran teknisnya, ada di [catatan terpisah](/writing/2026/legacy-php-to-go-migration/) yang saya tulis khusus untuk sisi implementasinya.
 
 ## Pelajaran
 

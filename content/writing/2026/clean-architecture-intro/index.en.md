@@ -303,7 +303,7 @@ Clean Architecture is a tool, not a religion. If the context doesn't require it,
 
 Clean Architecture, at its core, isn't about the number of layers or fancy patterns. It's about **writing code that can be understood, changed, and tested, by yourself and others**. Even if that's three months later hehe.
 
-If you're interested in seeing how Clean Architecture was applied in a real project (migrating from PHP to Go, 370+ endpoints), I have a [separate write-up](/en/writing/legacy-php-to-go-migration/) for the implementation side.
+If you're interested in seeing how Clean Architecture was applied in a real project (migrating from PHP to Go, 370+ endpoints), I have a [separate write-up](/writing/2026/legacy-php-to-go-migration/) for the implementation side.
 
 If you have questions or want to discuss further, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
 

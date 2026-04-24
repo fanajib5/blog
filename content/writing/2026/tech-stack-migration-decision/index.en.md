@@ -94,7 +94,7 @@ Tech stack migration requires new skills. The team needs to learn a stack they m
 
 The question isn't "can we?" but "do we have the **room** to do it?" If the team is already overwhelmed with deadlines and bug fixes, migration will only add burden. But if there's a window, whether between projects, or when capacity is sufficient, that's the right time to start.
 
-In my case, we didn't migrate everything at once. We started with one module, one endpoint at a time, while still running business as usual. _Slow and steady wins the race_, as my colleague put it hehe. The technical details are in [my separate migration notes](/en/writing/legacy-php-to-go-migration/).
+In my case, we didn't migrate everything at once. We started with one module, one endpoint at a time, while still running business as usual. _Slow and steady wins the race_, as my colleague put it hehe. The technical details are in [my separate migration notes](/en/writing/2026/legacy-php-to-go-migration/).
 
 ### "How Do We Know the Migration Succeeded?"
 
@@ -133,7 +133,7 @@ I decided to migrate. Not a decision made overnight, but a process of several we
 
 The result? _Alhamdulillah_. Features that used to take two weeks could now be shipped in days. Production bugs decreased. New developer onboarding was faster. And most importantly: deploys were no longer feared. Now even Friday afternoon deploys are... well, still a little nerve-wracking, but nowhere near as bad as before hahaha.
 
-For the technical details of how the migration was done, the per-module approach, patterns used, and technical lessons learned, there's a [separate write-up](/en/writing/legacy-php-to-go-migration/) I wrote specifically for the implementation side.
+For the technical details of how the migration was done, the per-module approach, patterns used, and technical lessons learned, there's a [separate write-up](/en/writing/2026/legacy-php-to-go-migration/) I wrote specifically for the implementation side.
 
 ## Lessons Learned
 
