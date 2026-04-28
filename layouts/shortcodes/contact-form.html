@@ -1,6 +1,6 @@
 {{- $key := os.Getenv "WEB3FORMS_KEY" -}}
 {{- if not $key -}}
-{{- errorf "WEB3FORMS_KEY env var is not set: contact form will not work. Set it in Netlify Dashboard > Site settings > Environment variables." -}}
+{{- errorf "WEB3FORMS_KEY env var is not set: contact form will not work. Set it in Cloudflare Dashboard > Site settings > Environment variables." -}}
 {{- end -}}
 {{- $isID := eq .Page.Lang "id" -}}
 {{- if $key -}}

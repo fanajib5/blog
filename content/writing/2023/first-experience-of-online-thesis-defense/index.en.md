@@ -36,7 +36,7 @@ The wish was granted. The campus released an announcement that lecture activitie
 
 We were half happy and half worried. Because, if conditions outside were indeed as reported, it wasn't impossible that we wouldn't be able to return home if we forced ourselves to stay in Bandung.
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/writing/2023/first-experience-of-online-thesis-defense/VID-20200316-WA0015.gif" class="right" alt="gif video when station platform staff check passenger temperature" width="50%" caption="temperature checked by station platform staff" >}}
+{{< figure src="VID-20200316-WA0015.gif" class="right" alt="gif video when station platform staff check passenger temperature" width="50%" caption="temperature checked by station platform staff" >}}
 
 Carrying just enough luggage in a suitcase from the boarding house, we immediately headed to Kiaracondong station which turned out to be already full with masked prospective passengers.
 
