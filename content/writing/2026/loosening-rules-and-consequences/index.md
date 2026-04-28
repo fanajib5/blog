@@ -1,6 +1,6 @@
 ---
 title: "Kelonggaran Aturan dan Konsekuensinya"
-description: "Refleksi tentang keputusan memberikan kepercayaan kepada mahasiswa untuk menggunakan AI — dan apa artinya ketika tanggung jawab itu berpindah tangan."
+description: "Refleksi tentang keputusan memberikan kepercayaan kepada mahasiswa untuk menggunakan AI, dan apa artinya ketika tanggung jawab itu berpindah tangan."
 author: "Faiq Najib"
 date: 2026-04-28
 lastmod: 2026-04-28
@@ -13,27 +13,27 @@ tags:
   - catatan
 ---
 
-_Nganu_, jadi pertengahan April lalu saya mengetik pesan yang lumayan panjang di grup WhatsApp mahasiswa — tempat saya mengajar sebagai dosen. Isinya tentang program [GitHub Education](https://education.github.com/pack), sebuah inisiatif dari GitHub yang memberikan akses gratis ke berbagai _tools_ pengembangan bagi mahasiswa dan pengajar aktif.
+_Nganu_, jadi pertengahan April lalu saya mengetik pesan yang lumayan panjang di grup WhatsApp mahasiswa, tempat saya mengajar sebagai dosen. Isinya tentang program [GitHub Education](https://education.github.com/pack), sebuah inisiatif dari GitHub yang memberikan akses gratis ke berbagai _tools_ pengembangan bagi mahasiswa dan pengajar aktif.
 
-Di antara paket manfaatnya ada GitHub Copilot. Asisten AI yang sudah cukup dikenal di kalangan _developer_ sebagai partner ngoding — dari _autocomplete_, _code review_, sampai langsung mengerjakan sebagian kodingan kita.
+Di antara paket manfaatnya ada GitHub Copilot. Asisten AI yang sudah cukup dikenal di kalangan _developer_ sebagai partner ngoding, dengan autocomplete, code review, sampai langsung mengerjakan sebagian kodingan kita.
 
 Pesan itu saya tutup dengan kalimat yang, kalau dipikir-pikir ulang, cukup menggambarkan bagaimana saya memandang peran saya sebagai pengajar:
 
 > _Semoga rekan-rekan bisa amanah ya. Karena sudah saya anggap dewasa. Kalau ternyata berlawanan dengan itu, ya sudah jadi bukan tanggung jawab saya lagi. 😊_
 
-Saya menutupnya dengan "salam dari rekan dosen genzi angkatan pertama" — sambil tertawa sendiri mengetiknya hahaha.
+Saya menutupnya dengan "salam dari rekan dosen genzi angkatan pertama," sambil tertawa sendiri mengetiknya hahaha.
 
 Tulisan ini adalah refleksi dari momen itu.
 
-## Yang Saya Lakukan (dan Kenapa)
+## Yang Saya Lakukan (dan Alasannya)
 
-Intinya saya menyarankan mahasiswa untuk mendaftarkan email kampus mereka ke GitHub Education. Prosesnya tidak rumit — daftar, verifikasi status mahasiswa aktif, dan mereka bisa mengakses berbagai layanan secara gratis. Termasuk GitHub Copilot dengan 300 kuota _prompt_ per bulan beserta akses ke beragam model AI di dalamnya.
+Intinya saya menyarankan mahasiswa untuk mendaftarkan email kampus mereka ke GitHub Education. Prosesnya tidak rumit: daftar, verifikasi status mahasiswa aktif, dan mereka bisa mengakses berbagai layanan secara gratis. Termasuk GitHub Copilot dengan 300 kuota _prompt_ per bulan beserta akses ke beragam model AI di dalamnya.
 
-Satu catatan yang saya tekankan: GitHub Copilot ini bukan alat untuk mengerjakan tugas secara penuh dilepas ke AI. Ini untuk dijadikan partner belajar — biar tidak seperti saya dulu yang harus _marathon_ forum StackOverflow atau video tutorial dari orang Indonesia, Barat, sampai orang India hahaha.
+Satu catatan yang saya tekankan: GitHub Copilot ini bukan alat untuk mengerjakan tugas secara penuh dilepas ke AI. Ini untuk dijadikan partner belajar, biar tidak seperti saya dulu yang harus _marathon_ forum StackOverflow atau video tutorial dari orang Indonesia, Barat, sampai orang India hahaha.
 
 Hanya itu. Tidak ada larangan tertulis, tidak ada konsekuensi formal, tidak ada sistem pengawasan. Hanya sebuah imbauan, dan kepercayaan.
 
-Ini yang saya sebut kelonggaran — bukan aturan yang dihapus, tapi batasan yang diserahkan ke kesadaran masing-masing.
+Ini yang saya sebut kelonggaran: bukan aturan yang dihapus, tapi batasan yang diserahkan ke kesadaran masing-masing.
 
 ## Saya Juga Pernah Jadi Mahasiswa
 
@@ -53,13 +53,13 @@ Jadi ketika saya memberikan akses Copilot kepada mahasiswa hanya dengan sebuah i
 
 Karena menurut saya, menolak memberikan akses bukan berarti menutup akses.
 
-GitHub Copilot sudah ada. AI sudah ada. Mahasiswa yang penasaran pasti akan menemukan caranya sendiri — dengan atau tanpa arahan dari pengajarnya. Perbedaannya hanya satu: apakah mereka menemukannya dengan sedikit pemahaman tentang batasannya, atau tanpa pemahaman sama sekali.
+GitHub Copilot sudah ada. AI sudah ada. Mahasiswa yang penasaran pasti akan menemukan caranya sendiri, dengan atau tanpa arahan dari pengajarnya. Perbedaannya hanya satu: apakah mereka menemukannya dengan sedikit pemahaman tentang batasannya, atau tanpa pemahaman sama sekali.
 
 Ada kalimat yang saya tulis di pesan itu yang ingin saya elaborasi:
 
 > _Kita tidak digantikan AI sepenuhnya — setidaknya belum untuk saat ini. Tapi kita ada kemungkinan untuk digantikan seseorang yang bisa memaksimalkan AI di kehidupan, terutama pekerjaan kita._
 
-Ini bukan nakut-nakutin. Ini kenyataan yang sudah mulai terasa di lapangan. Saya melihatnya sendiri: dua orang dengan kemampuan teknis yang setara, tapi satu lebih mahir menggunakan AI sebagai _tool_ — hasilnya beda jauh dari segi kecepatan dan kualitas _output_.
+Ini bukan nakut-nakutin. Ini kenyataan yang sudah mulai terasa di lapangan. Saya melihatnya sendiri: dua orang dengan kemampuan teknis yang setara, tapi satu lebih mahir menggunakan AI sebagai _tool_. Hasilnya beda jauh dari segi kecepatan dan kualitas _output_.
 
 Kalau saya bisa memberikan mahasiswa satu langkah awal untuk memahami bagaimana bekerja berdampingan dengan AI — itu lebih bernilai daripada menutup aksesnya atas dasar kekhawatiran yang, bagaimanapun, tidak sepenuhnya bisa dicegah.
 
@@ -67,7 +67,7 @@ Kalau saya bisa memberikan mahasiswa satu langkah awal untuk memahami bagaimana 
 
 Tapi kembali ke inti: memberikan kelonggaran itu bukan tanpa taruhan.
 
-Ketika saya berkata _"sudah saya anggap dewasa"_, saya bukan sedang melempar tanggung jawab. Saya sedang memindahkan tanggung jawab — secara sadar — ke tangan yang bersangkutan. Dan itu berbeda.
+Ketika saya berkata _"sudah saya anggap dewasa"_, saya bukan sedang melempar tanggung jawab. Saya sedang memindahkan tanggung jawab, secara sadar, ke tangan yang bersangkutan. Dan itu berbeda.
 
 Memindahkan tanggung jawab ke orang yang sudah cukup dewasa untuk menerimanya adalah bentuk penghormatan, bukan kelalaian.
 
@@ -81,11 +81,11 @@ Dan saya tidak bisa menjaga mereka dari konsekuensi itu. Bukan karena tidak pedu
 
 ## Tentang Menjadi Pengajar yang Belum Terlalu Tua
 
-Ada hal yang sedikit menggelikan dari momen itu. Saya menyebut diri sendiri "dosen genzi angkatan pertama" — dan itu terasa akurat sekaligus sedikit absurd hahaha.
+Ada hal yang sedikit menggelikan dari momen itu. Saya menyebut diri sendiri "dosen genzi angkatan pertama," dan itu terasa akurat sekaligus sedikit absurd hahaha.
 
-Karena jujurnya, jarak antara pengalaman saya sebagai mahasiswa dan posisi saya sekarang sebagai pengajar tidak terlalu jauh. Saya masih ingat betul bagaimana rasanya duduk di sisi yang satunya — kurang tidur, setengah paham, dan sesekali mencari jalan pintas.
+Karena jujurnya, jarak antara pengalaman saya sebagai mahasiswa dan posisi saya sekarang sebagai pengajar tidak terlalu jauh. Saya masih ingat betul bagaimana rasanya duduk di sisi yang satunya: kurang tidur, setengah paham, dan sesekali mencari jalan pintas.
 
-Mungkin itu yang membuat saya lebih memilih memberikan kepercayaan daripada larangan. Bukan karena naif, tapi karena saya tahu bahwa larangan jarang benar-benar mengubah perilaku. Yang mengubah perilaku adalah konsekuensi yang dialami sendiri — dan, kalau beruntung, sedikit pemahaman yang datang sebelum konsekuensi itu tiba.
+Mungkin itu yang membuat saya lebih memilih memberikan kepercayaan daripada larangan. Bukan karena naif, tapi karena saya tahu bahwa larangan jarang benar-benar mengubah perilaku. Yang mengubah perilaku adalah konsekuensi yang dialami sendiri, dan kalau beruntung, sedikit pemahaman yang datang sebelum konsekuensi itu tiba.
 
 Jadi ya, saya memberikan kelonggaran itu. Dengan mata terbuka, dan dengan kesadaran bahwa hasilnya tidak sepenuhnya dalam kendali saya.
 
