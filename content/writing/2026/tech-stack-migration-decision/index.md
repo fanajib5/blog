@@ -2,8 +2,8 @@
 title: "Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi"
 description: "Sebuah catatan pengambilan keputusan, kapan tech stack yang sudah ada perlu dimigrasi, kapan cukup di-refactor, dan bagaimana membaca sinyal dari sisi bisnis."
 author: "Faiq Najib"
-date: 2026-04-15
-lastmod: 2026-04-15
+date: 2026-04-10
+lastmod: 2026-04-10
 draft: false
 toc: true
 comments: false
@@ -80,6 +80,7 @@ Tapi ini **kasus saya**, _ya_. Bukan berarti _refactor_ selalu salah. Kalau sist
 Ini pertanyaan yang sering luput. Kita sering hitung biaya migrasi, waktu, uang, risiko, tapi jarang hitung **biaya dari tetap stagnan**.
 
 Dalam kasus GPS _tracker_:
+
 - Fitur yang makin lambat dikirim = client mungkin pindah ke kompetitor
 - _Bug_ yang muncul di _production_ = _trust_ client menurun
 - Onboarding yang makin lama = biaya rekrutmen efektif meningkat
@@ -159,8 +160,11 @@ Keputusan migrasi _tech stack_ itu personal, tergantung pada konteks, tim, _time
 Semoga catatan ini bermanfaat buat yang lagi galau mau migrasi atau nggak. Kalau kamu sedang menghadapi dilema serupa dan ingin mendiskusikannya, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 
 [^1]: Sistem GPS _tracker_ yang sudah berjalan sejak beberapa tahun lalu, dengan berbagai penambahan fitur dan _patch_ di sana-sini.
+
 [^2]: Banyak _developer_ yang datang dan pergi selama bertahun-tahun. Masing-masing punya gaya _coding_ sendiri. Jadinya... _yah_, _mixed styles_ hehe.
+
 [^3]: Bukan berarti _dynamically typed language_ itu jelek, _ya_. Cuma untuk kasus tertentu, _static typing_ bisa sangat membantu.
+
 [^4]: _FOMO_ (_Fear of Missing Out_) dalam dunia _tech_ itu nyata. Tapi jangan sampai keputusan teknis diambil cuma karena takut ketinggalan _trend_.
 
 ---

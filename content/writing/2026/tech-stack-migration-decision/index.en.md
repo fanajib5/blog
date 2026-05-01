@@ -2,8 +2,8 @@
 title: "Decision Journal: When It's Time to Migrate Your Tech Stack"
 description: "A decision-making journal, when your existing tech stack needs migration, when refactoring is enough, and how to read the signals from a business perspective."
 author: "Faiq Najib"
-date: 2026-04-15
-lastmod: 2026-04-15
+date: 2026-04-10
+lastmod: 2026-04-10
 draft: false
 toc: true
 comments: false
