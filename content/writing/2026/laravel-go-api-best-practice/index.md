@@ -497,13 +497,13 @@ return $this->sendResponse([
 ```go
 // internal/pkg/response/response.go
 type Response struct {
-    Success bool        `json:"success"`
-    Message string      `json:"message"`
-    Data    interface{} `json:"data,omitempty"`
-    Errors  interface{} `json:"errors,omitempty"`
+    Success bool   `json:"success"`
+    Message string `json:"message"`
+    Data    any    `json:"data,omitempty"`
+    Errors  any    `json:"errors,omitempty"`
 }
 
-func Success(c *gin.Context, data interface{}) {
+func Success(c *gin.Context, data any) {
     c.JSON(http.StatusOK, Response{
         Success: true,
         Message: "OK",
