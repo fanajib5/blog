@@ -19,8 +19,11 @@ Istri saya baru saja menceritakan sesuatu yang saya tidak tahu harus menertawaka
 Jadi, ibu mertua saya mengajar les bahasa Inggris. Suatu hari, ada muridnya yang sedang berlatih mengerjakan soal. Lalu percakapannya kira-kira seperti ini:
 
 > Murid A: "Buffalo iku artine opo seh?"
+>
 > Murid B: "Kertas."
+>
 > Murid A: "Seng nggenah tah!"
+>
 > Murid B: "Iyo! Kertas buffalo. Kan berarti kertas."
 
 Saya diam sejenak setelah mendengar ini. Bukan karena bingung, tapi karena dalam diam itu saya sadar: _logikanya masuk akal_. Dan itu justru yang lebih membingungkan.

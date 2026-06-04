@@ -1,10 +1,8 @@
 baseURL = "https://najib.id"
 defaultContentLanguage = "id"
-languageCode = "id-ID"
 staticDir = "static"
 title = "Blogfolio Najib"
 # defaultContentLanguageInSubdir = true
-canonifyURLs = true
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
 enableRobotsTXT = true
 theme = "retro-jib"
@@ -16,12 +14,12 @@ getenv = ['^HUGO_', '^CI$', '^WEB3FORMS_KEY$']
 
 [languages]
 [languages.id]
-languageCode = "id-ID"
-languageName = "Bahasa Indonesia"
+locale = "id-ID"
+label = "Bahasa Indonesia"
 weight = 1
 [languages.en]
-languageCode = "en-US"
-languageName = "English"
+locale = "en-US"
+label = "English"
 weight = 2
 
 [markup]

@@ -19,8 +19,11 @@ My wife just told me something, and I genuinely didn't know who to laugh at.
 So my mother-in-law teaches English tutoring classes. One day, one of her students was practicing some exercises. The conversation went something like this (in Javanese, roughly translated):
 
 > Student A: "Hey, what does 'buffalo' mean?"
+>
 > Student B: "Paper."
+>
 > Student A: "Be serious!"
+>
 > Student B: "I am! Buffalo paper. So it means paper."
 
 I went quiet for a moment after hearing this. Not because I was confused, but because in that silence I realized: _the logic actually checks out_. And that was the more confusing part.
