@@ -2,8 +2,8 @@
 title: "Buffalo Means Paper: Learning Language Through Association-Based Translation"
 description: "A funny story about an English tutoring student who translated 'buffalo' as 'paper', and why it actually makes scientific sense."
 author: "Faiq Najib"
-date: 2026-06-04T20:00:00+07:00
-lastmod: 2026-06-04T20:00:00+07:00
+date: 2026-06-04T10:28:00+07:00
+lastmod: 2026-06-04T10:28:00+07:00
 draft: false
 toc: true
 comments: false

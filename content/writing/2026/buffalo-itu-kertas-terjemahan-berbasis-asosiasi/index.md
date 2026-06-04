@@ -2,8 +2,8 @@
 title: "Buffalo Itu Kertas: Belajar Bahasa Lewat Terjemahan Berbasis Asosiasi"
 description: "Sebuah cerita lucu dari anak les bahasa Inggris yang menerjemahkan 'buffalo' sebagai 'kertas', dan kenapa itu sebenarnya masuk akal secara ilmiah."
 author: "Faiq Najib"
-date: 2026-06-04T20:00:00+07:00
-lastmod: 2026-06-04T20:00:00+07:00
+date: 2026-06-04T10:28:00+07:00
+lastmod: 2026-06-04T10:28:00+07:00
 draft: false
 toc: true
 comments: false
