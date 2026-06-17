@@ -1,6 +1,6 @@
 ---
 title: "Pengajaran"
-description: "Pengalaman mengajar dan mentoring oleh Faiq Najib, dosen online Universitas Terbuka, workshop, dan pendampingan teknis."
+description: "Pengalaman mengajar dan mentoring oleh Faiq Najib Al-Aziz, dosen online Universitas Terbuka, workshop, dan pendampingan teknis."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

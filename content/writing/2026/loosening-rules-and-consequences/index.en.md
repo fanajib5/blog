@@ -1,7 +1,7 @@
 ---
 title: "Loosening the Rules and What Comes With It"
 description: "A reflection on the decision to give students access to AI tools, and what it means when responsibility shifts hands."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-28
 lastmod: 2026-04-28
 draft: false

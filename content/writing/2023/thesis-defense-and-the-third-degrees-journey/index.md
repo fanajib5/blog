@@ -2,7 +2,7 @@
 title: "Sidang tesis. Lika-liku perjalanan gelar ketiga"
 url: ""
 description: "Sebuah curahan hati pengalaman penulis dalam menjalani perkuliahan dan sidang akhir yang ketiga untuk mendapatkan gelar akademik."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2023-07-23T18:55:34.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false

@@ -3,7 +3,7 @@ title: "Wisata Paralayang Malang"
 date: 2016-12-03T12:30:00+07:00
 lastmod: 2022-05-04T20:53:51+08:00
 location: Wisata Paralayang, Kabupaten Malang, Jawa Timur
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 shot_date: 2016-12-03T06:00:00+07:00
 shot_with: Xiaomi Mi-4c
 description:

@@ -1,7 +1,7 @@
 ---
 title: "Choosing a Tech Stack: Between Ego and Business"
 description: "The temptation to pick the latest technology is real, but is that decision driven by sound business logic, or just our developer ego?"
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-18
 lastmod: 2026-04-22
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "Kelonggaran Aturan dan Konsekuensinya"
 description: "Refleksi tentang keputusan memberikan kepercayaan kepada mahasiswa untuk menggunakan AI, dan apa artinya ketika tanggung jawab itu berpindah tangan."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-28
 lastmod: 2026-04-28
 draft: false

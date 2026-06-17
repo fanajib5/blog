@@ -1,7 +1,7 @@
 ---
 title: "Why One Bug Can Take Three Days"
 description: "Why fixing one small bug can take days, and how to explain it to non-technical people so misunderstandings don't happen."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-16
 lastmod: 2026-04-16
 draft: false

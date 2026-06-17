@@ -2,7 +2,7 @@
 title: "VPS Notes: setting up the first VPS that isn't the first"
 url: ""
 description: "Notes containing about installation, configuration, and examples of Git and Github"
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2023-07-30T20:14:01.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false

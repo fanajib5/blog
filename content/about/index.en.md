@@ -1,13 +1,13 @@
 ---
 title: "About"
-description: "Faiq Najib, Developer, Builder, Educator. Backend engineer specializing in Go & PostgreSQL, based in Jombang, East Java."
+description: "Faiq Najib Al-Aziz, Developer, Builder, Educator. Backend engineer specializing in Go & PostgreSQL, based in Jombang, East Java."
 date: 2018-03-20T20:16:07+08:00
 lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 ---
 
-I'm **Faiq Najib**, a **Developer, Builder, and Educator** based in Jombang, East Java. I build scalable backend systems, develop digital products, and share knowledge through teaching.
+I'm **Faiq Najib Al-Aziz**, a **Developer, Builder, and Educator** based in Jombang, East Java. I build scalable backend systems, develop digital products, and share knowledge through teaching.
 
 ## Developer
 
@@ -50,7 +50,7 @@ Interested in working together? Check out the [Services](/en/services/) page or 
 * Telegram: [@fanajib5](http://t.me/fanajib5)
 * Twitter: [@fanajib5](https://twitter.com/fanajib5)
 * GitHub: [fanajib5](https://github.com/fanajib5)
-* LinkedIn: [Faiq Najib](https://linkedin.com/in/fanajib5)
+* LinkedIn: [fanajib5](https://linkedin.com/in/fanajib5)
 * Email: [faiq.najib@gmail.com](mailto:faiq.najib@gmail.com)
 * CV: [faiq-resume.pdf](/cv/faiq-resume.pdf)
 
@@ -61,7 +61,7 @@ Interested in working together? Check out the [Services](/en/services/) page or 
 
 <br/></br>
 
-<img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Faiq Najib's signature" title="Faiq Najib Al-Aziz">
+<img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Faiq Najib Al-Aziz's signature" title="Faiq Najib Al-Aziz">
 
 <br/></br>
 

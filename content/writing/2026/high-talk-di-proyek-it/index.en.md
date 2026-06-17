@@ -1,7 +1,7 @@
 ---
 title: "A Stepladder for IT Projects"
 description: "A story about teammates or bosses in IT projects whose way of talking feels like summiting a mountain, and how to deal with it without having to climb alongside them."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-05-17
 lastmod: 2026-05-17
 draft: false

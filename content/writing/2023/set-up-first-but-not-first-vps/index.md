@@ -2,7 +2,7 @@
 title: "Catatan VPS: set up VPS pertama yang bukan pertama"
 url: ""
 description: "Catatan yang berisikan tentang instalasi, konfigurasi, dan contoh dari Git dan Github"
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2023-07-30T20:14:01.039+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false

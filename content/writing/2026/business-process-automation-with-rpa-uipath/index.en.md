@@ -1,7 +1,7 @@
 ---
 title: "Business Process Automation with UiPath RPA: Start with the Boring Work First"
 description: "Field notes from implementing UiPath RPA for business process automation, from repetitive tasks to practical lessons learned."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-03-12
 lastmod: 2026-03-12
 draft: false

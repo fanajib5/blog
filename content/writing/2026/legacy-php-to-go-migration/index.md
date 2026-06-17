@@ -1,7 +1,7 @@
 ---
 title: "Migrasi Legacy PHP ke Go: Kenapa, Bagaimana, dan Pelajarannya"
 description: "Catatan pengalaman mengkonversi sistem backend dari PHP (CodeIgniter 3 & Laravel) ke Go, 370+ endpoint, 33 entity, dan 194K baris kode yang berhasil dimigrasi bertahap."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
 lastmod: 2026-04-04
 draft: false

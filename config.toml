@@ -56,11 +56,11 @@ tabWidth = 4
   tag = "tags"
 
 [params]
-description = "Faiq Najib | Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
+description = "Faiq Najib Al-Aziz | Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
 images = ["apple-touch-icon.png"]
 
 [[params.author]]
-name = "Faiq Najib"
+name = "Faiq Najib Al-Aziz"
 
 [menu]
 

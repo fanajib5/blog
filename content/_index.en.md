@@ -1,9 +1,9 @@
 ---
-title: "Hi, I'm Faiq Najib"
+title: "Hi, I'm Faiq Najib Al-Aziz"
 date: 2023-06-24T15:01:44.4447251+08:00
 lastmod: 2026-04-15T00:00:00+07:00
-description: "Faiq Najib, Backend Developer (Go), Independent Builder & Educator. Personal blog and professional portfolio."
-keywords: "Faiq Najib,Fanajib5,backend developer,Go,Golang,PostgreSQL,freelance programmer,independent builder,educator"
+description: "Faiq Najib Al-Aziz, Backend Developer (Go), Independent Builder & Educator. Personal blog and professional portfolio."
+keywords: "Faiq Najib Al-Aziz,Fanajib5,backend developer,Go,Golang,PostgreSQL,freelance programmer,independent builder,educator"
 draft: false
 comments: false
 ---

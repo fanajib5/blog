@@ -1,6 +1,6 @@
 ---
 title: "Proyek"
-description: "Proyek dan karya digital oleh Faiq Najib, open source, produk digital, dan eksperimen teknologi."
+description: "Proyek dan karya digital oleh Faiq Najib Al-Aziz, open source, produk digital, dan eksperimen teknologi."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

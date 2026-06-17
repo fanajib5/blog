@@ -1,7 +1,7 @@
 ---
 title: "Tangga Lipat di Proyek IT"
 description: "Sebuah cerita tentang rekan atau atasan proyek IT yang bicaranya lebih tinggi dari Gunung Semeru, dan bagaimana cara menghadapinya tanpa harus ikut mendaki."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-05-17
 lastmod: 2026-05-17
 draft: false

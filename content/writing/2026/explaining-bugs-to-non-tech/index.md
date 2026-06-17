@@ -1,7 +1,7 @@
 ---
 title: "Kenapa Satu Bug Bisa Tiga Hari?"
 description: "Kenapa memperbaiki satu bug kecil bisa memakan waktu berhari-hari, dan bagaimana menjelaskannya ke orang non-teknis agar tidak terjadi miskomunikasi."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-16
 lastmod: 2026-04-16
 draft: false

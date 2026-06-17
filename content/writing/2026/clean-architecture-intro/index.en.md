@@ -1,7 +1,7 @@
 ---
 title: "Clean Architecture: From Spaghetti Code to Readable Code"
 description: "An introduction to Clean Architecture for students, from spaghetti code to structured code, with real examples from a GPS tracker project."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-15
 lastmod: 2026-04-15
 draft: false

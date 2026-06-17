@@ -1,7 +1,7 @@
 ---
 title: "Best Practice Membangun API di Laravel dan Go: Catatan dari Proyek Nyata"
 description: "Pelajaran dari proyek migrasi 460+ route dan 58 controller—pola yang harus dipertahankan, yang harus ditinggalkan, dan bagaimana implementasinya di Go."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
 lastmod: 2026-05-07T10:28:00+07:00
 draft: false

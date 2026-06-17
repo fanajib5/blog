@@ -1,6 +1,6 @@
 ---
 title: "Teaching"
-description: "Teaching and mentoring experience by Faiq Najib, online tutor at Universitas Terbuka, workshops, and technical coaching."
+description: "Teaching and mentoring experience by Faiq Najib Al-Aziz, online tutor at Universitas Terbuka, workshops, and technical coaching."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

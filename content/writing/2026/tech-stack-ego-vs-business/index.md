@@ -1,7 +1,7 @@
 ---
 title: "Pemilihan Tech Stack: Antara Ego dan Bisnis"
 description: "Godaan memilih teknologi terbaru itu nyata, tapi apakah keputusan itu lahir dari logika bisnis, atau sekadar ego kita sebagai developer?"
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-18
 lastmod: 2026-04-22
 draft: false

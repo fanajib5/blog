@@ -2,7 +2,7 @@
 title: "Buku tamu"
 date: 0001-01-01T00:00:00-00:00
 lastmod: 2022-05-04T20:53:51+08:00
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 shot_date: 2019-04-16T06:00:00+07:00
 location: Anywhere
 shot_with: Xiaomi Mi-4c, Xiaomi Redmi Note 5, Samsung Galaxy A32

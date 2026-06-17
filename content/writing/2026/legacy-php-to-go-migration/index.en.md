@@ -1,7 +1,7 @@
 ---
 title: "Migrating Legacy PHP to Go: Why, How, and Lessons Learned"
 description: "Notes from converting a backend system from PHP (CodeIgniter 3 & Laravel) to Go, 370+ endpoints, 33 entities, and 194K lines of code migrated incrementally."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
 lastmod: 2026-04-04
 draft: false

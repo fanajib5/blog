@@ -1,7 +1,7 @@
 ---
 title: "Otomasi Proses Bisnis dengan RPA UiPath: Mulai dari yang Membosankan Dulu"
 description: "Catatan pengalaman menerapkan RPA UiPath untuk otomasi proses bisnis, dari pekerjaan repetitif sampai pelajaran penting yang sering terlewat."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-03-12
 lastmod: 2026-03-12
 draft: false

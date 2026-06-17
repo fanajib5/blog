@@ -2,7 +2,7 @@
 title: "The end of the wicked"
 url: ""
 description: "A rhyme inspired by song lyrics."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2023-05-26T10:34:44+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false

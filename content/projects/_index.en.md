@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-description: "Projects and digital works by Faiq Najib, open source, digital products, and technology experiments."
+description: "Projects and digital works by Faiq Najib Al-Aziz, open source, digital products, and technology experiments."
 draft: false
 comments: false
 lastmod: 2026-04-15T00:00:00+07:00

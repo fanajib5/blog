@@ -1,13 +1,13 @@
 ---
 title: "About"
-description: "Faiq Najib, Developer, Builder, Educator. Backend engineer spesialis Go & PostgreSQL, berbasis di Jombang, Jawa Timur."
+description: "Faiq Najib Al-Aziz, Developer, Builder, Educator. Backend engineer spesialis Go & PostgreSQL, berbasis di Jombang, Jawa Timur."
 date: 2018-03-20T20:16:07+08:00
 lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 ---
 
-Saya **Faiq Najib**, seorang **Developer, Builder, dan Educator** yang berbasis di Jombang, Jawa Timur. Saya membangun sistem backend yang scalable, mengembangkan produk digital, dan berbagi pengetahuan melalui pengajaran.
+Saya **Faiq Najib Al-Aziz**, seorang **Developer, Builder, dan Educator** yang berbasis di Jombang, Jawa Timur. Saya membangun sistem backend yang scalable, mengembangkan produk digital, dan berbagi pengetahuan melalui pengajaran.
 
 ## Developer
 
@@ -50,7 +50,7 @@ Tertarik untuk bekerja sama? Lihat halaman [Layanan](/services/) atau langsung [
 * Telegram: [@fanajib5](http://t.me/fanajib5)
 * Twitter: [@fanajib5](https://twitter.com/fanajib5)
 * GitHub: [fanajib5](https://github.com/fanajib5)
-* LinkedIn: [Faiq Najib](https://linkedin.com/in/fanajib5)
+* LinkedIn: [fanajib5](https://linkedin.com/in/fanajib5)
 * Email: [faiq.najib@gmail.com](mailto:faiq.najib@gmail.com)
 * CV: [faiq-resume.pdf](/cv/faiq-resume.pdf)
 
@@ -61,7 +61,7 @@ Tertarik untuk bekerja sama? Lihat halaman [Layanan](/services/) atau langsung [
 
 <br/></br>
 
-<img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Tanda tangan Faiq Najib" title="Faiq Najib Al-Aziz">
+<img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Tanda tangan Faiq Najib Al-Aziz" title="Faiq Najib Al-Aziz">
 
 <br/></br>
 

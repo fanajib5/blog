@@ -1,7 +1,7 @@
 ---
 title: "Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi"
 description: "Sebuah catatan pengambilan keputusan, kapan tech stack yang sudah ada perlu dimigrasi, kapan cukup di-refactor, dan bagaimana membaca sinyal dari sisi bisnis."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-10
 lastmod: 2026-04-10
 draft: false

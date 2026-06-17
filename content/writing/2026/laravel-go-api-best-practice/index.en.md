@@ -1,7 +1,7 @@
 ---
 title: "Best Practices for Building APIs in Laravel and Go: Notes from a Real Project"
 description: "Lessons from auditing 460+ routes and 58 controllers—patterns to keep, patterns to ditch, and how each maps to Go."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
 lastmod: 2026-05-07T10:28:00+07:00
 draft: false

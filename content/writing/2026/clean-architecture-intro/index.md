@@ -1,7 +1,7 @@
 ---
 title: "Clean Architecture: Dari Spaghetti Code ke Kode yang Bisa Dibaca Ulang"
 description: "Pengantar Clean Architecture untuk mahasiswa, dari spaghetti code ke kode yang terstruktur, dengan contoh nyata dari proyek GPS tracker."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2026-04-15
 lastmod: 2026-04-15
 draft: false

@@ -2,7 +2,7 @@
 title: "City of Angels"
 url: ""
 description: "A rhyme with accompanying photos."
-author: "Faiq Najib"
+author: "Faiq Najib Al-Aziz"
 date: 2019-07-05T10:34:44+07:00
 lastmod: 2023-07-23T11:58:34.039+07:00
 draft: false
