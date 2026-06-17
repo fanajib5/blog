@@ -21,14 +21,14 @@ tags:
   - natures
   - countryside
 ---
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170125_055007_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
+{{< figure src="IMG_20170125_055007_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170125_053323_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
+{{< figure src="IMG_20170125_053323_HDR.webp" alt="matahari terbit dari Villa Setiabudi">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_072011_HDR.webp" alt="pemandangan gunung dan persawahan">}}
+{{< figure src="IMG_20170126_072011_HDR.webp" alt="pemandangan gunung dan persawahan">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073103_HDR.webp" alt="pemandangan gunung">}}
+{{< figure src="IMG_20170126_073103_HDR.webp" alt="pemandangan gunung">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073105_HDR.webp" alt="pemandangan gunung">}}
+{{< figure src="IMG_20170126_073105_HDR.webp" alt="pemandangan gunung">}}
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR.webp" alt="pemandangan gunung dan seorang laki-laki yang menatap hampa">}}
+{{< figure src="IMG_20170126_073124_HDR.webp" alt="pemandangan gunung dan seorang laki-laki yang menatap hampa">}}

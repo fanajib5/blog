@@ -57,7 +57,7 @@ tabWidth = 4
 
 [params]
 description = "Faiq Najib Al-Aziz | Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
-images = ["apple-touch-icon.png"]
+  images = ["/img/og-image.png"]
 
 [[params.author]]
 name = "Faiq Najib Al-Aziz"

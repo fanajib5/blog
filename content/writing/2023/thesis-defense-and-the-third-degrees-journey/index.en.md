@@ -1,6 +1,5 @@
 ---
 title: "Thesis defense. The ups and downs of the journey to a third degree"
-url: ""
 description: "A heart's outpouring of the author's experience in undergoing lectures and the third final defense to obtain an academic degree."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-23T18:55:34.039+07:00

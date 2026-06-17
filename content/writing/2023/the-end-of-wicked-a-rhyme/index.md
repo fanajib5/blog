@@ -1,20 +1,19 @@
 ---
-title: "The end of the wicked"
-url: ""
-description: "Sebuah sajak yang terinspirasi dari lirik lagu."
+title: "The End of the Wicked: A Rhyme"
+description: "Sebuah sajak refleksi tentang kerusakan moral, kekuasaan, dan pemulihan."
 author: "Faiq Najib Al-Aziz"
 date: 2023-05-26T10:34:44+07:00
-lastmod: 2023-07-23T11:58:34.039+07:00
+lastmod: 2023-05-26T10:34:44+07:00
 draft: false
 toc: false
 comments: false
-images:
 tags:
-  - random
-  - rhymes
+  - puisi
+  - personal
+  - refleksi
 ---
 <br/>
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2019-04-20/IMG_20190420_173415.webp" width="75%" alt="foto masjid Al Irsyad Satya, Kota Baru Parahyangan">}}
+{{< figure src="../gallery/2019-04-20/IMG_20190420_173415.webp" width="75%" alt="foto masjid Al Irsyad Satya, Kota Baru Parahyangan">}}
 
 Man's becoming more corrupt now, godless, wicked, and cruel<br/>
 The soulless man stood silenced, their empty promises rang so true<br/>

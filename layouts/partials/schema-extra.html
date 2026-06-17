@@ -35,21 +35,28 @@
   "@type": "BlogPosting",
   "headline": "{{ .Title }}",
   "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
+  "image": "{{ with .Params.images }}{{ index . 0 | relURL }}{{ else }}{{ .Site.BaseURL }}/img/og-image.png{{ end }}",
   "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z" }}",
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z" }}",
   "author": {
     "@type": "Person",
-    "name": "Faiq Najib Al-Aziz"
+    "name": "{{ with .Params.author }}{{ . }}{{ else }}Faiq Najib Al-Aziz{{ end }}"
   },
   "publisher": {
-    "@type": "Person",
-    "name": "Faiq Najib Al-Aziz"
+    "@type": "Organization",
+    "name": "Blogfolio Najib",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.BaseURL }}/img/og-image.png"
+    }
   },
   "url": "{{ .Permalink }}",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
-  }
+  },
+  "wordCount": {{ .WordCount }},
+  "inLanguage": "{{ .Lang }}"
 }
 </script>
 {{- else -}}

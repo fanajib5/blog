@@ -1,6 +1,5 @@
 ---
 title: "Online final defense and becoming part of the pandemic graduation cohort"
-url: ""
 description: "A story of the author's experience in conducting an online final thesis defense."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-24T17:32:00+07:00

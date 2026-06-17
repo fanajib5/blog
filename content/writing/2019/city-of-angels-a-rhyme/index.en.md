@@ -1,6 +1,5 @@
 ---
 title: "City of Angels"
-url: ""
 description: "A rhyme with accompanying photos."
 author: "Faiq Najib Al-Aziz"
 date: 2019-07-05T10:34:44+07:00
@@ -29,7 +28,7 @@ Sing back the melody, a song for the hearts left in the streets<br/>
 A voice for the out of reach<br/>
 The city of angels<br/>
 
-{{< figure src="https://cdn.statically.io/gh/fanajib5/blog/main/content/gallery/2017-01-26/IMG_20170126_073124_HDR.webp" width="75%" alt="a mountain view and a man staring into the void" >}}
+{{< figure src="../../gallery/2017-01-26/IMG_20170126_073124_HDR.webp" width="75%" alt="a mountain view and a man staring into the void" >}}
 
 There was a boy with the world in the palm of his hand<br/>
 Bright like a star but he burned everything that he had<br/>
