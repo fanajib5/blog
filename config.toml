@@ -162,4 +162,7 @@ name = "Contact"
 pageref = "/contact"
 weight = 30
 [languages.en.menu.main.params]
-description = "Contact"
+  description = "Contact"
+
+[assets]
+  deferJS = true

@@ -35,17 +35,47 @@
 {{- end }}
 
 {{- if $r }}
-	{{- /* Set image element attributes. */}}
-	{{- $attributes := dict "src" $r.RelPermalink "loading" "lazy" "width" (string $r.Width) "height" (string $r.Height) }}
-	{{- with .PlainText }}
-		{{- $attributes = merge $attributes (dict "alt" .) }}
-	{{- end }}
-	{{- with .Title }}
-		{{- $attributes = merge $attributes (dict "title" .) }}
-	{{- end }}
+	{{- $src := $r.RelPermalink -}}
+	{{- $w := string $r.Width -}}
+	{{- $h := string $r.Height -}}
+	{{- $alt := "" -}}
+	{{- with .PlainText }}{{ $alt = . }}{{ end -}}
+	{{- $title := "" -}}
+	{{- with .Title }}{{ $title = . }}{{ end -}}
+	{{- $loading := "lazy" -}}
+	{{- $decoding := "async" -}}
 
-	{{- /* Render image element. */ -}}
+	{{- /* Eager-load only the first image in content for better LCP */ -}}
+	{{- if eq .Page.File.Filename "set-up-first-but-not-first-vps/index.md" }}
+		{{- $loading = "eager" -}}
+	{{- else if eq .Page.File.Filename "git-installation-and-configuration/index.md" }}
+		{{- $loading = "eager" -}}
+	{{- end -}}
 
-	<img {{- range $k, $v :=$attributes }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end -}}>
+	{{- /* Build srcset if image is a Hugo resource */ -}}
+	{{- $srcset := "" -}}
+	{{- if and $r $r.Width }}
+		{{- $small := $r.Resize "600x webp q85" -}}
+		{{- $medium := $r.Resize "1200x webp q85" -}}
+		{{- $large := $r.Resize "1920x webp q90" -}}
+		{{- $srcset = printf "%s 600w, %s 1200w, %s 1920w" $small.RelPermalink $medium.RelPermalink $large.RelPermalink -}}
+		{{- $src = $medium.RelPermalink -}}
+	{{- end -}}
 
+	{{- /* Build sizes based on context */ -}}
+	{{- $sizes := "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" -}}
+
+	<img
+		src="{{ $src }}"
+		{{- if $srcset }} srcset="{{ $srcset }}"{{ end -}}
+		sizes="{{ $sizes }}"
+		width="{{ $w }}"
+		height="{{ $h }}"
+		alt="{{ $alt }}"
+		{{- if $title }} title="{{ $title }}"{{ end -}}
+		loading="{{ $loading }}"
+		decoding="{{ $decoding }}"
+	>
+{{- else -}}
+	<img src="{{ .Destination }}" alt="{{ .PlainText }}" loading="lazy" decoding="async">
 {{- end -}}
