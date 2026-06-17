@@ -1,9 +1,9 @@
 ---
 title: "Git Notes: installation, configuration, and examples"
-description: "Notes containing installation, configuration, and examples of Git and GitHub"
+description: "A complete guide to installing and configuring Git and GitHub: from setting up your account, SSH keys, to best practices for backend developers."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-31T22:00:01.039+07:00
-lastmod: 2023-07-23T11:58:34.039+07:00
+lastmod: 2023-07-31T22:00:01.039+07:00
 draft: false
 toc: true
 comments: false

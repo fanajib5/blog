@@ -1,6 +1,6 @@
 ---
 title: "Catatan VPS: set up VPS pertama yang bukan pertama"
-description: "Catatan tentang setup VPS pertama yang bukan pertama, pengalaman dan langkah-langkah praktis."
+description: "Pengalaman setup VPS Hetzner dari nol: instalasi LEMP stack, PostgreSQL, MongoDB, dan pelajaran dari akun yang kena retas."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-30T20:14:01.039+07:00
 lastmod: 2023-07-30T20:14:01.039+07:00
@@ -105,11 +105,11 @@ Karena tidak ada panduan pasti dan untuk berjaga-jaga, saya _install_ banyak _pa
 
 #### LEMP _stack_
 
-_Stack_ yang digunakan di dunia per-kodingan, utamanya _website_, seteau saya (tanpa data yak!) adalah LAMP dan LEMP.
+_Stack_ yang digunakan di dunia per-kodingan, utamanya _website_, setahu saya (tanpa data yak!) adalah LAMP dan LEMP.
 
 [LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04#introduction) adalah kepanjangan dari Linux, Apache, MySQL, PHP. Sedangkan [LEMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-22-04#introduction) adalah kepanjangan dari Linux, Nginx, MySQL, PHP.
 
-Kebetulan,saya `~~**iseng lagi**~~ memilih _stack_ LEMP ini. Oh lupa, ada alasannya _ding_. VPS ini sudah saya rencanakan sebagai subdomain website ini, yaitu [```portfolio.najib.id```](https://portfolio.najib.id) hehehe. _Anyway_, berikut langkah-langkahnya.
+Kebetulan, saya `~~**iseng lagi**~~ memilih _stack_ LEMP ini. Oh lupa, ada alasannya _ding_. VPS ini sudah saya rencanakan sebagai subdomain website ini, yaitu [```portfolio.najib.id```](https://portfolio.najib.id) hehehe. _Anyway_, berikut langkah-langkahnya.
 
 ##### _Install_ NGINX _web server_
 
@@ -226,7 +226,7 @@ sudo apt install php8.1-fpm php-mysql
 
 ##### Konfigurasi NGINX agar menggunakan PHP
 
-Pertama-tama, buat direktori _root web_ dengan domain yang dinginkan, misalnya adalah [```portfolio.najib.id```](https://portfolio.najib.id) sebagai nama _folder_-nya.
+Pertama-tama, buat direktori _root web_ dengan domain yang dimiliki, misalnya adalah [```portfolio.najib.id```](https://portfolio.najib.id) sebagai nama _folder_-nya.
 
 ```bash
 sudo mkdir /var/www/portfolio.najib.id
@@ -272,7 +272,7 @@ server {
 }
 ```
 
-Selesai mengubah, keluar dari ```nano``` editor dengan ```CTRL + X``` lalu ```Y``` unguk konfirmasi menyimpan file yang diubah tadi, dan tekan ```ENTER```.
+Selesai mengubah, keluar dari ```nano``` editor dengan ```CTRL + X``` lalu ```Y``` untuk konfirmasi menyimpan file yang diubah tadi, dan tekan ```ENTER```.
 
 Buat _symbolic link_ dari direktori tadi.
 
@@ -305,7 +305,7 @@ _Restart_ NGINX untuk menerapka perubahan konfigurasi.
 sudo systemctl reload nginx
 ```
 
-Buat alaman awal dari _website_ saat _IP Address_ atau _domain_ diakses.
+Buat halaman awal dari _website_ saat _IP Address_ atau _domain_ diakses.
 
 ```bash
 nano /var/www/portfolio.najib.id/index.html
@@ -330,7 +330,7 @@ Isi file ```index.html``` tersebut contohnya seperti ini
 </html>
 ```
 
-Cek hasilnya pada peramban (_browser_) dengan memasukkan ```http://ip_address``` atau ```domain_qoeh.com```.
+Cek hasilnya pada peramban (_browser_) dengan memasukkan ```http://ip_address``` atau ```domain_anda.com```.
 
 #### PostgreSQL Database
 
@@ -431,7 +431,7 @@ For mongosh info see: https://docs.mongodb.com/mongodb-shell/
 
 ## _Troubleshooting_
 
-Untuk kebutuhan koneksi _database_ secara _remote_ dari perangkat pribadi, maka dapat melakukan pengaturan koneksi melalui ```bind_address=0.0.0.0``` dan menyetel _firewall_. Banyak laah tutorialnya di mbah Google hehehe.
+Untuk kebutuhan koneksi _database_ secara _remote_ dari perangkat pribadi, maka dapat melakukan pengaturan koneksi melalui ```bind_address=0.0.0.0``` dan menyetel _firewall_. Banyak lah tutorialnya di mbah Google hehehe.
 
 Pada kondisi ini, saya mendapat galat bahwa koneksi _remote_ database tidak bisa dilakukan meskipun konfigurasi sudah sesuai dengan apa yang ada di internet. Ternyata solusi yang harus dilakukan adalah mengatur _firewall_ pada _console dashboard_ Hetzner **juga**. Itu untuk Hetzner, saya tidak tahu bagaimana _provider cloud_ lainnya.
 
@@ -452,6 +452,8 @@ Dan, Hetzner sepertinya punya _firewall_ bertingkat, mulai dari _console dashboa
 Alasan saya memakai NGINX adalah sekaligus sebagai _reverse proxy_ karena _domain_ utama saya sudah melalui [Netlify](https://netlify.com) yang meng-_serve website_ statis [ini](https://najib.id). Sedangkan NGINX akan berperan untuk me-_route_ ketika _subdomain_ [portfolio.najib.id](https://portfolio.najib.id) diakses oleh pengguna internet. Itulah rencana saya, setidaknya menurut informasi dan pengetahuan yang saya dapatkan dari Google hehe.
 
 Terima kasih bagi yang sudah tersasar ke _section_ catatan ini dan membacanya. Semoga catatan ini bermanfaat bagi Anda.
+
+Setelah VPS siap, langkah berikutnya adalah deploy aplikasi dan setup *workflow* development yang proper. Lihat panduan [instalasi Git di server](/writing/2023/git-installation-and-configuration/) untuk version control, dan [pengenalan Clean Architecture](/writing/2023/clean-architecture-intro/) untuk struktur codebase yang scalable.
 
 Sekian. Salam.
 

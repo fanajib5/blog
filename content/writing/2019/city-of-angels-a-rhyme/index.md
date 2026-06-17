@@ -9,8 +9,9 @@ toc: false
 comments: false
 images:
 tags:
-  - random
-  - rhymes
+  - puisi
+  - lirik
+  - personal
 ---
 <br/>
 {{< figure src="IMG_20190418_155010_16-9.webp" width="75%" alt="pemandangan gerbang kampus ITB dan seorang wanita yang seperti menatap kosong ke depan">}}

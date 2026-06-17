@@ -1,6 +1,6 @@
 ---
 title: "Catatan Git: instalasi, konfigurasi, dan contohnya"
-description: "Catatan yang berisikan tentang instalasi, konfigurasi, dan contoh dari Git dan Github"
+description: "Panduan instalasi Git dan GitHub dari nol: setup akun, konfigurasi SSH, dan best practices untuk backend developer."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-31T22:00:01.039+07:00
 lastmod: 2023-07-31T22:00:01.039+07:00
@@ -153,6 +153,8 @@ Instalasi Git pada setiap OS cukup berbeda, terutama Windows yang tidak dibekali
 Terdapat artikel yang membahas ada algoritma _asymmetric cryptography_ yang yang tidak disarankan lagi untuk _generate_ SSH, karena sudah dianggap lemah. Namun sepertinya saya lupa tidak menyimpan _link_ artikel tersebut hehehe. Oh! Barusan ketemu artikel yang mirip, [ternyata kunci DSA](https://thechief.io/c/news/github-is-making-protocol-security-changes-for-ssh-users/).
 
 Terima kasih bagi yang sudah tersasar ke _section_ catatan ini dan membacanya. Semoga catatan ini bermanfaat bagi Anda.
+
+Setelah Git terpasang, langkah selanjutnya adalah menyiapkan environment development yang sesuai. Lihat catatan [setup VPS pertama](/writing/2023/set-up-first-but-not-first-vps/) untuk persiapan server, dan [pengenalan Clean Architecture](/writing/2023/clean-architecture-intro/) untuk struktur project yang maintainable.
 
 Sekian. Salam.
 
