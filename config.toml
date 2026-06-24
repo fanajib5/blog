@@ -69,6 +69,10 @@ name = "Orin GPS Tracker"
 logo = "/img/clients/orin.png"
 
 [[params.clients]]
+name = "PT Aria Jasa Reksatama"
+logo = "/img/clients/ajr.png"
+
+[[params.clients]]
 name = "Teavaro Gmbh"
 logo = "/img/clients/teavaro.png"
 
