@@ -13,6 +13,7 @@ Berikut ini adalah _hardware_, _software_, dan layanan yang saya gunakan sehari-
 
 ## Hardware
 
+- Philips Evnia 25M2N3200
 - Asus Vivobook 14 (Ryzen 5 3500U with Radeon Vega)
 - Samsung A32
 
@@ -22,7 +23,7 @@ Berikut ini adalah _hardware_, _software_, dan layanan yang saya gunakan sehari-
 - **Code Editor**: [VS Code](https://code.visualstudio.com/) atau [Zed](https://zed.dev/)
 - **Terminal**: GNOME Terminal
 - **AI Agents**:
-  - [Kilo.ai](https://kilo.ai) dengan Kilo Gateway
+  - [Kilo.ai (50% bonus with my referral)](https://share.kilo.ai/mzUYL4Q) dengan Kilo Gateway
   - [Z.ai GLM](https://z.ai) dengan Harness Droid CLI
   - [Claude Code](https://docs.anthropic.com/en/docs/claude-code), Anthropic's official CLI
   - [OpenCode](https://opencode.ai)

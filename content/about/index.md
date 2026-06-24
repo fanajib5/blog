@@ -71,4 +71,4 @@ Tertarik untuk bekerja sama? Lihat halaman [Layanan](/services/) atau langsung [
 
 ---
 
-Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di [GitHub](https://github.com/fanajib5/blog) sekaligus dengan file sumber Markdown artikel. Anda dapat menggunakan kode sumber situs ini di bawah persetujuan [Mozilla Public License 2.0](https://opensource.org/license/mpl-2-0/). Artikel, gambar, dan konten lainnya mengikuti perjanjian [CC BY- NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh).
+Situs ini dibangun menggunakan [Hugo](https://gohugo.io/), bersumber terbuka di [GitHub](https://github.com/fanajib5/blog) sekaligus dengan file sumber Markdown artikel. Anda dapat menggunakan kode sumber situs ini di bawah persetujuan [MIT License](https://opensource.org/license/mit). Artikel, gambar, dan konten lainnya mengikuti perjanjian [CC BY- NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh).
