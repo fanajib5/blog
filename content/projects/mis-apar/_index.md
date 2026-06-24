@@ -9,6 +9,7 @@ project_type: "Freelance / Product"
 tech_stack: ["Laravel", "Livewire", "Alpine.js", "Tailwind CSS", "MySQL", "Redis"]
 live_url: ""
 repo_url: "https://github.com/fanajib5/mis-apar"
+results: ["Digitalisasi operasional bisnis APAR", "User-friendly untuk 4 admin", "ERP-style workflow lengkap"]
 ---
 
 ## Masalah

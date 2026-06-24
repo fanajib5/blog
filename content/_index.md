@@ -10,6 +10,7 @@ comments: false
 
 <div class="hero">
 <p class="hero-tagline">Engineer &bull; Builder &bull; Educator</p>
+<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs</p>
 </div>
 
 Saya adalah **backend developer** yang berfokus pada **Go (Golang)** dan **PostgreSQL**, dengan pengalaman membangun sistem yang scalable dan melakukan migrasi dari legacy code (PHP/Laravel) ke arsitektur modern.

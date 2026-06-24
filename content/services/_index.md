@@ -8,14 +8,15 @@ lastmod: 2026-04-15T00:00:00+07:00
 
 Saya menyediakan layanan profesional di bidang teknologi informasi, berfokus pada backend development dan solusi yang scalable.
 
-## Software Development
+## Development & Building
 
-Pengembangan aplikasi backend menggunakan **Go (Golang)**, **PostgreSQL**, dan arsitektur yang bersih. Berpengalaman membangun REST API, microservices, dan sistem yang menangani traffic tinggi.
+Pengembangan dan produksi konten teknis menggunakan **Go (Golang)**, **PostgreSQL**, dan arsitektur yang bersih.
 
 - REST API & microservices design
 - Database design & optimization (PostgreSQL, MySQL)
 - Legacy migration (PHP/Laravel → Go)
 - API integration & third-party services
+- API documentation & technical writing
 
 ## Konsultasi Teknis
 
@@ -28,22 +29,15 @@ Diskusi one-on-one untuk membantu Anda membuat keputusan teknis yang tepat.
 
 ## Teaching & Mentoring
 
-Sesi pengajaran dan mentoring untuk individu maupun tim, tersedia dalam format workshop, guest lecture, atau mentoring privat.
+Sesi pengajaran dan mentoring untuk individu maupun tim.
 
 - Go programming workshop
 - Backend development fundamentals
 - Database design & SQL mastery
 - Code review culture & best practices
 
-## Technical Writing
-
-Penulisan dokumentasi teknis, tutorial, dan artikel yang jelas dan terstruktur.
-
-- API documentation
-- Technical blog posts
-- Tutorial & guides
-- README & contributor docs
-
 ---
 
-Tertarik bekerja sama? [Hubungi saya](/contact/) untuk diskusi lebih lanjut.
+Tertarik bekerja sama? Hubungi saya untuk diskusi lebih lanjut.
+
+<a href="/contact/" class="cta-primary">Book Discovery Call</a>

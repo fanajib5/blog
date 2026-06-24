@@ -61,6 +61,10 @@ Interested in working together? Check out the [Services](/en/services/) page or 
 
 <br/></br>
 
+<img style="max-width: 30%; float=left;" src="/img/about/faiq-professional.webp" alt="Faiq Najib Al-Aziz - professional" title="Faiq Najib Al-Aziz">
+
+<br/></br>
+
 <img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Faiq Najib Al-Aziz's signature" title="Faiq Najib Al-Aziz">
 
 <br/></br>

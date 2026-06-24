@@ -18,6 +18,11 @@
 			{{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
 		</div>
 		{{ end }}
+		{{ with .Params.results }}
+		<div class="project-metrics">
+			{{ range . }}<span class="metric">{{ . }}</span>{{ end }}
+		</div>
+		{{ end }}
 		<div class="project-links">
 			{{ with .Params.live_url }}<a href="{{ . }}" target="_blank" rel="noopener">Live Demo</a>{{ end }}
 			{{ with .Params.repo_url }}<a href="{{ . }}" target="_blank" rel="noopener">Source Code</a>{{ end }}

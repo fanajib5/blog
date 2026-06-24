@@ -20,6 +20,37 @@
     <label for="message">{{ if $isID }}Pesan{{ else }}Message{{ end }}</label>
     <textarea id="message" name="message" rows="6" required placeholder="{{ if $isID }}Tulis pesan Anda di sini...{{ else }}Write your message here...{{ end }}"></textarea>
   </div>
+  <div class="form-group">
+    <label for="budget">{{ if $isID }}Budget{{ else }}Budget{{ end }}</label>
+    <select id="budget" name="budget">
+      <option value="">{{ if $isID }}Pilih rentang budget{{ else }}Select budget range{{ end }}</option>
+      <option value="< 5jt">&lt; 5jt</option>
+      <option value="5-10jt">5-10jt</option>
+      <option value="10-50jt">10-50jt</option>
+      <option value="> 50jt">&gt; 50jt</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="timeline">{{ if $isID }}Timeline{{ else }}Timeline{{ end }}</label>
+    <select id="timeline" name="timeline">
+      <option value="">{{ if $isID }}Pilih timeline{{ else }}Select timeline{{ end }}</option>
+      <option value="< 2 minggu">&lt; 2 minggu</option>
+      <option value="2-4 minggu">2-4 minggu</option>
+      <option value="1-3 bulan">1-3 bulan</option>
+      <option value="> 3 bulan">&gt; 3 bulan</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="project_type">{{ if $isID }}Tipe Proyek{{ else }}Project Type{{ end }}</label>
+    <select id="project_type" name="project_type">
+      <option value="">{{ if $isID }}Pilih tipe proyek{{ else }}Select project type{{ end }}</option>
+      <option value="API / Backend">API / Backend</option>
+      <option value="Full-stack">Full-stack</option>
+      <option value="Migration">Migration</option>
+      <option value="Consulting">Consulting</option>
+      <option value="Lainnya">Lainnya</option>
+    </select>
+  </div>
   <button type="submit">{{ if $isID }}Kirim Pesan{{ else }}Send Message{{ end }}</button>
   <div class="h-captcha" data-captcha="true"></div>
 </form>

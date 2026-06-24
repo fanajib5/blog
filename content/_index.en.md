@@ -10,6 +10,7 @@ comments: false
 
 <div class="hero">
 <p class="hero-tagline">Engineer &bull; Builder &bull; Educator</p>
+<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs</p>
 </div>
 
 I'm a **backend developer** focused on **Go (Golang)** and **PostgreSQL**, with experience building scalable systems and migrating from legacy code (PHP/Laravel) to modern architectures.

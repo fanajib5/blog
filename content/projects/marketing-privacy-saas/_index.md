@@ -9,6 +9,7 @@ project_type: "Production System"
 tech_stack: ["Go", "PostgreSQL", "REST API", "Docker"]
 live_url: ""
 repo_url: ""
+results: ["Test coverage 75%", "Production bugs turun 40%", "Deployment on schedule"]
 ---
 
 ## Masalah

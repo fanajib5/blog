@@ -61,6 +61,10 @@ Tertarik untuk bekerja sama? Lihat halaman [Layanan](/services/) atau langsung [
 
 <br/></br>
 
+<img style="max-width: 30%; float=left;" src="/img/about/faiq-professional.webp" alt="Faiq Najib Al-Aziz - profesional" title="Faiq Najib Al-Aziz">
+
+<br/></br>
+
 <img style="max-width: 30%; float=left;" src="Faiqnajib-handwriting-_1_.webp" alt="Tanda tangan Faiq Najib Al-Aziz" title="Faiq Najib Al-Aziz">
 
 <br/></br>

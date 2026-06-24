@@ -9,6 +9,7 @@ project_type: "Production System"
 tech_stack: ["Go", "PostgreSQL", "TimescaleDB", "Apache Kafka", "Docker"]
 live_url: ""
 repo_url: ""
+results: ["~194K LoC migrated", "370+ API endpoints", "Automatic read/write split"]
 ---
 
 ## The Problem

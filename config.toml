@@ -14,12 +14,13 @@ getenv = ['^HUGO_', '^CI$', '^WEB3FORMS_KEY$']
 
 [languages]
 [languages.id]
-languageCode = "id-ID"
-languageName = "Bahasa Indonesia"
+locale = "id-ID"
+label = "Bahasa Indonesia"
 weight = 1
+
 [languages.en]
-languageCode = "en-US"
-languageName = "English"
+locale = "en-US"
+label = "English"
 weight = 2
 
 [markup]
@@ -58,6 +59,22 @@ tabWidth = 4
 [params]
 description = "Faiq Najib Al-Aziz | Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
   images = ["/img/og-image.png"]
+
+[[params.clients]]
+name = "CV Andika Jaya Infinite"
+logo = "/img/clients/cv-aji.png"
+
+[[params.clients]]
+name = "Orin GPS Tracker"
+logo = "/img/clients/orin.png"
+
+[[params.clients]]
+name = "Teavaro Gmbh"
+logo = "/img/clients/teavaro.png"
+
+[[params.clients]]
+name = "Bank Mega"
+logo = "/img/clients/Bank_Mega_2013.svg"
 
 [[params.author]]
 name = "Faiq Najib Al-Aziz"
