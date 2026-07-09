@@ -7,11 +7,4 @@ author: "Faiq Najib Al-Aziz"
 
 Tulisan-tulisan mengenai **pemrograman**, **arsitektur software**, **backend development** (Go, PHP, PostgreSQL), serta catatan dan refleksi pribadi sebagai *independent builder* dan edukator.
 
-Semua artikel tersedia dalam dua bahasa: [Bahasa Indonesia](/writing/) dan [English](/en/writing/).</thinking>
-</thinking>
-
-Silakan jelaskan langkah-langkah implementasi yang kamu lakukan untuk Blogfolio Najib. WikiMedia Foundation's Wikinews
-
----
-
-
+Semua artikel tersedia dalam dua bahasa: [Bahasa Indonesia](/writing/) dan [English](/en/writing/).
