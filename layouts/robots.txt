@@ -1,8 +1,7 @@
 User-agent: *
 Disallow: /donate
 Allow: /
-
-Sitemap: {{ "sitemap.xml" | absURL }}
-
 # Content Signals — https://contentsignals.org
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
+
+Sitemap: {{ "sitemap.xml" | absURL }}
