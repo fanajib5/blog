@@ -7,7 +7,7 @@ lastmod: {{ .Date }}
 draft: true
 toc: true
 comments: false
-episode: 00
+episode: "00"
 project: ""
 status: "WIP"
 images: []
