@@ -56,6 +56,11 @@ tabWidth = 4
 [taxonomies]
   tag = "tags"
 
+[outputs]
+  home = ["html", "rss", "markdown"]
+  section = ["html", "rss", "markdown"]
+  page = ["html", "markdown"]
+
 [params]
 description = "Faiq Najib Al-Aziz | Backend Developer, Independent Builder & Educator. Blog personal dan portofolio profesional."
   images = ["/img/og-image.png"]

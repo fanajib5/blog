@@ -24,3 +24,6 @@
 
 /*.svg
   Cache-Control: public, max-age=2592000
+
+/*.md
+  Content-Type: text/markdown; charset=utf-8
