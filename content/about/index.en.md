@@ -71,4 +71,4 @@ Interested in working together? Check out the [Services](/en/services/) page or 
 
 ---
 
-This site is built with [Hugo](https://gohugo.io/), open-sourced on [GitHub](https://github.com/fanajib5/blog) along with the Markdown source files for articles. You may use this site's source code under the [Mozilla Public License 2.0](https://opensource.org/license/mpl-2-0/). Articles, images, and other content follow the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh) license.
+This site is built with [Hugo](https://gohugo.io/), open-sourced on [GitHub](https://github.com/fanajib5/blog) along with the Markdown source files for articles. You may use this site's source code under the [MIT License](https://opensource.org/license/mit). Articles, images, and other content follow the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh) license.
