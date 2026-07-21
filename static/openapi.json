@@ -1,0 +1,95 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "najib.id Content API",
+    "description": "Read-only content surface for the personal blog and portfolio of Faiq Najib Al-Aziz. HTML is the default representation; request `Accept: text/markdown` to receive a Markdown rendering of any page.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Faiq Najib Al-Aziz",
+      "url": "https://najib.id/contact/"
+    },
+    "license": {
+      "name": "CC BY-NC 4.0",
+      "url": "https://creativecommons.org/licenses/by-nc/4.0/"
+    }
+  },
+  "servers": [
+    { "url": "https://najib.id" }
+  ],
+  "tags": [
+    { "name": "content", "description": "Site pages and articles" },
+    { "name": "syndication", "description": "Feeds and site maps" },
+    { "name": "discovery", "description": "Agent discovery metadata" }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["content"],
+        "summary": "Homepage",
+        "description": "Returns the homepage. Send `Accept: text/markdown` for a Markdown representation.",
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "default": "text/html" },
+            "description": "Use `text/markdown` to receive Markdown."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Homepage in the negotiated representation.",
+            "content": {
+              "text/html": { "schema": { "type": "string" } },
+              "text/markdown": { "schema": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "/writing/": {
+      "get": {
+        "tags": ["content"],
+        "summary": "Writing archive",
+        "description": "List of published articles.",
+        "responses": { "200": { "description": "Article index." } }
+      }
+    },
+    "/index.xml": {
+      "get": {
+        "tags": ["syndication"],
+        "summary": "Primary RSS feed",
+        "responses": {
+          "200": {
+            "description": "RSS 2.0 feed.",
+            "content": { "application/rss+xml": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "tags": ["syndication"],
+        "summary": "XML sitemap",
+        "responses": {
+          "200": {
+            "description": "Sitemap.",
+            "content": { "application/xml": { "schema": { "type": "string" } } }
+          }
+        }
+      }
+    },
+    "/api/status": {
+      "get": {
+        "tags": ["discovery"],
+        "summary": "Service status",
+        "responses": {
+          "200": {
+            "description": "Service health and capability summary.",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    }
+  }
+}

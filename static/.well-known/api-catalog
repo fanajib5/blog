@@ -1,0 +1,40 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://najib.id/",
+      "service-desc": [
+        {
+          "href": "https://najib.id/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.1",
+          "title": "OpenAPI 3.1 description of the najib.id content surface"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://najib.id/about/",
+          "type": "text/html",
+          "title": "About najib.id"
+        },
+        {
+          "href": "https://najib.id/auth.md",
+          "type": "text/markdown",
+          "title": "Agent authentication and registration (auth.md)"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://najib.id/api/status",
+          "type": "application/json",
+          "title": "Service status"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "https://najib.id/index.xml",
+          "type": "application/rss+xml",
+          "title": "Primary RSS feed"
+        }
+      ]
+    }
+  ]
+}

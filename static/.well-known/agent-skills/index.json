@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "version": "0.2.0",
+  "updated": "2026-07-21T09:29:18Z",
+  "skills": [
+    {
+      "name": "explore-writing",
+      "type": "skill-md",
+      "description": "Search and read articles from the najib.id writing archive, including how to request Markdown representations.",
+      "url": "https://najib.id/.well-known/agent-skills/explore-writing/SKILL.md",
+      "digest": "sha256:8696035e12539259bdf5ec9dc1feb8dc8e85071053fcad414e4c7748fafadc77"
+    },
+    {
+      "name": "read-profile",
+      "type": "skill-md",
+      "description": "Return the professional profile, skills, and experience of Faiq Najib Al-Aziz.",
+      "url": "https://najib.id/.well-known/agent-skills/read-profile/SKILL.md",
+      "digest": "sha256:e81171656d9da3950900eefda288913527e4259830b8dcaaeb9f51c147c3da4c"
+    },
+    {
+      "name": "contact-faiq",
+      "type": "skill-md",
+      "description": "Discover how to contact Faiq Najib Al-Aziz, including the contact form and available channels.",
+      "url": "https://najib.id/.well-known/agent-skills/contact-faiq/SKILL.md",
+      "digest": "sha256:ad0b3dfbc9e36abd19b8772214cc2788ef30d680ac487eef0dadf72893cab6c9"
+    }
+  ]
+}
