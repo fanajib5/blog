@@ -70,6 +70,69 @@
 		</div>
 		{{ end }}
 	</footer>
+	<script>
+	(function () {
+		'use strict';
+		var mc = navigator.modelContext;
+		if (!mc) return;
+		var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+		function register(def) {
+			if (controller) def.signal = controller.signal;
+			if (typeof mc.registerTool === 'function') return mc.registerTool(def);
+			if (typeof mc.provideContext === 'function') return mc.provideContext(def);
+		}
+		register({
+			name: 'search_site',
+			description: 'Search najib.id articles and pages by keyword and return matching titles and URLs.',
+			inputSchema: {
+				type: 'object',
+				properties: { query: { type: 'string', description: 'Search keywords' } },
+				required: ['query']
+			},
+			execute: async function (input) {
+				var q = ((input && input.query) || '').toLowerCase();
+				var res = await fetch(new URL('/writing/', location.origin), { headers: { Accept: 'text/markdown' } });
+				var text = await res.text();
+				var matches = text.split('\n')
+					.filter(function (l) { return l && l.toLowerCase().indexOf(q) !== -1; })
+					.slice(0, 10);
+				return { query: input.query, matches: matches };
+			}
+		});
+		register({
+			name: 'read_page',
+			description: 'Fetch any najib.id page as Markdown (uses Markdown for Agents).',
+			inputSchema: {
+				type: 'object',
+				properties: { path: { type: 'string', description: 'Site path, e.g. /about/ or /writing/' } },
+				required: ['path']
+			},
+			execute: async function (input) {
+				var p = ((input && input.path) || '/').replace(/^https?:\/\/[^\/]+/, '');
+				if (p.charAt(0) !== '/') p = '/' + p;
+				var url = new URL(p, location.origin);
+				var res = await fetch(url, { headers: { Accept: 'text/markdown' } });
+				return { url: url.toString(), content: await res.text() };
+			}
+		});
+		register({
+			name: 'get_contact',
+			description: 'Return contact channels for Faiq Najib Al-Aziz (najib.id).',
+			inputSchema: { type: 'object', properties: {} },
+			execute: async function () {
+				return {
+					contact_page: new URL('/contact/', location.origin).toString(),
+					channels: {
+						github: 'https://github.com/fanajib5',
+						linkedin: 'https://linkedin.com/in/fanajib5',
+						telegram: 'https://t.me/fanajib5'
+					}
+				};
+			}
+		});
+		window.__unregisterWebMcp = function () { if (controller) controller.abort(); };
+	})();
+	</script>
 </body>
 
 </html>

@@ -1,0 +1,19 @@
+{
+  "status": "ok",
+  "service": "najib.id",
+  "description": "Personal blog and portfolio of Faiq Najib Al-Aziz (Backend Developer).",
+  "agent_ready": true,
+  "capabilities": {
+    "markdown_negotiation": true,
+    "webmcp": true,
+    "mcp_server_card": "https://najib.id/.well-known/mcp/server-card.json",
+    "agent_skills": "https://najib.id/.well-known/agent-skills/index.json"
+  },
+  "endpoints": {
+    "rss": "https://najib.id/index.xml",
+    "sitemap": "https://najib.id/sitemap.xml",
+    "api_catalog": "https://najib.id/.well-known/api-catalog",
+    "auth_md": "https://najib.id/auth.md"
+  },
+  "updated": "2026-07-21T09:29:18Z"
+}

@@ -1,0 +1,8 @@
+{
+  "resource": "https://najib.id/api/",
+  "authorization_servers": ["https://najib.id"],
+  "bearer_methods_supported": ["header"],
+  "scopes_supported": ["read", "write"],
+  "resource_documentation": "https://najib.id/auth.md",
+  "jwks_uri": "https://najib.id/.well-known/jwks.json"
+}

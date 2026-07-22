@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/server-card/schema/draft/server-card.json",
+  "version": "2025-11-25",
+  "mcp_version": "2025-11-25",
+  "serverInfo": {
+    "name": "najib-id",
+    "version": "1.0.0",
+    "title": "Najib.id Agent Gateway",
+    "description": "Exposes the writing archive, projects, and professional profile of Faiq Najib Al-Aziz to AI agents and MCP clients."
+  },
+  "transports": [
+    {
+      "type": "streamable-http",
+      "endpoint": "https://najib.id/mcp",
+      "security": ["oauth2"]
+    }
+  ],
+  "capabilities": {
+    "tools": { "listChanged": true },
+    "resources": { "listChanged": true, "subscribe": true },
+    "prompts": { "listChanged": true }
+  },
+  "tools": [
+    { "name": "search_writing", "description": "Search published articles by keyword." },
+    { "name": "read_profile", "description": "Return the professional profile and skills of the author." },
+    { "name": "list_projects", "description": "List featured projects and their details." }
+  ],
+  "resources": [
+    { "uri": "https://najib.id/about/", "name": "about", "description": "Author bio and skills." },
+    { "uri": "https://najib.id/writing/", "name": "writing", "description": "Article archive." },
+    { "uri": "https://najib.id/projects/", "name": "projects", "description": "Portfolio projects." }
+  ],
+  "authorization_servers": ["https://najib.id"],
+  "license": "CC BY-NC-4.0",
+  "website_url": "https://najib.id",
+  "contact": "https://najib.id/contact/"
+}
