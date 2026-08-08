@@ -1,0 +1,24 @@
+{{ define "main" }}
+<main class="wrapper">
+  <h1><a href="/" class="home">{{ .Title }}</a></h1>
+
+  {{ if .Content -}}
+  <div class="content">{{ .Content }}</div>
+  {{- end }}
+
+  <ul class="lsn post-list">
+    {{ range .Pages.ByParam "series_part" -}}
+    <li class="post-item">
+      <span class="dim post-day">
+        {{ with .Params.series_part }}Part {{ . }} &middot; {{ end }} {{
+        dateFormat "Jan 02" .Date }}
+      </span>
+      <a href="{{ .RelPermalink }}" class="post-title">{{ .Title }}</a>
+    </li>
+    {{- else }}
+    <li class="post-item dim">Belum ada artikel dalam seri ini.</li>
+    {{- end }}
+  </ul>
+</main>
+<hr />
+{{- end }}
