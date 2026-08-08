@@ -55,6 +55,8 @@ tabWidth = 4
 
 [taxonomies]
   tag = "tags"
+  series = "series"
+  pillar = "pillar"
 
 [outputs]
   home = ["html", "rss", "markdown"]
