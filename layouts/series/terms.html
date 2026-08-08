@@ -5,8 +5,10 @@
   <ul class="lsn post-list">
     {{ range .Data.Terms.Alphabetical -}}
     <li class="post-item">
-      <span class="dim">{{ .Pages.Len }} artikel</span>
-      <a href="{{ .RelPermalink }}" class="post-title">{{ .Title }}</a>
+      <span class="dim">{{ .Count }} artikel</span>
+      <a href="{{ .Page.RelPermalink }}" class="post-title"
+        >{{ .Page.Title }}</a
+      >
     </li>
     {{- else }}
     <li class="post-item dim">Belum ada seri yang dipublikasikan.</li>
