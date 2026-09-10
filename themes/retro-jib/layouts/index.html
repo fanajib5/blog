@@ -1,7 +1,7 @@
 {{ define "main" }}
 <main class="wrapper">
   <div>
-    <h1><a href="/" class="home">{{ .Title }}</a></h1>
+    <h1><a href="/" class="home">{{ .Title | markdownify }}</a></h1>
   </div>
   {{ if .Content -}}
   <div class="content">
@@ -15,7 +15,7 @@
     {{ range first 3 (where site.RegularPages "Type" "in" "writing") -}}
     <li>
       <span>{{ .Date.Local.Format "2006-01-02" }} </span>
-      <a href="{{.RelPermalink}}">{{.Title}}</a>
+      <a href="{{.RelPermalink}}">{{.Title | markdownify}}</a>
     </li>
     {{ end }}
   </ul>
