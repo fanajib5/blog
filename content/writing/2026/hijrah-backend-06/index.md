@@ -2,7 +2,7 @@
 title: "Hijrah Backend (6): Merapikan _Monolith_, Pesawatnya Tetap Terbang"
 description: "Ep 6 seri Hijrah Backend: merombak _monolith_ puluhan ribu baris menjadi 14 modul _domain_, sensus sebelum pindah, pindahan yang byte-identik, dan kenapa bukan microservices."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-11T00:15:00+07:00
 draft: false
 toc: true

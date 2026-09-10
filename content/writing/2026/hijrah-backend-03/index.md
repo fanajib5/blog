@@ -2,7 +2,7 @@
 title: "Hijrah Backend (3): Mem-_port_ Puluhan Parser Protokol GPS Tanpa Menghentikan Armada"
 description: "Ep 3 seri Hijrah Backend: sprint sebulan mem-port 21 versi parser biner GPS, mobil parkir yang terbaca 66 km/jam, band-aid yang bertahan kurang dari sehari, dan satu karakter yang menyelesaikan semuanya."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-11T01:00:00+07:00
 draft: false
 toc: true

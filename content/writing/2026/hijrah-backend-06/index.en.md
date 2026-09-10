@@ -2,7 +2,7 @@
 title: "Hijrah Backend (6): Tidying a Monolith While the Plane Keeps Flying"
 description: "Episode 6 of the Hijrah Backend series: restructuring a monolith of tens of thousands of lines into 14 domain modules, census before moving, byte-identical moves, and why not microservices."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-11T00:15:00+07:00
 draft: false
 toc: true

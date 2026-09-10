@@ -2,7 +2,7 @@
 title: "Hijrah Backend (8): Eighteen Months in Retrospect (Give or Take)"
 description: "The final episode of the Hijrah Backend series: what I'd do differently, the transcontinental anti-pattern promised back in Ep 2, a teaching plan that never happened, and the thank-yous."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-10T15:40:00+07:00
 draft: false
 toc: true

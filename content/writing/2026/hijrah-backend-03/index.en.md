@@ -2,7 +2,7 @@
 title: "Hijrah Backend (3): Porting Dozens of GPS Protocol Parsers Without Stopping the Fleet"
 description: "Episode 3 of the Hijrah Backend series: a one-month sprint porting 21 binary GPS parsers, a parked car reading 66 km/h, a band-aid that lived less than a day, and the single character that fixed it all."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-11T01:00:00+07:00
 draft: false
 toc: true

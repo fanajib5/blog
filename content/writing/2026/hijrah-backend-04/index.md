@@ -2,7 +2,7 @@
 title: "Hijrah Backend (4): Kode Lama sebagai _Executable Spec_"
 description: "Ep 4 seri Hijrah Backend: parity-first secara utuh, kenapa migrasi bukan momen perbaikan, cerita 'perbaikan' yang harus saya hapus sendiri, dan filosofi dependensi di balik 22 baris go.mod."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-10T23:30:00+07:00
 draft: false
 toc: true

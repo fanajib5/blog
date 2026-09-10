@@ -2,8 +2,8 @@
 title: "Hijrah Backend (1): Hari Pertama Disodori Warisan 370+ Endpoint"
 description: "Ep 1 seri Hijrah Backend: cerita personal di balik migrasi backend GPS dari PHP ke Go, dimulai dari lowongan yang mengajak mewujudkan keputusan orang lain, mandat tiga bulan, dan warisan 370+ endpoint."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
-lastmod: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
+lastmod: 2026-09-10T15:30:00+07:00
 draft: false
 toc: true
 comments: false

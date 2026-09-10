@@ -2,7 +2,7 @@
 title: "Hijrah Backend (2): Anatomi Endpoint 15 Detik"
 description: "Ep 2 seri Hijrah Backend: forensik sebuah endpoint yang makan 15 detik, empat hipotesis salah, satu baris konfigurasi yang benar, dan pelajaran membaca log sebelum ber teori."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-10T015:30:00+07:00
+date: 2026-09-10T15:30:00+07:00
 lastmod: 2026-09-10T23:00:00+07:00
 draft: false
 toc: true
