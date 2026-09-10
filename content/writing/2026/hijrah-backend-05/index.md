@@ -2,7 +2,7 @@
 title: "Hijrah Backend (5): Query yang Bilang 'Pakai _Index_-ku'"
 description: "Ep 5 seri Hijrah Backend: ketika index yang sempurna diam-diam didiamkan oleh satu pembungkus DATE(), pelajaran sargable di tabel puluhan juta baris, tersangka COLLATE yang tidak bersalah, dan utang yang saya akui."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T01:30:00+07:00
+date: 2026-09-10T015:30:00+07:00
 lastmod: 2026-09-10T23:45:00+07:00
 draft: false
 toc: true

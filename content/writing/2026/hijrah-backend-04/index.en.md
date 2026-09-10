@@ -2,7 +2,7 @@
 title: "Hijrah Backend (4): Old Code as an Executable Spec"
 description: "Episode 4 of the Hijrah Backend series: parity-first in full, why a migration is not the moment for improvements, the story of an 'improvement' I had to delete myself, and the dependency philosophy behind 22 lines of go.mod."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T01:30:00+07:00
+date: 2026-09-10T015:30:00+07:00
 lastmod: 2026-09-10T23:30:00+07:00
 draft: false
 toc: true

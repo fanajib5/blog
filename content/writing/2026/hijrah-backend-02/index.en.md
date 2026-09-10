@@ -2,7 +2,7 @@
 title: "Hijrah Backend (2): Anatomy of a 15-Second Endpoint"
 description: "Episode 2 of the Hijrah Backend series: forensics on an endpoint that took 15 seconds, four wrong hypotheses, one correct config line, and the lesson of reading logs before theorizing."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T01:30:00+07:00
+date: 2026-09-10T015:30:00+07:00
 lastmod: 2026-09-10T23:00:00+07:00
 draft: false
 toc: true
