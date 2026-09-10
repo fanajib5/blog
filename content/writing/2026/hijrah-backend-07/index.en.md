@@ -2,7 +2,7 @@
 title: "Hijrah Backend (7): From TCP Packets to a Time-Series Database"
 description: "Episode 7 of the Hijrah Backend series: how TCP packets from thousands of GPS trackers become tidy rows, why there's a queue in the middle, a producer that used to throw everything away, and a database that understands time."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T01:30:00+07:00
 lastmod: 2026-09-11T00:30:00+07:00
 draft: false
 toc: true

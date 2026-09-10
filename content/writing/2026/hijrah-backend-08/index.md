@@ -2,7 +2,7 @@
 title: "Hijrah Backend (8): Refleksi 18 Bulan (Lebih atau Kurang)"
 description: "Episode terakhir seri Hijrah Backend: yang akan saya kerjakan beda kalau mengulang, anti-pattern transbenua yang dijanjikan sejak Ep 2, satu rencana mengajar yang tidak jadi, dan kata terima kasih."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T01:30:00+07:00
 lastmod: 2026-09-11T01:45:00+07:00
 draft: false
 toc: true

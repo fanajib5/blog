@@ -2,7 +2,7 @@
 title: "Hijrah Backend (1): Day One, Handed a Legacy of 370+ Endpoints"
 description: "Episode 1 of the Hijrah Backend series: the personal story behind migrating a GPS backend from PHP to Go, starting with a job opening that asked me to execute someone else's decision, a three-month mandate, and a legacy of 370+ endpoints."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T01:30:00+07:00
 lastmod: 2026-09-11T01:30:00+07:00
 draft: false
 toc: true

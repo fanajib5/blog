@@ -2,7 +2,7 @@
 title: "Hijrah Backend (9): Epilogue, MySQL, PostgreSQL, Then MySQL Again"
 description: "Epilogue of the Hijrah Backend series: the story of a database engine that changed direction twice, a LISTEN/NOTIFY optimization that went to waste, double work, and a frontend legacy smelled from across the stack."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T01:30:00+07:00
 lastmod: 2026-09-11T02:00:00+07:00
 draft: false
 toc: true

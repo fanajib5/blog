@@ -2,7 +2,7 @@
 title: "Hijrah Backend (9): Epilog, MySQL, PostgreSQL, Lalu MySQL Lagi"
 description: "Epilog seri Hijrah Backend: kisah mesin database yang berubah arah dua kali, optimasi LISTEN/NOTIFY yang hangus, kerja dua kali, dan warisan frontend yang tercium dari seberang."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T01:30:00+07:00
 lastmod: 2026-09-11T02:00:00+07:00
 draft: false
 toc: true
