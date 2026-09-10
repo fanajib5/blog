@@ -45,7 +45,9 @@ To stay faithful to the debt-list tradition, here's the division:
 
 **Canceled without regret**: the _state management_ migration. It's on the didn't-happen list, and that list is part of a healthy archive hahaha.
 
-> **[FILL IN, optional: one or two sentences as a backend engineer who now also maintains a frontend. How does it feel now? Still a tourist country, or starting to feel like a resident? Your voice, any length.]**
+> In the end, after all the wrestling with keeping this v3 web app alive, I feel more and more like a tourist here. The heart says no, but the demands keep coming, and _production_ has to keep running.
+
+In [episode one](/en/writing/2026/hijrah-frontend-01/) I joked about the tourist visa being revoked and replaced with a resident ID. The honest answer turns out to be this: the ID card got issued, but the heart still carries its passport hehe~
 
 ## Closing Both Series
 

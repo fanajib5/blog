@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (5): Dua Sisi Satu Gedung"
 description: "Episode penutup seri Hijrah Frontend: inventaris akhir port tipis, pelajaran yang sama dengan pakaian berbeda, warisan yang dirawat vs yang menunggu, dan perpisahan singkat."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
+date: 2026-09-11T13:00:00+07:00
 lastmod: 2026-09-11T03:45:00+07:00
 draft: true
 toc: true
@@ -45,7 +45,9 @@ Supaya setia pada tradisi daftar utang, ini pembagiannya:
 
 **Yang dibatalkan dan tidak menyesal**: migrasi _state management_. Dia sudah masuk daftar yang tidak jadi, dan daftar itu bagian dari arsip yang sehat hahaha.
 
-> **[ISI KAMU, opsional: satu-dua kalimat sebagai backend engineer yang kini juga merawat frontend. Rasanya sekarang bagaimana? Tetap negeri turis, atau sudah mulai merasa penduduk? Suaramu, terserah panjangnya.]**
+> Akhirnya, setelah ikut berjibaku merawat _web app_ v3 ini, saya semakin merasa menjadi turis di sini. Hati menolak, tapi tuntutan terus jalan, dan _production_ harus tetap lancar.
+
+Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya bercanda soal visa turis yang dicabut dan diganti KTP penduduk. Jawaban jujurnya ternyata begini: KTP-nya terbit, tapi hati masih sering membawa paspor hehe~
 
 ## Penutup Dua Seri
 
