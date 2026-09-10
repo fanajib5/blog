@@ -6,7 +6,7 @@ lastmod: 2026-04-15T00:00:00+07:00
 draft: false
 comments: false
 project_type: "Production System"
-tech_stack: ["Go", "PostgreSQL", "TimescaleDB", "Apache Kafka", "Docker"]
+tech_stack: ["Go", "PostgreSQL", "TimescaleDB", "RabbitMQ", "Docker"]
 live_url: ""
 repo_url: ""
 results: ["~194K LoC migrated", "370+ API endpoints", "Read/write split otomatis"]
@@ -29,7 +29,7 @@ Konversi total backend dari **Laravel → Go** menggunakan Clean Architecture pa
 ```
 Request → Controller → UseCase → Repository → PostgreSQL/TimescaleDB
                        ↕
-                    Gateway → External API / Kafka
+                    Gateway → External API / RabbitMQ
 ```
 
 Setiap layer punya tanggung jawab yang jelas:
@@ -42,11 +42,11 @@ Setiap layer punya tanggung jawab yang jelas:
 
 | Komponen | Teknologi |
 |----------|-----------|
-| Language | Go 1.24 |
+| Language | Go 1.26 |
 | HTTP Framework | GoFiber v2 |
 | Database | PostgreSQL + TimescaleDB (hypertable untuk device data) |
 | ORM/Driver | pgx/v5 (raw SQL performance) |
-| Messaging | Apache Kafka (Sarama) |
+| Messaging | RabbitMQ (amqp091-go) |
 | Cache | Ristretto (in-memory) |
 | Migration | golang-migrate |
 | Validation | go-playground/validator |
