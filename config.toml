@@ -1,4 +1,5 @@
 baseURL = "https://najib.id"
+buildFuture = true
 defaultContentLanguage = "id"
 staticDir = "static"
 title = "Blogfolio Najib"
