@@ -1,12 +1,12 @@
 ---
 title: "GPS Fleet Tracking API, Laravel to Go"
-description: "Full-stack backend conversion of a GPS fleet tracking system from Laravel (PHP) to Go with PostgreSQL, 370+ endpoints, 33 entities, clean architecture."
+description: "Full-stack backend conversion of a GPS fleet tracking system from Laravel (PHP) to Go with MySQL (domain data) + PostgreSQL/TimescaleDB (location data), 370+ endpoints, 33 entities, clean architecture."
 date: 2024-06-01
-lastmod: 2026-04-15T00:00:00+07:00
+lastmod: 2026-09-11T02:30:00+07:00
 draft: false
 comments: false
 project_type: "Production System"
-tech_stack: ["Go", "PostgreSQL", "TimescaleDB", "RabbitMQ", "Docker"]
+tech_stack: ["Go", "MySQL", "PostgreSQL", "TimescaleDB", "RabbitMQ", "Docker"]
 live_url: ""
 repo_url: ""
 results: ["~194K LoC migrated", "370+ API endpoints", "Automatic read/write split"]
@@ -22,12 +22,12 @@ A GPS fleet tracking system handling real-time vehicle tracking was built on Lar
 
 ## The Solution
 
-Full backend conversion from **Laravel → Go** using Clean Architecture pattern, with a database migration from **MySQL → PostgreSQL + TimescaleDB**.
+Full backend conversion from **Laravel → Go** using Clean Architecture pattern, with clear database role separation: **MySQL for domain data, PostgreSQL + TimescaleDB for location data (time-series)**.
 
 ### Architecture
 
 ```
-Request → Controller → UseCase → Repository → PostgreSQL/TimescaleDB
+Request → Controller → UseCase → Repository → MySQL (domain) / PostgreSQL+TimescaleDB (location)
                        ↕
                     Gateway → External API / RabbitMQ
 ```
@@ -44,7 +44,7 @@ Each layer has clear responsibilities:
 |-----------|------------|
 | Language | Go 1.26 |
 | HTTP Framework | GoFiber v2 |
-| Database | PostgreSQL + TimescaleDB (hypertable for device data) |
+| Database | MySQL (domain data) + PostgreSQL/TimescaleDB (location/time-series data) |
 | ORM/Driver | pgx/v5 (raw SQL performance) |
 | Messaging | RabbitMQ (amqp091-go) |
 | Cache | Ristretto (in-memory) |
@@ -74,4 +74,4 @@ Each layer has clear responsibilities:
 
 1. **Clean Architecture enables gradual migration**: each endpoint could be converted one by one without breaking changes, allowing v2 (Laravel) and v3 (Go) to run in parallel during the transition
 2. **pgx/v5 > ORM for high-throughput**: full control over SQL queries delivers more predictable performance compared to ORM abstractions
-3. **TimescaleDB is a game-changer**: hypertable + continuous aggregate replaced reporting queries that previously took minutes with sub-second results
+3. **TimescaleDB is a game-changer**: hypertables + compression keep millions of location records per day stored efficiently and fast to read.
