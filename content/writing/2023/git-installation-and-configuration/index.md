@@ -3,7 +3,7 @@ title: "Catatan Git: instalasi, konfigurasi, dan contohnya"
 description: "Panduan instalasi Git dan GitHub dari nol: setup akun, konfigurasi SSH, dan best practices untuk backend developer."
 author: "Faiq Najib Al-Aziz"
 date: 2023-07-31T22:00:01.039+07:00
-lastmod: 2023-07-31T22:00:01.039+07:00
+lastmod: 2026-09-11T08:58:01.039+07:00
 draft: false
 toc: true
 comments: false
@@ -19,7 +19,7 @@ tags:
 
 ## Perkenalan
 
-[Git](https://git-scm.com/) adalah sistem kontrol versi terdistribusi yang bersifat _open source_ dan gratis yang dirancang untuk menangani segala sesuatu mulai dari proyek kecil hingga sangat besar dengan ceoat dan efisien.
+[Git](https://git-scm.com/) adalah sistem kontrol versi terdistribusi yang bersifat _open source_ dan gratis yang dirancang untuk menangani segala sesuatu mulai dari proyek kecil hingga sangat besar dengan cepat dan efisien.
 
 Sedangkan, [GitHub](https://github.com/about) [adalah](https://en.wikipedia.org/wiki/GitHub) platform dan layanan _developer_ yang lengkap untuk membangun, menskalakan, dan mengirimkan perangkat lunak yang aman menggunakan Git.
 
