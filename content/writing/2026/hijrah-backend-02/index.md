@@ -1,9 +1,9 @@
 ---
 title: "Hijrah Backend (2): Anatomi Endpoint 15 Detik"
-description: "Ep 2 seri Hijrah Backend: forensik sebuah endpoint yang makan 15 detik, empat hipotesis salah, satu baris konfigurasi yang benar, dan pelajaran membaca log sebelum ber teori."
+description: "Ep 2 seri Hijrah Backend: forensik sebuah endpoint yang makan 15 detik, empat hipotesis salah, satu baris konfigurasi yang benar, dan pelajaran membaca log sebelum berteori."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:00+07:00
-lastmod: 2026-09-10T23:00:00+07:00
+lastmod: 2026-09-11T09:00:00+07:00
 draft: false
 toc: true
 comments: false
@@ -45,7 +45,7 @@ Hasilnya: 16,57 detik menjadi 15,64 detik. Itu pun saya curigai cuma _noise_. Te
 
 Masih di jalur yang sama, muncul teori ketiga: _server_ database membunuh koneksi _idle_ di menit kesepuluh, sementara aplikasi mengira koneksinya berumur 30 menit. Ketimpangan umur = koneksi _zombie_ = gagal di tengah jalan.
 
-Teori ini tidak sepenuhnya salah, ketimpangannya nyata, dan perbaikannya memang patut dilakukan. Tapi juga tidak menjawab misteri utama: angkanya tetap di atas 15 detik. Tiga kali menuduh, tiga kali meleset. Sudah waktunya berhenti ber teori dan mulai mendengarkan.
+Teori ini tidak sepenuhnya salah, ketimpangannya nyata, dan perbaikannya memang patut dilakukan. Tapi juga tidak menjawab misteri utama: angkanya tetap di atas 15 detik. Tiga kali menuduh, tiga kali meleset. Sudah waktunya berhenti berteori dan mulai mendengarkan.
 
 ## Log Bicara, Semua Teori Bubar
 

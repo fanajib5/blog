@@ -3,7 +3,7 @@ title: "Hijrah Backend (7): Dari Paket TCP ke _Time-Series Database_"
 description: "Ep 7 seri Hijrah Backend: bagaimana paket-paket TCP dari ribuan tracker GPS menjadi baris data rapi, kenapa ada antrean, producer yang dulu membuang segalanya, dan database yang mengerti waktu."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:00+07:00
-lastmod: 2026-09-11T00:30:00+07:00
+lastmod: 2026-09-11T09:00:00+07:00
 draft: false
 toc: true
 comments: false
@@ -61,7 +61,7 @@ Kombinasi keduanya mengubah pertanyaan "kapan kita beres-beres data?" dari _kena
 4. **_Backpressure_ itu fitur.** Saat kapasitas habis, membiarkan sumber menunggu adalah penyimpanan termurah yang ada.
 5. **Retensi otomatis menggantikan ritual.** Apa yang dulu rutin manual dan penuh doa, kini cuma kebijakan yang jalan sendiri.
 
-Episode berikutnya episode terakhir berseri ini: refleksi hampir dua tahun, yang akan saya kerjakan beda kalau mengulang, dan bagian yang paling saya syukuri. Sampai ketemu di penutup.
+Episode berikutnya adalah episode terakhir dari seri ini: refleksi hampir dua tahun, yang akan saya kerjakan beda kalau mengulang, dan bagian yang paling saya syukuri. Sampai ketemu di penutup.
 
 Sekian. Salam.
 

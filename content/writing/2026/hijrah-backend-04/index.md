@@ -3,7 +3,7 @@ title: "Hijrah Backend (4): Kode Lama sebagai _Executable Spec_"
 description: "Ep 4 seri Hijrah Backend: parity-first secara utuh, kenapa migrasi bukan momen perbaikan, cerita 'perbaikan' yang harus saya hapus sendiri, dan filosofi dependensi di balik 22 baris go.mod."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:00+07:00
-lastmod: 2026-09-10T23:30:00+07:00
+lastmod: 2026-09-11T09:00:00+07:00
 draft: false
 toc: true
 comments: false
@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Kalau boleh merangkum satu aturan yang memegang kendali penuh atas migrasi ini, kualimatkan begini: **yang benar adalah yang lama.**[^2]
+Kalau boleh merangkum satu aturan yang memegang kendali penuh atas migrasi ini, kukalimatkan begini: **yang benar adalah yang lama.**[^2]
 
 Kedengarannya menyebalkan, saya tahu. Kamu dipercaya memindahkan sistem ke bahasa baru, dan aturan nomor satu-nya justru: jangan berubah apa-apa. Bukan lebih cepat. Bukan lebih bersih. Bukan lebih baik. **Identik.** Tulisan ini bedah kenapa aturan yang anti-klimaks itu justru keputusan paling masuk akal yang pernah saya jalani hehe~
 

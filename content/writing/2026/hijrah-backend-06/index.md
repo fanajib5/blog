@@ -3,7 +3,7 @@ title: "Hijrah Backend (6): Merapikan _Monolith_, Pesawatnya Tetap Terbang"
 description: "Ep 6 seri Hijrah Backend: merombak _monolith_ puluhan ribu baris menjadi 14 modul _domain_, sensus sebelum pindah, pindahan yang byte-identik, dan kenapa bukan microservices."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:00+07:00
-lastmod: 2026-09-11T00:15:00+07:00
+lastmod: 2026-09-11T09:00:00+07:00
 draft: false
 toc: true
 comments: false
@@ -25,7 +25,7 @@ Pertanyaan pertama yang biasanya muncul: kalau mau memisahkan domain, kenapa tid
 
 Jawabannya: tim kami kecil, dan _microservices_ itu bukan struktur arsitektur, dia keputusan infrastruktur. Tiap layanan berarti satu _deployment_ baru, satu antrean monitoring baru, satu set masalah jaringan baru, plus komunikasi antar-layanan yang dulu gratis jadi mahal. Untuk ukuran tim kami, menukar _folder_ yang rapi dengan enam _server_ tambahan itu seperti membeli rumah untuk menyimpan kamar yang tidak terpakai.
 
-_Yang_ saya butuhkan bukan pemisahan _proses_, tapi pemisahan _tanggung jawab_. Itu nama _nya_: **_modular monolith_**, satu _binary_, satu _deployment_, tapi di dalamnya tiap domain punya rumah dengan dinding.
+Yang saya butuhkan bukan pemisahan _proses_, tapi pemisahan _tanggung jawab_. Itu namanya: **_modular monolith_**, satu _binary_, satu _deployment_, tapi di dalamnya tiap domain punya rumah dengan dinding.
 
 ## Modul Itu Rumah dengan Satu Pintu
 
@@ -39,7 +39,7 @@ Bagian yang paling sering dilewatkan orang saat _refactoring_: menghitung dulu s
 
 Untuk modul terbesar, _device_, saya membuat dokumen sensus sebelum menyentuh satu baris kode. Hasilnya mengejutkan sendiri: 51 file di luar modul mengonsumsi repo-nya, repo keluarga _device_ menawarkan 321 _method_ _exported_... dan yang benar-benar dipanggil dari luar cuma **100**.[^1] Lebih dari dua pertiga stoknya tidak pernah diminta. Bahkan satu repositori "dewa" berisi 122 _method_, yang terpakai 49.
 
-Sensusnya pun punya jebakan yang bikin saya tertawa saat mengalaminya. Menghitung konsumen pakai pencarian nama, dan ternyata akhiran "-device" menyebar di mana-mana: ada repo _shared-link-device_, ada _user-group-device_, keduanya bukan bagian keluarga _device_. Ada pula satu repo yang namanya mengandung angka, dan pola pencarian huruf-saja saya melewatinya tanpa sadar. Kesimpulannya rendah hati: **sensu s yang tidak curiga pada dirinya sendiri akan menghitung dunia yang salah** hehe~
+Sensusnya pun punya jebakan yang bikin saya tertawa saat mengalaminya. Menghitung konsumen pakai pencarian nama, dan ternyata akhiran "-device" menyebar di mana-mana: ada repo _shared-link-device_, ada _user-group-device_, keduanya bukan bagian keluarga _device_. Ada pula satu repo yang namanya mengandung angka, dan pola pencarian huruf-saja saya melewatinya tanpa sadar. Kesimpulannya rendah hati: **sensus yang tidak curiga pada dirinya sendiri akan menghitung dunia yang salah** hehe~
 
 ## Pindahan yang _Byte-Identik_
 

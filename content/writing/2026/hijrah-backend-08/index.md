@@ -3,7 +3,7 @@ title: "Hijrah Backend (8): Refleksi 18 Bulan (Lebih atau Kurang)"
 description: "Episode terakhir seri Hijrah Backend: yang akan saya kerjakan beda kalau mengulang, anti-pattern transbenua yang dijanjikan sejak Ep 2, satu rencana mengajar yang tidak jadi, dan kata terima kasih."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:00+07:00
-lastmod: 2026-09-10T15:40:00+07:00
+lastmod: 2026-09-11T09:00:00+07:00
 draft: false
 toc: true
 comments: false
@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Ini episode terakhir berseri. Dan seperti yang sudah Anda duga dari judulnya, angka "18 bulan" itu sendiri perlu tanda kutip: kalau dihitung dari hari pertama sampai tulisan ini disusun, angkanya lebih dari itu. Tapi ya sudahlah, angka di _slide_ memang punya versi masing-masing; seri ini sejak awal memang cerita tentang selisihnya hahaha.[^1]
+Ini episode terakhir dari seri ini. Dan seperti yang sudah Anda duga dari judulnya, angka "18 bulan" itu sendiri perlu tanda kutip: kalau dihitung dari hari pertama sampai tulisan ini disusun, angkanya lebih dari itu. Tapi ya sudahlah, angka di _slide_ memang punya versi masing-masing; seri ini sejak awal memang cerita tentang selisihnya hahaha.[^1]
 
 Tujuh episode sebelumnya sudah membahas pelajaran teknis satu per satu. Episode ini isinya sisanya: yang akan saya kerjakan beda, utang arsitektur yang saya janjikan sejak [episode kedua](/writing/2026/hijrah-backend-02/), satu babak yang tidak jadi, dan terima kasih.
 
