@@ -39,7 +39,7 @@ Dari sisi bisnis, ini berarti **kecepatan deliver value ke _user_ menurun**. Fit
 
 ### 2. _Bug_ yang Hanya Muncul di _Production_
 
-_Kalau di lokal aman, tapi di production error, dimana harusnya saya cari?_ (pertanyaan yang sering bikin saya begadang sambil _scrolling Stack Overflow_ hahaha)
+_Kalau di lokal aman, tapi di production error, di mana harusnya saya cari?_ (pertanyaan yang sering bikin saya begadang sambil _scrolling Stack Overflow_ hahaha)
 
 Ini _classic symptom_ dari sistem yang tightly coupled. Kode yang berjalan di satu _environment_ tidak berjalan sama di _environment_ lain karena ada _side effect_ yang tidak terduga. _Debug_-nya bukan soal logika, tapi soal _mengapa_ konteks _production_ berbeda dari ekspektasi. Pernah waktu itu saya sampai _remote_ ke _server production_ jam 2 pagi cuma buat _check_ satu environment variable yang ternyata... memang belum di-_set_. _Facepalm_.
 
@@ -65,7 +65,7 @@ Setelah sadar bahwa gejala-gejala di atas bukan _normal_, saya mulai mengajukan 
 
 Ini pertanyaan pertama dan paling penting. Kalau masalahnya cara kita menulis kode, misalnya, tidak ada _layering_, tidak ada _testing_, tidak ada _code review_, maka migrasi _tech stack_ tidak akan menyelesaikan apa-apa. Kita cuma pindah masalah ke _tool_ baru.
 
-Dalam kasus GPS _tracker_ ini, jawabannya: **keduanya**. Cara kode ditulis memang perlu diperbaiki, tapi bahasa dan _framework_ yang dipakai juga punya _limitation_ yang membuat penulisan kode yang _clean_ jadi lebih sulit dari seharusnya. _Dynamically typed language_[^3] tanpa _enforcement_ di _runtime_ membuat _bug_ _type-related_ muncul di _production_, bukan saat _development_. Dan _bug type-related_ di _production_ itu... _hadeh_, bikin hati dag-dig-dug setiap kali ada notifikasi error hehe.
+Dalam kasus GPS _tracker_ ini, jawabannya: **keduanya**. Cara kode ditulis memang perlu diperbaiki, tapi bahasa dan _framework_ yang dipakai juga punya _limitation_ yang membuat penulisan kode yang _clean_ jadi lebih sulit dari seharusnya. Bahasa dengan tipe data dinamis[^3] tanpa penjagaan yang ketat di _runtime_ membuat _bug_ _type-related_ muncul di _production_, bukan saat _development_. Dan _bug type-related_ di _production_ itu... _hadeh_, bikin hati dag-dig-dug setiap kali ada notifikasi error hehe.
 
 ### "Kalau Kita _Refactor_ Saja, Apakah Cukup?"
 
@@ -121,7 +121,7 @@ Bukan _feeling_ "kayaknya sih makin lambat", tapi **data**. Fitur yang dulu 2 ha
 
 ### 3. Tim Punya Kapasitas untuk Menjalankan
 
-Migrasi butuh waktu, energi, dan fokus. Kalau tim sedang di _peak season_, atau kalau tidak ada _budget_ untuk _learning curve_, lebih baik tunda. Migrasi yang _force_ di waktu yang salah bisa lebih merusak daripada _codebase_ yang _legacy_.
+Migrasi butuh waktu, energi, dan fokus. Kalau tim sedang di _peak season_, atau kalau tidak ada _budget_ untuk _learning curve_, lebih baik tunda. Migrasi yang dipaksakan di waktu yang salah bisa lebih merusak daripada _codebase_ yang _legacy_.
 
 ---
 
@@ -155,7 +155,7 @@ Kita sering fokus pada "berapa biaya migrasi" dan lupa bertanya "berapa biaya ka
 
 ## Penutup
 
-Keputusan migrasi _tech stack_ itu personal, tergantung pada konteks, tim, _timeline_, dan banyak faktor lain. Tidak ada _framework_ yang bisa menjawab semua situasi. Tapi dengan mengajukan pertanyaan yang tepat dan mengumpulkan data yang cukup, keputusan yang diambil jauh lebih _sound_ daripada mengikuti _hype_.
+Keputusan migrasi _tech stack_ itu personal, tergantung pada konteks, tim, _timeline_, dan banyak faktor lain. Tidak ada _framework_ yang bisa menjawab semua situasi. Tapi dengan mengajukan pertanyaan yang tepat dan mengumpulkan data yang cukup, keputusan yang diambil jauh lebih masuk akal daripada mengikuti _hype_.
 
 Semoga catatan ini bermanfaat buat yang lagi galau mau migrasi atau nggak. Kalau kamu sedang menghadapi dilema serupa dan ingin mendiskusikannya, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 

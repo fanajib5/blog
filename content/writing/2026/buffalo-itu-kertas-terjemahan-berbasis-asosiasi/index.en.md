@@ -3,7 +3,7 @@ title: "Buffalo Means Paper: Learning Language Through Association-Based Transla
 description: "A funny story about an English tutoring student who translated 'buffalo' as 'paper', and why it actually makes scientific sense."
 author: "Faiq Najib Al-Aziz"
 date: 2026-06-04T10:28:00+07:00
-lastmod: 2026-06-04T10:28:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -32,7 +32,7 @@ I went quiet for a moment after hearing this. Not because I was confused, but be
 
 If you've ever tried learning a foreign language, you know the feeling: the brain doesn't store words like a dictionary. It stores them more like a cluttered folder.
 
-The word _"buffalo"_ enters the student's ear. The brain immediately runs a search. And the first result that comes up isn't an image of a large furry animal roaming the North American prairies — it's... **buffalo paper**. That's what he'd encountered most. That's what was closest. That's what was most _relevant_ to his brain.
+The student hears the word _"buffalo"_. The brain immediately runs a search. And the first result that comes up isn't an image of a large furry animal roaming the North American prairies — it's... **buffalo paper**. That's what he'd encountered most. That's what was closest. That's what was most _relevant_ to his brain.
 
 This phenomenon has a name. Linguists and language researchers call it _**association-based translation**_: the idea that humans translate words not from a dictionary, but from the memory most strongly associated with that word.[^1] And that memory isn't always correct. But it always _feels_ correct.
 

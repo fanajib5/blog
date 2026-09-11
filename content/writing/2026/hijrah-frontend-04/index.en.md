@@ -3,7 +3,7 @@ title: "Hijrah Frontend (4): Two UI Libraries, Two Naming Eras"
 description: "Episode 4 of the Hijrah Frontend series: primereact and antd coexisting in one application without ever meeting in a single file. About demarcation lines, a UI dictionary in a reducer's pocket, and three styling eras."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:30:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-In [episode two](/en/writing/2026/hijrah-frontend-02/) I mentioned the numbers: one UI library is used across 101 files, the other survives in 13. This episode opens them deeper, because inside are two findings that made me laugh alone in front of a screen hehe~
+In [episode two](/en/writing/2026/hijrah-frontend-02/) I mentioned the numbers: one UI library is used across 101 files, the other survives in 13. This episode digs deeper into them, because inside are two findings that made me laugh alone in front of a screen hehe~
 
 Finding one: the two **never meet in a single file**. Finding two: the less popular library holds the most sought-after goods in town. In order, then.
 
@@ -27,7 +27,7 @@ The second civilization is smaller, but holds a monopoly. It keeps the _DatePick
 
 And what made me relieved and impressed at once: after checking one by one, **zero files use both at the same time**. The two civilizations coexist without ever sharing a room. A demarcation line, written in no document anywhere, yet perfectly honored, by whom and since when, nobody knows hehe~
 
-Lines like this are usually born not from policy but from experience: once, someone tried mixing the two, tasted styles eating each other alive, and the entire team collectively forgot-to-remember. Demarcation with trauma as its notary hahaha.
+Lines like this are usually born not from policy but from experience: once, someone tried mixing the two, watched the styles eat each other alive, and the whole team never tried it again. Demarcation with trauma as its notary hahaha.
 
 ## A Dictionary in the Reducer's Pocket
 
@@ -51,7 +51,7 @@ The three eras don't erase each other. First-era pages still dress first-era, an
 
 To stay faithful to tradition: while this thin port ran, we **standardized nothing** from the list above. No library migration, no separating reducers from their dictionaries, no removing styling eras.
 
-What we guarded was the demarcation line itself: zero mixed files remains the unwritten rule we have now officially written down. Because large-scale standardization during a house move is the _frontend_ edition of [episode four's](/en/writing/2026/hijrah-backend-04/) rule violation. Standardization is real and good; its place is the epilogue, not the suitcase hehe~
+What we guarded was the demarcation line itself: zero mixed files, an unwritten rule we've now officially written down. Because large-scale standardization during a house move is the _frontend_ edition of [episode four's](/en/writing/2026/hijrah-backend-04/) rule violation. Standardization is real and good; its place is the epilogue, not the suitcase hehe~
 
 ## Lessons
 

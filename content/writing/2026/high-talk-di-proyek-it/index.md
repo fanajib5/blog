@@ -3,7 +3,7 @@ title: "Tangga Lipat di Proyek IT"
 description: "Sebuah cerita tentang rekan atau atasan proyek IT yang bicaranya lebih tinggi dari Gunung Semeru, dan bagaimana cara menghadapinya tanpa harus ikut mendaki."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-17
-lastmod: 2026-05-17
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -51,7 +51,7 @@ Intinya? Kita perlu pisahkan beberapa bagian kode supaya lebih gampang di-_maint
 
 Yang lebih menantang lagi adalah kalau _high-talker_-nya adalah **atasan**. Karena kalau rekan sebaya masih bisa kita potong dengan candaan ringan, atasan punya dinamika yang berbeda. Salah-salah malah dianggap tidak sopan atau tidak profesional.
 
-Saya pernah menghadiri _meeting_ rutin dimana seorang atasan, dengan penuh semangat, menjelaskan arah teknis proyek selama 30 menit tanpa jeda yang cukup untuk pertanyaan. Dan saya keluar dari ruangan itu, atau lebih tepatnya, keluar dari Zoom Meeting, dengan satu pertanyaan besar: _"Jadi, kita mau ngapain besok?"_
+Saya pernah menghadiri _meeting_ rutin di mana seorang atasan, dengan penuh semangat, menjelaskan arah teknis proyek selama 30 menit tanpa jeda yang cukup untuk pertanyaan. Dan saya keluar dari ruangan itu, atau lebih tepatnya, keluar dari Zoom Meeting, dengan satu pertanyaan besar: _"Jadi, kita mau ngapain besok?"_
 
 ## Teknik Feynman: Senjata Rahasia
 
@@ -104,7 +104,7 @@ Jangan pura-pura paham demi menjaga perasaan semua orang. Termasuk perasaan diri
 
 Satu hal yang saya sadari setelah cukup banyak berhadapan dengan tipe komunikasi seperti ini: saya sendiri pun pernah jadi _high-talker_-nya.
 
-Ada masa-masa dimana saya sangat antusias dengan sesuatu yang baru dipelajari, entah itu _clean architecture_, _hexagonal pattern_, atau konsep apapun yang baru saya temukan dari blog luar, dan langsung menyebutkannya di setiap kesempatan. Padahal tidak semua orang butuh mendengar itu saat itu juga. Dan mungkin saya sendiri pun belum benar-benar menguasainya~~
+Ada masa-masa di mana saya sangat antusias dengan sesuatu yang baru dipelajari, entah itu _clean architecture_, _hexagonal pattern_, atau konsep apa pun yang baru saya temukan dari blog luar, dan langsung menyebutkannya di setiap kesempatan. Padahal tidak semua orang butuh mendengar itu saat itu juga. Dan mungkin saya sendiri pun belum benar-benar menguasainya~~
 
 Jadi, tulisan ini bukan untuk menghakimi siapa pun. Lebih ke pengingat, untuk saya sendiri dan mungkin juga untuk kamu yang tersasar ke sini dan membaca ini, bahwa komunikasi yang baik bukan soal seberapa banyak istilah yang kita tahu. Tapi seberapa yakin kita bahwa orang lain benar-benar mengerti apa yang kita maksud.
 

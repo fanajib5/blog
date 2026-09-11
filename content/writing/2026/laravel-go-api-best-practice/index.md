@@ -3,7 +3,7 @@ title: "Best Practice Membangun API di Laravel dan Go: Catatan dari Proyek Nyata
 description: "Pelajaran dari proyek migrasi 460+ route dan 58 controller—pola yang harus dipertahankan, yang harus ditinggalkan, dan bagaimana implementasinya di Go."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
-lastmod: 2026-05-07T10:28:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -426,7 +426,7 @@ type AnalyzeDeviceRequest struct {
 }
 ```
 
-_Keenangan_: di Go, karena struct adalah _first-class citizen_, validasi otomatis ter-_attach_ ke tipe data. Tidak mungkin ada _"lho, validasi mana yang dipakai di _endpoint_ ini?"_ karena struct-nya langsung _visible_ di _handler_ signature hehe~
+_Kelebihannya_: di Go, karena struct adalah _first-class citizen_, validasi otomatis ter-_attach_ ke tipe data. Tidak mungkin ada _"lho, validasi mana yang dipakai di _endpoint_ ini?"_ karena struct-nya langsung _visible_ di _handler_ signature hehe~
 
 ## 4. Response Consistency: Satu Format, Semua Endpoint
 
@@ -475,7 +475,7 @@ return response()->json([
 return $this->sendResponse($user->toArray());  // ✅ konsisten
 ```
 
-Bayangkan _frontend developer_ yang harus _handle_ dua format response berbeda untuk _endpoint login_ yang pada dasarnya sama. Pasti _mental_ dia _"why tho?"_ hahaha.
+Bayangkan _frontend developer_ yang harus _handle_ dua format response berbeda untuk _endpoint login_ yang pada dasarnya sama. Pasti dalam hati dia bertanya, _"kenapa harus begini?"_ hahaha.
 
 ### Best Practice
 

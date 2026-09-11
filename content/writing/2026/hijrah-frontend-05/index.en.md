@@ -3,7 +3,7 @@ title: "Hijrah Frontend (5): Two Sides of One Building"
 description: "The final episode of the Hijrah Frontend series: the thin port's honest closing inventory, the same lessons in different clothes, the inheritance we feed versus the one that waits, and a short farewell."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:45:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -14,7 +14,7 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-This is the final episode of the _frontend_ series. And true to the closing tradition of [the neighboring series](/en/writing/2026/hijrah-backend-09/), this episode isn't a victory party; it's the closing inventory: what's done, what's deliberately not, and what living in a building whose two sides ended up occupied by the same person actually taught me hehe~
+This is the final episode of the _frontend_ series. And true to the closing tradition of [the neighboring series](/en/writing/2026/hijrah-backend-09/), this episode isn't a victory party; it's the closing inventory: what's done, what's intentionally left unfinished, and what living in a building whose two sides ended up occupied by the same person actually taught me hehe~
 
 ## The Honest Closing Inventory
 
@@ -22,7 +22,7 @@ The last four episodes opened the inherited _frontend_ building. Now that the do
 
 - **76 pages moved, 76 pages alive.** A 1:1 port without leaving a single page behind, and every internal link between pages still knows its way home.
 - **Two UI libraries remain at peace.** One hundred and one files for the majority, thirteen for the calendar monopoly holder, and still zero files catching them sharing a room.
-- **194 type scars, measured.**[^1] Two hundred small safety nets that honestly admit to being installments, not architecture.
+- **194 type scars, measured.**[^1] One hundred ninety-four small safety nets that honestly admit to being installments, not architecture.
 - **Three styling eras coexist**,[^2] one backup corpse received a proper farewell, and _standardization_ officially waits in the epilogue room.
 
 Nothing on that list reads "everything is tidy". And that's exactly the honesty: this building **finished being moved**, not finished being renovated. Two different things, and telling them apart is the biggest lesson from both series hehe~
@@ -39,7 +39,7 @@ Even the caretaker is the same. In both buildings, what raised the code wasn't b
 
 To stay faithful to the debt-list tradition, here's the division:
 
-**Fed starting now**: the library demarcation line (zero mixed files), type contracts at the entrance, and the habit of recording carried inheritance, like these four episodes.
+**What we actively maintain from now on**: the library demarcation line (zero mixed files), type contracts at the entrance, and the habit of recording carried inheritance, like these four episodes.
 
 **Waiting for its turn**: _TypeScript_ (a big decision whose time hasn't come), cross-era naming standardization (epilogue, not suitcase), and internal structure refactoring (one decision at a time, with usage data in hand).
 
@@ -55,7 +55,7 @@ With this episode, two Hijrah series stand complete: [one _backend_](/en/writing
 
 If you're standing in front of your own inherited building, backend or frontend or otherwise: measure first, move faithfully, take care of yourself, and let some inheritance calmly wait its turn. A building doesn't need to finish renovating to be worth living in.
 
-Thank you for following to the final episode. May your building serve long, and may its caretakers change calmly.
+Thank you for following to the final episode. May your building serve well for a long time, and may its caretakers change without chaos.
 
 Cheers.
 

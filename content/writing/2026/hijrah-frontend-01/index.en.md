@@ -3,7 +3,7 @@ title: "Hijrah Frontend (1): When a Backend Engineer Is Told to Touch the Fronte
 description: "Episode 1 of the Hijrah Frontend series: after the GPS backend moved to Go, it's the neighboring building's turn. A backend engineer's first impressions of an inherited frontend, and the thin-port decision."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T02:45:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -22,7 +22,7 @@ I am a backend engineer. My world: queries, indexes, binary packet parsers, and 
 
 ## First Impressions: A Backend Nose Works Fine
 
-When I first opened the inherited frontend, one thing registered immediately: even someone who isn't a frontend expert could smell its spaghetti, armed with nothing but a programmer's mental model and years of reading code other people loved. You don't need to be a chef to know the soup is seven days old; a working nose suffices.
+When I first opened the inherited frontend, one thing registered immediately: even someone who isn't a frontend expert could smell its spaghetti, armed with nothing but a programmer's mental model and years of reading code other people wrote. You don't need to be a chef to know the soup is seven days old; a working nose suffices.
 
 And that smell isn't an accusation. The frontend is what it is: built over years, touched by many hands with many tastes, surviving while serving tens of thousands of users daily. Exactly like the backend I once migrated. How can a different building smell exactly the same? Because the caretaker is the same: **time and urgency** hehe~
 
@@ -30,7 +30,7 @@ And that smell isn't an accusation. The frontend is what it is: built over years
 
 After the experience of [migrating the backend](/en/writing/2026/hijrah-backend-01/), one belief stuck: total rewrites are attractive on slides and terrifying in production.
 
-So for the frontend, the decision was similar: **fork the old system, port it thin**. Not redrawing from scratch with the trendiest framework, but moving the old application into the new house as-is first. The repo even kept its exact old name; as if it hasn't been informed that it changed course hahaha.
+So for the frontend, the decision was similar: **fork the old system, do a thin port**. Not redrawing from scratch with the trendiest framework, but moving the old application into the new house as-is first. The repo even kept its exact old name; as if it hasn't been informed that it changed course hahaha.
 
 And on day one in the new house, I started counting the closets:
 
@@ -39,13 +39,13 @@ And on day one in the new house, I started counting the closets:
 - A legacy state management layer that has been gardener and electrician at once for years
 - A document named `TAILWIND_FIX.md` at the repo root: a small monument to an illness that got cured hehe~
 
-Sixty of those pages are JSX. Not a complaint; just a reminder that this country speaks another language. I, who used to shout `if err != nil`, now have to learn to weave _className_s hahaha.
+Sixty of those pages are JSX. Not a complaint; just a reminder that this country speaks another language. I, who used to shout `if err != nil`, now have to learn to weave `className`s hahaha.
 
 ## Why Thin Port, Not Redesign
 
 The same question as on the backend: why not rebuild everything at once, all tidy, all modern?
 
-The same answer, too: users don't care about your internal architecture; they care that the buttons they press every day keep behaving the same. Redesigning the looks while moving the house is two changes at once, and [episode four of the backend series](/en/writing/2026/hijrah-backend-04/) already priced the cost of fixing while migrating: silent improvements are poison.
+The same answer, too: users don't care about your internal architecture; they care that the buttons they press every day keep behaving the same. Redesigning the looks while moving the house is two changes at once, and [episode four of the backend series](/en/writing/2026/hijrah-backend-04/) already showed the cost of fixing while migrating: silent improvements are poison.
 
 So, frontend edition of parity: looks and behavior get carried over as-is first, internal structure gets tidied later, one decision at a time. Legacy code that boards the train gets recorded, not hidden. Episode two covers exactly what boarded that train, and why some of it had to board despite the smell hehe~
 

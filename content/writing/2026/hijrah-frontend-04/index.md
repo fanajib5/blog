@@ -3,7 +3,7 @@ title: "Hijrah Frontend (4): Dua Library UI, Dua Era Penamaan"
 description: "Ep 4 seri Hijrah Frontend: primereact dan antd hidup berdampingan di satu aplikasi tanpa pernah bertemu di satu file. Tentang garis demarkasi, kamus UI di kantong reducer, dan tiga era styling."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:30:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Di [episode kedua](/writing/2026/hijrah-frontend-02/) saya menyebut angkanya: satu _library_ UI dipakai di 101 _file_, satunya bertahan di 13. Episode ini kami buka lebih dalam, karena di dalamnya ada dua temuan yang membuat saya tertawa sendirian di depan layar hehe~
+Di [episode kedua](/writing/2026/hijrah-frontend-02/) saya menyebut angkanya: satu _library_ UI dipakai di 101 _file_, satunya bertahan di 13. Episode ini saya buka lebih dalam, karena di dalamnya ada dua temuan yang membuat saya tertawa sendirian di depan layar hehe~
 
 Temuan pertama: keduanya **tidak pernah bertemu di satu _file_ yang sama**. Temuan kedua: _library_ yang kalah popularitas itu menyimpan barang paling dicari se-kota. Mari berurutan.
 
@@ -33,7 +33,7 @@ Garis seperti ini biasanya lahir bukan dari kebijakan, tapi dari pengalaman: sek
 
 Temuan kedua ini favorit saya. Salah satu _library_ itu butuh _locale_: label kalender dalam bahasa Indonesia. Wajar; semua orang butuh kalender berbahasa sendiri. Yang tidak wajar adalah di mana _locale_-nya di-_import_: **di dalam _reducer_**.
 
-_Pengusaha data_, yang seharusnya mengurus angka dan status, ternyata membawa kamus lapisan tampilan di kantongnya. Tiga _reducer_ berbeda, tiga kali kamus yang sama.[^2]
+_Pengurus data_, yang seharusnya mengurus angka dan status, ternyata membawa kamus lapisan tampilan di kantongnya. Tiga _reducer_ berbeda, tiga kali kamus yang sama.[^2]
 
 Untuk apa? Mungkin supaya label _locale_ tersedia saat _state_ disusun. Mungkin sekadar ikut _copy-paste_ zaman dulu. Tidak ada yang tahu pasti, dan memangnya perlu? Inilah peta dan kota tua: arsitektur yang rapi ada di kepala orang asing, sementara kenyataannya adalah kota yang tumbuh liar tapi berfungsi. _Reducer_ membawa kamus itu aneh, tapi dia sudah bertahun-tahun menunjukkan jalan dengan benar, jadi biarlah dia membawa kamusnya hahaha.
 

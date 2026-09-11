@@ -3,7 +3,7 @@ title: "Kenapa Satu Bug Bisa Tiga Hari?"
 description: "Kenapa memperbaiki satu bug kecil bisa memakan waktu berhari-hari, dan bagaimana menjelaskannya ke orang non-teknis agar tidak terjadi miskomunikasi."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-16
-lastmod: 2026-04-16
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -19,7 +19,7 @@ Pernah denger kalimat ini? Atau mungkin variasinya: _"Tinggal ganti satu baris d
 
 Kalau kamu _developer_, hampir pasti pernah. Dan kalimat itu biasanya datang dari atasan, _project manager_, atau _client_, orang yang tidak perlu tahu apa itu _N+1 query_, tapi perlu tahu **kenapa sesuatu yang terlihat simpel memakan waktu yang tidak simpel**.
 
-Ini bukan tentang menyalahkan siapa. Ini tentang **kenapa _gap_ komunikasi ini terjadi dan bagaimana menutupinya**.
+Ini bukan tentang menyalahkan siapa. Ini tentang **kenapa _gap_ komunikasi ini terjadi dan bagaimana menjembataninya**.
 
 ## Anatomi "1 Bug = 3 Hari"
 
@@ -46,7 +46,7 @@ Tapi setelah diperiksa ternyata:
 - Noda di dinding karena **pipa di balik tembok bocor**
 - Pipa bocor karena **sambungan sudah berkarat**
 - Sambungan berkarat karena **ventilasi di atap tersumbat**, jadi uap air menumpuk
-- Untuk fix semuanya, harus **buka atap dulu**, baru ganti pipa, baru cat ulang dinding
+- Untuk memperbaiki semuanya, harus **buka atap dulu**, baru ganti pipa, baru cat ulang dinding
 
 Pemilik rumah melihat noda. Tukang melihat pipa, sambungan, ventilasi, dan atap. Keduanya melihat masalah yang sama, tapi **tingkat kedalaman yang berbeda**.
 

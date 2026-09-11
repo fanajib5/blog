@@ -3,7 +3,7 @@ title: "Decision Journal: When It's Time to Migrate Your Tech Stack"
 description: "A decision-making journal, when your existing tech stack needs migration, when refactoring is enough, and how to read the signals from a business perspective."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-10
-lastmod: 2026-04-10
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -73,7 +73,7 @@ The second question: if we invested time in cleaning up the architecture on the 
 
 In this case, I did a rough calculation: to refactor 370+ endpoints with proper architecture in PHP would take almost the same time as migrating to a new stack. The difference was, if we refactored in PHP, we'd still be stuck with some fundamental limitations (type safety, concurrency, deployment complexity). If we migrated, we'd unlock new capabilities.
 
-But this was **my case**, right. It doesn't mean refactoring is always the wrong choice. If the system is smaller, or if the stack's limitations aren't too constraining, refactoring is a far wiser choice. Don't read this and immediately start migrating your whole system without thinking it through. You don't want to end up like a horror story I once heard, 2 years of migration work, and they ended up reverting to the old system hahaha.
+But this was **my case**, right. It doesn't mean refactoring is always the wrong choice. If the system is smaller, or if the stack's limitations aren't too constraining, refactoring is a far wiser choice. Don't read this and immediately start migrating your whole system without thinking it through. You don't want to end up like one horror story I once heard: two years of migration work, only to end up reverting to the old system hahaha.
 
 ### "What's the Cost of Doing Nothing?"
 

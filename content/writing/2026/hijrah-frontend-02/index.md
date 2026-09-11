@@ -3,7 +3,7 @@ title: "Hijrah Frontend (2): Port Tipis dan Warisan yang Ikut Naik"
 description: "Ep 2 seri Hijrah Frontend: 76 halaman masuk, 76 halaman keluar. Kenapa nol halaman ditinggalkan, apa isi kotak yang dibuka pertama, dan satu rencana besar yang tidak jadi."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:00:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -17,15 +17,15 @@ series: "Hijrah Frontend"
 
 Pindahan di [episode pertama](/writing/2026/hijrah-frontend-01/) akhirnya selesai, dan hari penyerahan barang tiba. Manifestnya pendek dan membosankan, persis seperti manifest pindahan terbaik: **tujuh puluh enam kotak masuk, tujuh puluh enam kotak keluar. Nol halaman tertinggal.**
 
-Itu bukan kebetulan. Itu keputusan. Dan episode ini cerita tentang keputusan itu: apa yang sadar kita naikkan, apa yang ternyata ikut naik tanpa undangan, dan satu rencana besar yang memilih untuk tidak jadi hehe~
+Itu bukan kebetulan. Itu keputusan. Dan episode ini cerita tentang keputusan itu: apa yang sengaja kita naikkan, apa yang ternyata ikut naik tanpa undangan, dan satu rencana besar yang memilih untuk tidak jadi hehe~
 
 ## Kenapa Nol Halaman Ditinggalkan
 
 Kalau Anda pernah pindah rumah, Anda tahu momen paling membebaskan: saat memutuskan "yang ini buang aja". Migrasi _frontend_ punya momen yang sama, dengan godaan yang lebih besar, karena membuang halaman terasa seperti membereskan _produk_ sekalian.
 
-_Amit-amit_ lagi. Memutuskan hidup-mati sebuah halaman saat pindah rumah itu dua keputusan digabung jadi satu: pindah, dan merombak skope produk. [Seri sebelah](/writing/2026/hijrah-backend-04/) sudah membayar biaya pembelajaran untuk kombinasi itu. Jadi aturannya sederhana: **tujuh puluh enam masuk, tujuh puluh enam keluar**, halaman demi halaman, satu per satu, tanpa skrip pembuangan.
+_Amit-amit_ lagi. Memutuskan hidup-mati sebuah halaman saat pindah rumah itu dua keputusan digabung jadi satu: pindah, dan merombak cakupan produk. [Seri sebelah](/writing/2026/hijrah-backend-04/) sudah membayar biaya pembelajaran untuk kombinasi itu. Jadi aturannya sederhana: **tujuh puluh enam masuk, tujuh puluh enam keluar**, halaman demi halaman, satu per satu, tanpa skrip pembuangan.
 
-Hasilnya terverifikasi membosankan: _repo_ baru menghitung 76 halaman, _repo_ lama juga 76, dan daftar foldernya cocok satu per satu. Bahkan halaman-halaman yang namanya menimbulkan tanda tanya, semacam _demo_ dan _docs_ dan jalur-jalur khusus, ikut naik juga. Bukan karena penting; tapi karena membuangnya bukan wewenang momen ini hahaha.
+Hasilnya membosankan, tapi terverifikasi: _repo_ baru menghitung 76 halaman, _repo_ lama juga 76, dan daftar foldernya cocok satu per satu. Bahkan halaman-halaman yang namanya menimbulkan tanda tanya, semacam _demo_ dan _docs_ dan jalur-jalur khusus, ikut naik juga. Bukan karena penting; tapi karena membuangnya bukan keputusan untuk fase ini hahaha.
 
 ## Isi Kotak yang Dibuka Pertama
 

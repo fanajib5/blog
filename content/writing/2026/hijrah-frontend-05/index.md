@@ -3,7 +3,7 @@ title: "Hijrah Frontend (5): Dua Sisi Satu Gedung"
 description: "Episode penutup seri Hijrah Frontend: inventaris akhir port tipis, pelajaran yang sama dengan pakaian berbeda, warisan yang dirawat vs yang menunggu, dan perpisahan singkat."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-11T13:00:00+07:00
-lastmod: 2026-09-11T03:45:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -14,7 +14,7 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Ini episode terakhir berseri _frontend_. Dan sesuai tradisi penutup di [seri sebelah](/writing/2026/hijrah-backend-09/), episode ini bukan pesta kemenangan; dia inventaris akhir: apa yang sudah beres, apa yang sengaja belum, dan apa yang dipelajari dari tinggal di gedung yang dua sisinya akhirnya dihuni satu orang yang sama hehe~
+Ini episode terakhir berseri _frontend_. Dan sesuai tradisi penutup di [seri sebelah](/writing/2026/hijrah-backend-09/), episode ini bukan pesta kemenangan; melainkan inventaris akhir: apa yang sudah beres, apa yang sengaja belum, dan apa yang dipelajari dari tinggal di gedung yang dua sisinya akhirnya dihuni satu orang yang sama hehe~
 
 ## Inventaris Akhir yang Jujur
 
@@ -22,7 +22,7 @@ Empat episode lalu kita membuka gedung _frontend_ warisan. Saat pintu ditutup ke
 
 - **76 halaman pindah, 76 halaman hidup.** Port 1:1 tanpa buang satu halaman pun, dan semua _link_ internal antar halaman tetap mengerti jalan pulangnya.
 - **Dua _library_ UI tetap berdamai.** Seratus satu _file_ untuk si mayoritas, tiga belas untuk si pemegang monopoli kalender, dan tetap nol _file_ yang memergoki mereka berbagi kamar.
-- **194 bekas luka tipe terukur.**[^1] Dua ratus jaring pengaman kecil yang jujur mengaku dirinya angsuran, bukan arsitektur.
+- **194 bekas luka tipe terukur.**[^1] Seratus sembilan puluh empat jaring pengaman kecil yang jujur mengaku dirinya angsuran, bukan arsitektur.
 - **Tiga era styling hidup berdampingan**,[^2] satu jenazah _backup_ mendapat penghormatan terakhir yang layak, dan _standardisasi_ resmi menunggu di ruang epilog.
 
 Tidak ada di daftar itu yang berbunyi "semuanya rapi". Dan justru itu kejujurannya: gedung ini tidak selesai direnovasi; gedung ini **selesai dipindahkan**. Dua hal yang berbeda, dan membedakan keduanya adalah pelajaran terbesar dari dua seri hehe~
@@ -51,7 +51,7 @@ Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya bercanda soal visa 
 
 ## Penutup Dua Seri
 
-Dengan episode ini, dua seri Hijrah berdiri selesai: [satu _backend_](/writing/2026/hijrah-backend-01/), satu _frontend_, dua sisi satu gedung yang sama, yang melayani puluhan ribu _user_ setiap hari tanpa pernah sekali pun minta diacungi jempol.
+Dengan episode ini, dua seri Hijrah akhirnya berdiri utuh: [satu _backend_](/writing/2026/hijrah-backend-01/), satu _frontend_, dua sisi satu gedung yang sama, yang melayani puluhan ribu _user_ setiap hari tanpa pernah sekali pun minta diacungi jempol.
 
 Kalau Anda sedang berdiri di depan gedung warisan Anda sendiri, _backend_ atau _frontend_ atau yang lain: ukur dulu, pindahkan dengan setia, rawat diri Anda, dan izinkan beberapa warisan menunggu gilirannya dengan tenang. Gedung tidak perlu selesai direnovasi supaya layak dihuni.
 

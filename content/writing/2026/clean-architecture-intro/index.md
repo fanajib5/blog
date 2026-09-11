@@ -3,7 +3,7 @@ title: "Clean Architecture: Dari Spaghetti Code ke Kode yang Bisa Dibaca Ulang"
 description: "Pengantar Clean Architecture untuk mahasiswa, dari spaghetti code ke kode yang terstruktur, dengan contoh nyata dari proyek GPS tracker."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-15
-lastmod: 2026-04-15
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -140,7 +140,7 @@ Perhatikan: tidak ada _database query_, tidak ada _HTTP request_, tidak ada _fra
 
 **2. Use Case, Apa yang Sistem Lakukan**
 
-_Use case_ mendefinisikan **apa** yang sistem lakukan, tanpa peduli **bagaimana** detailnya.
+_Use case_ mendefinisikan **apa** yang dilakukan sistem, tanpa peduli **bagaimana** detailnya.
 
 ```
 class UpdatePositionUseCase:
@@ -283,7 +283,7 @@ Intinya: **gunakan ketika kompleksitas sudah membutuhkannya**, bukan karena kede
 
 ## Pelajaran
 
-### 1. _Spaghetti Code_ Itu Normal, Tinggal di Itu yang Tidak Normal
+### 1. _Spaghetti Code_ Itu Normal, Tinggal di Situ yang Tidak Normal
 
 Semua _developer_ pernah nulis spaghetti code, termasuk yang sudah senior. Yang membedakan adalah: sadar kalau kodenya sudah _spaghetti_, dan tahu cara memperbaikinya.
 

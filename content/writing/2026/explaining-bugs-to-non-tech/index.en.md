@@ -3,7 +3,7 @@ title: "Why One Bug Can Take Three Days"
 description: "Why fixing one small bug can take days, and how to explain it to non-technical people so misunderstandings don't happen."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-16
-lastmod: 2026-04-16
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -66,7 +66,7 @@ The most common mistake: explaining technical problems using technical terms.
 Your boss doesn't care about the number of queries. What they care about: **what's the business impact?**
 
 **More effective:**
-> _"The system currently fetches data one at a time, but there could be hundreds of records. So the more data, the slower it gets. If left unfixed, when users reach a thousand, the report page could take 30 seconds to load, users will think the system is broken and leave the app."_
+> _"The system currently fetches data one at a time, but there could be hundreds of records. So the more data, the slower it gets. If left unfixed, when users reach a thousand, the report page could take 30 seconds to load. Users will think the system is broken and leave the app."_
 
 Notice the shift:
 

@@ -3,7 +3,7 @@ title: "Hijrah Frontend (1): Ketika Backend Engineer Disuruh Menyentuh Frontend"
 description: "Ep 1 seri Hijrah Frontend: setelah backend GPS selesai dihijrahkan ke Go, giliran gedung sebelah. Kesan pertama seorang backend engineer membuka kode frontend warisan, dan keputusan port tipis."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T02:45:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -22,7 +22,7 @@ Saya seorang _backend engineer_. Dunia saya: _query_, _index_, _parser_ paket bi
 
 ## Kesan Pertama: Hidung Backend Tidak Menyatu
 
-Saat mulai menyentuh _frontend_ warisan, satu hal langsung terasa: bahkan saya yang tidak jago _frontend_ bisa mencium bau _spaghetti_-nya, cukup dengan _mental model_ seorang programmer dan pengalaman bertahun-tahun membaca kode. Anda tidak perlu jago masak untuk tahu sup itu sudah tujuh hari; cukup hidung.
+Saat mulai menyentuh _frontend_ warisan, satu hal langsung terasa: bahkan saya yang tidak jago _frontend_ bisa mencium bau _spaghetti_-nya, cukup dengan _mental model_ seorang programmer dan pengalaman bertahun-tahun membaca kode. Anda tidak perlu jago masak untuk tahu sup itu sudah tujuh hari; cukup cium baunya.
 
 Dan bau itu bukan tuduhan. _Frontend_ itu apa adanya: dibangun bertahun-tahun, disentuh banyak orang dengan selera berbeda, bertahan hidup melayani puluhan ribu _user_ setiap hari. Sama persis dengan _backend_ yang pernah saya hijrahkan. Kok bisa gedung yang berbeda punya bau yang sama persis? Karena penjaganya sama: **waktu dan darurat** hehe~
 
@@ -53,7 +53,7 @@ Jadi paritas versi _frontend_: tampilan dan perilaku dibawa dulu apa adanya, str
 
 Seri **Hijrah Frontend** ini berisi lima episode:
 
-2. **Port tipis dan warisan yang ikut naik**: apa saja yang terbawa dari rumah lama, sadar-sadar.
+2. **Port tipis dan warisan yang ikut naik**: apa saja yang terbawa dari rumah lama, secara sadar.
 3. **Type chaos: angka, _string_ kosong, dan halaman yang berbeda pendapat**: bagaimana satu _field_ yang sama dikirim dengan tipe berbeda-beda tergantung halamannya, dan bagaimana hal itu diterima di dunia yang _strict_.
 4. **Dua _library_ UI, dua era penamaan**: warisan yang hidup berdampingan, dan konvensi yang berganti setiap ganti tukang.
 5. **Dua sisi satu gedung**: penutup, refleksi, dan apa yang berubah setelah gedung sebelah jadi rumah sendiri.

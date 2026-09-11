@@ -3,7 +3,7 @@ title: "Hijrah Frontend (3): Type Chaos, Angka, String Kosong, dan Halaman yang 
 description: "Ep 3 seri Hijrah Frontend: satu field yang sama dikirim sebagai angka, string kosong, dan string biasa tergantung halamannya. Tentang PHP yang memafkan, Go yang perfeksionis, dan 194 bekas lukanya."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:15:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -27,7 +27,7 @@ Dunia ini berjalan damai. Semua halaman mengirim dengan gayanya masing-masing, _
 
 ## Tetangga Baru yang Perfeksionis
 
-Lalu _backend_-nya pindah ke Go, dan Go punya pandangan yang sangat berbeda tentang tipe: **tipe adalah kontrak**. Kalau kontraknya bilang angka, yang datang harus angka; _string_ kosong yang mengaku angka akan ditolak di pintu, dengan _error decoding_ yang panjang dan tidak tertawakan.
+Lalu _backend_-nya pindah ke Go, dan Go punya pandangan yang sangat berbeda tentang tipe: **tipe adalah kontrak**. Kalau kontraknya bilang angka, yang datang harus angka; _string_ kosong yang mengaku angka akan ditolak di pintu, dengan _error decoding_ yang panjang dan sama sekali tidak lucu.
 
 Di sinilah chaos itu baru tampak bentuknya. Bukan karena Go menciptakan chaos; Go cuma berhenti memafkannya. Tiga keyakinan yang selama ini hidup damai tiba-tiba jadi tiga pelanggaran:
 
@@ -47,7 +47,7 @@ Dua ratus jaring pengaman itu tidak salah; malah mereka pahlawan sunyi yang memb
 
 ## Kontrak, Bukan Tebak-Tebakan
 
-Solusi jangka panjangnya bukan menambah jaring pengaman keempat ratus. Solusinya adalah mengubah pertanyaannya: dari _"nilai ini bentuknya apa hari ini?"_ menjadi _"kontraknya bilang apa?"_
+Solusi jangka panjangnya bukan menambah jaring pengaman ke-400. Solusinya adalah mengubah pertanyaannya: dari _"nilai ini bentuknya apa hari ini?"_ menjadi _"kontraknya bilang apa?"_
 
 Satu _field_, satu tipe yang dijanjikan, dipatuhi semua halaman yang mengirimnya. _String_ kosong yang mengaku angka tidak lagi ditolak di ujung dengan _error_; dia ditolak lebih awal, di tempat yang bisa menjelaskan dengan sopan. Dan daftar kontrak itu menjadi dokumen paling berguna yang pernah diabaikan _frontend_ bertahun-tahun: sederhana, tertulis, dan menghabiskan semua perdebatan hahaha.
 

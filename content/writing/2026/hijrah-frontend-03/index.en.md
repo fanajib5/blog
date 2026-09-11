@@ -3,7 +3,7 @@ title: "Hijrah Frontend (3): Type Chaos, Numbers, Empty Strings, and Pages with 
 description: "Episode 3 of the Hijrah Frontend series: the same field sent as a number, an empty string, and a plain string depending on the page. About PHP that forgave, Go that didn't, and 194 measured scars."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:15:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -39,7 +39,7 @@ There are no villains in this story. Every page is consistent with itself, for i
 
 ## The Measured Scars
 
-My favorite part of this episode: the chaos isn't just tellable, it's countable.
+My favorite part of this episode: the chaos isn't just something you can describe; you can count it.
 
 When I swept through the new repo, one pattern stood out clearly: nearly two hundred `String()` calls scattered across the pages, plus twenty-something `Number()` calls.[^1] Some of them are on official duty; many more are **scars** from the chaos era: small safety nets installed so that values of unpredictable types could still be processed.
 
@@ -47,7 +47,7 @@ Those two hundred safety nets aren't wrong; they're silent heroes that kept the 
 
 ## Contracts, Not Guessing Games
 
-The long-term fix isn't adding safety net number four hundred. It's changing the question: from _"what shape is this value today?"_ to _"what does the contract say?"_
+The long-term fix isn't adding a 400th safety net. It's changing the question: from _"what shape is this value today?"_ to _"what does the contract say?"_
 
 One field, one promised type, honored by every page that sends it. The empty string claiming to be a number no longer gets rejected at the far end with an error; it gets rejected earlier, in a place that can explain itself politely. And that contract list became the most useful document the frontend had ignored for years: simple, written down, and ending all the debates hahaha.
 

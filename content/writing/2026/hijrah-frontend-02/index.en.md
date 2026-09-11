@@ -3,7 +3,7 @@ title: "Hijrah Frontend (2): The Thin Port and the Inheritance That Boarded"
 description: "Episode 2 of the Hijrah Frontend series: 76 pages in, 76 pages out. Why zero pages were left behind, what the first opened boxes contained, and one big plan that chose not to happen."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T03:00:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: true
 toc: true
 comments: false
@@ -17,7 +17,7 @@ series: "Hijrah Frontend"
 
 The move from [episode one](/en/writing/2026/hijrah-frontend-01/) is finished, and handover day has arrived. The manifest is short and boring, exactly like the best moving manifests: **seventy-six boxes in, seventy-six boxes out. Zero pages left behind.**
 
-That's not luck. That's a decision. And this episode is about that decision: what we consciously carried up, what turned out to board without an invitation, and one big plan that chose not to happen hehe~
+That's not luck. That's a decision. And this episode is about that decision: what we deliberately carried over, what turned out to board without an invitation, and one big plan that chose not to happen hehe~
 
 ## Why Zero Pages Were Left Behind
 
@@ -25,7 +25,7 @@ If you've ever moved houses, you know the most liberating moment: deciding "just
 
 God forbid, again. Deciding a page's life or death during a house move is two decisions fused into one: move, and reshape the product's scope. [The neighboring series](/en/writing/2026/hijrah-backend-04/) already paid the tuition for that combination. So the rule was simple: **seventy-six in, seventy-six out**, page by page, one at a time, no discard script.
 
-The result is boringly verified: the new repo counts 76 pages, the old repo counts 76, and the folder lists match one by one. Even the pages whose names raise eyebrows, like the demo and docs and special-purpose routes, boarded too. Not because they matter; because discarding them wasn't this moment's authority hahaha.
+The result is boringly verified: the new repo counts 76 pages, the old repo counts 76, and the folder lists match one by one. Even the pages whose names raise eyebrows, like the demo and docs and special-purpose routes, boarded too. Not because they matter; because discarding them wasn't a decision for this phase hahaha.
 
 ## The First Boxes We Opened
 

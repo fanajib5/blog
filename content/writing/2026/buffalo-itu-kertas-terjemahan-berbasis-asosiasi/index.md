@@ -3,7 +3,7 @@ title: "Buffalo Itu Kertas: Belajar Bahasa Lewat Terjemahan Berbasis Asosiasi"
 description: "Sebuah cerita lucu dari anak les bahasa Inggris yang menerjemahkan 'buffalo' sebagai 'kertas', dan kenapa itu sebenarnya masuk akal secara ilmiah."
 author: "Faiq Najib Al-Aziz"
 date: 2026-06-04T10:28:00+07:00
-lastmod: 2026-06-04T10:28:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -34,7 +34,7 @@ Kalau kamu pernah belajar bahasa asing, kamu pasti tahu rasanya: otak tidak meny
 
 Kata _"buffalo"_ masuk ke telinga si anak. Otak langsung melakukan pencarian. Dan yang pertama muncul di hasil pencarian bukan gambar hewan berbulu besar yang hidup di padang rumput Amerika Utara, tapi... **kertas buffalo**. Itu yang paling sering dia temui. Itu yang paling dekat. Itu yang paling _relevan_ menurut otaknya.
 
-Fenomena ini punya nama. Para linguist dan peneliti bahasa menyebutnya _**association-based translation**_, atau dalam bahasa yang lebih manusiawi: **terjemahan berbasis asosiasi**.[^1]
+Fenomena ini punya nama. Para linguis dan peneliti bahasa menyebutnya _**association-based translation**_, atau dalam bahasa yang lebih manusiawi: **terjemahan berbasis asosiasi**.[^1]
 
 Intinya sederhana: manusia menerjemahkan kata bukan dari kamus, tapi dari memori yang paling kuat terasosiasi dengan kata tersebut. Dan memori itu tidak selalu benar. Tapi selalu _merasa_ benar.
 
@@ -42,7 +42,7 @@ Intinya sederhana: manusia menerjemahkan kata bukan dari kamus, tapi dari memori
 
 Sebelum kamu terlalu cepat melempar senyum sambil bilang, _"ya wajar, itu kan anak kecil"_ — tunggu dulu.
 
-Saya mau berbagi beberapa contoh yang sedikit lebih _closer to home_.
+Saya mau berbagi beberapa contoh yang sedikit lebih dekat dengan keseharian kita.
 
 **Contoh pertama.** Pernah ada yang mengira kata _"deadline"_ artinya "sudah mati"? Maksudnya dari sisi orang yang belum pernah bekerja di lingkungan yang menggunakan istilah itu. _Dead_ kan artinya mati. _Line_ artinya garis. Jadi _deadline_: garis kematian? Secara asosiasi, masuk akal. Secara konteks, tentu tidak.
 
