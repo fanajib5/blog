@@ -15,7 +15,7 @@ Backend engineer dengan fokus utama pada **Go (Golang)** dan **PostgreSQL**. Ber
 
 - **Bahasa**: Go, PHP, SQL
 - **Database**: PostgreSQL, TimescaleDB, MySQL, Redis
-- **Infrastructure**: Docker, Linux, Nginx, CI/CD, Apache Kafka
+- **Infrastructure**: Docker, Linux, Nginx, CI/CD
 - **Spesialisasi**: REST API & microservices, legacy migration (PHP → Go), database optimization
 
 Lihat karya saya di halaman [Proyek](/projects/).

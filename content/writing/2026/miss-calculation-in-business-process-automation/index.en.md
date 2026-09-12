@@ -3,7 +3,7 @@ title: "Business Process Automation with UiPath RPA: When an Rp8 Billion Differe
 description: "Field notes on using UiPath RPA to reduce manual-process risk after a bond worksheet miscalculation of around Rp8 billion stopped feeling as alarming as it should have."
 author: "Faiq Najib Al-Aziz"
 date: 2026-03-20
-lastmod: 2026-03-20
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -20,7 +20,7 @@ That was the disturbing part.
 
 Because **Rp8 billion is not a small number**. But in my head at that time, after being exposed to large nominal figures so often, it briefly felt closer to **Rp8 million** than to a real operational alarm. Still wrong, obviously. But mentally, the danger signal had gone dull. And when your danger signal goes dull, the issue is no longer just calculation. The issue is the process around it.
 
-This is not a step-by-step UiPath Studio tutorial. These are my notes on how a bond-workpaper miscalculation changed the way I looked at business process automation. For me, automation was not about flashy tools. It was about **protecting people from fatigue, bias, and the habit of treating high-risk numbers as routine**.
+This is not a step-by-step UiPath Studio tutorial. These are my notes on how a miscalculation in a bond workpaper changed the way I looked at business process automation. For me, automation was not about flashy tools. It was about **protecting people from fatigue, bias, and the habit of treating high-risk numbers as routine**.
 
 ## It Did Not Start with a Huge Bug, Just a Process That Was Too Manual
 

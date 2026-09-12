@@ -3,7 +3,7 @@ title: "Migrating Legacy PHP to Go: Why, How, and Lessons Learned"
 description: "Notes from converting a backend system from PHP (CodeIgniter 3 & Laravel) to Go, 370+ endpoints, 33 entities, and 194K lines of code migrated incrementally."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
-lastmod: 2026-04-04
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -49,7 +49,7 @@ This system handles many simultaneous requests, from real-time GPS tracking to r
 
 ### 3. Clean Deployment
 
-One binary. No dependency hell, no `composer install` on the server, no PHP version conflicts. Build locally, deploy one file. Done. Back with PHP deployments, you had to make sure all composer dependencies installed correctly, the PHP version matched, the right extensions were there... now it's just `scp` one file and done. Simple life is the best life hehe.
+One binary. No dependency hell, no `composer install` on the server, no PHP version conflicts. Build locally, deploy one file. Done. With PHP deployments, you had to make sure all composer dependencies installed correctly, the PHP version matched, the right extensions were there... now it's just `scp` one file and done. Simple life is the best life hehe.
 
 ### 4. Measurable Performance
 
@@ -114,7 +114,7 @@ A few things I learned from this process:
 
 ### 1. Understand the Existing System First
 
-Before writing a single line of Go code, I spent considerable time understanding the behavior of the existing system. Not just reading the code, understanding **why** certain decisions were made. Sometimes, code that looks "weird" has a perfectly reasonable explanation in its original context. Don't just label legacy code as bad code. Maybe there was a constraint back then that forced that decision hehe~
+Before writing a single line of Go code, I spent considerable time understanding the behavior of the existing system. Not just reading the code, but understanding **why** certain decisions were made. Sometimes, code that looks "weird" has a perfectly reasonable explanation in its original context. Don't just label legacy code as bad code. Maybe there was a constraint back then that forced that decision hehe~
 
 ### 2. Big Bang Rewrite Is a Trap
 

@@ -3,7 +3,7 @@ title: "Choosing a Tech Stack: Between Ego and Business"
 description: "The temptation to pick the latest technology is real, but is that decision driven by sound business logic, or just our developer ego?"
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-18
-lastmod: 2026-04-22
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -56,7 +56,7 @@ Notice how the two columns are talking about completely different things. And we
 
 This doesn't mean we should ignore technical concerns. Poor technical choices today become expensive technical debt tomorrow, _and that is also_ a business concern. The point is that **both sides need to be considered**, not just one.
 
-## A Framework That Doesn't Hurt
+## A Practical Decision Framework
 
 After choosing wrong a few times (and living with the consequences hehe), I've landed on four questions I now run through before committing to a new stack or architecture:
 

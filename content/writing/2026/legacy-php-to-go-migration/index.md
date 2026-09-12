@@ -3,7 +3,7 @@ title: "Migrasi Legacy PHP ke Go: Kenapa, Bagaimana, dan Pelajarannya"
 description: "Catatan pengalaman mengkonversi sistem backend dari PHP (CodeIgniter 3 & Laravel) ke Go, 370+ endpoint, 33 entity, dan 194K baris kode yang berhasil dimigrasi bertahap."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
-lastmod: 2026-04-04
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -29,7 +29,7 @@ Sistem yang saya tangani punya profil seperti ini:
 
 Masalah sebenarnya bukan di bahasa pemrogramannya. PHP itu bagus kok. Masalahnya ada di:
 
-1. **Tidak ada pemisahan layer**: _controller_ langsung query ke database, _business logic_ bercampur dengan _presentation logic_. Pokoknya kayak nasi goreng yang isinya macem-macem, tapi nggak tau mana nasi mana sayurnya hahaha.
+1. **Tidak ada pemisahan layer**: _controller_ langsung query ke database, _business logic_ bercampur dengan _presentation logic_. Pokoknya kayak nasi goreng yang isinya macem-macem, tapi nggak tahu mana nasi mana sayurnya hahaha.
 2. **Sulit di-_test_**: kode yang tightly coupled bikin unit testing jadi _nightmare_. Mau _test_ satu function, eh harus _setup_ database, _mock_ tiga dependency, dan berdoa semoga berhasil.
 3. **_Developer experience_ menurun**: onboarding _developer_ baru makin lama, _bug fix_ makin berisiko. Terakhir ada _developer_ baru yang sampai bilang, _"Mas, ini kodenya... ehem, menarik sekali arsitekturnya."_, _Translation_: _chaotic_ hehe~
 
@@ -53,7 +53,7 @@ Satu _binary_. Tanpa _dependency hell_, tanpa _composer install_ di _server_, ta
 
 ### 4. _Performance_ yang Terukur
 
-Bukan soal _benchmark_ angka, tapi soal **penggunaan resource yang predictable**. _Memory usage_ Go yang konsisten membuat kapasitas _planning_ jauh lebih mudah. Dulu sistem PHP bisa tiba-tiba _memory spike_ tanpa sebab yang jelas. Sekarang _memory usage_-nya _flat_ dan _predictable_. _Peace of mind_, priceless hahaha.
+Bukan soal _benchmark_ angka, tapi soal **penggunaan resource yang predictable**. _Memory usage_ Go yang konsisten membuat perencanaan kapasitas jauh lebih mudah. Dulu sistem PHP bisa tiba-tiba _memory spike_ tanpa sebab yang jelas. Sekarang _memory usage_-nya _flat_ dan _predictable_. _Peace of mind_, priceless hahaha.
 
 Bukan berarti Go sempurna, _error handling_-nya _verbose_ (semua `if err != nil` itu... _well_, _you get used to it_)[^3], dan _ecosystem_-nya lebih kecil dari PHP. Tapi untuk _use case_ ini, _trade-off_-nya sepadan. Setiap _tool_ punya kelebihan dan kekurangan, tinggal kita pintar-pintarnya milih yang paling cocok aja hehe~
 
@@ -114,7 +114,7 @@ Beberapa hal yang saya pelajari dari proses ini:
 
 ### 1. Pahami Dulu Sistem yang Ada
 
-Sebelum menulis satu baris pun kode Go, saya _spend_ waktu cukup lama untuk memahami _behavior_ sistem yang sudah ada. Bukan membaca _code_-nya saja, tapi memahami **mengapa** keputusan tertentu dibuat di masa lalu. Kadang, kode yang terlihat _"aneh"_ punya alasan yang masuk akal di konteks saat itu dibuat. Jangan langsung _judge_ kode _legacy_ sebagai kode jelek. Siapa tahu dulu ada _constraint_ tertentu yang memaksa keputusan itu diambil hehe~
+Sebelum menulis satu baris pun kode Go, saya _spend_ waktu cukup lama untuk memahami _behavior_ sistem yang sudah ada. Bukan sekadar membaca _code_-nya, tapi juga memahami **mengapa** keputusan tertentu dibuat di masa lalu. Kadang, kode yang terlihat _"aneh"_ punya alasan yang masuk akal di konteks saat itu dibuat. Jangan langsung _judge_ kode _legacy_ sebagai kode jelek. Siapa tahu dulu ada _constraint_ tertentu yang memaksa keputusan itu diambil hehe~
 
 ### 2. _Big Bang_ Rewrite itu _Trap_
 

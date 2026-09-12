@@ -1,9 +1,9 @@
 ---
 title: "Otomasi Proses Bisnis dengan RPA UiPath: Ketika Selisih Rp8 Miliar Mulai Terlihat Normal"
-description: "Catatan pengalaman menggunakan RPA UiPath untuk mengurangi risiko proses manual setelah miss kalkulasi kertas kerja obligasi hingga Rp8 miliar terasa seperti angka yang biasa saja."
+description: "Catatan pengalaman menggunakan RPA UiPath untuk mengurangi risiko proses manual setelah salah hitung pada kertas kerja obligasi hingga Rp8 miliar terasa seperti angka yang biasa saja."
 author: "Faiq Najib Al-Aziz"
 date: 2026-03-20
-lastmod: 2026-03-20
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -14,13 +14,13 @@ tags:
   - uipath
 ---
 
-Ada fase dalam pekerjaan yang bikin ukuran "besar" jadi bergeser tanpa sadar. Setiap hari lihat angka miliaran, puluhan miliar, ratusan juta, sampai-sampai suatu waktu ketika ada selisih **Rp8 miliar** di kertas kerja obligasi, reaksi pertama saya bukan panik. Malah lebih ke, _"Oh, ada miss lagi. Cek bentar ya."_ 
+Ada fase dalam pekerjaan yang bikin ukuran "besar" jadi bergeser tanpa sadar. Setiap hari lihat angka miliaran, puluhan miliar, ratusan juta, sampai-sampai suatu waktu ketika ada selisih **Rp8 miliar** di kertas kerja obligasi, reaksi pertama saya bukan panik. Malah lebih ke, _"Oh, ada selisih lagi. Cek bentar ya."_ 
 
 Nah itu yang justru mengganggu.
 
 Karena kalau dipikir-pikir, **Rp8 miliar itu bukan angka kecil**. Tapi di mata saya waktu itu, saking seringnya lihat nominal besar, angka itu sempat terasa seperti **Rp8 juta saja**. Tetap salah, tentu. Tapi secara mental, rasa bahayanya tumpul. Dan ketika rasa bahaya mulai tumpul, itu pertanda ada yang salah bukan cuma di perhitungannya, tapi juga di proses kerjanya.
 
-Tulisan ini bukan tutorial UiPath Studio langkah demi langkah. Ini catatan pengalaman saya tentang bagaimana insiden miss kalkulasi di proses obligasi membuka mata saya bahwa otomasi proses bisnis itu bukan soal keren-kerenan tool, tapi soal **menjaga manusia dari kelelahan, bias, dan kebiasaan menganggap risiko besar sebagai hal biasa**.
+Tulisan ini bukan tutorial UiPath Studio langkah demi langkah. Ini catatan pengalaman saya tentang bagaimana insiden salah hitung di proses obligasi membuka mata saya bahwa otomasi proses bisnis itu bukan soal keren-kerenan tool, tapi soal **menjaga manusia dari kelelahan, bias, dan kebiasaan menganggap risiko besar sebagai hal biasa**.
 
 ## Awalnya Bukan Bug Besar, Cuma Proses yang Terlalu Manual
 

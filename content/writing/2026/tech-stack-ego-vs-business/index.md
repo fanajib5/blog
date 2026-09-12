@@ -3,7 +3,7 @@ title: "Pemilihan Tech Stack: Antara Ego dan Bisnis"
 description: "Godaan memilih teknologi terbaru itu nyata, tapi apakah keputusan itu lahir dari logika bisnis, atau sekadar ego kita sebagai developer?"
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-18
-lastmod: 2026-04-22
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -113,7 +113,7 @@ Ingin mempelajari teknologi baru itu bagus, itu yang membuat kita berkembang. In
 
 Yang bermasalah adalah ketika ego itu **mengaburkan judgment kita**, ketika kita memilih teknologi untuk terlihat pintar, bukan untuk memecahkan masalah. Ketika kita membangun sistem yang kompleks bukan karena dibutuhkan, tapi karena _fun_ untuk dibangun. Ketika kita mempertahankan pilihan yang salah karena tidak mau mengakui kekeliruan.
 
-_Aware_ terhadap perbedaan itu, menurut saya, adalah salah satu kematangan penting seorang _software engineer_.
+Menyadari perbedaan itu, menurut saya, adalah salah satu kematangan penting seorang _software engineer_.
 
 Sekian. Semoga bermanfaat dan terima kasih sudah tersasar ke sini hehe~
 

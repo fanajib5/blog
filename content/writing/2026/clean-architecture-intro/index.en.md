@@ -3,7 +3,7 @@ title: "Clean Architecture: From Spaghetti Code to Readable Code"
 description: "An introduction to Clean Architecture for students, from spaghetti code to structured code, with real examples from a GPS tracker project."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-15
-lastmod: 2026-04-15
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -121,7 +121,7 @@ For students, I think these three layers are the most important to understand:
 
 **1. Entity, Core Business Rules**
 
-This is what **shouldn't change** regardless of whatever technology you use. In the GPS tracker project:
+This is what **shouldn't change** regardless of the technology you use. In the GPS tracker project:
 
 ```
 class Vehicle:
@@ -198,7 +198,7 @@ Now let's compare the spaghetti code from the beginning with the "clean" version
 
 ### Before: Spaghetti
 
-One function handles everything, read DB, process logic, send notification, generate report. All fused together.
+One function handles everything: reads from the database, processes business logic, sends notifications, generates reports. All fused together.
 
 ### After: Clean
 

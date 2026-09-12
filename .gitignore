@@ -12,3 +12,6 @@ public/
 
 # Internal planning documents
 docs/
+
+# Hugo asset cache (regenerated)
+resources/_gen/assets/

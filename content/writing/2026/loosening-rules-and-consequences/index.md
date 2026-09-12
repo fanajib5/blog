@@ -3,7 +3,7 @@ title: "Kelonggaran Aturan dan Konsekuensinya"
 description: "Refleksi tentang keputusan memberikan kepercayaan kepada mahasiswa untuk menggunakan AI, dan apa artinya ketika tanggung jawab itu berpindah tangan."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-28
-lastmod: 2026-04-28
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -73,7 +73,7 @@ Memindahkan tanggung jawab ke orang yang sudah cukup dewasa untuk menerimanya ad
 
 Konsekuensinya berlaku dua arah.
 
-Bagi mahasiswa yang menggunakannya dengan baik — sebagai teman belajar, sebagai alat eksplorasi konsep, sebagai cara mempercepat pemahaman — manfaatnya nyata. Mereka akan punya _headstart_ yang tidak kecil ketika masuk dunia kerja.
+Bagi mahasiswa yang menggunakannya dengan baik — sebagai teman belajar, sebagai alat eksplorasi konsep, sebagai cara mempercepat pemahaman — manfaatnya nyata. Mereka akan punya _head start_ yang tidak kecil ketika masuk dunia kerja.
 
 Bagi yang memilih menggunakannya sebagai jalan pintas — mengerjakan tugas tanpa memahami, menyerahkan semuanya ke AI tanpa refleksi — konsekuensinya juga nyata. Hanya saja tidak langsung terasa. Biasanya baru terasa ketika menghadapi situasi yang membutuhkan pemahaman yang sesungguhnya: wawancara kerja, _problem solving_ di lapangan, atau saat harus memodifikasi kode yang mereka sendiri tidak paham dari mana asalnya.
 

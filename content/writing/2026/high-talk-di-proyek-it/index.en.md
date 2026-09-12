@@ -3,7 +3,7 @@ title: "A Stepladder for IT Projects"
 description: "A story about teammates or bosses in IT projects whose way of talking feels like summiting a mountain, and how to deal with it without having to climb alongside them."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-17
-lastmod: 2026-05-17
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -29,7 +29,7 @@ People who've spent years immersed in microservices, event-driven architecture, 
 
 **Second, they want to appear competent.**
 
-This one's a bit sensitive. Sometimes, the overuse of technical jargon isn't a habit, it's a choice. _Show off_, plainly. The longer the acronym that rolls off their tongue, the higher they feel their position is. At least in their own head~~
+This one's a bit sensitive. Sometimes, the overuse of technical jargon isn't a habit, it's a choice. Showing off, plainly put. The longer the acronym that rolls off their tongue, the higher they feel their position is. At least in their own head~~
 
 **Third, the topic is genuinely hard.**
 
@@ -92,7 +92,7 @@ From experience, a few approaches tend to work, and one that's best avoided.
 
 2. **Ask for documentation or a diagram.** Sometimes people explain things more clearly in writing or visuals than in conversation. And with documentation, you can re-read at your own pace without pressure. _Win-win._
 
-3. **Validate first, ask second.** Try paraphrasing back: _"So you mean we need to split the system to make it easier to maintain, right?"_, if they agree, you've got the gist. If not, they'll correct you, and their explanation tends to get clearer because they're forced to rethink it haha.
+3. **Validate first, ask second.** Try paraphrasing back: _"So you mean we need to split the system to make it easier to maintain, right?"_ If they agree, you've got the gist. If not, they'll correct you, and their explanation tends to get clearer because they're forced to rethink it haha.
 
 4. **In meetings, establish shared norms.** If your position allows it, suggest a team habit: _"Let's agree that whenever a new technical term comes up, we add a brief plain-language explanation."_ It sounds small, but the impact on team communication quality is significant.
 

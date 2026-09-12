@@ -1,7 +1,7 @@
 {{ define "main" }}
 	<main class="wrapper">
 		<h1><a href="/" class="home">
-      {{ cond (eq (strings.Contains .RelPermalink "tags") true) (print "Tulisan tentang #" .Title) .Title }}
+      {{ cond (eq (strings.Contains .RelPermalink "tags") true) (print "Tulisan tentang #" .Title) (.Title | markdownify) }}
     </a></h1>
 		{{ if .Content -}}
 		<div class="content">
@@ -16,7 +16,7 @@
 				{{ range .Pages -}}
 				<li class="post-item">
 					<span class="dim post-day">{{ .Date.Format "Jan 02" }}</span>
-					<a href="{{.RelPermalink}}" class="post-title">{{.Title}}</a>
+					<a href="{{.RelPermalink}}" class="post-title">{{.Title | markdownify}}</a>
 				</li>
 				{{- end }}
 			</ul>

@@ -34,7 +34,7 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "{{ .Title }}",
+  "headline": "{{ .Title | markdownify | plainify }}",
   "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
   "image": "{{ with .Params.images }}{{ index . 0 | relURL }}{{ else }}{{ .Site.BaseURL }}/img/og-image.png{{ end }}",
   "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z" }}",
@@ -65,7 +65,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "{{ .Title }}",
+  "name": "{{ .Title | markdownify | plainify }}",
   "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}",
   "url": "{{ .Permalink }}",
   "isPartOf": {

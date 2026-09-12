@@ -3,7 +3,7 @@ title: "Otomasi Proses Bisnis dengan RPA UiPath: Mulai dari yang Membosankan Dul
 description: "Catatan pengalaman menerapkan RPA UiPath untuk otomasi proses bisnis, dari pekerjaan repetitif sampai pelajaran penting yang sering terlewat."
 author: "Faiq Najib Al-Aziz"
 date: 2026-03-12
-lastmod: 2026-03-12
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -132,7 +132,7 @@ Mereka yang menjalankan proses tiap hari. Insight mereka sering lebih akurat dar
 
 Buat saya, RPA UiPath bukan soal "menggantikan manusia", tapi soal mengembalikan waktu manusia ke pekerjaan yang lebih bernilai. Pekerjaan repetitif tetap harus selesai, tapi tidak selalu harus dikerjakan manual.
 
-Kalau kamu ingin lihat sisi yang lebih "lapangan", saya juga menulis [studi kasus lain](/writing/2026/miss-calculation-in-business-process-automation/) tentang bagaimana miss kalkulasi kertas kerja obligasi sampai Rp8 miliar justru menyadarkan saya bahwa proses yang terlalu manual bisa mengikis sensitivitas kita terhadap risiko.
+Kalau kamu ingin lihat sisi yang lebih "lapangan", saya juga menulis [studi kasus lain](/writing/2026/miss-calculation-in-business-process-automation/) tentang bagaimana salah hitung pada kertas kerja obligasi sampai Rp8 miliar justru menyadarkan saya bahwa proses yang terlalu manual bisa mengikis sensitivitas kita terhadap risiko.
 
 Kalau kamu sedang mengevaluasi inisiatif otomasi proses bisnis dan ingin diskusi dari sisi implementasi yang realistis, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 

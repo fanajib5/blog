@@ -3,7 +3,7 @@ title: "Best Practices for Building APIs in Laravel and Go: Notes from a Real Pr
 description: "Lessons from auditing 460+ routes and 58 controllers—patterns to keep, patterns to ditch, and how each maps to Go."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
-lastmod: 2026-05-07T10:28:00+07:00
+lastmod: 2026-09-11T09:28:00+07:00
 draft: false
 toc: true
 comments: false
@@ -426,7 +426,7 @@ type AnalyzeDeviceRequest struct {
 }
 ```
 
-_Nice thing_: in Go, since structs are first-class citizens, validation is automatically attached to the type. No more _"which validation does this endpoint use?"_ because the struct is directly visible in the handler signature hehe~
+The nice thing is: in Go, since structs are first-class citizens, validation is automatically attached to the type. No more _"which validation does this endpoint use?"_ because the struct is directly visible in the handler signature hehe~
 
 ## 4. Response Consistency: One Format, All Endpoints
 
@@ -475,7 +475,7 @@ return response()->json([
 return $this->sendResponse($user->toArray());  // ✅ consistent
 ```
 
-Imagine being the frontend developer handling two different response formats for essentially the same login endpoint. Their mental state: _"why tho?"_ hahaha.
+Imagine being the frontend developer handling two different response formats for essentially the same login endpoint. No wonder they'd ask, _"why does it have to be like this?"_ hahaha.
 
 ### Best Practice
 

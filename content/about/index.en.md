@@ -15,7 +15,7 @@ Backend engineer with a primary focus on **Go (Golang)** and **PostgreSQL**. Exp
 
 - **Languages**: Go, PHP, SQL
 - **Databases**: PostgreSQL, TimescaleDB, MySQL, Redis
-- **Infrastructure**: Docker, Linux, Nginx, CI/CD, Apache Kafka
+- **Infrastructure**: Docker, Linux, Nginx, CI/CD
 - **Specializations**: REST API & microservices, legacy migration (PHP → Go), database optimization
 
 See my work on the [Projects](/en/projects/) page.
