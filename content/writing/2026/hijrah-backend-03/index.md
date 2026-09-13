@@ -85,6 +85,8 @@ Dan soal kata "selesai": waktu itu saya umumkan selesai dengan percaya diri sete
 
 Episode berikutnya kita bedah filosofi yang menopang semua episode sebelumnya: kenapa "yang benar adalah yang lama", dan apa yang terjadi ketika "perbaikan" harus saya hapus sendiri. Sampai ketemu di sana.
 
+Kalau mau versi tutorialnya — menulis _decoder_ GT06 dari nol, tabel _byte_ demi _byte_ dengan CRC yang diuji — ada di [GPS Backend Part 3](/writing/2026/decode-packet-gt06-teltonika/).
+
 Sekian. Salam.
 
 [^1]: Potongan kode disederhanakan; nama protokol dan _field_ IO dipertahankan secukupnya untuk bercerita.

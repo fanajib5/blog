@@ -63,6 +63,8 @@ Kombinasi keduanya mengubah pertanyaan "kapan kita beres-beres data?" dari _kena
 
 Episode berikutnya adalah episode terakhir dari seri ini: refleksi hampir dua tahun, yang akan saya kerjakan beda kalau mengulang, dan bagian yang paling saya syukuri. Sampai ketemu di penutup.
 
+Versi tutorial dari dua babak episode ini — dari _TCP listener_ sampai _time-series database_ — ada di [GPS Backend Part 2](/writing/2026/tcp-listener-gps-go/) dan [Part 4](/writing/2026/gps-data-postgresql-timescaledb/).
+
 Sekian. Salam.
 
 [^1]: Potongan kode dan angka konfigurasi disederhanakan, bentuk aslinya lebih panjang dan membawa detail internal.

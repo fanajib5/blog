@@ -84,6 +84,8 @@ Mandat yang menunggu saya sejak sebelum hari pertama itu tenggangnya tiga bulan.
 
 Episode berikutnya kita masuk ke bagian yang paling sering ditanyakan: _kok bisa sih satu_ endpoint _makan 15 detik?_ Sampai ketemu di sana.
 
+Oh iah, untuk yang lebih suka versi tutorialnya — membangun backend GPS dari nol dengan kode yang bisa diikuti — saya tulis terpisah di [seri GPS Backend](/writing/2026/memahami-gps-protocol/). Seri Hijrah ini versi kisahnya.
+
 Terima kasih sudah tersasar ke sini dan membaca hehe. Semoga harimu menyenangkan!
 
 Sekian. Salam.
