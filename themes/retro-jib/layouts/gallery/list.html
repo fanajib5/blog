@@ -1,7 +1,7 @@
 {{ define "main" }}
 <style></style>
 <main class="wrapper">
-  <h1><a href="/" class="home">{{.Title | markdownify}}</a></h1>
+  <h1>{{.Title | markdownify}}</h1>
   {{ if .Content -}}
   <div class="content">
     {{ .Content }}
@@ -20,5 +20,4 @@
   </div>
   {{- end }}
 </main>
-<hr>
 {{- end }}

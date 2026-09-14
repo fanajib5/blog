@@ -1,6 +1,6 @@
 {{ define "main" }}
 <main class="wrapper">
-  <h1><a href="/" class="home">{{.Title | markdownify}}</a></h1>
+  <h1>{{.Title | markdownify}}</h1>
   <ul class="lsn dim album-header">
     {{ with .Params.location }}
       {{ if . }}
@@ -50,5 +50,4 @@
   {{ partialCached "comments.html" . }}
   {{- end }}
 </main>
-<hr>
 {{- end }}
