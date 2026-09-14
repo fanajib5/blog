@@ -50,8 +50,9 @@
 					{{- range .Site.Menus.main -}}
 					{{- $navURL := .URL -}}
 					{{- $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (eq $currentPage.RelPermalink $navURL) (and (ne $navURL "/") (strings.HasPrefix $currentPage.RelPermalink $navURL)) -}}
-					<li>
-						<a href="{{ .URL }}" class="{{ if $isActive }}active{{ end }}">{{ .Name }}</a>
+					{{- $isButton := or .Params.button (eq (strings.TrimRight "/" .URL) "/contact") (eq (strings.TrimRight "/" .URL) "/en/contact") -}}
+					<li class="{{ if $isButton }}nav-item-cta{{ end }}">
+						<a href="{{ .URL }}" class="{{ if $isActive }}active{{ end }}{{ if $isButton }} nav-cta{{ end }}">{{ .Name }}</a>
 					</li>
 					{{- end }}
 				</ul>

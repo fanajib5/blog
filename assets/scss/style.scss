@@ -147,6 +147,28 @@ textarea {
           border-bottom: 2px solid var(--c-accent);
           border-radius: 0;
         }
+
+        &.nav-cta {
+          margin-left: 0.25rem;
+          padding: 0.2rem 0.55rem;
+          border: 1px solid var(--c-border);
+          border-radius: 4px;
+          color: var(--c-txt);
+          font-weight: 600;
+
+          &:hover {
+            border-color: var(--c-accent);
+            color: var(--c-accent);
+            background-color: var(--c-bg-alt);
+          }
+
+          &.active {
+            border-color: var(--c-accent);
+            background-color: var(--c-bg-alt);
+            color: var(--c-accent);
+            border-bottom: 1px solid var(--c-accent);
+          }
+        }
       }
     }
   }

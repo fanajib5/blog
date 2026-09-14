@@ -94,20 +94,6 @@ name = "Faiq Najib Al-Aziz"
 [menu]
 
 [[menu.main]]
-name = "Home"
-pageref = "/"
-weight = 1
-[menu.main.params]
-description = "Beranda"
-
-[[menu.main]]
-name = "Services"
-pageref = "/services"
-weight = 5
-[menu.main.params]
-description = "Layanan"
-
-[[menu.main]]
 name = "Projects"
 pageref = "/projects"
 weight = 10
@@ -115,18 +101,18 @@ weight = 10
 description = "Proyek"
 
 [[menu.main]]
-name = "Writing"
-pageref = "/writing"
+name = "Services"
+pageref = "/services"
 weight = 15
 [menu.main.params]
-description = "Arsip artikel"
+description = "Layanan"
 
 [[menu.main]]
-name = "Teaching"
-pageref = "/teaching"
+name = "Writing"
+pageref = "/writing"
 weight = 20
 [menu.main.params]
-description = "Pengajaran"
+description = "Arsip artikel"
 
 [[menu.main]]
 name = "About"
@@ -141,22 +127,9 @@ pageref = "/contact"
 weight = 30
 [menu.main.params]
 description = "Kontak"
+button = true
 
 [languages.en.menu]
-
-[[languages.en.menu.main]]
-name = "Home"
-pageref = "/"
-weight = 1
-[languages.en.menu.main.params]
-description = "Homepage"
-
-[[languages.en.menu.main]]
-name = "Services"
-pageref = "/services"
-weight = 5
-[languages.en.menu.main.params]
-description = "Services"
 
 [[languages.en.menu.main]]
 name = "Projects"
@@ -166,18 +139,18 @@ weight = 10
 description = "Projects"
 
 [[languages.en.menu.main]]
-name = "Writing"
-pageref = "/writing"
+name = "Services"
+pageref = "/services"
 weight = 15
 [languages.en.menu.main.params]
-description = "Blog archive"
+description = "Services"
 
 [[languages.en.menu.main]]
-name = "Teaching"
-pageref = "/teaching"
+name = "Writing"
+pageref = "/writing"
 weight = 20
 [languages.en.menu.main.params]
-description = "Teaching"
+description = "Blog archive"
 
 [[languages.en.menu.main]]
 name = "About"
@@ -191,7 +164,8 @@ name = "Contact"
 pageref = "/contact"
 weight = 30
 [languages.en.menu.main.params]
-  description = "Contact"
+description = "Contact"
+button = true
 
 [assets]
   deferJS = true
