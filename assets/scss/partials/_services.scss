@@ -59,19 +59,6 @@
   }
 }
 
-// Trust badges - footer/client logos
-.client-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: center;
-  margin-top: 1.5rem;
-  opacity: 0.6;
-  transition: opacity .3s;
-  &:hover { opacity: 1; }
-  img { height: 1.5rem; filter: grayscale(1); }
-}
-
 // Metrics inline on project cards
 .project-metrics {
   display: flex;

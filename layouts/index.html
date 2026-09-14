@@ -31,7 +31,7 @@
   <div class="client-logos">
     {{ range . }}
     <div class="client-item">
-      <img src="{{ .logo }}" alt="{{ .name }}" title="{{ .name }}">
+      <img src="{{ .logo }}" alt="{{ .name }}" title="{{ .name }}" loading="lazy" onerror="this.parentElement.style.display='none'">
     </div>
     {{ end }}
   </div>
