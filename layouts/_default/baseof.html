@@ -39,36 +39,37 @@
 </head>
 
 <body>
-	<div class="wrapper lang-bar">
-		{{- partial "lang-switcher.html" . -}}
-	</div>
+	<header class="wrapper site-header">
+		<div class="site-branding">
+			<a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a>
+		</div>
+		<nav class="site-nav">
+			<ul class="nav-links lsn">
+				{{- $currentPage := . -}}
+				{{- range .Site.Menus.main -}}
+				{{- $navURL := .URL -}}
+				{{- $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (eq $currentPage.RelPermalink $navURL) (and (ne $navURL "/") (strings.HasPrefix $currentPage.RelPermalink $navURL)) -}}
+				<li>
+					<a href="{{ .URL }}" class="{{ if $isActive }}active{{ end }}">{{ .Name }}</a>
+				</li>
+				{{- end }}
+			</ul>
+			<div class="header-lang">
+				{{- partial "lang-switcher.html" . -}}
+			</div>
+		</nav>
+	</header>
+
 	{{ block "main" . }}
 	{{ end }}
-	<nav class="wrapper">
-		<h2>Menu</h2>
-		<ul class="lsc">
-			{{- range .Site.Menus.main -}}
-			<li>
-				<a href="{{ .URL }}">{{ .Name }}</a>
-			</li>
-			{{- end }}
-		</ul>
-	</nav>
 
-	<footer class="wrapper">
-		<h2>About</h2>
+	<footer class="wrapper site-footer-wrap">
+		<hr>
 		<ul class="lsn dim site-footer">
-			<li>&copy; {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ (index .Site.Params.author 0).name }}</a>. Content licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC 4.0</a>.</li>
-			<li>Made with &#10084; Powered by <a href="http://gohugo.io" target="_blank">Hugo</a> and theme by <a href="https://zak.ee" target="_blank">Zakee</a>.</li>
-			<li>View the "<a href="/about/">About</a>" page to learn more. Keep track via <a href="{{ "writing/index.xml" | absURL }}" target="_blank" title="RSS">RSS</a>.</li>
+			<li>&copy; {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ (index .Site.Params.author 0).name }}</a>. {{ if eq .Site.Language.Lang "id" }}Konten berlisensi{{ else }}Content licensed under{{ end }} <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>.</li>
+			<li>Made with &#10084; Powered by <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> and theme by <a href="https://zak.ee" target="_blank" rel="noopener">Zakee</a>.</li>
+			<li>{{ if eq .Site.Language.Lang "id" }}Lihat halaman "<a href="{{ "/about/" | relLangURL }}">About</a>". Ikuti update via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ else }}View the "<a href="{{ "/about/" | relLangURL }}">About</a>" page to learn more. Keep track via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ end }}</li>
 		</ul>
-		{{ with .Site.Params.clients }}
-		<div class="client-logos">
-			{{ range . }}
-			<img src="{{ .logo }}" alt="{{ .name }}" title="{{ .name }}">
-			{{ end }}
-		</div>
-		{{ end }}
 	</footer>
 	<script>
 	(function () {

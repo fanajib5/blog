@@ -1,4 +1,4 @@
-// Language switcher - top bar
+// Language switcher
 .lang-bar {
   text-align: right;
   margin-bottom: 0;
@@ -6,8 +6,8 @@
 
 .lang-switcher {
   display: inline-flex;
-  gap: 0.5rem;
-  font-size: 85%;
+  gap: 0.35rem;
+  font-size: 80%;
   padding: 0;
   margin: 0;
 
@@ -23,21 +23,29 @@
   a,
   .lang-active {
     display: inline-block;
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--c-txt-alt);
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--c-border);
+    border-radius: 3px;
     text-decoration: none;
-    font-size: 90%;
-    transition: border-color .3s, color .3s;
+    font-size: 82%;
+    font-family: $mono-fonts;
+    transition: border-color .2s, color .2s, background-color .2s;
   }
 
-  a:hover {
-    border-color: $accent;
-    color: $accent;
+  a {
+    color: var(--c-txt-alt);
+
+    &:hover {
+      border-color: var(--c-accent, $accent);
+      color: var(--c-accent, $accent);
+      background-color: var(--c-bg-alt);
+    }
   }
 
   .lang-active {
-    background-color: var(--c-txt-alt);
+    background-color: var(--c-txt);
     color: var(--c-bg);
-    border-color: var(--c-txt-alt);
+    border-color: var(--c-txt);
+    font-weight: bold;
   }
 }

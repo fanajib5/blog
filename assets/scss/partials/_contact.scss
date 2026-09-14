@@ -27,7 +27,7 @@
 
     &:focus {
       outline: none;
-      border-bottom-color: $accent;
+      border-bottom-color: var(--c-accent, $accent);
     }
   }
 
@@ -36,17 +36,17 @@
     max-width: 100%;
     min-height: 8rem;
     padding: 0.5rem;
-    border: 1px solid var(--c-txt-alt);
+    border: 1px solid var(--c-border);
     background-color: transparent;
     font-family: inherit;
     font-size: 100%;
     color: var(--c-txt);
     resize: vertical;
-    transition: border-color .3s;
+    transition: border-color .2s;
 
     &:focus {
       outline: none;
-      border-color: $accent;
+      border-color: var(--c-accent, $accent);
     }
   }
 }
@@ -56,14 +56,14 @@
   font-family: inherit;
   font-size: 100%;
   cursor: pointer;
-  border: 1px solid var(--c-txt-alt);
+  border: 1px solid var(--c-border);
   background: transparent;
   color: var(--c-txt);
-  transition: border-color .3s, color .3s;
+  transition: border-color .2s, color .2s;
 
   &:hover {
-    border-color: $accent;
-    color: $accent;
+    border-color: var(--c-accent, $accent);
+    color: var(--c-accent, $accent);
   }
 }
 

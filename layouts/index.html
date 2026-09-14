@@ -1,0 +1,40 @@
+{{ define "main" }}
+<main class="wrapper">
+  <div>
+    <h1>{{ .Title | markdownify }}</h1>
+  </div>
+  {{ if .Content -}}
+  <div class="content">
+    {{ .Content }}
+  </div>
+  {{- end }}
+</main>
+
+{{ with .Site.Params.clients }}
+<section class="wrapper clients-section">
+  <div class="section-label dim">{{ if eq $.Site.Language.Lang "id" }}Pengalaman & Kolaborasi Klien:{{ else }}Client Experience & Collaborations:{{ end }}</div>
+  <div class="client-logos">
+    {{ range . }}
+    <div class="client-item">
+      <img src="{{ .logo }}" alt="{{ .name }}" title="{{ .name }}">
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<section class="wrapper recent-posts-section">
+  <h2>{{ if eq .Site.Language.Lang "id" }}Tulisan Terbaru{{ else }}Recent Posts{{ end }}</h2>
+  <ul class="recent-posts-list lsc">
+    {{ range first 5 (where site.RegularPages "Type" "in" "writing") -}}
+    <li>
+      <span>{{ .Date.Local.Format "2006-01-02" }} </span>
+      <a href="{{.RelPermalink}}">{{.Title | markdownify}}</a>
+    </li>
+    {{ end }}
+  </ul>
+  <div class="view-all-link">
+    <a href="{{ "writing/" | relLangURL }}">{{ if eq .Site.Language.Lang "id" }}Lihat semua arsip tulisan &rarr;{{ else }}Browse all writing &rarr;{{ end }}</a>
+  </div>
+</section>
+{{- end }}

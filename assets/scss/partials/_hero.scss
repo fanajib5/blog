@@ -2,7 +2,7 @@
 .hero {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 2px solid var(--c-bg-alt);
+  border-bottom: 2px solid var(--c-border);
 }
 
 .hero-tagline {
@@ -10,6 +10,20 @@
   font-size: 1.25rem;
   font-style: italic;
   color: var(--c-txt-alt);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin: 0;
+
+  &:last-child {
+    font-family: $mono-fonts;
+    font-style: normal;
+    font-size: 0.85rem !important;
+    opacity: 0.9 !important;
+    margin-top: 0.75rem;
+    color: var(--c-txt);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+  }
 }
