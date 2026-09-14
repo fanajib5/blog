@@ -94,6 +94,7 @@
 			<li>{{ if eq .Site.Language.Lang "id" }}Lihat halaman "<a href="{{ "/about/" | relLangURL }}">About</a>". Ikuti update via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ else }}View the "<a href="{{ "/about/" | relLangURL }}">About</a>" page to learn more. Keep track via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ end }}</li>
 		</ul>
 	</footer>
+	{{- partial "mobile-nav.html" . -}}
 	<script>
 	(function () {
 		'use strict';
