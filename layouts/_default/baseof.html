@@ -43,21 +43,23 @@
 		<div class="site-branding">
 			<a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a>
 		</div>
-		<nav class="site-nav">
-			<ul class="nav-links lsn">
-				{{- $currentPage := . -}}
-				{{- range .Site.Menus.main -}}
-				{{- $navURL := .URL -}}
-				{{- $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (eq $currentPage.RelPermalink $navURL) (and (ne $navURL "/") (strings.HasPrefix $currentPage.RelPermalink $navURL)) -}}
-				<li>
-					<a href="{{ .URL }}" class="{{ if $isActive }}active{{ end }}">{{ .Name }}</a>
-				</li>
-				{{- end }}
-			</ul>
+		<div class="header-right">
+			<nav class="site-nav">
+				<ul class="nav-links lsn">
+					{{- $currentPage := . -}}
+					{{- range .Site.Menus.main -}}
+					{{- $navURL := .URL -}}
+					{{- $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (eq $currentPage.RelPermalink $navURL) (and (ne $navURL "/") (strings.HasPrefix $currentPage.RelPermalink $navURL)) -}}
+					<li>
+						<a href="{{ .URL }}" class="{{ if $isActive }}active{{ end }}">{{ .Name }}</a>
+					</li>
+					{{- end }}
+				</ul>
+			</nav>
 			<div class="header-lang">
 				{{- partial "lang-switcher.html" . -}}
 			</div>
-		</nav>
+		</div>
 	</header>
 
 	{{ block "main" . }}
