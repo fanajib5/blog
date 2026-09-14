@@ -67,7 +67,7 @@
 		<hr>
 		<ul class="lsn dim site-footer">
 			<li>&copy; {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ (index .Site.Params.author 0).name }}</a>. {{ if eq .Site.Language.Lang "id" }}Konten berlisensi{{ else }}Content licensed under{{ end }} <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>.</li>
-			<li>Made with &#10084; Powered by <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> and theme by <a href="https://zak.ee" target="_blank" rel="noopener">Zakee</a>.</li>
+			<li>Made with &#10084; Powered by <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> and theme ported from <a href="https://zak.ee" target="_blank" rel="noopener">Zakee</a>.</li>
 			<li>{{ if eq .Site.Language.Lang "id" }}Lihat halaman "<a href="{{ "/about/" | relLangURL }}">About</a>". Ikuti update via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ else }}View the "<a href="{{ "/about/" | relLangURL }}">About</a>" page to learn more. Keep track via <a href="{{ "writing/index.xml" | absLangURL }}" target="_blank" title="RSS">RSS</a>.{{ end }}</li>
 		</ul>
 	</footer>
