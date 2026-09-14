@@ -36,6 +36,14 @@
 	<link rel="preconnect" href="{{ .Site.BaseURL }}" crossorigin>
 	<script data-goatcounter="https://fanajib5.goatcounter.com/count"
 			async src="https://gc.zgo.at/count.js"></script>
+	<script>
+	(function () {
+		var theme = localStorage.getItem('theme');
+		if (theme === 'dark' || theme === 'light') {
+			document.documentElement.setAttribute('data-theme', theme);
+		}
+	})();
+	</script>
 </head>
 
 <body>
@@ -57,8 +65,20 @@
 					{{- end }}
 				</ul>
 			</nav>
-			<div class="header-lang">
-				{{- partial "lang-switcher.html" . -}}
+			<div class="header-actions">
+				<button id="theme-toggle" class="theme-toggle-btn" type="button"
+					aria-label="{{ if eq .Site.Language.Lang "id" }}Ganti mode tema tampilan{{ else }}Toggle color theme{{ end }}"
+					data-label-auto="{{ if eq .Site.Language.Lang "id" }}Tema: Sistem (Otomatis) — Klik untuk mode Gelap{{ else }}Theme: System (Auto) — Click for Dark mode{{ end }}"
+					data-label-dark="{{ if eq .Site.Language.Lang "id" }}Tema: Gelap — Klik untuk mode Terang{{ else }}Theme: Dark — Click for Light mode{{ end }}"
+					data-label-light="{{ if eq .Site.Language.Lang "id" }}Tema: Terang — Klik untuk mode Sistem{{ else }}Theme: Light — Click for System mode{{ end }}"
+					title="{{ if eq .Site.Language.Lang "id" }}Tema: Sistem (Otomatis){{ else }}Theme: System (Auto){{ end }}">
+					<svg class="theme-icon icon-auto" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+					<svg class="theme-icon icon-dark" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+					<svg class="theme-icon icon-light" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+				</button>
+				<div class="header-lang">
+					{{- partial "lang-switcher.html" . -}}
+				</div>
 			</div>
 		</div>
 	</header>
@@ -135,6 +155,51 @@
 			}
 		});
 		window.__unregisterWebMcp = function () { if (controller) controller.abort(); };
+	})();
+	</script>
+	<script>
+	(function () {
+		var btn = document.getElementById('theme-toggle');
+		if (!btn) return;
+
+		function updateThemeUI(theme) {
+			var label = btn.getAttribute('data-label-' + (theme || 'auto'));
+			if (label) {
+				btn.setAttribute('title', label);
+				btn.setAttribute('aria-label', label);
+			}
+		}
+
+		var initial = localStorage.getItem('theme');
+		if (initial === 'dark' || initial === 'light') {
+			updateThemeUI(initial);
+		} else {
+			updateThemeUI('auto');
+		}
+
+		btn.addEventListener('click', function () {
+			var current = localStorage.getItem('theme');
+			var next = null;
+
+			// Cycle: Auto -> Dark -> Light -> Auto
+			if (!current || (current !== 'dark' && current !== 'light')) {
+				next = 'dark';
+			} else if (current === 'dark') {
+				next = 'light';
+			} else {
+				next = null;
+			}
+
+			if (next) {
+				document.documentElement.setAttribute('data-theme', next);
+				localStorage.setItem('theme', next);
+			} else {
+				document.documentElement.removeAttribute('data-theme');
+				localStorage.removeItem('theme');
+			}
+
+			updateThemeUI(next);
+		});
 	})();
 	</script>
 </body>

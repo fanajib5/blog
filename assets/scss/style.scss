@@ -12,7 +12,7 @@ html {
   scroll-behavior: smooth;
 }
 
-:root {
+@mixin light-tokens {
   --c-bg: #F0F0F0;
   --c-bg-alt: #E4E8EE;
   --c-txt: #2B3452;
@@ -25,19 +25,35 @@ html {
   --c-code-txt: #E2E8F0;
 }
 
+@mixin dark-tokens {
+  --c-bg: #14161B;
+  --c-bg-alt: #1E222D;
+  --c-txt: #E2E8F0;
+  --c-txt-alt: #94A3B8;
+  --c-txt-alt2: #F87171;
+  --c-txt-em: #C084FC;
+  --c-accent: #FBBF24;
+  --c-border: #2D3342;
+  --c-code-bg: #0D0F12;
+  --c-code-txt: #F1F5F9;
+}
+
+:root {
+  @include light-tokens;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --c-bg: #14161B;
-    --c-bg-alt: #1E222D;
-    --c-txt: #E2E8F0;
-    --c-txt-alt: #94A3B8;
-    --c-txt-alt2: #F87171;
-    --c-txt-em: #C084FC;
-    --c-accent: #FBBF24;
-    --c-border: #2D3342;
-    --c-code-bg: #0D0F12;
-    --c-code-txt: #F1F5F9;
+  :root:not([data-theme="light"]) {
+    @include dark-tokens;
   }
+}
+
+:root[data-theme="dark"] {
+  @include dark-tokens;
+}
+
+:root[data-theme="light"] {
+  @include light-tokens;
 }
 
 body {
@@ -173,11 +189,64 @@ textarea {
     }
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.35rem;
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--c-txt-alt);
+    cursor: pointer;
+    line-height: 1;
+    transition: border-color .2s, background-color .2s, color .2s, transform .2s;
+
+    &:hover {
+      color: var(--c-accent);
+      border-color: var(--c-accent);
+      background-color: var(--c-bg-alt);
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--c-accent);
+      outline-offset: 1px;
+    }
+
+    .theme-icon {
+      display: none;
+      width: 16px;
+      height: 14px;
+    }
+  }
+
   .header-lang {
     display: flex;
     align-items: center;
     flex-shrink: 0;
   }
+}
+
+// Theme toggle icon visibility based on active theme
+:root:not([data-theme]) .theme-icon.icon-auto,
+:root[data-theme="auto"] .theme-icon.icon-auto {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-icon.icon-dark {
+  display: block;
+}
+
+:root[data-theme="light"] .theme-icon.icon-light {
+  display: block;
 }
 
 @media all and (max-width: 720px) {
@@ -198,7 +267,7 @@ textarea {
       }
     }
 
-    .header-lang {
+    .header-actions {
       margin-left: auto;
     }
   }
@@ -632,10 +701,18 @@ textarea {
   }
 }
 
+@mixin client-logos-dark {
+  filter: brightness(0) invert(0.85);
+}
+
 @media (prefers-color-scheme: dark) {
-  .client-logos .client-item img {
-    filter: brightness(0) invert(0.85);
+  :root:not([data-theme="light"]) .client-logos .client-item img {
+    @include client-logos-dark;
   }
+}
+
+:root[data-theme="dark"] .client-logos .client-item img {
+  @include client-logos-dark;
 }
 
 .recent-posts-section {
