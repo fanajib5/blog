@@ -14,9 +14,11 @@
   <h2>{{ if eq .Site.Language.Lang "id" }}Tulisan Terbaru{{ else }}Recent Posts{{ end }}</h2>
   <ul class="recent-posts-list lsc">
     {{ range first 5 (where site.RegularPages "Type" "in" "writing") -}}
-    <li>
-      <span>{{ .Date.Local.Format "2006-01-02" }} </span>
-      <a href="{{.RelPermalink}}">{{.Title | markdownify}}</a>
+    <li class="recent-post-item">
+      <div class="recent-post-inner">
+        <span class="post-date">{{ .Date.Local.Format "2006-01-02" }}</span>
+        <a href="{{.RelPermalink}}" class="post-title">{{.Title | markdownify}}</a>
+      </div>
     </li>
     {{ end }}
   </ul>

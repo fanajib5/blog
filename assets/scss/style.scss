@@ -851,6 +851,32 @@ textarea {
 }
 
 .recent-posts-section {
+  .recent-posts-list {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.4rem;
+
+      .recent-post-inner {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+
+        .post-date {
+          flex-shrink: 0;
+          min-width: 6.2rem;
+          color: var(--c-txt-alt);
+          font-variant-numeric: tabular-nums;
+        }
+
+        .post-title {
+          flex: 1;
+        }
+      }
+    }
+  }
+
   .view-all-link {
     margin-top: 1.5rem;
     font-size: 90%;
@@ -947,10 +973,6 @@ a.footnote-ref {
   .post-group {
     display: flex;
     gap: 1.5rem;
-  }
-
-  .recent-posts-list a {
-    display: inline;
   }
 }
 
