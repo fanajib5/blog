@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#3d9a98"/>
-  <text x="16" y="22" text-anchor="middle" fill="white" font-family="sans-serif" font-size="18" font-weight="bold">N</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M11.52 26.69L41.54 26.69L41.54 35.01L22.40 35.01L22.40 46.82L38.34 46.82L38.34 55.17L22.40 55.17L22.40 73.31L11.52 73.31L11.52 26.69M53.47 26.69L53.47 26.69L57.06 28.35L79.20 56.35L78.94 51.36L78.94 26.69L88.48 26.69L88.48 73.31L82.85 73.31L79.07 71.52L57.09 43.74L57.31 48.32L57.31 73.31L47.78 73.31L47.78 26.69L53.47 26.69" fill="#2b3452"/></svg>
