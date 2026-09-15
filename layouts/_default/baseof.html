@@ -11,8 +11,8 @@
 	<meta name="keywords" content="{{ range .Keywords }}{{ . }}{{ end }}">
 	{{ end }}
 	{{- template "_internal/schema.html" . }}
-	{{- template "_internal/opengraph.html" . }}
-	{{- template "_internal/twitter_cards.html" . }}
+	{{- partial "opengraph.html" . }}
+	{{- partial "twitter_cards.html" . }}
 	{{- partial "schema-extra.html" . -}}
 	<link rel="canonical" href="{{ .Permalink }}">
 	{{ range .Translations -}}
