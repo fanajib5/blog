@@ -2,9 +2,9 @@
 title: "Hijrah Frontend (3): Type Chaos, Angka, String Kosong, dan Halaman yang Berbeda Pendapat"
 description: "Ep 3 seri Hijrah Frontend: satu field yang sama dikirim sebagai angka, string kosong, dan string biasa tergantung halamannya. Tentang PHP yang memafkan, Go yang perfeksionis, dan 194 bekas lukanya."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-24T09:00:00+07:00
-lastmod: 2026-09-11T09:28:00+07:00
-draft: true
+date: 2026-09-11T09:00:00+07:00
+lastmod: 2026-09-23T21:28:00+07:00
+draft: false
 toc: true
 comments: false
 tags:
