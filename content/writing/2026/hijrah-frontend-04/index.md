@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (4): Dua Library UI, Dua Era Penamaan"
 description: "Ep 4 seri Hijrah Frontend: primereact dan antd hidup berdampingan di satu aplikasi tanpa pernah bertemu di satu file. Tentang garis demarkasi, kamus UI di kantong reducer, dan tiga era styling."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:04+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

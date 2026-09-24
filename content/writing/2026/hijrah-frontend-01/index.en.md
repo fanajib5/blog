@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (1): When a Backend Engineer Is Told to Touch the Frontend"
 description: "Episode 1 of the Hijrah Frontend series: after the GPS backend moved to Go, it's the neighboring building's turn. A backend engineer's first impressions of an inherited frontend, and the thin-port decision."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:01+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

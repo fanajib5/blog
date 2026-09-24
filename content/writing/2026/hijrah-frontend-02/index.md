@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (2): Port Tipis dan Warisan yang Ikut Naik"
 description: "Ep 2 seri Hijrah Frontend: 76 halaman masuk, 76 halaman keluar. Kenapa nol halaman ditinggalkan, apa isi kotak yang dibuka pertama, dan satu rencana besar yang tidak jadi."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:02+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (4): Two UI Libraries, Two Naming Eras"
 description: "Episode 4 of the Hijrah Frontend series: primereact and antd coexisting in one application without ever meeting in a single file. About demarcation lines, a UI dictionary in a reducer's pocket, and three styling eras."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:04+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

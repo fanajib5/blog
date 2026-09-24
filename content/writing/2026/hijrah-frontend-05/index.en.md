@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (5): Two Sides of One Building"
 description: "The final episode of the Hijrah Frontend series: the thin port's honest closing inventory, the same lessons in different clothes, the inheritance we feed versus the one that waits, and a short farewell."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:05+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

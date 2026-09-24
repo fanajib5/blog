@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (3): Type Chaos, Numbers, Empty Strings, and Pages with Different Opinions"
 description: "Episode 3 of the Hijrah Frontend series: the same field sent as a number, an empty string, and a plain string depending on the page. About PHP that forgave, Go that didn't, and 194 measured scars."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:03+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

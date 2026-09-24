@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (2): The Thin Port and the Inheritance That Boarded"
 description: "Episode 2 of the Hijrah Frontend series: 76 pages in, 76 pages out. Why zero pages were left behind, what the first opened boxes contained, and one big plan that chose not to happen."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:02+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true

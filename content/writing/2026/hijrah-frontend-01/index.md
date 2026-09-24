@@ -2,7 +2,7 @@
 title: "Hijrah Frontend (1): Ketika Backend Engineer Disuruh Menyentuh Frontend"
 description: "Ep 1 seri Hijrah Frontend: setelah backend GPS selesai dihijrahkan ke Go, giliran gedung sebelah. Kesan pertama seorang backend engineer membuka kode frontend warisan, dan keputusan port tipis."
 author: "Faiq Najib Al-Aziz"
-date: 2026-09-11T09:00:00+07:00
+date: 2026-09-23T09:00:01+07:00
 lastmod: 2026-09-23T21:28:00+07:00
 draft: false
 toc: true
