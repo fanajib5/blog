@@ -4,7 +4,7 @@ description: "Cara membuat TCP server di Go untuk menerima koneksi dari ratusan 
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-22
 lastmod: 2026-09-22
-draft: true
+draft: false
 toc: true
 comments: true
 images:

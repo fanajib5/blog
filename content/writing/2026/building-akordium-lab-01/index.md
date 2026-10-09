@@ -4,7 +4,7 @@ description: "Catatan pertama membangun Akordium Lab terbuka: kenapa mulai, apa 
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-01
 lastmod: 2026-10-01
-draft: true
+draft: false
 toc: true
 comments: true
 images:
