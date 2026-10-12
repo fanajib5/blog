@@ -10,6 +10,27 @@
   {{- end }}
 </main>
 
+{{ with .Site.Params.clients }}
+<section class="wrapper clients-section">
+  <div class="section-label dim">{{ if eq $.Site.Language.Lang "id" }}Pengalaman & Kolaborasi Klien:{{ else }}Client Experience & Collaborations:{{ end }}</div>
+  <div class="client-logos">
+    {{ range . }}
+    {{- $url := .url -}}
+    {{- if $url -}}
+      {{- $targetURL := $url | relLangURL -}}
+      <a href="{{ $targetURL }}" class="client-item client-item-link" title="{{ .name }} &ndash; {{ if eq $.Site.Language.Lang "id" }}Lihat Studi Kasus{{ else }}View Case Study{{ end }}">
+        <img src="{{ .logo }}" alt="{{ .name }}" loading="lazy" onerror="this.parentElement.style.display='none'">
+      </a>
+    {{- else -}}
+      <div class="client-item" title="{{ .name }}">
+        <img src="{{ .logo }}" alt="{{ .name }}" loading="lazy" onerror="this.parentElement.style.display='none'">
+      </div>
+    {{- end -}}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
 <section class="wrapper recent-posts-section">
   <h2>{{ if eq .Site.Language.Lang "id" }}Tulisan Terbaru{{ else }}Recent Posts{{ end }}</h2>
   <ul class="recent-posts-list lsc">
@@ -26,17 +47,4 @@
     <a href="{{ "writing/" | relLangURL }}">{{ if eq .Site.Language.Lang "id" }}Lihat semua arsip tulisan &rarr;{{ else }}Browse all writing &rarr;{{ end }}</a>
   </div>
 </section>
-
-{{ with .Site.Params.clients }}
-<section class="wrapper clients-section">
-  <div class="section-label dim">{{ if eq $.Site.Language.Lang "id" }}Pengalaman & Kolaborasi Klien:{{ else }}Client Experience & Collaborations:{{ end }}</div>
-  <div class="client-logos">
-    {{ range . }}
-    <div class="client-item">
-      <img src="{{ .logo }}" alt="{{ .name }}" title="{{ .name }}" loading="lazy" onerror="this.parentElement.style.display='none'">
-    </div>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
 {{- end }}

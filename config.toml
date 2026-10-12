@@ -84,6 +84,7 @@ logo = "/img/clients/cv-aji.png"
 [[params.clients]]
 name = "Orin GPS Tracker"
 logo = "/img/clients/orin.png"
+url = "/projects/gps-fleet-tracking/"
 
 [[params.clients]]
 name = "PT Aria Jasa Reksatama"
@@ -96,6 +97,7 @@ logo = "/img/clients/teavaro.png"
 [[params.clients]]
 name = "Bank Mega"
 logo = "/img/clients/Bank_Mega_2013.svg"
+url = "/projects/banking-rpa-automation/"
 
 [[params.author]]
 name = "Faiq Najib Al-Aziz"

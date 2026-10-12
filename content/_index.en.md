@@ -10,7 +10,7 @@ comments: false
 
 <div class="hero">
 <p class="hero-tagline">I help businesses migrate legacy PHP/Laravel systems to Go + PostgreSQL &mdash; faster, leaner, without downtime.</p>
-<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs</p>
+<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;"><a href="/en/projects/gps-fleet-tracking/" style="color: inherit; text-decoration: underline; text-decoration-style: dotted;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs &rarr;</a></p>
 </div>
 
 I'm **Faiq Najib Al-Aziz**, a backend developer focused on **Go (Golang)** and **PostgreSQL**. I specialize in building scalable systems and migrating legacy codebases (PHP/Laravel) to modern, more efficient architectures.
@@ -22,18 +22,19 @@ I'm **Faiq Najib Al-Aziz**, a backend developer focused on **Go (Golang)** and *
 
 <div id="home-social" style="font-size: 150%">
 <a href="https://linkedin.com/in/fanajib5" target="_blank" rel="me noopener" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-<a href="https://github.com/fanajib5" target="_blank" rel="me noopener" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0 0 20 4.77 5.07 5.07.0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38.0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 0 0 5 4.77 5.44 5.44.0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 0 0 9 18.13V22"></path></svg></a>
+<a href="https://github.com/fanajib5" target="_blank" rel="me noopener" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38.0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 0 0 5 4.77 5.44 5.44.0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
 <a href="https://x.com/fanajib5" target="_blank" rel="me noopener" title="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><path d="M4 4l16 16M4 20L20 4"></path></svg></a>
-<a href="https://t.me/fanajib5" target="_blank" rel="me noopener" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather"><path d="M21.198 2.433a2.242 2.242.0 00-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15.0 01-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.16.36.506.494.864.498l-.002.018s.281.028.555-.038a2.1 2.1.0 00.933-.517c.345-.324 1.28-1.244 1.811-1.764l3.999 2.952.032.018s.442.311 1.09.355c.324.022.75-.04 1.116-.308.37-.27.613-.702.728-1.196.342-1.492 2.61-12.285 2.997-14.072l-.01.042c.27-1.006.17-1.928-.455-2.474a1.654 1.654.0 00-1.034-.407z"></path></svg></a>
+<a href="https://t.me/fanajib5" target="_blank" rel="me noopener" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather"><path d="M21.198 2.433a2.242 2.242.0 00-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 01-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.16.36.506.494.864.498l-.002.018s.281.028.555-.038a2.1 2.1.0 00.933-.517c.345-.324 1.28-1.244 1.811-1.764l3.999 2.952.032.018s.442.311 1.09.355c.324.022.75-.04 1.116-.308.37-.27.613-.702.728-1.196.342-1.492 2.61-12.285 2.997-14.072l-.01.042c.27-1.006.17-1.928-.455-2.474a1.654 1.654.0 00-1.034-.407z"></path></svg></a>
 <a href="mailto:faiq.najib@gmail.com" title="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
 </div>
 
 ## Start Here
 
-Three pieces that best represent how I think and work:
+Curated pieces on software architecture, business tradeoffs, and system engineering:
 
-- 🛰 [Understanding GPS Protocol: How Tracker Devices Communicate](/en/writing/2026/memahami-gps-protocol/) — the technical foundation of real-time GPS systems, from TCP sockets to binary packet formats.
-- ⚙️ [Building a TCP Listener for GPS Devices in Go](/en/writing/2026/tcp-listener-gps-go/) — Go implementation: concurrent connections, binary stream framing, graceful shutdown.
-- 🧭 [Decision Notes: When to Migrate Your Tech Stack](/en/writing/2026/tech-stack-migration-decision/) — how to read business signals to decide between migration vs. refactor.
+- 🧭 [Decision Notes: When to Migrate Your Tech Stack](/en/writing/2026/tech-stack-migration-decision/) — how to evaluate business signals before deciding between refactoring vs full migration.
+- ⚖️ [Tech Stack Choice: Between Ego and Business](/en/writing/2026/tech-stack-ego-vs-business/) — resisting shiny new tools in favor of tangible business value.
+- 🚀 [Legacy PHP to Go Migration: Why, How, and Lessons Learned](/en/writing/2026/legacy-php-to-go-migration/) — real-world gradual migration of 370+ endpoints with zero downtime.
+- 🛰 [Understanding GPS Protocol: How Tracker Devices Communicate](/en/writing/2026/memahami-gps-protocol/) — deep dive into real-time tracking architectures, TCP sockets, and binary packets.
 
 ---

@@ -10,7 +10,7 @@ comments: false
 
 <div class="hero">
 <p class="hero-tagline">Saya bantu bisnis migrasi sistem PHP/Laravel ke Go + PostgreSQL &mdash; lebih cepat, lebih hemat, tanpa downtime.</p>
-<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs</p>
+<p class="hero-tagline" style="font-size: 80%; opacity: 0.7;"><a href="/projects/gps-fleet-tracking/" style="color: inherit; text-decoration: underline; text-decoration-style: dotted;">370+ endpoints migrated &middot; 194K LoC &middot; 40% fewer prod bugs &rarr;</a></p>
 </div>
 
 Saya **Faiq Najib Al-Aziz**, backend developer yang berfokus pada **Go (Golang)** dan **PostgreSQL**. Spesialisasi saya adalah membangun sistem yang scalable dan melakukan migrasi dari legacy code (PHP/Laravel) ke arsitektur modern yang lebih efisien.
@@ -30,10 +30,11 @@ Saya **Faiq Najib Al-Aziz**, backend developer yang berfokus pada **Go (Golang)*
 
 ## Mulai dari Sini
 
-Tiga tulisan yang paling mewakili cara saya berpikir dan bekerja:
+Tulisan pilihan seputar arsitektur, pertimbangan bisnis, dan rekayasa sistem:
 
-- 🛰 [Memahami GPS Protocol: Cara Komunikasi Device Tracker](/writing/2026/memahami-gps-protocol/) — fondasi teknis sistem GPS real-time, dari socket TCP sampai format paket binary.
-- ⚙️ [Membangun TCP Listener untuk GPS Device di Go](/writing/2026/tcp-listener-gps-go/) — implementasi Go: concurrent connections, framing binary stream, graceful shutdown.
-- 🧭 [Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi](/writing/2026/tech-stack-migration-decision/) — cara membaca sinyal bisnis untuk memutuskan migrasi vs. refactor.
+- 🧭 [Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi](/writing/2026/tech-stack-migration-decision/) — cara membaca sinyal bisnis sebelum memutuskan antara refactor vs migrasi total.
+- ⚖️ [Pemilihan Tech Stack: Antara Ego dan Bisnis](/writing/2026/tech-stack-ego-vs-business/) — godaan teknologi terbaru vs dampak riil terhadap operasional perusahaan.
+- 🚀 [Migrasi Legacy PHP ke Go: Kenapa, Bagaimana, dan Pelajarannya](/writing/2026/legacy-php-to-go-migration/) — pengalaman nyata migrasi bertahap tanpa downtime dan mitigasi bug di production.
+- 🛰 [Memahami GPS Protocol: Cara Komunikasi Device Tracker](/writing/2026/memahami-gps-protocol/) — deep dive arsitektur sistem GPS real-time, socket TCP, dan packet binary.
 
 ---
