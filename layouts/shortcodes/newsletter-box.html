@@ -1,0 +1,22 @@
+{{- $key := os.Getenv "WEB3FORMS_KEY" -}}
+{{- $isID := eq .Page.Lang "id" -}}
+<div class="newsletter-card">
+  <div class="newsletter-card-header">
+    <h3>{{ if $isID }}📬 Tetap Terhubung{{ else }}📬 Stay in the Loop{{ end }}</h3>
+    <p class="dim">{{ if $isID }}Dapatkan ringkasan artikel arsitektur backend, migrasi sistem, dan seri GPS langsung di inbox Anda (bebas spam, unsubs kapan saja).{{ else }}Get updates on backend architecture, legacy migrations, and the GPS series delivered straight to your inbox (zero spam, unsubscribe anytime).{{ end }}</p>
+  </div>
+  {{- if $key -}}
+  <form action="https://api.web3forms.com/submit" method="POST" class="newsletter-form">
+    <input type="hidden" name="access_key" value="{{ $key }}">
+    <input type="hidden" name="subject" value="{{ if $isID }}New Newsletter Subscriber (najib.id){{ else }}New Newsletter Subscriber (najib.id){{ end }}">
+    <input type="hidden" name="from_name" value="najib.id Newsletter">
+    <input type="checkbox" name="botcheck" style="display:none">
+    <div class="newsletter-input-group">
+      <input type="email" name="email" required placeholder="{{ if $isID }}Masukkan alamat email Anda...{{ else }}Enter your email address...{{ end }}" aria-label="Email Address">
+      <button type="submit" class="cta-primary">{{ if $isID }}Langganan{{ else }}Subscribe{{ end }}</button>
+    </div>
+  </form>
+  {{- else -}}
+  <p class="dim" style="font-size: 85%;">{{ if $isID }}Ikuti update artikel terbaru juga melalui <a href="{{ "writing/index.xml" | absLangURL }}">RSS Feed</a>.{{ else }}You can also follow new articles via <a href="{{ "writing/index.xml" | absLangURL }}">RSS Feed</a>.{{ end }}</p>
+  {{- end -}}
+</div>

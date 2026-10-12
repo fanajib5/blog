@@ -1,17 +1,16 @@
 {{ define "main" }}
 <main class="wrapper">
-  <h1>Content Series</h1>
+  <h1>{{ if eq .Site.Language.Lang "id" }}Seri Tulisan{{ else }}Serial Tracks{{ end }}</h1>
+  <p class="dim">{{ if eq .Site.Language.Lang "id" }}Kumpulan artikel berseri yang disusun berurutan:{{ else }}Curated multi-part series organized chronologically:{{ end }}</p>
 
   <ul class="lsn post-list">
     {{ range .Data.Terms.Alphabetical -}}
     <li class="post-item">
-      <span class="dim">{{ .Count }} artikel</span>
-      <a href="{{ .Page.RelPermalink }}" class="post-title"
-        >{{ .Page.Title }}</a
-      >
+      <span class="dim">{{ .Count }} {{ if eq $.Site.Language.Lang "id" }}artikel{{ else }}articles{{ end }}</span>
+      <a href="{{ .Page.RelPermalink }}" class="post-title">{{ .Page.Title }}</a>
     </li>
     {{- else }}
-    <li class="post-item dim">Belum ada seri yang dipublikasikan.</li>
+    <li class="post-item dim">{{ if eq .Site.Language.Lang "id" }}Belum ada seri yang dipublikasikan.{{ else }}No series published yet.{{ end }}</li>
     {{- end }}
   </ul>
 </main>
