@@ -22,7 +22,7 @@ CV Andika Jaya Infinite mengelola bisnis penjualan dan pemeliharaan APAR (Alat P
 
 ## Solusi
 
-Dibangun MIS-APAR (Management Information System for Fire Extinguisher) sebagai **produk pertama PT Akordium Digital Berkah**, perusahaan sole proprietorship saya.
+Dibangun MIS-APAR (Management Information System for Fire Extinguisher) sebagai **produk pertama PT Akordium Digital Berkah** (Akordium Lab), software agency dan digital studio yang saya dirikan.
 
 ### Fitur Utama
 

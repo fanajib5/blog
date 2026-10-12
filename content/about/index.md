@@ -22,7 +22,7 @@ Lihat karya saya di halaman [Proyek](/projects/).
 
 ## Builder
 
-Saya tidak hanya menulis kode, saya **membangun produk**. PT Akordium Digital Berkah adalah sole proprietorship saya yang berfokus pada solusi digital untuk bisnis nyata. Produk pertama, MIS-APAR, mendigitalisasi seluruh operasional bisnis APAR yang sebelumnya manual.
+Saya tidak hanya menulis kode, saya **membangun produk**. **PT Akordium Digital Berkah** (Akordium Lab) adalah software agency dan studio produk digital yang saya bangun untuk menghadirkan solusi teknologi bagi bisnis nyata. Produk pertama kami, MIS-APAR, mendigitalisasi seluruh operasional bisnis proteksi kebakaran yang sebelumnya manual.
 
 Saya juga berpengalaman mengerjakan proyek freelance untuk berbagai sektor, dari konstruksi (inventory management) hingga perbankan (process automation & Open API portal).
 

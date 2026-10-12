@@ -1,6 +1,6 @@
 ---
 title: "Writing"
-description: "Arsip artikel tentang pemrograman, arsitektur software, backend development, dan pengalaman pribadi sebagai developer indépendant."
+description: "Arsip artikel tentang pemrograman, arsitektur software, backend development, dan pengalaman pribadi sebagai developer independen."
 date: 2018-11-27T18:43:59+08:00
 author: "Faiq Najib Al-Aziz"
 ---

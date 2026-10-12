@@ -22,7 +22,7 @@ CV Andika Jaya Infinite was managing their fire extinguisher (APAR) sales and ma
 
 ## The Solution
 
-Built MIS-APAR (Management Information System for Fire Extinguishers) as the **first product of PT Akordium Digital Berkah**, my sole proprietorship company.
+Built MIS-APAR (Management Information System for Fire Extinguishers) as the **first product of PT Akordium Digital Berkah** (Akordium Lab), a software agency and digital studio I founded.
 
 ### Key Features
 

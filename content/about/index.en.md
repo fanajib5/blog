@@ -22,7 +22,7 @@ See my work on the [Projects](/en/projects/) page.
 
 ## Builder
 
-I don't just write code, I **build products**. PT Akordium Digital Berkah is my sole proprietorship focused on digital solutions for real businesses. Its first product, MIS-APAR, digitized an entire fire extinguisher business operation that was previously manual.
+I don't just write code, I **build products**. **PT Akordium Digital Berkah** (Akordium Lab) is a software agency and digital product studio I founded to build robust software solutions for real businesses. Our first product, MIS-APAR, digitized the entire operational workflow of a fire safety business that was previously handled manually.
 
 I also have experience delivering freelance projects across various sectors, from construction (inventory management) to banking (process automation & Open API portal).
 

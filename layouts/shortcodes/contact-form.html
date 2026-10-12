@@ -24,6 +24,7 @@
     <label for="budget">{{ if $isID }}Budget{{ else }}Budget{{ end }}</label>
     <select id="budget" name="budget">
       <option value="">{{ if $isID }}Pilih rentang budget{{ else }}Select budget range{{ end }}</option>
+      <option value="Belum tahu">{{ if $isID }}Belum tahu / Masih diskusi{{ else }}Not sure yet / Open to discuss{{ end }}</option>
       <option value="< 5jt">&lt; 5jt</option>
       <option value="5-10jt">5-10jt</option>
       <option value="10-50jt">10-50jt</option>
