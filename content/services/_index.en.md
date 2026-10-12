@@ -36,8 +36,12 @@ Teaching and mentoring sessions for individuals and teams.
 - Database design & SQL mastery
 - Code review culture & best practices
 
+## End-to-End Business Solutions
+
+If your organization requires a complete product build &mdash; from UI/UX and full-stack development to dedicated engineering team execution &mdash; we deliver turn-key solutions through my software agency: [**Akordium Lab**](https://akordium.id).
+
 ---
 
-Interested in working together? [Get in touch](/en/contact/) to discuss further.
+Interested in collaborating or discussing your system architecture?
 
 <a href="/en/contact/" class="cta-primary">Book Discovery Call</a>

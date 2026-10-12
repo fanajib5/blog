@@ -15,6 +15,8 @@ comments: false
 
 I'm **Faiq Najib Al-Aziz**, a backend developer focused on **Go (Golang)** and **PostgreSQL**. I specialize in building scalable systems and migrating legacy codebases (PHP/Laravel) to modern, more efficient architectures.
 
+> 🏢 **Looking for complete digital solutions or a dedicated development team for your business?** For end-to-end software development (full-stack, UI/UX, and engineering execution), explore [**Akordium Lab**](https://akordium.id).
+
 <div class="cta-group">
 <a href="/en/contact/" class="cta-primary">Book Discovery Call</a>
 <a href="/en/writing/" class="cta-secondary">Read My Writing</a>

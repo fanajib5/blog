@@ -36,8 +36,12 @@ Sesi pengajaran dan mentoring untuk individu maupun tim.
 - Database design & SQL mastery
 - Code review culture & best practices
 
+## Solusi End-to-End untuk Bisnis
+
+Jika kebutuhan bisnis Anda membutuhkan eksekusi penuh dari tahap perencanaan, UI/UX, full-stack app, hingga tim engineering yang siap pakai, layanan menyeluruh tersebut dikerjakan melalui software agency saya: [**Akordium Lab**](https://akordium.id).
+
 ---
 
-Tertarik bekerja sama? Hubungi saya untuk diskusi lebih lanjut.
+Tertarik berkolaborasi atau mendiskusikan arsitektur sistem Anda?
 
 <a href="/contact/" class="cta-primary">Book Discovery Call</a>
