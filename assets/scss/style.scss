@@ -165,24 +165,27 @@ textarea {
         }
 
         &.nav-cta {
-          margin-left: 0.25rem;
-          padding: 0.2rem 0.55rem;
-          border: 1px solid var(--c-border);
+          margin-left: 0.35rem;
+          padding: 0.3rem 0.75rem;
+          background-color: var(--c-accent);
+          color: var(--c-bg) !important;
+          border: 1px solid var(--c-accent);
           border-radius: 4px;
-          color: var(--c-txt);
-          font-weight: 600;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          transition: background-color .2s, border-color .2s, transform .1s, opacity .2s;
 
           &:hover {
-            border-color: var(--c-accent);
-            color: var(--c-accent);
-            background-color: var(--c-bg-alt);
+            opacity: 0.9;
+            transform: translateY(-1px);
+            background-color: var(--c-accent);
+            color: var(--c-bg) !important;
           }
 
           &.active {
-            border-color: var(--c-accent);
-            background-color: var(--c-bg-alt);
-            color: var(--c-accent);
-            border-bottom: 1px solid var(--c-accent);
+            opacity: 1;
+            border-color: var(--c-txt);
           }
         }
       }

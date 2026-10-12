@@ -15,14 +15,22 @@ getenv = ['^HUGO_', '^CI$', '^WEB3FORMS_KEY$']
 
 [languages]
 [languages.id]
+title = "Faiq Najib"
 locale = "id-ID"
 label = "Bahasa Indonesia"
 weight = 1
+[languages.id.params]
+description = "Faiq Najib Al-Aziz – Backend Developer spesialis Go dan PostgreSQL, migrasi legacy PHP ke Go, arsitektur sistem scalable."
+ogImageAlt = "Kartu gelap berisi logo monogram FN: Faiq Najib Al-Aziz, Backend Developer & Independent Builder"
 
 [languages.en]
+title = "Faiq Najib"
 locale = "en-US"
 label = "English"
 weight = 2
+[languages.en.params]
+description = "Faiq Najib Al-Aziz – Backend Developer specialized in Go and PostgreSQL, legacy PHP-to-Go migration, and scalable system architecture."
+ogImageAlt = "Dark card featuring FN monogram logo: Faiq Najib Al-Aziz, Go Backend Developer & Architect"
 
 [markup]
 defaultMarkdownHandler = "goldmark"
@@ -116,6 +124,13 @@ weight = 20
 description = "Arsip artikel"
 
 [[menu.main]]
+name = "Teaching"
+pageref = "/teaching"
+weight = 22
+[menu.main.params]
+description = "Pengajaran & Mentoring"
+
+[[menu.main]]
 name = "About"
 pageref = "/about"
 weight = 25
@@ -152,6 +167,13 @@ pageref = "/writing"
 weight = 20
 [languages.en.menu.main.params]
 description = "Blog archive"
+
+[[languages.en.menu.main]]
+name = "Teaching"
+pageref = "/teaching"
+weight = 22
+[languages.en.menu.main.params]
+description = "Teaching & Mentoring"
 
 [[languages.en.menu.main]]
 name = "About"
