@@ -1,6 +1,6 @@
 # Editorial Voice Cleanup
 
-**Status:** Approved design; awaiting spec review  
+**Status:** Approved  
 **Date:** 2026-10-24
 
 ## Goal
