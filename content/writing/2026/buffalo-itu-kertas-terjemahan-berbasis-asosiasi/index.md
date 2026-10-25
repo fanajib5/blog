@@ -14,7 +14,7 @@ tags:
   - personal
 ---
 
-Istri saya baru saja menceritakan sesuatu yang saya tidak tahu harus menertawakan siapa.
+Istri saya baru saja menceritakan sesuatu. Saya sampai tidak tahu harus menertawakan siapa.
 
 Jadi, ibu mertua saya mengajar les bahasa Inggris. Suatu hari, ada muridnya yang sedang berlatih mengerjakan soal. Lalu percakapannya kira-kira seperti ini:
 
@@ -26,27 +26,27 @@ Jadi, ibu mertua saya mengajar les bahasa Inggris. Suatu hari, ada muridnya yang
 >
 > Murid B: "Iyo! Kertas buffalo. Kan berarti kertas."
 
-Saya diam sejenak setelah mendengar ini. Bukan karena bingung, tapi karena dalam diam itu saya sadar: _logikanya masuk akal_. Dan itu justru yang lebih membingungkan.
+Setelah mendengarnya, saya sempat diam. Bukan karena bingung. Saya justru sadar: _logikanya masuk akal_. Itu yang bikin saya makin bingung.
 
 ## Otak Itu _Cache_-nya Terlalu Kuat
 
-Kalau kamu pernah belajar bahasa asing, kamu pasti tahu rasanya: otak tidak menyimpan kata seperti kamus. Otak menyimpan kata seperti _folder_ yang isinya berdesakan.
+Kalau kamu pernah belajar bahasa asing, mungkin kamu tahu rasanya: otak tidak menyimpan kata seperti kamus. Kata-kata tersimpan seperti _folder_ yang isinya berdesakan.
 
 Kata _"buffalo"_ masuk ke telinga si anak. Otak langsung melakukan pencarian. Dan yang pertama muncul di hasil pencarian bukan gambar hewan berbulu besar yang hidup di padang rumput Amerika Utara, tapi... **kertas buffalo**. Itu yang paling sering dia temui. Itu yang paling dekat. Itu yang paling _relevan_ menurut otaknya.
 
-Fenomena ini punya nama. Para linguis dan peneliti bahasa menyebutnya _**association-based translation**_, atau dalam bahasa yang lebih manusiawi: **terjemahan berbasis asosiasi**.[^1]
+Para linguis dan peneliti bahasa menyebut fenomena ini _**association-based translation**_, atau **terjemahan berbasis asosiasi**.[^1]
 
 Intinya sederhana: manusia menerjemahkan kata bukan dari kamus, tapi dari memori yang paling kuat terasosiasi dengan kata tersebut. Dan memori itu tidak selalu benar. Tapi selalu _merasa_ benar.
 
 ## Ini Bukan Cuma Soal Anak-Anak
 
-Sebelum kamu terlalu cepat melempar senyum sambil bilang, _"ya wajar, itu kan anak kecil"_ — tunggu dulu.
+Sebelum ikut tersenyum dan bilang, _"ya wajar, itu kan anak kecil"_, tahan dulu.
 
 Saya mau berbagi beberapa contoh yang sedikit lebih dekat dengan keseharian kita.
 
-**Contoh pertama.** Pernah ada yang mengira kata _"deadline"_ artinya "sudah mati"? Maksudnya dari sisi orang yang belum pernah bekerja di lingkungan yang menggunakan istilah itu. _Dead_ kan artinya mati. _Line_ artinya garis. Jadi _deadline_: garis kematian? Secara asosiasi, masuk akal. Secara konteks, tentu tidak.
+**Contoh pertama.** Pernah ada yang mengira _"deadline"_ artinya "sudah mati"? Bagi orang yang belum pernah bekerja di lingkungan yang memakai istilah itu, tafsirnya masuk akal. _Dead_ artinya mati. _Line_ artinya garis. Jadi _deadline_: garis kematian? Secara asosiasi, masuk akal. Dalam konteks kerja, tentu bukan itu artinya.
 
-**Contoh kedua.** Kata _"overtime"_ yang sering diartikan sebagai "waktu ekstra untuk istirahat" oleh beberapa orang baru masuk dunia kerja. _Over_ = lebih. _Time_ = waktu. Jadi waktu lebih? _Ya, waktu lebih untuk kerja_. Tapi yang kebayang di kepala bisa saja sebaliknya haha.
+**Contoh kedua.** Beberapa orang yang baru masuk dunia kerja mengartikan _"overtime"_ sebagai "waktu ekstra untuk istirahat". _Over_ = lebih. _Time_ = waktu. Jadi waktu lebih? _Ya, waktu lebih untuk kerja_. Tapi yang terbayang bisa saja sebaliknya haha.
 
 **Contoh ketiga, dan ini yang paling ironis.** Saya sendiri. Dulu pernah mengira _"hardware"_ adalah nama merek alat tulis. Karena di dekat rumah ada toko yang namanya _"Toko Hardware"_. Dan yang dijual memang peralatan keras. Sampai SMA pun saya masih agak rancu. _Silakan tertawa._[^2]
 
@@ -54,33 +54,31 @@ Saya mau berbagi beberapa contoh yang sedikit lebih dekat dengan keseharian kita
 
 Ini bukan kesalahan evolusi. Ini justru fitur.
 
-Otak manusia dirancang untuk efisien, bukan untuk akurat. Ketika kamu mendengar atau membaca sebuah kata, otak tidak membuka kamus internal yang punya satu definisi resmi. Otak melempar pertanyaan ke _cache_-nya sendiri: _"kata ini pernah ketemu di mana? Di konteks apa? Dengan siapa?"_ Dan jawaban yang paling cepat muncul, itulah yang dipakai.[^3]
+Otak manusia lebih mengutamakan efisiensi daripada akurasi. Saat mendengar atau membaca sebuah kata, otak tidak membuka kamus internal untuk mencari satu definisi resmi. Otak bertanya kepada _cache_-nya sendiri: _"kata ini pernah ketemu di mana? Di konteks apa? Dengan siapa?"_ Jawaban yang paling cepat muncul itulah yang dipakai.[^3]
 
-Si anak yang menjawab _"kertas"_ tidak bodoh. Otaknya bekerja dengan sempurna. Yang terjadi hanya: data masukannya kurang beragam. Dia belum cukup sering bertemu kata _"buffalo"_ di luar konteks kertas. Jadi satu-satunya asosiasi yang dia punya adalah kertas buffalo.
+Anak yang menjawab _"kertas"_ itu tidak bodoh. Otaknya bekerja seperti biasa, hanya saja pengalaman bahasanya belum beragam. Dia belum cukup sering menjumpai kata _"buffalo"_ di luar konteks kertas. Asosiasi yang ia punya hanya kertas buffalo.
 
 Dan kalau dipikir lebih jauh lagi: **berapa banyak orang dewasa yang juga begitu, tapi tidak menyadarinya?**
 
 Banyak asumsi yang kita pegang erat ternyata hanya asosiasi pertama yang pernah masuk ke kepala. Bukan kebenaran. Hanya _cache_ lama yang belum pernah di-_update_.
 
-## Pelajaran yang Tidak Terasa Seperti Pelajaran
+## Yang Bisa Dipelajari dari Jawaban "Kertas"
 
-Cerita si anak tadi sebenarnya menyimpan sesuatu yang cukup dalam untuk ukuran percakapan les bahasa Inggris.
+Jawaban si anak tadi mengingatkan saya pada beberapa hal.
 
-Pertama: **konteks itu raja**. Satu kata bisa punya banyak arti. Dan mana yang dipakai tergantung sepenuhnya pada konteks kalimat, bukan hafalan arti kata.
+Pertama: **konteks menentukan arti**. Satu kata bisa punya beberapa arti; kalimat di sekitarnya membantu kita tahu arti mana yang dimaksud.
 
-Kedua: **asosiasi pertama bukan asosiasi terbaik**. Otak kita sering menipu dengan memberikan jawaban yang _familiar_, bukan yang _benar_. Ini berlaku di bahasa, tapi juga di banyak keputusan hidup lainnya. _Tapi itu bahasan yang terlalu berat untuk postingan yang dimulai dari cerita buffalo._
+Kedua: **asosiasi pertama belum tentu yang tepat**. Otak sering memberi jawaban yang _familiar_, bukan yang _benar_. Ini bisa terjadi saat memahami bahasa maupun saat mengambil keputusan. _Tapi itu bahasan yang terlalu berat untuk postingan yang dimulai dari cerita buffalo._
 
-Ketiga: **kalau ngajar, jangan langsung disalahkan**. Respons _"seng nggenah tah!"_ di cerita tadi sebenarnya wajar, karena asosiasi si penanya memang masuk akal dalam dunianya. Yang lebih efektif adalah meluruskan sambil menghargai logikanya: _"Iya ada kertas buffalo, tapi kalau ditanya arti bahasa Inggrisnya, buffalo itu hewannya. Kerbau."_ Sederhana. Tidak membuat anak merasa bodoh.
+Ketiga: **saat mengajar, jangan buru-buru menyalahkan anak**. Respons _"seng nggenah tah!"_ di cerita tadi bisa dimengerti, tetapi asosiasi si penjawab memang masuk akal dalam dunianya. Kita bisa meluruskan sambil menghargai logikanya: _"Iya ada kertas buffalo, tapi kalau ditanya arti bahasa Inggrisnya, buffalo itu hewannya. Kerbau."_ Dengan begitu, anak tidak dibuat merasa bodoh.
 
 ---
 
 Istri saya waktu cerita itu sambil menahan tawa. Saya ikut tertawa juga.
 
-Tapi setelah itu saya malah kepikiran: _berapa banyak hal lain yang saya "terjemahkan" berdasarkan asosiasi pertama, dan tidak pernah saya pertanyakan lagi?_
+Setelah ikut tertawa, saya malah bertanya-tanya: _berapa banyak hal lain yang saya "terjemahkan" berdasarkan asosiasi pertama, lalu tidak pernah saya pertanyakan lagi?_
 
-Mungkin banyak. Mungkin lebih banyak dari yang saya kira. Dan mungkin sebagian dari kamu yang sampai di paragraf ini pun sekarang lagi mikir hal yang sama.
-
-Sekian. Salam.
+Mungkin banyak. Saya sendiri belum tahu berapa.
 
 [^1]: Istilah yang lebih sering muncul di literatur adalah _lexical association_ atau _associative meaning_. Tapi "terjemahan berbasis asosiasi" terasa lebih pas untuk menggambarkan apa yang terjadi saat seseorang menerjemahkan kata berdasarkan ingatan konteks, bukan makna dasar.
 
