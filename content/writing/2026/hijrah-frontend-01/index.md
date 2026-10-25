@@ -14,57 +14,57 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Seri [Hijrah Backend](/writing/2026/hijrah-backend-01/) sudah selesai. Backend GPS sekarang berjalan di Go, 14 modul domain sudah tertata, dan _endpoint_ yang tadinya makan waktu 15 detik sudah jauh lebih cepat.
+Seri [Hijrah Backend](/writing/2026/hijrah-backend-01/) akhirnya kelar. Backend GPS sekarang jalan di Go, 14 modul domain sudah tertata, dan _endpoint_ yang dulu butuh 15 detik sekarang jauh lebih ngebut. Alhamdulillah.
 
-Sekarang giliran gedung sebelah: _frontend_.
+Nah, sekarang giliran gedung sebelah: _frontend_.
 
-Saya seorang _backend engineer_. Sehari-hari saya berurusan dengan _query_, _index_, _parser_ paket biner, dan kesejahteraan _database_. _Frontend_ biasanya hanya saya kunjungi seperlunya, seperti turis. Sampai akhirnya saya diminta ikut mengurusnya, bukan sekadar mampir hehe~
+Saya seorang _backend engineer_. Sehari-hari saya berurusan dengan _query_, _index_, _parser_ paket biner, dan kesejahteraan _database_. _Frontend_ biasanya hanya saya kunjungi seperlunya, seperti turis. Sampai akhirnya saya diminta ikut mengurusnya. Bukan sekadar mampir lagi, hehe~
 
 ## Kesan Pertama: Bau _Spaghetti_
 
-Saat membuka _frontend_ warisan itu, saya langsung melihat _spaghetti_ di mana-mana. Saya memang tidak jago _frontend_, tapi sudah cukup lama membaca kode untuk mengenali polanya. Anda tidak perlu jadi koki untuk tahu sup sudah terlalu lama di meja; kadang cukup lihat saja.
+Saat membuka _frontend_ warisan itu, saya langsung melihat _spaghetti_ di mana-mana. Saya memang tidak jago _frontend_, tapi sudah cukup lama baca kode orang untuk tahu mana yang _spaghetti_. Tidak perlu jadi koki untuk tahu kalau sup sudah kelamaan nangkring di meja, kan? Kelihatan saja sudah cukup.
 
-Saya tidak bermaksud menuduh siapa pun. Aplikasi itu dibangun selama bertahun-tahun, dikerjakan banyak orang dengan selera berbeda, dan tetap melayani puluhan ribu _user_ setiap hari. _Backend_ yang pernah saya hijrahkan punya cerita serupa. Ternyata gedungnya berbeda, tapi penyebabnya sama: **waktu dan keadaan darurat**.
+Eh, saya tidak bermaksud menuduh siapa pun ya. Aplikasi itu dibangun bertahun-tahun, dikerjakan banyak orang dengan selera berbeda, dan tetap melayani puluhan ribu _user_ setiap hari. _Backend_ yang dulu saya hijrahkan ceritanya mirip. Gedungnya beda, penyebabnya sama: **waktu dan keadaan darurat**.
 
 ## Keputusan: Fork, Bukan Rewrite
 
-Pengalaman [menghijrahkan _backend_](/writing/2026/hijrah-backend-01/) membuat saya makin percaya bahwa _rewrite_ total memang terlihat menarik di _slide_, tapi menakutkan saat sudah masuk produksi.
+Pengalaman [menghijrahkan _backend_](/writing/2026/hijrah-backend-01/) membuat saya makin yakin bahwa _rewrite_ total itu kelihatan keren di _slide_, tapi bikin deg-degan begitu masuk produksi.
 
-Untuk _frontend_, kami memilih jalan yang mirip: **fork sistem lama, lalu port tipis**. Aplikasi dibawa ke rumah baru apa adanya, bukan digambar ulang dari nol dengan _framework_ terbaru. Bahkan nama _repo_-nya tidak berubah, mungkin karena belum sempat diberi tahu bahwa ia sudah pindah rumah.
+Untuk _frontend_, kami ambil jalan yang mirip: **fork sistem lama, lalu port tipis**. Aplikasinya dibawa ke rumah baru apa adanya, tidak digambar ulang dari nol pakai _framework_ terbaru. Bahkan nama _repo_-nya tidak berubah, mungkin karena belum sempat diberi tahu bahwa ia sudah pindah rumah.
 
-Hari pertama di rumah baru saya habiskan dengan menghitung isi lemari:
+Hari pertama di rumah baru saya habiskan untuk menghitung isi lemari:
 
 - **76 halaman** di _app router_[^2]: 60 berformat JSX, 15 berformat JS, dan satu file _backup_ yang tidur di antara mereka[^1]
 - Dua _library_ UI besar yang hidup berdampingan di satu aplikasi yang sama
 - _State management_ warisan yang sudah bertahun-tahun menjadi tukang kebun sekaligus tukang listrik
 - Satu dokumen bernama `TAILWIND_FIX.md` di akar _repo_: monumen kecil untuk penyakit yang pernah sehat hehe~
 
-Enam puluh halaman memakai JSX. Ini bukan keluhan, hanya pengingat bahwa saya sedang belajar bahasa lain. Biasanya saya berteriak `if err != nil`; sekarang saya harus belajar merangkai _className_.
+Enam puluh halaman pakai JSX. Ini bukan keluhan, cuma pengingat bahwa saya sedang belajar bahasa lain. Biasanya saya teriak `if err != nil`, sekarang harus belajar merangkai _className_ (ya... pelan-pelan).
 
 ## Kenapa Port Tipis, Bukan Redesign
 
-Pertanyaannya sama seperti saat di _backend_: kenapa tidak sekalian rombak semuanya supaya rapi dan modern?
+Pertanyaannya sama seperti di _backend_: kenapa tidak sekalian dirombak biar rapi dan kekinian?
 
-Jawabannya sederhana: _user_ ingin tombol yang mereka pakai setiap hari tetap bekerja. Merombak tampilan sambil memindahkan aplikasi berarti mengubah dua hal sekaligus. Di [episode empat di seri backend](/writing/2026/hijrah-backend-04/), saya sudah belajar betapa mahalnya perbaikan diam-diam saat migrasi.
+Jawabannya sederhana, _user_ maunya tombol yang mereka pakai tiap hari tetap jalan. Merombak tampilan sambil pindahan berarti mengubah dua hal sekaligus. Di [episode empat di seri backend](/writing/2026/hijrah-backend-04/), saya sudah belajar betapa mahalnya perbaikan diam-diam saat migrasi.
 
-Untuk _frontend_, berarti tampilan dan perilakunya kami pertahankan dulu. Struktur internal bisa dirapikan nanti, satu keputusan setiap kali. Kode warisan yang ikut pindah dicatat, bukan disembunyikan. Di episode kedua, saya akan membahas apa saja yang terbawa dan alasan sebagian belum bisa ditinggalkan.
+Jadi untuk _frontend_, tampilan dan perilakunya kami pertahankan dulu. Struktur internal dirapikan nanti saja, satu keputusan setiap kali. Kode warisan yang ikut pindah kami catat, tidak kami sembunyikan. Di episode kedua saya cerita apa saja yang terbawa dan kenapa sebagian belum bisa ditinggal.
 
-## Peta Perjalanan
+## Rencana Episode
 
-Seri **Hijrah Frontend** ini berisi lima episode:
+Seri **Hijrah Frontend** ini rencananya lima episode (yang pertama sedang Anda baca):
 
 2. **Port tipis dan warisan yang ikut naik**: apa saja yang terbawa dari rumah lama, secara sadar.
-3. **Type chaos: angka, _string_ kosong, dan halaman yang berbeda pendapat**: bagaimana satu _field_ yang sama dikirim dengan tipe berbeda-beda tergantung halamannya, dan bagaimana hal itu diterima di dunia yang _strict_.
+3. **Type chaos: angka, _string_ kosong, dan halaman yang berbeda pendapat**: satu _field_ yang sama dikirim dengan tipe berbeda-beda tergantung halamannya, lalu bagaimana itu diterima di dunia yang _strict_.
 4. **Dua _library_ UI, dua era penamaan**: warisan yang hidup berdampingan, dan konvensi yang berganti setiap ganti tukang.
 5. **Dua sisi satu gedung**: penutup, refleksi, dan apa yang berubah setelah gedung sebelah jadi rumah sendiri.
 
-Kalau Anda datang dari seri _backend_: selamat datang kembali, gedungnya masih sama, cuma kita pindah lantai. Kalau Anda baru mampir: [episode pembuka seri sebelah](/writing/2026/hijrah-backend-01/) adalah tempat terbaik untuk mulai, atau langsung saja di sini; cerita ini berdiri sendiri hehe~
+Kalau Anda datang dari seri _backend_: selamat datang kembali, gedungnya masih sama, cuma pindah lantai. Kalau baru mampir, boleh mulai dari [episode pembuka seri sebelah](/writing/2026/hijrah-backend-01/), atau langsung di sini saja. Cerita ini tetap bisa dinikmati sendiri kok, hehe~
 
-## Jadi Penghuni Gedung Sebelah
+## Tetangga Baru Gedung Sebelah
 
-Saya datang sebagai turis, tapi sekarang _frontend_ warisan ini juga menjadi tanggung jawab saya. Isinya sudah saya lihat: _spaghetti_, dua _library_ UI, dan 76 halaman yang perlu tetap berfungsi setelah pindah.
+Saya datang sebagai turis, tapi sekarang _frontend_ warisan ini ikut jadi tanggung jawab saya. Isinya sudah kelihatan: _spaghetti_, dua _library_ UI, dan 76 halaman yang harus tetap jalan setelah pindah.
 
-Berikutnya, saya mulai mencatat barang-barang yang ikut naik kereta. Daftarnya lebih panjang daripada yang saya kira.
+Selanjutnya saya mulai mencatat barang-barang yang ikut naik kereta. Ternyata daftarnya lebih panjang dari dugaan saya.
 
 [^1]: Satu file itu bukan salah siapa-siapa; dia jenazah _backup_ yang setia menemani, sama seperti puluhan jenazah berkomentar yang pernah saya temui di _backend_.
 

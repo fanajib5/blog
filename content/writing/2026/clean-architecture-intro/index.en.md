@@ -1,6 +1,6 @@
 ---
 title: "Clean Architecture: From Spaghetti Code to Readable Code"
-description: "An introduction to Clean Architecture for students, from spaghetti code to structured code, with real examples from a GPS tracker project."
+description: "My notes on Clean Architecture, using an example from a GPS tracker project I worked on."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-15
 lastmod: 2026-09-11T09:28:00+07:00
@@ -12,9 +12,9 @@ tags:
   - architecture
 ---
 
-I once wrote code that made sense at the time. The logic was clear, the flow was neat, and the variable names were descriptive. Three months later, I opened the same file and wondered, _"what was this even supposed to do?"_
+I once wrote code that made sense at the time. The logic was clear, the flow was neat, and the variable names were descriptive. Three months later I opened the same file and thought, _"what was this even supposed to do?"_ Turns out I can confuse myself with my own code too hehe.
 
-On a GPS tracker project I worked on, one function queried the database, updated a vehicle's status and position, sent notifications, and generated reports.
+On a GPS tracker project I worked on, one function did everything: queried the database, updated a vehicle's status and position, sent notifications, and generated reports. Practical at first? Maybe. As the code grew, it started to show.
 
 ## Recognizing "Spaghetti Code"
 
@@ -70,9 +70,9 @@ See? One function handles **everything**, read database, process business logic,
 └─────────────────────────────────────────────────┘
 ```
 
-## Clean Architecture: The Core Idea Is Actually Simple
+## Clean Architecture, in a Nutshell
 
-Robert C. Martin (Uncle Bob) popularized the term "Clean Architecture". The main idea is simple: **code that matters (business logic) should not depend on technical details (database, framework, API).**
+Robert C. Martin (Uncle Bob) popularized the term "Clean Architecture". The short version is this: **business logic should not depend on technical details like a database, framework, or API.** No need to make it sound more complicated than that.
 
 Business logic tends to be more stable than technical details. It includes rules for calculating distance, determining whether a vehicle is active, and setting speed limits. The database, framework, and email delivery are **details** that can change.
 
@@ -111,7 +111,7 @@ If the repository contract stays the same, switching from MySQL to PostgreSQL do
 
 ### Three Important Layers
 
-These three layers help explain how responsibilities are divided:
+The responsibilities are usually explained with these three layers:
 
 **1. Entity, Core Business Rules**
 
@@ -186,7 +186,7 @@ class EmailAlertService:
 
 This is the part that's **allowed to change**. Want to switch MySQL to PostgreSQL? Change it here. Want to switch email to WhatsApp? Change it here. Entity and Use Case remain untouched.
 
-## Step by Step: Applying It to the GPS Tracker
+## Trying It on the GPS Tracker Example
 
 Here's the "clean" version of the original flow:
 
@@ -253,13 +253,13 @@ class EmailAlertService:
 
 Each layer can be tested separately: `Vehicle` without a database, `UpdatePositionUseCase` with a mock repository, and `MySQLVehicleRepository` on its own.
 
-## Clean Architecture in Small Projects
+## What If the Project Is Small?
 
-You might think, _"This is for big projects. My thesis is just a small app."_ For a small app, Clean Architecture can be overkill. Still, separating business logic from technical details can help when the code needs testing or its implementation details change.
+You might be thinking, _"This is for big projects. My thesis is just a small app."_ Fair enough. Clean Architecture can easily be overkill for a small app. Still, keeping business logic separate from technical details can help when the code needs tests or its implementation changes.
 
 When explaining a thesis design, an advisor might ask _"why did you design the system this way?"_ An answer like _"because my business logic doesn't depend on the database"_ is clearer than _"because the tutorial I followed did it this way."_
 
-### When It's Okay NOT to Use Clean Architecture
+### When You Don't Need the Extra Layers
 
 Clean Architecture isn't a silver bullet. There are times you don't need it:
 
@@ -267,31 +267,31 @@ Clean Architecture isn't a silver bullet. There are times you don't need it:
 - **Small scripts**: if it's just 50 lines to scrape data, no need for layers.
 - **Still learning basics**: if you're not comfortable with OOP or design patterns yet, learn those first. Clean Architecture needs that foundation.
 
-Use it when the project's complexity calls for it, not just because the name sounds cool.
+Use it when the project actually needs it, not just because the name sounds cool. Otherwise you might spend more time building layers than solving the problem hehe.
 
-## Lessons Learned
+## A Few Things I Took Away
 
-### 1. Spaghetti Code Is Normal, Staying There Is Not
+### Spaghetti code happens
 
-Spaghetti code can emerge as code grows without clear separation of responsibilities. Recognizing which parts are tangled is the first step toward fixing them.
+Spaghetti code can show up when code keeps growing without clear responsibilities. No need to panic or judge the old code right away. Start by finding which parts are tangled together.
 
-### 2. Separate "What" from "How"
+### Separate "what" from "how"
 
-Separate what the system does (business logic) from how it does it (database, API, framework). That's the essence of Clean Architecture.
+Business logic says what the system does. The database, API, and framework are the technical means of doing it. To me, that separation is the main idea.
 
-### 3. Testability Is a Sign of Good Architecture
+### If it's hard to test, check the boundaries
 
-Difficulty writing unit tests can signal that the separation of responsibilities needs another look. In this example, Entity and Use Case can be tested without connecting to a database or email service.
+Difficulty writing unit tests can be a sign that the boundaries need another look. In this example, Entity and Use Case can be tested without connecting to a database or email service.
 
-### 4. Don't Be Dogmatic
+### It's a tool, not a rulebook
 
-Clean Architecture is a tool, not a religion. Understand the principles, then use them when the project calls for it.
+Clean Architecture is a tool, not a religion (worth repeating before anyone adds layer after layer). Understand the idea, then use it when it fits the project.
 
-## Closing Thoughts
+## So, Where Does That Leave Us?
 
-Clean Architecture isn't about the number of layers or fancy patterns. It separates responsibilities so code is easier to understand, change, and test, including when you open it again months later.
+So, it's not about how many layers or fancy patterns you have. The point is to keep responsibilities from getting mixed up, so a few months later we can still understand our own code. I have personally failed at that last part hehe.
 
-If you're interested in seeing how Clean Architecture was applied in a real project (migrating from PHP to Go, 370+ endpoints), I have a [separate write-up](/writing/2026/legacy-php-to-go-migration/) for the implementation side.
+If you want to see how it played out in a real project, including a PHP to Go migration with 370+ endpoints, I wrote a [separate post](/writing/2026/legacy-php-to-go-migration/).
 
 To discuss applying these ideas or ask for help, [get in touch](/en/contact/) or browse my [services](/en/services/).
 

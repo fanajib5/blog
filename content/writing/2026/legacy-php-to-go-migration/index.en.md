@@ -1,6 +1,6 @@
 ---
 title: "Migrating Legacy PHP to Go: Why, How, and Lessons Learned"
-description: "Notes from converting a backend system from PHP (CodeIgniter 3 & Laravel) to Go, 370+ endpoints, 33 entities, and 194K lines of code migrated incrementally."
+description: "My story of migrating a PHP backend (CodeIgniter 3 and Laravel) to Go, one endpoint at a time."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
 lastmod: 2026-09-11T09:28:00+07:00
@@ -14,11 +14,11 @@ tags:
   - migration
 ---
 
-The PHP codebase I worked on had become difficult to maintain. New features were harder to add, bugs appeared more often, and every deployment felt like flipping a coin. The problem wasn't PHP. The system had grown for years without a clear architecture. One day, I had to roll back three times after what should have been a simple deploy. It was a stressful afternoon.
+The PHP codebase I worked on had become hard to maintain. New features were harder to add, bugs showed up more often, and every deploy felt like flipping a coin. PHP itself wasn't the culprit. The system had grown for years without a clear architecture. One day I had to roll back three times after a deploy that should have been simple. That was a stressful afternoon.
 
-This isn't an argument that "_Go is better than PHP_" or "_PHP is dead_." It's an account of a project where I migrated a backend system from PHP (CodeIgniter 3 and Laravel) to Go. This isn't a tutorial or a call for everyone to switch languages. I hope my experience, including the mistakes, helps someone facing a similar situation.
+I'm not here to argue that "_Go is better than PHP_" or "_PHP is dead_." This is my account of migrating a backend system from PHP (CodeIgniter 3 and Laravel) to Go. It's not a tutorial, and definitely not a call for everyone to switch languages. Maybe my experience, mistakes included, will help someone dealing with something similar.
 
-## The Problem Isn't the Language, It's the Architecture
+## What Made It Hard: The Architecture
 
 The system I handled looked like this:
 
@@ -27,39 +27,39 @@ The system I handled looked like this:
 - **~194,000 lines** of PHP code across CodeIgniter 3 and Laravel
 - Testing existed, but coverage was very low.
 
-The real problem wasn't the programming language. PHP is actually fine. The problems were:
+PHP wasn't the problem by itself. PHP is perfectly usable. The trouble spots in this system were:
 
 1. **No layer separation**: controllers queried the database directly, and business logic was mixed with presentation logic. Like fried rice with everything mixed in, it was hard to tell where one concern ended and another began.
 2. **Hard to test**: tightly coupled code made unit testing difficult. To test one function, I had to set up a database, mock three dependencies, and hope it worked.
 3. **Declining developer experience**: onboarding new developers took longer, and bug fixes carried more risk. One new developer said, _"So... this is an... interesting architecture."_ In other words, chaotic.
 
-The system needed more than a language change. Its architecture needed to be reworked, too.
+So changing languages alone wasn't going to be enough. The architecture needed work too.
 
-## Why Go?
+## Why I Picked Go
 
-If you ask why not just refactor in PHP, the answer is **absolutely possible**. In this case, though, Go was a better fit for several reasons, not simply because of the hype.
+If you ask why I didn't just refactor in PHP, the answer is: **I could have**. For this project, Go felt like a better fit for a few reasons. Not just because people were talking about it.
 
 ### 1. Type Safety Saves Debug Time
 
 PHP is dynamically typed[^2], so many bugs only surface at runtime. Go's static typing can catch type-related errors at compile time, before they reach production.
 
-### 2. Concurrency for Free
+### 2. Goroutines Helped with Concurrency
 
 This system handles many simultaneous requests, from real-time GPS tracking to report generation. Compared with other approaches I've tried, goroutines make concurrent programming much simpler. The first time I used them, I thought, _"Wait, it's really this simple?"_
 
-### 3. Clean Deployment
+### 3. A Simpler Deploy
 
 Go produces one binary. There is no `composer install` on the server and no PHP version conflict to worry about. PHP deployments meant checking that composer dependencies were installed, the PHP version matched, and the required extensions were available. Now I build locally and use `scp` to send one file.
 
-### 4. Measurable Performance
+### 4. More Predictable Resource Use
 
 I wasn't focused on benchmark numbers, but on **predictable resource usage**. Go's consistent memory usage makes capacity planning easier. The old PHP system could have unexplained memory spikes. Now memory usage is flatter and more predictable.
 
 Go isn't perfect. Its error handling is verbose (all those `if err != nil`)[^3], and its ecosystem is smaller than PHP's. For this use case, the trade-offs were worth it.
 
-## Migration Approach: Per-Module, Not Big Bang
+## How I Migrated: Module by Module
 
-One risk in a migration is deciding to rewrite everything at once. I've heard about a team that spent two years on a big-bang rewrite and never finished. The reasons varied: burnout, scope creep, or business requirements that changed along the way.
+One migration risk is deciding to rewrite everything at once. I once heard about a team that spent two years on a big-bang rewrite and never finished. Burnout, scope creep, changing business requirements, you name it. Projects can wander off in plenty of ways.
 
 The approach I used:
 
@@ -67,20 +67,20 @@ The approach I used:
 
 First, I mapped all endpoints and entities to clear modules. I grouped the 370+ endpoints into domains such as authentication, tracking, reporting, and user management. Building a spreadsheet to map them took a few days. It was tedious, but it helped with the work that followed.
 
-### 2. Service–Repository Pattern
+### 2. Service-Repository Pattern
 
-Each module was designed using the **service–repository** pattern:
+I designed each module using the **service-repository** pattern:
 
 - **Repository layer**: responsible for data access (database queries)
 - **Service layer**: contains business logic, calls the repository
 
-The separation meant:
+That separation helped with a few things:
 
 - Repositories can be mocked when testing services
 - Business logic can be tested without a database
 - Adding features doesn't break other parts
 
-Clear layers give each part its own responsibility. The pattern felt like over-engineering at first, but after a few months it proved useful.
+With clear layers, each part has its own job. The pattern felt like over-engineering at first. After a few months of using it, I could see the point.
 
 ### 3. One Endpoint at a Time
 
@@ -88,16 +88,16 @@ The process was roughly:
 
 1. Take one endpoint from PHP
 2. Write test cases based on existing behavior[^4]
-3. Implement in Go using the service–repository pattern
+3. Implement in Go using the service-repository pattern
 4. Test until passing
 5. Deploy and monitor
 6. Repeat
 
 The process is slow, but **predictable**. Each migrated endpoint is measurable progress that stakeholders can see. _"This week we migrated 5 endpoints"_ is clearer than saying _"we're still working on the migration"_ for months without visible results.
 
-## Measurable Results
+## What Changed
 
-Some numbers from this project:
+A few numbers from the project:
 
 - **370+ endpoints** successfully migrated
 - **33 entities** converted from MySQL to PostgreSQL[^5]
@@ -108,31 +108,31 @@ Some numbers from this project:
 
 One benefit that doesn't show up in the numbers is a calmer deployment process. I no longer go into a deploy hoping nothing breaks. It can still be nerve-wracking, but it doesn't keep me up at night.
 
-## Lessons Learned
+## Things I Learned Along the Way
 
-This process taught me a few things:
+I came away with a few lessons:
 
-### 1. Understand the Existing System First
+### Get to Know the Old System First
 
-Before writing Go code, I spent time understanding the behavior of the existing system. I didn't just read the code; I tried to understand **why** certain decisions had been made. Code that looks "weird" can make sense in its original context. Don't assume legacy code is bad. There may have been a constraint behind the decision.
+Before writing Go, I spent time learning how the existing system behaved. I read the code and tried to figure out **why** certain decisions had been made. Code that looks "weird" might have made sense in its original context. So I try not to call legacy code bad too quickly. There may be a constraint I can no longer see.
 
-### 2. Big Bang Rewrite Is a Trap
+### Don't Rewrite Everything at Once
 
-_If you can do it incrementally, why go all at once?_ The incremental approach feels slow, but the risk is lower. Each migrated endpoint is progress you can show stakeholders, and the system keeps running throughout the process.
+_If you can do it in pieces, why do it all at once?_ Incremental work feels slower, but it carries less risk. You can show stakeholders each finished endpoint, and the existing system keeps running.
 
-### 3. Test First, Then Migrate
+### Test Before Moving Things Over
 
-Writing tests for a legacy system can be tedious, but they are the **safety net** that helps ensure the system behaves the same after migration. Without tests, you risk changing behavior that users already depend on.
+Writing tests for a legacy system can be tedious (I know). But tests are a safety net against quietly changing behavior after migration. Without them, you might change something users already rely on.
 
-### 4. Don't Prematurely Optimize
+### Don't Make It Complicated Too Soon
 
-I was tempted to jump straight into microservices, message queues, and more elaborate architecture. But a system without a stable architecture needs **a solid foundation**, not microservices. A well-structured monolith is better than chaotic microservices. KISS (_Keep It Simple, Stupid_)[^6] is still a useful principle.
+I was tempted to jump into microservices, message queues, and all sorts of elaborate architecture. But a system without a stable architecture needs a foundation first, not more moving parts. A well-structured monolith is easier to live with than chaotic microservices. KISS (_Keep It Simple, Stupid_)[^6] still comes in handy.
 
-## Closing Thoughts
+## So, Should You Move to Go?
 
-Migrating from PHP to Go isn't about "_language A is better than language B_." It's about **choosing a tool that fits the problem**. For this project, Go's static typing, concurrency model, and simpler deployment made it the right choice.
+For me, moving from PHP to Go isn't a contest over which language is better. It's about **choosing a tool that fits the problem**. In this project, Go's static typing, concurrency model, and simpler deployment made sense.
 
-Does every PHP system need to move to Go? _Not at all_. If your system runs well, its architecture is clear, and your team is comfortable with PHP, there is no reason to switch just because of hype. Migrate when there is clear business value and a measurable benefit.
+Does every PHP system need to move to Go? _Nope_. If your system runs well, the architecture is clear, and the team is comfortable with PHP, switching just because it is trendy will only create more work. I think migration makes sense when the business value is clear and the benefits can be measured.
 
 If the legacy system you work on is becoming difficult to maintain and you'd like to discuss a migration approach, [get in touch](/en/contact/). You can also learn more about my [services](/en/services/).
 

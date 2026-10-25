@@ -19,17 +19,17 @@ series: "gps-backend-series"
 series_part: 5
 ---
 
-"Vehicle A entered the port area at 03:00, exited at 05:30."
+"Vehicle A entered the port area at 03:00 and left at 05:30."
 
-GPS tracking services often offer this feature, but geofencing is also easy to implement incorrectly. It takes more than drawing a _polygon_ on a map; we also need to detect entry and exit _events_ accurately in a data stream arriving every 10 to 30 seconds.
+That kind of note is a common feature in GPS tracking services. It sounds simple, but it is easy to get wrong. We need to draw a _polygon_ and detect entry and exit _events_ from a stream of positions arriving every 10-30 seconds.
 
-In [Part 4](/en/writing/2026/gps-data-postgresql-timescaledb/), positions were stored in TimescaleDB. This post adds another dimension: **regions**. All examples here were tested on PostGIS 3.5 (PostgreSQL 16, container `postgis/postgis:16-3.5`).
+In [Part 4](/en/writing/2026/gps-data-postgresql-timescaledb/), positions were stored in TimescaleDB. This time I am adding one thing: **regions**. I tested the examples with PostGIS 3.5 (PostgreSQL 16, container `postgis/postgis:16-3.5`).
 
-## A Geofence Is Just an Inside or Outside Question
+## First, Is This Point Inside or Outside?
 
-Geofencing comes down to one question for each point: _is this point inside that polygon?_ PostGIS answers this with `ST_Within(point, polygon)`. Let's start by testing the basics.
+The basic question is simple: _is this point inside the polygon or outside it?_ PostGIS has `ST_Within(point, polygon)` for that. I will start with this basic check.
 
-Create the geofences table with polygons using SRID 4326 (the standard GPS latitude/longitude coordinate system) and a GiST index:
+I create the geofences table with polygons using SRID 4326 (the standard GPS latitude/longitude coordinate system) and a GiST index:
 
 ```sql
 CREATE TABLE geofences (
@@ -43,7 +43,7 @@ CREATE INDEX idx_geofences_geom ON geofences USING GIST (geom);
 CREATE INDEX idx_geofences_geog ON geofences USING GIST ((geom::geography));
 ```
 
-For this demo, I will use a bounding box roughly covering the Tanjung Perak Port area in Surabaya (in production, polygons are drawn by customers on a map and can take any shape):
+For this demo I use a bounding box that roughly covers Tanjung Perak Port in Surabaya. In production, customers can draw polygons of any shape on the map.
 
 ```sql
 INSERT INTO geofences (name, geom) VALUES (
@@ -54,14 +54,14 @@ INSERT INTO geofences (name, geom) VALUES (
 );
 ```
 
-Next, create geometry for the position points. If your `positions` table still uses `lat`/`lon` columns (like our schema in Part 4), we can add a geometry column as a _generated column_ without changing how we insert rows:
+Next I prepare geometry for the position points. If the `positions` table still uses `lat`/`lon` columns like the schema in Part 4, we can add a geometry column as a _generated column_. The insert statement does not need to change:
 
 ```sql
 ALTER TABLE positions ADD COLUMN geom GEOMETRY(Point, 4326)
     GENERATED ALWAYS AS (ST_SetSRID(ST_MakePoint(lon, lat), 4326)) STORED;
 ```
 
-Let's test membership against the seeded truck route: two points outside the area and two inside:
+I will test this against the sample truck route, with two points outside the area and two inside:
 
 ```sql
 SELECT time, lat, lon,
@@ -79,13 +79,13 @@ FROM positions ORDER BY time;
 (4 rows)
 ```
 
-The query works, but customers don't buy a list of `true`/`false` values; they pay for **events**.
+The query works. But users do not need a list of `true` and `false` values; they need **events**.
 
-## Turning Inside/Outside into Events: Entry and Exit
+## Turning Status into Entry and Exit Events
 
-Membership alone is not enough. A truck idling inside the port for 4 hours will emit hundreds of `inside` points. A dashboard that displays "entered" 400 times is broken. We need one `ENTER` event when the state changes from outside to inside, and one `EXIT` event for the reverse transition.
+Inside/outside status alone is not enough. A truck sitting in the port for 4 hours could send hundreds of `inside` points. A dashboard that says "entered" 400 times is clearly wrong. We only need an `ENTER` when the state changes from outside to inside, then an `EXIT` when it changes back.
 
-To detect a change, compare the current point's status with the previous one. The `LAG` window function does that:
+To spot a change, I compare the current point with the previous one. The `LAG` window function is handy for this:
 
 ```sql
 WITH membership AS (
@@ -116,11 +116,11 @@ The route produces two rows:
          1 | 2026-11-11 05:30:00+07 | EXIT
 ```
 
-(In production, add `PARTITION BY device_id, g.id ORDER BY time`, since each device tracks its own state sequence per fence.)
+(In production, add `PARTITION BY device_id, g.id ORDER BY time` so each device has its own status sequence for each fence.)
 
-## Real-Time: Checking Inside the Ingest Worker
+## Check Positions as They Arrive
 
-The query above is useful for historical analysis. Real-time alerts need checks **at the point of ingestion**. As in the architecture from Part 2, the listener leaves database work to the ingest worker:
+The query above is useful for historical analysis. Real-time alerts need a check **when the data arrives**. In the Part 2 architecture, the listener does not touch the database. The ingest worker handles that:
 
 ```go
 func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
@@ -149,16 +149,16 @@ func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
 }
 ```
 
-Two details help this query scale as the number of fences grows:
+Here are two things to keep in mind as the number of fences grows:
 
 1. **The 5 km geography `ST_DWithin` pre-filter** can use the `idx_geofences_geog` expression index on `geom::geography` to prune distant fences. The `idx_geofences_geom` index remains available for geometry operations such as `ST_Within`. The planner may choose a different scan depending on table size and statistics, so check the query plan with `EXPLAIN (ANALYZE, BUFFERS)`.
 2. **Previous state is not queried from `positions`**; it is retrieved directly from cache (`device_id:fence_id -> inside`). It is literally a single bit of state that only updates upon a change event.
 
-Why not use PostgreSQL triggers? They can work, but couple business logic tightly to your schema, are difficult to unit-test in isolation, and hide background workloads from application metrics. With the worker pattern, alert notifications (push, WhatsApp, email) can be sent with regular Go code.
+Why not use PostgreSQL triggers? They can work, but business logic gets tied to the schema, testing it separately is harder, and the work is hidden from application metrics. With a worker, notifications (push, WhatsApp, email) can go through ordinary Go functions. I find the boundaries easier to follow this way.
 
-## POI Radius: geography, Not geometry
+## POI Radius: Use geography, Not geometry
 
-Polygon geofences are ideal for clearly bounded areas (ports, warehouses, industrial zones). For a requirement like "alert when a vehicle approaches a gas station within 500 meters", a circle is more natural. The catch is **units of measurement**.
+Polygon geofences fit areas with clear boundaries, like ports or warehouses. If the requirement is "alert when a vehicle gets within 500 meters of a gas station", a radius makes more sense. There is one PostGIS gotcha: **units**.
 
 `geometry` operates in angular degrees; `geography` operates on the Earth's curved surface in **meters**. A 500-meter radius written as `ST_DWithin(geom, geom, 500)` on a geometry column means 500 *degrees*, enough to circle the globe multiple times. For radius checks, use `geography`:
 
@@ -188,23 +188,18 @@ FROM pois;
 (1 row)
 ```
 
-The point is 199 meters away, within the 500-meter radius. `geography` accounts for the Earth's curvature.
+The result is 199 meters, still within the 500-meter radius. `geography` also accounts for the Earth's curvature.
 
-## Gotchas That Will Bite You
+## A Few Things That Can Surprise You
 
 - **GPS drift along polygon boundaries.** A fluctuating GPS signal near a boundary can generate repeated ENTER/EXIT events, for example when a truck is parked right next to the fence. One common solution is a buffer zone: require the point to be 50 meters inside (`ST_DWithin(geom, geom, -50)` is invalid; use `ST_Contains(ST_Buffer(geom, -0.0005), point)`), or require two consecutive consistent readings before firing an event.
 - **Sampling interval vs. speed.** A vehicle moving at 60 km/h with a 60-second ping interval travels 1 km between points. A route through a small fence can be missed between pings without ever recording a point *inside*. For mission-critical boundaries, inspect the path segment to see whether the line between two consecutive points intersects the polygon boundary using `ST_Intersects` on `ST_MakeLine`.
 - **Degree units vs. meters**: `geometry` uses degrees while `geography` uses meters. Check which type you are querying.
 - **Mismatched SRIDs**: if you omit the SRID when calling `ST_SetSRID(ST_MakePoint(lon, lat), 4326)`, PostGIS will refuse to compare them (or worse, silently match if both are 0). The parameter order matters too: **longitude first, latitude second**, the opposite of our usual "lat-long" phrasing.
 
-## Key Takeaways
+So, `ST_Within` gives us an inside/outside status, and `LAG` helps read status changes as events. For real-time checks, the worker can use an `ST_DWithin` pre-filter and keep the latest status in a cache. For radius checks, `geography` uses meters while `geometry` uses degrees. GPS can drift or send sparse updates, so we also need to think about the space between points.
 
-- A geofence is an inside/outside query (`ST_Within`) transformed into a **transition event** (`LAG` state comparison), not a raw membership log.
-- Perform real-time evaluations inside the **ingest worker** using an `ST_DWithin` pre-filter and a 1-bit cached state; save heavy window function queries for historical reporting.
-- `geometry` vs `geography`: degrees vs meters. POI radius checks belong in `geography`.
-- Real-world GPS data is imprecise: engineer around drift (buffers) and sparse sampling intervals (line segments vs points).
-
-Position data is stored and geofence events are detected. In [Part 6](/en/writing/2026/real-time-gps-dashboard/), we will continue with a real-time dashboard that displays the map without page refreshes, using WebSockets, fan-out, and broadcast patterns.
+The positions are stored and the geofence events are detected. In [Part 6](/en/writing/2026/real-time-gps-dashboard/), I will move on to a real-time GPS dashboard that displays the map without refreshing, with WebSockets, fan-out, and broadcast patterns.
 
 ## What's Next
 
@@ -213,6 +208,6 @@ This post is part of the **Building a GPS Backend from Scratch** series.
 - Previous: [Part 4: Storing GPS Data with PostgreSQL + TimescaleDB](/en/writing/2026/gps-data-postgresql-timescaledb/)
 - Next: [Part 6: Building a Real-Time GPS Dashboard](/en/writing/2026/real-time-gps-dashboard/)
 
-## CTA
+## If You Want to Talk
 
-To discuss geofencing with PostGIS, visit [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).
+If you want to talk more about geofencing with PostGIS, visit [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).

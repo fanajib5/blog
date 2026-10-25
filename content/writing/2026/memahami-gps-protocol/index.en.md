@@ -1,6 +1,6 @@
 ---
 title: "Understanding GPS Protocols: How Tracker Devices Communicate"
-description: "GPS trackers send location data via TCP sockets using brand-specific binary protocols. Learn how GPS tracker communication works, the packet structure of Teltonika and GT06, and why HTTP falls short."
+description: "GPS trackers send location data over TCP sockets using binary protocols that differ per brand. My notes on how it works, the packet formats of Teltonika and GT06, and why not HTTP."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-08
 lastmod: 2026-09-13
@@ -20,55 +20,55 @@ series:
 series_part: 1
 ---
 
-When I first took responsibility for the backend serving hundreds of GPS trackers, I assumed the job was to build a standard REST API: the device sends a `POST /api/location` with JSON, the server saves it to the database, and that's it.
+When I was first trusted with the backend for hundreds of GPS trackers, I figured the job was just a standard REST API: the device sends a `POST /api/location` with JSON, the server saves it to the database, done. Easy, right? Hahaha.
 
-I was wrong. The backend was eventually migrated from Laravel to Go across 370+ endpoints. I tell the full story in my [Hijrah Backend narrative series](/en/writing/2026/hijrah-backend-01/). The series you are reading is its tutorial counterpart: rebuilding the backend from scratch, with code you can follow.
+I was wrong. The backend was eventually migrated from Laravel to Go, covering 370+ endpoints. I tell the full story in my [Hijrah Backend narrative series](/en/writing/2026/hijrah-backend-01/). The series you're reading is its tutorial counterpart: rebuilding the backend from scratch, with code you can follow along.
 
-GPS trackers do not speak HTTP or send JSON. A TCP connection carries raw bytes such as `\x00\x00\x00\x2f\x8e\x01\x04\x01\x03...`, with no HTTP headers, content-type, or other clues. Each hardware vendor also has its own way of arranging those bytes.
+GPS trackers don't speak HTTP. No JSON either. A TCP connection carries raw bytes such as `\x00\x00\x00\x2f\x8e\x01\x04\x01\x03...`, with no headers, content-type, or any hint at all. Each brand also has its own way of arranging those bytes.
 
-This article explains how GPS trackers communicate with a server. It is not a decoder walkthrough; that is covered in [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/). Here, we will cover the concepts you need before writing parser code.
+In this article I'll first talk about how GPS trackers chat with a server. It's not the decoder tutorial yet, that's in [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/). We start with the concepts you need before writing any parser code.
 
 ## What Is a GPS Tracker, Really?
 
 A GPS tracker is an embedded device built around two core modules:
 
-1. **GPS module**: receives satellite signals to calculate physical position (latitude, longitude, altitude, speed, heading).
-2. **GSM/LTE module**: transmits those telemetry coordinates to your server over cellular networks.
+1. **GPS module**: receives satellite signals to work out position (latitude, longitude, altitude, speed, heading).
+2. **GSM/LTE module**: sends that position data to your server over the cellular network.
 
-Beyond those basics, trackers typically feature:
+Besides those, trackers usually have:
 
-- **Digital I/O**: sensors for door status (open/closed), engine ignition state, and SOS emergency buttons
+- **Digital I/O**: sensors for door open/closed, ignition (engine on), and SOS buttons
 - **Analog inputs**: fuel level and temperature sensors
-- **Accelerometer**: crash detection, harsh braking, and motion triggers
-- **Internal battery**: backup power reserve when the vehicle battery is disconnected
+- **Accelerometer**: shock detection (crashes or harsh braking)
+- **Internal battery**: backup when main power is disconnected
 
-Data collected across all these sensors is bundled into a single compact packet and pushed to the server periodically, usually every 10 to 30 seconds when the vehicle is moving, and much less frequently when parked (to save cellular data).
+Data from all these sensors is bundled into one packet and pushed to the server periodically, usually every 10 to 30 seconds while moving, and less often when parked to save data.
 
 ## Why TCP Instead of HTTP?
 
-My first question was simple: why don't device manufacturers just use an HTTP REST API?
+My first question was the same: why don't the devices just use an HTTP REST API?
 
-There are four core reasons:
+There are four reasons.
 
 ### 1. Bandwidth Efficiency
 
-HTTP requests add overhead. Headers alone can easily consume 500+ bytes (`Host`, `Content-Type`, `Accept`, `Authorization`, and so on), while a typical binary GPS packet is only 40 to 60 bytes. Over unreliable 2G/3G cellular links, where SIM data is billed per megabyte, every byte matters.
+HTTP requests carry a lot of overhead. Headers alone can easily eat 500+ bytes (`Host`, `Content-Type`, `Accept`, `Authorization`, and so on), while a typical binary GPS packet is only 40 to 60 bytes. Over flaky 2G/3G links, with SIM data billed per megabyte, every byte counts.
 
 ### 2. Persistent Connections
 
-A vehicle tracker needs an **always-on persistent connection** so the server can send downlink commands at any moment: "cut the engine" (engine kill), "update reporting interval", or "request immediate location update". HTTP uses a request-response model; sending a command when the device has not made a new request requires another mechanism, such as polling or a separate channel.
+A tracker needs to keep its connection alive so the server can send commands anytime: "cut the engine" (engine kill), "update reporting interval", or "send location now". HTTP is request-response. Sending a command while the device isn't making a request needs another mechanism, like polling or a separate channel.
 
-### 3. Granular Control Over Data Layout
+### 3. Full Control Over the Data Layout
 
-HTTP defines a fixed structure (methods, headers, body, and status codes). A custom binary protocol lets hardware manufacturers choose a compact data layout. With bitmasks, a single byte can represent three or four status fields.
+HTTP forces a certain structure (methods, headers, body, status codes). A custom binary protocol lets manufacturers design the format as compactly as they like. With bitmasks, one byte can stand for three or four fields.
 
 ### 4. Hardware Constraints
 
-Many GPS trackers use microcontrollers with limited resources (often 64KB RAM and a 48MHz clock). An HTTP stack (header parsing, TLS handshakes, JSON serialization) can use too much memory and processing power. Raw TCP sockets are lighter.
+Many GPS trackers use microcontrollers with limited resources (often 64KB RAM and a 48MHz clock). An HTTP stack (header parsing, TLS handshakes, JSON serialization) eats too much of that. Raw TCP sockets are much lighter.
 
 ## How GPS Tracker Communication Works
 
-The communication lifecycle looks like this:
+The flow looks like this:
 
 ```
 Device                          Server
@@ -92,39 +92,39 @@ Device                          Server
 
 ### Phase 1: Connection & Login
 
-The tracker opens a TCP socket to the server's IP and port. Once connected, it sends a **login packet**, typically containing its IMEI (International Mobile Equipment Identity), a unique 15-digit identifier for the device.
+The tracker opens a TCP socket to the server's IP and port. Once connected, it sends a **login packet**, usually containing its IMEI (International Mobile Equipment Identity), a unique 15-digit number that identifies the device.
 
-The server responds with an ACK packet. If the IMEI is unknown or unauthorized, the server can close the connection or ignore subsequent packets.
+The server replies with an ACK. If the IMEI is unknown or unauthorized, the server can close the connection or ignore the data.
 
 ### Phase 2: Data Reporting
 
-After a successful handshake, the tracker sends telemetry packets at regular intervals. Many protocols also report events:
+After a successful login, the tracker starts sending location data at regular intervals. Many protocols also report on events:
 
 - When motion is detected
-- When a distance threshold from the previous coordinate is crossed (distance-based reporting)
-- When ignition is toggled on or off
-- When the SOS button is triggered
-- When an onboard geofence is breached
+- When a distance threshold from the previous point is crossed (distance-based reporting)
+- When ignition is switched on or off
+- When the SOS button is pressed
+- When a geofence is breached
 
-Every location packet contains at least a timestamp, latitude, and longitude. It may also include speed, heading/azimuth, altitude, I/O sensor status (ignition, door switches, alarms), and backup battery voltage.
+Every location packet contains at least a timestamp, latitude, and longitude. There's usually speed, heading/azimuth, altitude, I/O status (ignition, door, alarms), and battery level too.
 
 ### Phase 3: Server Commands
 
-The server can send commands to any online tracker. Examples include:
+The server can send commands to any online tracker. For example:
 
-- **Reboot device**: handy when hardware firmware hangs
-- **Set reporting interval**: adjust ping frequencies dynamically
-- **Engine cut**: disable the starter motor relay (anti-theft immobilizer)
-- **Listen-in**: open an audio monitoring channel via onboard mic
-- **Request current location**: force an immediate coordinate broadcast
+- **Reboot device**: handy when firmware hangs
+- **Set reporting interval**: change how often it sends data
+- **Engine cut**: disable the starter relay (anti-theft)
+- **Listen-in**: open the onboard mic for audio monitoring
+- **Request current location**: ask for a position right now
 
 ### Phase 4: Heartbeat / Keep-Alive
 
-When the vehicle is parked and stationary, the tracker keeps the TCP connection alive by sending a lightweight heartbeat ping every 2 to 5 minutes. This prevents intermediate carrier NAT timeouts and ensures the socket remains reachable.
+When the vehicle is parked and idle, the tracker keeps the TCP connection alive by sending a heartbeat packet every 2 to 5 minutes. This prevents NAT timeouts and keeps the socket reachable.
 
 ## Anatomy of a GPS Packet
 
-Protocol specifications vary across vendors, but most binary GPS packets follow this general layout:
+Formats differ across brands, but most binary GPS packets follow this general layout:
 
 ```
 ┌──────────┬──────────┬────────────┬─────────────┬──────────┬──────────┐
@@ -133,16 +133,16 @@ Protocol specifications vary across vendors, but most binary GPS packets follow 
 └──────────┴──────────┴────────────┴─────────────┴──────────┴──────────┘
 ```
 
-- **Start marker**: fixed sentinel bytes denoting packet start (e.g., `\x78\x78` for GT06, or four zero bytes `\x00\x00\x00\x00` for Teltonika)
-- **Length**: payload byte length, informing the server when a full packet frame has been read
-- **Protocol ID / Codec ID**: data type identifier (location update, alarm notification, heartbeat, command acknowledgment)
-- **Payload**: the actual serialized telemetry (IMEI, coordinates, sensor bitfields)
-- **CRC**: checksum validating data integrity over the wire
-- **End marker**: sentinel bytes indicating the end of the frame (e.g., `\x0d\x0a` for GT06)
+- **Start marker**: fixed bytes marking the start of a packet (e.g., `\x78\x78` for GT06, or four zero bytes `\x00\x00\x00\x00` for Teltonika)
+- **Length**: payload byte length (so the server knows when a full packet has been read)
+- **Protocol ID / Codec ID**: identifier for the data type (location, alarm, heartbeat, command response)
+- **Payload**: the actual data (IMEI, coordinates, I/O status, etc.)
+- **CRC**: checksum to validate data integrity
+- **End marker**: fixed bytes marking the end of a packet (e.g., `\x0d\x0a` for GT06)
 
 ### Example: GT06 (Concox) Packet Structure
 
-GT06 is common in Indonesia because the hardware is affordable and widely available. Its packet structure looks like this:
+GT06 is common in Indonesia because the hardware is cheap and easy to find. Its structure looks like this:
 
 ```
 78 78      Start bit (2 bytes)
@@ -154,11 +154,11 @@ GT06 is common in Indonesia because the hardware is affordable and widely availa
 0D 0A      Stop bit (2 bytes)
 ```
 
-The example above illustrates a login packet from the Concox GT06 v1.8.1 datasheet for terminal ID `123456789012345` (a 15-digit IMEI: 8 BCD bytes hold 16 nibbles, with the leading nibble dropped). CRC-ITU is computed starting from the _length_ byte through the _serial number_ (inclusive); we will dive into CRC variants in [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/). The `0x7878` header and `0x0D0A` trailer act as the GT06 "signature". When you spot those bytes in raw TCP logs, you immediately know: this is Concox/GT06 family hardware.
+The example above is a login packet from the Concox GT06 v1.8.1 datasheet for terminal ID `123456789012345` (a 15-digit IMEI: 8 BCD bytes hold 16 nibbles, with the leading nibble dropped). CRC-ITU is computed from the _length_ byte through the _serial number_ (inclusive); we'll go through CRC variants in [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/). The `0x7878` header and `0x0D0A` trailer are kind of the GT06 "signature". When you spot those bytes in raw TCP logs, you know right away it's Concox/GT06 family hardware.
 
 ### Example: Teltonika Packet Structure
 
-Teltonika (FMB and FMTC series) uses a different, more structured design built around "codec" frames:
+Teltonika (FMB and FMTC series) takes a slightly different approach. The structure is more orderly and built around "codec" frames:
 
 ```
 0000 0000        Preamble (4 zero bytes)
@@ -170,42 +170,42 @@ Teltonika (FMB and FMTC series) uses a different, more structured design built a
 0000 0XXX         CRC-16 (4 bytes)
 ```
 
-Teltonika uses a 4-byte length prefix and CRC-16, while GT06 uses a 1-byte length, 2-byte CRC-ITU, and an incremental serial number to match ACKs. These differences matter when we write decoders in Part 3.
+Teltonika uses a 4-byte length prefix and CRC-16, while GT06 uses a 1-byte length, 2-byte CRC-ITU, and a serial number to match ACKs. These differences will matter when we write decoders in Part 3.
 
 ## Popular Protocols in the Field
 
-From my experience with GPS tracking in production, these are protocols and brands you are likely to encounter:
+From my experience with GPS tracking in production, these are the protocols and brands you're likely to run into:
 
 | Protocol       | Common Brands                        | Format         | Description                                 |
 | -------------- | ------------------------------------ | -------------- | ------------------------------------------- |
 | **GT06**       | Concox, Coban, Xexun, diverse OEMs   | Binary         | Most affordable, widest variety of clones   |
-| **Teltonika**  | Teltonika FMB/FMTC/FM                | Binary         | Premium tier, rock-solid docs, codec system |
+| **Teltonika**  | Teltonika FMB/FMTC/FM                | Binary         | Premium tier, solid docs, codec system      |
 | **Meitrack**   | Meitrack MVT/MST                     | Binary         | Common across enterprise fleet deployments  |
 | **Wialon IPS** | Various brands (Universal)           | Text (ASCII)   | Comma-separated, human-readable format      |
-| **H02**        | H02/GPS103                           | Text (ASCII)   | Simple, prevalent in budget trackers        |
+| **H02**        | H02/GPS103                           | Text (ASCII)   | Simple, common in budget trackers           |
 | **MQTT**       | Modern multi-sensor hardware         | JSON over MQTT | Emerging trend: 4G hardware pushing JSON    |
 
 ### Binary vs. Text Protocols
 
-GPS protocols fall into two broad architectural families:
+GPS protocols fall into two big camps.
 
 **Binary protocols** (Teltonika, GT06, Meitrack):
 
-- Every byte carries precise meaning, frequently packing multiple fields
-- Highly bandwidth-efficient (1 byte = 8 bits = 8 independent boolean flags)
-- Harder for human inspection (`\x8e\x01\x04` vs. `lat=-6.2,lng=106.8`)
-- Demands rigorous vendor documentation to parse correctly
+- Every byte has a precise meaning, often packing several fields
+- Very bandwidth-efficient (1 byte = 8 bits = 8 independent boolean flags)
+- Harder for humans to read (`\x8e\x01\x04` vs. `lat=-6.2,lng=106.8`)
+- Needs thorough vendor documentation to parse correctly
 
 **Text protocols** (Wialon, H02):
 
 - Directly readable ASCII strings: `#L#359769030123456;NA`
-- Trivial to debug in plaintext logs
+- Easy to debug in plaintext logs
 - Higher bandwidth footprint
-- Suited for quick prototyping or low-complexity devices
+- Good for quick prototyping or low-resource devices
 
 ### The Trend: MQTT and JSON
 
-In the GPS-tracking work I've seen in Indonesia, newer trackers (4G/LTE, Cat-M1, NB-IoT) are starting to use MQTT with JSON payloads. A payload can look like this:
+Lately I've started running into newer trackers (4G/LTE, Cat-M1, NB-IoT) that use MQTT with JSON payloads. A payload can look like this:
 
 ```json
 {
@@ -219,33 +219,33 @@ In the GPS-tracking work I've seen in Indonesia, newer trackers (4G/LTE, Cat-M1,
 }
 ```
 
-JSON is easier to parse, human-readable, and does not require a low-level protocol specification. In Indonesia, 2G/3G devices are still common and continue to use binary TCP. Both approaches will coexist for the next few years.
+JSON is easier to parse, human-readable, and doesn't need a special low-level protocol spec. But in Indonesia 2G/3G devices are still common and still use binary TCP. Both approaches will probably live side by side for the next few years.
 
-## Common Misconceptions I Learned the Hard Way
+## Misconceptions I Learned the Hard Way
 
 ### "Reading one vendor's documentation is enough"
 
-Wrong. GT06 has dozens of protocol dialect variations because countless white-label OEM clones tweaked minor framing details. Concox GT06, Coban GPS103, and "generic GT06" have subtle quirks that will crash your parser unless you guard against unexpected packet variations.
+Wrong. GT06 has dozens of protocol variations because countless white-label OEM clones tweaked small framing details. Concox GT06, Coban GPS103, and "generic GT06" have subtle differences that will crash your parser if you don't handle those edge cases.
 
-### "IMEIs are always globally unique"
+### "IMEIs are always unique per device"
 
-In theory, yes. In practice, budget clone hardware can ship with duplicate or invalid IMEIs. Assign an internal surrogate `device_id` primary key in your database; do not use raw IMEIs as primary keys without normalization.
+In theory, yes. In practice, cheap clone hardware can ship with duplicate or invalid IMEIs. Give your database its own surrogate `device_id` primary key, and don't use raw IMEIs as primary keys without normalization.
 
 ### "An active TCP connection means the tracker is online"
 
-Not necessarily. NAT connection table drops, silent cellular resets, and frozen hardware loops can leave a socket half-open on the server while the device has been offline for hours. Heartbeat/keep-alive timeouts are essential to detect this.
+Not always. NAT table drops, silent carrier-level resets, and frozen devices can leave a socket looking alive on the server while the device has been dead for hours. That's why heartbeat/keep-alive timeouts are a must.
 
 ### "Every tracker reports timestamps in UTC"
 
-Most do, but some vendors send timestamps in local vehicle time (such as UTC+7 for Indonesia). Check the protocol spec and verify it against a real device.
+Most do, but some brands send timestamps in local time (such as UTC+7 for Indonesia). Check the protocol spec, or better, don't assume and test with a real device.
 
 ## Tools for Packet Inspection
 
-Before writing a decoder, inspect the incoming traffic. These are the tools I use:
+Before writing a decoder, I "peek" at the incoming traffic first with a few tools.
 
 ### 1. TCP Packet Logger
 
-A simple TCP connection handler can dump received bytes to standard output for inspection. This example only receives and prints data; it does not forward anything to another server:
+To see packet structure, use a simple TCP connection handler that logs incoming bytes. This example only receives and prints data; it does not forward anything to another server:
 
 ```go
 // Minimal TCP logger: dump all inbound bytes
@@ -266,30 +266,30 @@ Hex dumps make it easier to compare packet layouts with vendor datasheets.
 
 ### 2. Wireshark
 
-If you can capture traffic on the server interface, filter Wireshark by `tcp.port == 5094` (or your listening port) to inspect packets. "Follow TCP Stream" shows the full conversation between tracker and server.
+If you can capture traffic on the server interface, filter Wireshark by `tcp.port == 5094` (or your listening port) to inspect each packet. "Follow TCP Stream" shows the full conversation between tracker and server.
 
 ### 3. Device Simulators
 
-Some vendors provide desktop simulators. If yours does not, record packets from a physical tracker and replay them in automated tests. That way, you do not need a physical device every time you change parsing logic for another protocol.
+Some vendors provide simulators. If yours doesn't, record packets from a physical tracker and replay them in tests. That way you don't need a physical device every time you work on a decoder for another protocol.
 
-## Key Takeaways Before Moving Forward
+## What to Have in Your Head Before Moving On
 
-Before moving on, keep these points in mind:
+Before moving on, make sure you've got these:
 
-- **Why GPS devices run on TCP sockets rather than HTTP**: bandwidth efficiency, persistent downlinks, and compact binary representations
-- **Device-to-server lifecycle**: connect → login → telemetry reporting → commands → heartbeat
-- **Binary packet anatomy**: start sentinel, length prefix, payload, CRC, end sentinel
-- **Protocol tradeoffs**: binary vs. text, GT06 vs. Teltonika vs. MQTT
-- **Production gotchas**: duplicated IMEIs, zombie TCP sockets, and inconsistent timestamp timezones
+- **Why GPS devices use TCP sockets rather than HTTP**: bandwidth efficiency, persistent connections, and control over the format
+- **Device-to-server lifecycle**: connect → login → data reporting → commands → heartbeat
+- **Binary packet anatomy**: start marker, length, payload, CRC, end marker
+- **Protocol differences per brand**: binary vs. text, GT06 vs. Teltonika vs. MQTT
+- **Common gotchas**: duplicated IMEIs, TCP "alive" but device dead, inconsistent timezones
 
 ## What's Next
 
 This article is part of the **Building a GPS Backend from Scratch** series.
 
-Next is [Part 2: Building a High-Performance GPS TCP Listener in Go](/en/writing/2026/tcp-listener-gps-go/), where we build a concurrent TCP listener that handles hundreds of tracker connections with Go goroutines.
+Next up: [Part 2: Building a High-Performance GPS TCP Listener in Go](/en/writing/2026/tcp-listener-gps-go/), where we build a TCP server that handles hundreds of tracker connections concurrently with goroutines.
 
-[Part 3](/en/writing/2026/decode-packet-gt06-teltonika/) covers binary frame decoding for GT06 and Teltonika.
+If you want to jump straight to reading packets, [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/) covers the details of parsing GT06 and Teltonika binary frames.
 
-## Wrap-Up
+## CTA
 
-For questions or discussion, use [Contact](/en/contact/) or subscribe to [RSS](/en/writing/index.xml).
+For questions or discussion, head to [Contact](/en/contact/) or subscribe to [RSS](/en/writing/index.xml).

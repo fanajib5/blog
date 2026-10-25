@@ -1,6 +1,6 @@
 ---
 title: "Decision Journal: When It's Time to Migrate Your Tech Stack"
-description: "A decision-making journal, when your existing tech stack needs migration, when refactoring is enough, and how to read the signals from a business perspective."
+description: "My notes on when an old tech stack needs migrating, when refactoring is enough, and how to read the signals from the business side."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-10
 lastmod: 2026-09-11T09:28:00+07:00
@@ -29,7 +29,7 @@ The GPS tracker project I was handling wasn't ~~exactly~~ small. The numbers wer
 - **33 database entities** with complex relationships
 - **~194,000 lines of code** written over several years by multiple developers[^2]
 
-But the numbers weren't really the problem. The line count looks intimidating; what got in the way were the **symptoms**:
+But the numbers weren't really the problem. The line count looks big, but what actually gave me headaches were the **symptoms**:
 
 ### 1. Features That Should Be Fast, Became Slow
 
@@ -109,7 +109,7 @@ If after migration, these numbers improve, then the migration succeeded. If not,
 
 ## A Thinking Framework: It's Not About the Language, It's About Momentum
 
-Those questions led me to a simple framework: **three conditions that must be met** before migration makes sense.
+Those questions led me to a simple framework: **three conditions** that have to be met before migration makes sense.
 
 ### 1. The Problem Is Structural, Not a Skill Gap
 
@@ -125,7 +125,7 @@ Migration requires time, energy, and focus. If the team is in peak season, or if
 
 ---
 
-If all three conditions are met, **migration makes sense**. If even one isn't, it's better to refactor or wait until the conditions support it.
+If all three are met, **migration makes sense**. If even one isn't, better to refactor or wait until the conditions are right.
 
 ## The Decision and What Happened
 
@@ -155,9 +155,9 @@ We often focus on "how much does migration cost" and forget to ask "how much doe
 
 ## Closing Thoughts
 
-A tech stack migration decision is personal: it depends on context, team, timeline, and other factors. No framework applies to every situation. Asking the right questions and gathering enough data can lead to a sounder decision than simply following hype.
+A tech stack migration decision is personal: it depends on context, team, timeline, and other things. No framework fits every situation, so this isn't a recipe either. My one takeaway: ask the right questions, gather the data, and don't migrate just because of hype.
 
-I hope these notes are useful if you're weighing a migration. If you'd like to discuss a similar dilemma, [get in touch](/en/contact/) or check out my [services](/en/services/).
+I hope these notes are useful if you're weighing a migration. If you'd like to chat about a similar dilemma, [get in touch](/en/contact/) or check out my [services](/en/services/).
 
 [^1]: A GPS tracker system that had been running for several years, with various feature additions and patches layered on top over time.
 

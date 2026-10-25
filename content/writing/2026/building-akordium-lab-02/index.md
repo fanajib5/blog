@@ -1,6 +1,6 @@
 ---
 title: "Building Akordium Lab #2: Bulan Pertama yang Sebenarnya"
-description: "Laporan bulanan kedua membangun Akordium Lab — konten vs rencana, progres produk, metrik, dan kesalahan bulan ini. Format sama seperti dijanjikan BAL #1."
+description: "Catatan bulan kedua membangun Akordium Lab, dari jadwal yang kejadian, progres produk, sampai hal-hal yang perlu saya benahi."
 author: "Faiq Najib Al-Aziz"
 date: 2026-11-26
 lastmod: 2026-11-26
@@ -18,13 +18,13 @@ series: "building-akordium-lab"
 series_part: 2
 ---
 
-Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, dan satu keputusan. Ini laporan pertama yang menyertakan angka. Beberapa minggu pertama setelah janji itu akan menunjukkan apakah format ini bisa saya pertahankan.
+Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, dan satu keputusan. Ini laporan pertama yang punya angka. Kita lihat saja apakah saya sanggup mempertahankan format ini bulan depan juga.
 
-> **Status draft**: bagian bertanda _(isi)_ menunggu data Oktober — diisi sebelum rilis 26 November. Kerangka dan narasi evergreen sudah final.
+> **Status draft**: bagian bertanda _(isi)_ masih menunggu catatan Oktober. Saya isi sebelum rilis 26 November. Kerangka besarnya sudah ada, tinggal memastikan ceritanya cocok dengan yang benar-benar terjadi.
 
 ## Konten vs Rencana
 
-Rencana Oktober–November menurut roadmap:
+Ini jadwal Oktober-November yang saya catat di roadmap:
 
 | Item                   | Jadwal | Hasil                                               |
 | ---------------------- | ------ | --------------------------------------------------- |
@@ -36,34 +36,34 @@ Rencana Oktober–November menurut roadmap:
 | OPS-1 Monolith Modular | 24 Nov | _(isi)_                                             |
 | GPS-6 Dashboard        | 25 Nov | _(isi)_                                             |
 
-_(isi: paragraf jujur tentang apa yang naik-turun — kalau semua hijau, ceritakan harganya; kalau ada yang telat, ceritakan penyebabnya. Pembaca BAL tidak datang untuk melihat sempurna, mereka datang untuk melihat sungguhan.)_
+_(isi: ceritakan apa yang berjalan dan apa yang meleset. Kalau semua sesuai jadwal, tulis juga apa yang harus dikorbankan. Kalau ada yang telat, jelaskan sebabnya. Nanti saya cek catatan dulu supaya tidak mengarang.)_
 
 ## Progres Produk
 
-**DukunGPS** — dari BAL #1: business design selesai dan disetujui Juli, gerbang berikutnya Fase 0. _(isi: apa yang bergerak bulan ini — repo core open source dimulai? domain? halaman tunggu? kalau tidak ada yang bergerak, tulis kenapa — itu juga data.)_
+**DukunGPS**: dari BAL #1, business design selesai dan disetujui Juli, berikutnya Fase 0. _(isi: cek apa yang benar-benar bergerak bulan ini. Repo core open source, domain, halaman tunggu, atau memang belum ada yang maju? Kalau belum, tulis alasannya.)_
 
-**Seri GPS sebagai pipeline produk** — 6 bab selesai sebagai draft final dengan kode teruji; manuskrip ebook kompilasi sudah tersusun (±80 KB, 6 bab + 2 lampiran). _(isi: status jadi PDF + halaman unduh + mekanisme lead magnet-nya.)_
+**Seri GPS sebagai pipeline produk**: enam bab sudah selesai sebagai draft final dengan kode teruji; manuskrip ebook kompilasi sudah tersusun (±80 KB, 6 bab + 2 lampiran). _(isi: cek status PDF, halaman unduh, dan cara kerja lead magnet-nya.)_
 
 ## Metrik
 
 | Metrik                                 | Target 12 bulan | Nilai sekarang                        |
 | -------------------------------------- | --------------- | ------------------------------------- |
 | Newsletter subscriber                  | 50              | _(isi)_                               |
-| Ranking keyword GPS (hal. 1–2)         | 3 keyword       | _(isi: posisi terbaik + keyword-nya)_ |
+| Ranking keyword GPS (hal. 1-2)         | 3 keyword       | _(isi: posisi terbaik + keyword-nya)_ |
 | Trafik organik writing/                | tumbuh          | _(isi: angka kasar bulan ini)_        |
 | Lead yang menyebut "baca blognya dulu" | ≥1              | _(isi)_                               |
 
 ## Kesalahan Bulan Ini
 
-_(isi: satu kesalahan nyata + satu pelajaran. Petunjuk mengisi: ambil dari log keputusan — biasanya kandidatnya: jadwal yang terlalu optimis, konten yang direvisi berulang karena belum jelas sasarannya, atau waktu yang tersedot pekerjaan klien sampai roadmap menganggur. Yang terakhir itu bukan aib — itu bulan pertama yang sehat untuk agency muda.)_
+_(isi: pilih satu kesalahan yang memang terjadi dan apa yang saya pelajari. Cek log keputusan dulu, jangan pilih dari daftar kemungkinan ini hanya karena kedengarannya bagus. Bisa jadi jadwalnya terlalu optimistis, tulisan bolak-balik direvisi, atau pekerjaan klien makan waktu. Nanti lihat faktanya.)_
 
 ## Keputusan Penting
 
-_(isi: 1–3 keputusan bulan ini beserta alasannya. Kandidat yang sudah diambil di perencanaan: rilis ebook sebagai lead magnet alih-alih menumpuk konten gratis tanpa funnel; dan disiplin "kode contoh wajib teruji" sebagai standar seri.)_
+_(isi: tulis keputusan yang benar-benar saya ambil bulan ini dan alasannya. Rencana awalnya termasuk rilis ebook sebagai lead magnet dan mewajibkan kode contoh diuji. Cek lagi apakah keduanya memang jadi keputusan bulan ini.)_
 
 ---
 
-Menulis laporan kedua dengan jujur pun masih terasa berat. Bulan depan saya akan menulis laporan ketiga sekaligus mengevaluasi progres di pertengahan kuartal sebelum memilih topik lanjutan seri: antrean pesan, API layer, atau deployment.
+Menulis laporan kedua dengan jujur ternyata masih perlu usaha. Bulan depan saya akan menulis laporan ketiga dan melihat lagi progres pertengahan kuartal. Setelah itu baru memilih topik lanjutan: antrean pesan, API layer, atau deployment.
 
 Kalau kamu juga sedang membangun sesuatu dan ingin saling menjaga komitmen, [hubungi saya](/contact/). Laporan berikutnya bisa diikuti lewat [RSS](/writing/index.xml).
 

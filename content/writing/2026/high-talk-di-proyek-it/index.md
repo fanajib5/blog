@@ -1,6 +1,6 @@
 ---
 title: "Tangga Lipat di Proyek IT"
-description: "Sebuah cerita tentang rekan atau atasan proyek IT yang bicaranya lebih tinggi dari Gunung Semeru, dan bagaimana cara menghadapinya tanpa harus ikut mendaki."
+description: "Catatan saya soal istilah teknis yang kadang bikin obrolan proyek IT terasa seperti pendakian tanpa peta."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-17
 lastmod: 2026-09-11T09:28:00+07:00
@@ -13,64 +13,58 @@ tags:
   - personal
 ---
 
-Ada satu jenis orang yang kadang bikin saya harus diam sejenak, mengerutkan dahi, lalu berpura-pura mengangguk, padahal dalam hati sudah mengangkat tangan dan berteriak minta tangga lipat.
+Ada satu jenis obrolan yang bikin saya diam sebentar, mengerutkan dahi, lalu mengangguk-angguk seolah paham. Padahal dalam hati saya sudah minta tangga lipat.
 
-Saya menyebutnya _high-talker_. Bukan berarti suaranya nyaring. Tapi cara mereka berbicara serasa mengajak kita mendaki Gunung Semeru... tanpa bekal, tanpa peta, dan tanpa persiapan fisik sama sekali.
+Saya menyebut orangnya _high-talker_. Bukan karena suaranya nyaring, tapi karena penjelasannya kadang terasa seperti ajakan mendaki Gunung Semeru tanpa bekal dan tanpa peta. Saya sendiri baru dengar istilahnya, jadi jangan-jangan saya ikut-ikutan sok tahu juga hehe.
 
-Dan ironisnya, saya paling sering bertemu tipe ini justru di proyek IT.
+Anehnya, saya paling sering bertemu tipe ini di proyek IT.
 
-## Kenapa Mereka Seperti Ini?
+## Kok Bisa Begitu?
 
-Saya sudah cukup lama bertanya-tanya kenapa bisa begitu. Dari pengalaman di beberapa proyek, ada tiga kemungkinan.
+Saya pernah bertanya-tanya kenapa obrolan teknis bisa berujung seperti ini. Dari beberapa proyek yang saya alami, alasannya bisa macam-macam.
 
-**Pertama, mereka terlalu dalam di bidangnya.**
+Ada orang yang sudah lama berkutat dengan _microservices_, _event-driven architecture_, _CQRS_, atau _distributed tracing_, lalu lupa bahwa tidak semua orang tidur dan bangun dengan istilah yang sama. Mereka bicara seperti menulis dokumentasi teknis: detail, akurat, dan membingungkan kalau kita belum punya konteks hehe.
 
-Orang yang sudah lama berkutat dengan _microservices_, _event-driven architecture_, _CQRS_, atau _distributed tracing_ kadang lupa bahwa tidak semua orang tidur dan bangun dengan istilah yang sama. Mereka bicara seperti menulis dokumentasi teknis: detail, akurat, dan sangat membingungkan kalau kamu belum punya konteks yang cukup hehe.
+Ada juga yang ingin terlihat paling paham. Yang ini agak sensitif. Kadang istilah teknis berlebihan bukan kebiasaan, tapi pilihan. _Show off_, simpelnya. Semakin panjang akronim yang keluar, semakin tinggi posisi yang dia rasakan. Setidaknya di kepalanya sendiri~~
 
-**Kedua, mereka ingin terlihat kompeten.**
+Topiknya juga bisa memang susah. Ini harus saya akui, _fair_. Tidak semua konsep IT bisa dijelaskan dalam dua kalimat. _Dependency injection_, _race condition_, dan _eventual consistency_ kadang memang butuh _effort_ ekstra untuk dipahami.
 
-Yang ini agak sensitif. Ada kalanya penggunaan istilah teknis yang berlebihan bukan karena kebiasaan, tapi pilihan. _Show off_, simpelnya. Semakin panjang akronim yang keluar dari mulutnya, semakin tinggi posisi yang dia rasakan. Setidaknya di kepalanya sendiri~~
-
-**Ketiga, topiknya memang susah.**
-
-Ini yang harus saya akui juga, _fair_. Tidak semua konsep IT bisa dijelaskan dengan dua kalimat. Kadang _dependency injection_, _race condition_, atau _eventual consistency_ itu memang butuh sedikit... _effort_ ekstra untuk dipahami.
-
-Bedanya adalah: orang yang **benar-benar paham** biasanya bisa menyederhanakan. Orang yang **setengah paham** biasanya malah menambahkan lebih banyak istilah. Seperti kata fisikawan Richard Feynman:
+Saya perhatikan, orang yang paham biasanya bisa mencari cara untuk menjelaskan ulang. Kalau istilahnya malah makin bertambah, bisa jadi pembicaranya belum benar-benar paham. Atau saya saja yang belum nyambung, dua-duanya mungkin hahaha. Richard Feynman pernah bilang:
 
 > _"Kalau kamu tidak bisa jelaskan sesuatu dengan simpel, berarti kamu belum paham sepenuhnya."_
 
-## Kasusnya di Proyek IT: Rekan dan Atasan
+## Waktu Obrolan Proyek Mulai Melayang
 
-Saya pernah mengalami ini langsung. Di satu proyek pembuatan aplikasi, seorang rekan satu tim yang cukup senior soal _backend_ selalu mengawali penjelasannya dengan sepuluh istilah baru, bahkan untuk hal yang mestinya bisa dijelaskan dalam satu kalimat.
+Saya pernah mengalaminya sendiri. Di satu proyek aplikasi, rekan yang lebih senior di _backend_ sering membuka penjelasan dengan istilah baru bertumpuk-tumpuk. Bahkan untuk hal yang sebenarnya bisa dijelaskan dalam satu kalimat.
 
 _"Kita perlu redesign flow-nya karena ada tight coupling antara domain service dan infrastructure layer yang bikin testability-nya jelek dan nanti waktu kita mau scale horizontally bakal jadi bottleneck di message broker."_
 
 ...Saya yang saat itu cuma bisa mengangguk sambil dalam hati berbisik: _"Oke, Mas. Nanti kita ngobrol lagi ya kalau saya sudah beli kamus."_
 
-Intinya? Kita perlu pisahkan beberapa bagian kode supaya lebih gampang di-_maintain_. Tapi butuh satu paragraf penuh istilah untuk sampai ke sana haha.
+Kalau diterjemahkan ke bahasa saya, maksudnya kode perlu dipisah supaya lebih gampang di-_maintain_. Panjang juga perjalanan untuk sampai ke sana haha.
 
 Kalau _high-talker_-nya **atasan**, situasinya lebih rumit. Rekan sebaya masih bisa kita potong dengan candaan ringan, tetapi salah bicara kepada atasan bisa dianggap tidak sopan atau tidak profesional.
 
-Saya pernah menghadiri _meeting_ rutin di mana seorang atasan, dengan penuh semangat, menjelaskan arah teknis proyek selama 30 menit tanpa jeda yang cukup untuk pertanyaan. Dan saya keluar dari ruangan itu, atau lebih tepatnya, keluar dari Zoom Meeting, dengan satu pertanyaan besar: _"Jadi, kita mau ngapain besok?"_
+Pernah juga ada _meeting_ rutin ketika atasan menjelaskan arah teknis proyek sekitar 30 menit. Saya menunggu jeda buat bertanya, tapi tidak kunjung datang. Begitu _meeting_ selesai, saya cuma punya satu pertanyaan: _"Besok kita mau ngapain, ya?"_
 
-## Teknik Feynman
+## Mencoba Menjelaskan Ulang
 
-Saya lalu mulai mengenal [Teknik Feynman](https://fs.blog/feynman-technique/) lebih serius.
+Belakangan saya membaca lagi soal [Teknik Feynman](https://fs.blog/feynman-technique/).
 
-Intinya simpel: kalau kamu tidak bisa menjelaskan sebuah konsep kepada seseorang yang sama sekali tidak tahu apa-apa, berarti kamu sendiri belum benar-benar menguasainya.
+Versi singkatnya, coba jelaskan konsep itu ke orang yang belum pernah mendengarnya. Kalau saya sendiri masih berputar-putar, mungkin saya belum cukup paham.
 
-Di proyek IT, teknik ini bisa dilihat dari dua sisi.
+Di obrolan proyek, saya bisa memakainya sebagai pendengar maupun pembicara.
 
 **Sebagai pendengar**, kamu bisa minta rekan atau atasan untuk menjelaskan ulang dengan analogi yang lebih sederhana. Contoh kalimat yang cukup ampuh:
 
 - _"Bisa dianalogikan dulu, Mas/Pak, seolah-olah saya anak SMA yang baru belajar coding?"_
 - _"Bisa kasih contoh nyata dari kasus kita dulu sebelum masuk ke teorinya?"_
 
-Orang yang benar-benar memahami konsepnya biasanya bisa menjelaskannya dengan lebih sederhana. Kalau dia malah tambah bingung saat diminta menyederhanakan, mungkin dia sendiri belum benar-benar paham konsep itu haha.
+Kalau orangnya paham, biasanya ia bisa memberi contoh yang lebih sederhana. Kalau malah sama-sama bingung, ya mungkin kami perlu berhenti sebentar dan menyamakan pemahaman dulu haha.
 
 **Sebagai pembicara**, teknik ini melatih kita sendiri untuk tidak terjebak dalam kebiasaan yang sama. Sebelum menjelaskan sesuatu ke tim, coba tanya diri sendiri dulu: _kalau teman saya yang baru sebulan belajar coding mendengar ini, apakah dia akan mengerti?_
 
-Kalau jawabannya tidak, maka sederhanakan dulu.
+Kalau jawabannya belum, coba sederhanakan dulu. Saya sendiri juga perlu mengingat ini.
 
 Contohnya, daripada bilang:
 
@@ -80,30 +74,30 @@ Coba bilang:
 
 > _"Bayangin mobilmu haus bensin. Biasanya kamu sendiri yang harus isi bensin. Tapi dengan cara ini, mobilnya cukup bilang 'butuh bensin', dan orang lain yang kasih. Mobilnya nggak perlu tahu dari mana bensinnya datang. Nah, itu intinya."_
 
-Analogi ini lebih mudah dicerna, dan pesannya tetap sampai.
+Analogi ini mungkin lebih gampang dibayangkan, setidaknya buat saya.
 
-## Cara Menghadapinya
+## Kalau Mulai Kehilangan Alur
 
-Kalau penjelasan mulai sulit diikuti, ada beberapa cara untuk membawanya kembali ke kasus yang sedang dibahas.
+Kalau penjelasan mulai terasa seperti kamus berjalan, saya biasanya mencoba menarik obrolan kembali ke masalah yang sedang dibahas.
 
-**Yang berhasil:**
+**Yang bisa dicoba:**
 
-1. **Tanya dengan tulus, bukan konfrontatif.** Kalimat seperti _"Wah menarik, bisa dicontohkan dalam kasus kita?"_ terasa jauh lebih aman daripada _"Saya nggak ngerti, jelasin yang simpel dong."_ Hasil akhirnya sama, tapi yang pertama tidak melukai ego siapa pun. Apalagi kalau yang diajak bicara adalah atasan hehe.
+1. **Tanya baik-baik.** _"Wah menarik, bisa kasih contoh dari kasus kita?"_ terdengar lebih enak daripada _"Saya nggak ngerti, jelasin yang simpel dong."_ Apalagi kalau lawan bicara kita atasan hehe.
 
-2. **Minta dokumentasi atau diagram.** Kadang orang lebih mudah menjelaskan lewat tulisan atau gambar daripada ngobrol langsung. Dan dengan dokumentasi, kamu bisa baca ulang pelan-pelan tanpa tekanan. _Win-win_.
+2. **Minta contoh tertulis atau gambar.** Kadang diagram lebih membantu daripada penjelasan lisan. Saya juga bisa membacanya ulang tanpa harus buru-buru mengangguk.
 
-3. **Validasi dulu, tanya kemudian.** Coba parafrase balik pemahamanmu: _"Oh iya, jadi maksudnya sistem kita perlu dipisah supaya lebih mudah di-maintain ya?"_, kalau dia setuju, berarti kamu sudah menangkap intinya. Kalau tidak, dia akan mengoreksi, dan penjelasannya biasanya akan jadi lebih jelas karena terpaksa haha.
+3. **Coba ulangi dengan kata-kata sendiri.** Misalnya, _"Berarti sistemnya perlu dipisah supaya lebih mudah di-maintain, ya?"_ Kalau salah, lawan bicara bisa mengoreksi. Saya sering lebih paham setelah mendengar versi sederhananya.
 
-4. **Di meeting, buat aturan bersama.** Kalau posisimu memungkinkan, usulkan kebiasaan tim: _"Kita sepakat ya, setiap ada istilah teknis baru, langsung kasih penjelasan singkatnya."_ Terasa sepele, tapi dampaknya ke kualitas komunikasi tim itu luar biasa.
+4. **Kalau memungkinkan, sepakati kebiasaan di meeting.** Misalnya, setiap memakai istilah baru, sekalian jelaskan artinya sebentar. Tidak perlu jadi aturan panjang, yang penting orang tidak pulang dengan pertanyaan yang sama seperti saya.
 
 **Yang sebaiknya dihindari:**
 
-Jangan pura-pura paham demi menjaga perasaan semua orang. Termasuk perasaan diri sendiri. Karena itu cuma menunda masalah. Dan masalah yang ditunda di proyek IT biasanya berbunga, lalu beranak-pinak, lalu jadi _bug_ yang kamu temukan seminggu sebelum _deadline_ haha.
+Saya berusaha tidak pura-pura paham hanya supaya obrolan cepat selesai. Nanti pertanyaannya muncul lagi, biasanya saat _deadline_ sudah dekat dan _bug_ mulai beranak-pinak haha.
 
 ## Saya Juga Pernah Jadi _High-Talker_
 
-Setelah beberapa kali berhadapan dengan cara komunikasi seperti ini, saya sadar saya sendiri pun pernah jadi _high-talker_.
+Setelah beberapa kali mengeluh soal orang lain, saya sadar saya juga pernah jadi _high-talker_.
 
-Ada masa-masa di mana saya sangat antusias dengan sesuatu yang baru dipelajari, entah itu _clean architecture_, _hexagonal pattern_, atau konsep apa pun yang baru saya temukan dari blog luar, dan langsung menyebutkannya di setiap kesempatan. Padahal tidak semua orang butuh mendengar itu saat itu juga. Dan mungkin saya sendiri pun belum benar-benar menguasainya~~
+Kalau baru belajar _clean architecture_ atau _hexagonal pattern_, saya bisa terlalu semangat membawanya ke obrolan. Padahal orang lain belum tentu butuh mendengar istilah itu saat itu, dan saya pun belum tentu sudah paham betul. Hehe, kena diri sendiri.
 
-Saya menulis ini bukan untuk menghakimi siapa pun. Saya juga perlu mengingatkan diri sendiri bahwa komunikasi bukan soal berapa banyak istilah yang kita tahu, melainkan apakah orang lain memahami maksud kita. Istilah yang baru saya pelajari belum tentu perlu saya bawa ke setiap obrolan.
+Tulisan ini bukan buat menghakimi siapa-siapa. Saya menulisnya sambil mengingatkan diri sendiri: kalau orang lain tidak menangkap maksud saya, mungkin saya yang perlu menjelaskan ulang. Istilah baru yang saya pelajari tidak harus masuk ke setiap obrolan. Kadang satu kalimat sederhana sudah cukup, kalau saya bisa merangkainya.

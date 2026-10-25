@@ -1,6 +1,6 @@
 ---
 title: "Pemilihan Tech Stack: Antara Ego dan Bisnis"
-description: "Godaan memilih teknologi terbaru itu nyata, tapi apakah keputusan itu lahir dari logika bisnis, atau sekadar ego kita sebagai developer?"
+description: "Catatan soal godaan memilih teknologi yang keren, dan cara saya mencoba membedakan rasa penasaran dari kebutuhan proyek."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-18
 lastmod: 2026-09-11T09:28:00+07:00
@@ -23,25 +23,25 @@ Saya tidak menyalahkan beliau. Saya pun pernah begitu. Dan kalau jujur, kadang m
 
 Setiap kali harus memilih _tech stack_, saya merasa ada dua suara yang saling tarik-menarik: ego yang ingin terlihat canggih, dan bisnis yang hanya peduli apakah sistemnya berjalan dan menghasilkan nilai.
 
-## Ketika Ego Berbicara
+## Tanda-tanda Ego Mulai Ikut Campur
 
-Ciri-ciri keputusan teknis yang didorong ego itu sebenarnya cukup mudah dikenali, kalau kita mau jujur:
+Kalau mau jujur, keputusan teknis yang didorong ego biasanya punya tanda-tanda seperti ini:
 
 **"Teknologi ini lagi _trending_."**
-Buka _Twitter/X_, scroll sebentar, langsung ada tiga _thread_ tentang framework baru yang katanya mengubah segalanya. Satu bulan kemudian, ada lagi framework baru yang mengubah yang tadi. Dan siklus itu terus berputar. _Fear of Missing Out_ di dunia teknologi itu nyata sekali, dan berbahaya kalau tidak dikendalikan.
+Buka _Twitter/X_, scroll sebentar, ada saja _thread_ tentang _framework_ baru yang katanya mengubah segalanya. Bulan depan muncul lagi yang katanya lebih mengubah segalanya. Begitu terus. _Fear of Missing Out_ di dunia teknologi itu nyata, dan kalau dituruti terus, ya capek juga.
 
 **"Nanti susah di-_hire_ kalau pakai yang lama."**
-Ini argumen yang kedengarannya masuk akal, tapi seringkali dipakai untuk membenarkan keputusan yang sebenarnya bukan soal sistem, melainkan soal karier pribadi. Yang mana tidak salah! Tapi harus jujur bahwa motivasinya memang itu, bukan kebutuhan sistem.
+Kedengarannya masuk akal. Kadang memang benar, tapi kadang ini cara halus membenarkan keputusan yang sebenarnya lebih soal karier pribadi daripada kebutuhan sistem. Tidak salah juga, kok. Yang penting jujur soal alasannya.
 
-**"Teman di komunitas semuanya sudah pakai ini."**
-_Peer pressure_ itu tidak berhenti di masa SMA. Di dunia _developer_, bentuknya adalah rasa tidak enak kalau belum pakai _Kubernetes_, belum coba _Rust_, atau belum _containerize_ semuanya, padahal sistem-nya _monolith_ kecil yang baik-baik saja hehe~
+**"Teman-teman komunitas sudah pakai ini semua."**
+Ternyata _peer pressure_ tidak berhenti setelah SMA. Di lingkungan _developer_, wujudnya bisa rasa tertinggal karena belum pakai _Kubernetes_, belum coba _Rust_, atau belum _containerize_ semuanya. Padahal _monolith_ kecilnya masih baik-baik saja hehe~
 
 **"Kode yang bagus itu _fun_ untuk ditulis."**
-Nah, yang ini paling berbahaya karena terselubung dalam jubah profesionalisme. Kita memilih arsitektur yang kompleks bukan karena dibutuhkan, tapi karena... _exciting_ untuk diimplementasikan. Dan akhirnya yang menanggung beban adalah orang yang meneruskan _codebase_ tersebut[^1].
+Nah, ini gampang sekali dibungkus dengan alasan profesional. Kita memilih arsitektur kompleks bukan karena dibutuhkan, melainkan karena seru dibuat. Yang kebagian repot nanti? Orang yang meneruskan _codebase_-nya, mungkin termasuk kita sendiri beberapa bulan lagi[^1].
 
-## Bisnis Tidak Peduli Stack-mu
+## Bisnis Biasanya Tidak Ikut Memilih Stack-mu
 
-Ini kenyataan yang sedikit pahit tapi perlu dikatakan: **bisnis tidak peduli kamu pakai PHP atau Go, REST atau GraphQL, Postgres atau MySQL**, selama sistemnya berjalan, cepat, murah untuk dioperasikan, dan mudah dikembangkan ketika ada kebutuhan baru.
+Agak pahit, tapi begitulah: **bisnis biasanya tidak peduli kamu pakai PHP atau Go, REST atau GraphQL, Postgres atau MySQL**. Yang penting sistemnya jalan, cukup cepat, biaya operasinya masuk akal, dan bisa dikembangkan saat kebutuhan baru datang.
 
 Dalam praktiknya, pertanyaan bisnis biasanya berkisar di hal-hal ini:
 
@@ -52,45 +52,45 @@ Dalam praktiknya, pertanyaan bisnis biasanya berkisar di hal-hal ini:
 | Apakah ini bisa _scale_ sampai jutaan _user_? | Berapa biaya _server_ tiap bulannya? |
 | Apakah ini pakai bahasa yang populer? | Kalau ada yang keluar tim, berapa lama onboarding _developer_ baru? |
 
-Coba lihat dua kolom itu. Pertanyaannya berbeda, tapi saya sering lebih sibuk memikirkan kolom kiri, sementara orang yang membayar gaji saya memikirkan kolom kanan.
+Kalau dilihat begitu, pertanyaannya memang beda. Saya sendiri sering lebih sibuk memikirkan kolom kiri, sementara yang menggaji saya lebih peduli kolom kanan. Ya, kadang perlu diingatkan.
 
-Bukan berarti kita harus abaikan aspek teknis. Pilihan teknis yang buruk hari ini bisa jadi hutang teknis yang mahal besok, _dan itu juga_ kekhawatiran bisnis. Maksudnya, **kedua sisi perlu dipertimbangkan**, bukan cuma satu.
+Bukan berarti aspek teknis boleh diabaikan. Pilihan teknis yang buruk hari ini bisa jadi utang teknis mahal besok, dan itu juga masalah bisnis. Jadi dua sisinya perlu dilihat, bukan salah satunya saja.
 
-## Cara Memilih yang Tidak Menyakitkan
+## Pertanyaan yang Sekarang Saya Ajukan
 
-Setelah beberapa kali salah pilih (dan menanggung akibatnya hehe), saya punya empat pertanyaan yang sekarang saya ajukan sebelum memutuskan _stack_ atau arsitektur baru:
+Setelah beberapa kali salah pilih (dan ikut menanggung akibatnya hehe), sekarang saya coba bertanya empat hal ini sebelum memilih _stack_ atau arsitektur baru:
 
-### 1. Apakah tim saya bisa _maintain_ ini dalam 6 bulan?
+### 1. Apa tim masih bisa merawat ini enam bulan lagi?
 
-Bukan "bisakah saya _implement_ ini?", tapi "bisakah tim saya hidup bersama ini dalam jangka panjang?" Kalau saya yang pergi besok, apakah orang lain bisa melanjutkan tanpa _breakdown_ dua minggu pertama?
+Pertanyaannya bukan "bisa saya _implement_?", tapi "bisa tim saya hidup bersama ini?" Kalau saya pergi besok, orang lain masih bisa melanjutkannya atau malah _breakdown_ selama dua minggu?
 
 Saya ingin teknologi yang dipilih tetap bisa dipahami oleh orang yang paling junior di tim[^2]. Kalau tidak, kita sedang membangun _knowledge silo_, dan itu berbahaya.
 
-### 2. Apakah ini memecahkan masalah nyata yang sudah ada, atau masalah yang mungkin ada nanti?
+### 2. Ini menyelesaikan masalah sekarang, atau masalah khayalan nanti?
 
 _Premature optimization_ itu musuh _productivity_. Membangun sistem _event-driven_ yang kompleks untuk aplikasi yang belum tentu mencapai jutaan _user_ adalah keputusan yang sangat mahal, baik dari sisi waktu maupun kompleksitas.
 
-Aturan yang saya pegang: **selesaikan masalah yang ada sekarang, dengan solusi yang cukup baik untuk kebutuhan yang terukur**. Kalau nanti butuh _scale_, _refactor_ dengan bukti, bukan dengan asumsi.
+Pegangan saya: **bereskan masalah yang ada sekarang dengan solusi yang cukup untuk kebutuhan saat ini**. Kalau nanti memang perlu _scale_, kita _refactor_ berdasarkan bukti. Bukan berdasarkan ramalan saya yang sok tahu hehe.
 
-### 3. Berapa biaya nyatanya?
+### 3. Berapa ongkos sebenarnya?
 
-Bukan cuma biaya _cloud_, tapi biaya waktu. Berapa lama untuk _setup_? Berapa lama untuk _onboarding_? Berapa lama _debugging_ ketika ada masalah? Berapa lama kalau ada _developer_ baru harus paham sistem ini?
+Bukan cuma biaya _cloud_, waktu juga dihitung. Berapa lama _setup_-nya? _Onboarding_-nya? _Debugging_ saat ada masalah? Berapa lama _developer_ baru perlu supaya paham sistemnya?
 
 Teknologi yang canggih tapi butuh seminggu untuk _setup_ lokal itu mahal, bahkan sebelum satu baris kode bisnis ditulis.
 
-### 4. Apakah ini meningkatkan _time-to-market_ atau memperlambatnya?
+### 4. Ini mempercepat _time-to-market_ atau malah menahannya?
 
 Kecepatan _delivery_ itu sangat penting bagi bisnis. Fitur yang telat enam bulan bisa berarti _opportunity_ yang hilang, _user_ yang pergi ke kompetitor, atau _investor_ yang kehilangan kepercayaan.
 
 Kalau pilihan teknologi kita mempercepat _delivery_, bagus. Kalau justru memperlambat, pertimbangkan ulang, meskipun teknologinya secara teknis lebih "benar".
 
-## Pelajaran dari Lapangan
+## Contoh yang Pernah Saya Alami
 
-Boleh saya _self-reflect_ sebentar? Saya pernah menulis tentang [migrasi sistem backend dari PHP ke Go](/writing/2026/legacy-php-to-go-migration/) yang saya kerjakan, 370+ _endpoint_, 33 _entity_, hampir 200 ribu baris kode.
+Boleh _self-reflect_ sebentar? Saya pernah menulis tentang [migrasi backend dari PHP ke Go](/writing/2026/legacy-php-to-go-migration/). Proyeknya punya 370+ _endpoint_, 33 _entity_, dan hampir 200 ribu baris kode.
 
 Dan pertanyaan yang jujur saya ajukan ke diri sendiri saat itu adalah: **apakah ini keputusan bisnis, atau ego saya yang ingin kerja dengan Go?**
 
-Jawabannya... keduanya, tapi dengan proporsi yang terjaga hehe~
+Jawabannya: dua-duanya. Saya memang penasaran dengan Go, tapi bukan cuma itu hehe~
 
 Sisi **ego**-nya: ya, saya penasaran dengan Go. Saya ingin _hands-on_ experience yang lebih dalam. Saya suka cara Go menangani _concurrency_. Itu nyata dan saya tidak akan mengingkarinya.
 
@@ -103,19 +103,19 @@ Tapi sisi **bisnis**-nya juga nyata:
 
 Jadi, Go bukan dipilih semata karena keren, tapi karena di konteks spesifik tersebut, _trade-off_-nya masuk akal: biaya migrasi[^3] yang besar _upfront_, tapi dengan _long-term benefit_ yang terukur.
 
-Itu yang membedakan keputusan teknis berbasis bisnis dengan keputusan berbasis ego: **ada analisis _trade-off_ yang jelas dan berani dipertanggungjawabkan**.
+Buat saya, yang penting bisa menjelaskan _trade-off_-nya dengan jujur dan siap bertanggung jawab atas pilihan itu. Bukan pura-pura tidak punya ego sama sekali.
 
-## Ego Itu Tidak Selalu Buruk
+## Ego Juga Ada Gunanya
 
-Satu hal yang ingin saya luruskan sebelum menutup tulisan ini: **ego sebagai _developer_ tidak selalu buruk**.
+**Ego sebagai _developer_ tidak selalu buruk.** Kita jadi ingin belajar hal baru, menulis kode yang lebih bersih, dan mendorong solusi yang lebih baik. Itu semua ada manfaatnya.
 
-Ingin mempelajari teknologi baru itu bagus, itu yang membuat kita berkembang. Ingin menulis kode yang _clean_ dan _elegant_ itu bagus, itu yang membuat sistem lebih mudah dirawat. Ingin _push_ untuk solusi yang lebih baik itu bagus, itu yang menggerakkan inovasi.
+Masalahnya muncul kalau ego mulai mengaburkan penilaian. Kita memilih teknologi supaya terlihat pintar, bukan karena menyelesaikan masalah. Kita bikin sistem rumit karena seru, lalu membela pilihan yang salah karena gengsi mengakuinya.
 
-Yang bermasalah adalah ketika ego itu **mengaburkan judgment kita**, ketika kita memilih teknologi untuk terlihat pintar, bukan untuk memecahkan masalah. Ketika kita membangun sistem yang kompleks bukan karena dibutuhkan, tapi karena _fun_ untuk dibangun. Ketika kita mempertahankan pilihan yang salah karena tidak mau mengakui kekeliruan.
+Saya sendiri masih perlu mengecek motivasi itu dari waktu ke waktu. Kadang alasannya memang bisnis, kadang saya cuma ingin mencoba teknologi baru. Tidak apa-apa, asal tidak mencampuradukkan keduanya saat menjelaskan keputusan ke tim.
 
-Menurut saya, kemampuan membedakan keduanya adalah salah satu tanda penting kematangan seorang _software engineer_.
+Saya belum tentu selalu bisa membedakannya dengan benar. Tapi setidaknya pertanyaannya layak diajukan sebelum kita telanjur membangun semuanya.
 
-Sekian. Semoga bermanfaat dan terima kasih sudah tersasar ke sini hehe~
+Nah, itu dulu dari saya. Terima kasih sudah tersasar ke sini dan membaca sampai selesai hehe~
 
 [^1]: Dan biasanya itu adalah diri kita sendiri, enam bulan kemudian, yang sudah lupa kenapa dulu bikin seperti itu hahaha.
 [^2]: Ini bukan berarti tidak boleh pakai teknologi yang advanced. Tapi artinya ada tanggung jawab untuk dokumentasi, onboarding plan, dan memastikan knowledge tidak tersentralisasi di satu orang.

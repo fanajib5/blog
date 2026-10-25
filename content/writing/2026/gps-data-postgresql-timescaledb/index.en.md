@@ -19,15 +19,15 @@ series: "gps-backend-series"
 series_part: 4
 ---
 
-Each vehicle reports its position every 10 seconds. With one thousand vehicles, that adds up to 8.6 million rows per day, 260 million per month, and roughly 3 billion a year. Customer dashboards also need two things at once: fast inserts for a continuous stream of data, and reporting queries that can summarize weeks of telemetry quickly.
+Each vehicle reports its position every 10 seconds. With one thousand vehicles, that is 8.6 million rows a day, 260 million a month, or around 3 billion a year. Customer dashboards want two things: new data inserted quickly, and reports over several weeks that do not take forever to load. PostgreSQL has to do both jobs here.
 
-A standard PostgreSQL table can ingest that volume with the right indexes. But an aggregate query like "maximum speed per hour over the last 30 days" will scan hundreds of millions of rows every time it runs. B-tree indexes don't help much with time-range aggregates. These queries need to summarize millions of rows, not look up a single one.
+A regular PostgreSQL table can ingest that volume with the right indexes. The trouble is a query like "maximum speed per hour over the last 30 days" has to summarize hundreds of millions of rows whenever it runs. B-tree indexes are useful, but they do not help much with time-range aggregates. This is not a lookup for one row; it is a summary over many rows.
 
-In [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/), the coordinates came out of the decoder. Here, I store and query them with PostgreSQL + [TimescaleDB](https://www.timescale.com/)[^ts]. I ran all the examples in a `timescale/timescaledb:latest-pg16` container (TimescaleDB 2.30) populated with 155,000 synthetic rows.
+In [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/), the coordinates came out of the decoder. Now I store them in PostgreSQL + [TimescaleDB](https://www.timescale.com/)[^ts]. I ran these examples in a `timescale/timescaledb:latest-pg16` container (TimescaleDB 2.30) with 155,000 synthetic rows. Not millions yet. I would rather not make my laptop complain.
 
 ## Why TimescaleDB, Not Just Regular Tables?
 
-TimescaleDB is a PostgreSQL extension, not a separate database. Your existing tools and setup (pgx, DBeaver, `pg_dump` backups, database user permissions) keep working. For time-series data, it adds three features:
+TimescaleDB is a PostgreSQL extension, not another database to maintain separately. Your usual tools (pgx, DBeaver, `pg_dump` backups, and database permissions) still work. For time-series data, it adds a few features:
 
 1. **Hypertables**: tables that are automatically partitioned into time-range chunks under the hood. You write queries just like normal SQL; TimescaleDB figures out which chunks to touch.
 2. **Continuous aggregates**: materialized summaries computed incrementally in the background, rather than recalculated from scratch on every query.
@@ -72,11 +72,11 @@ After that, `positions` is a hypertable, and each day's data goes into a separat
 CREATE INDEX idx_positions_device_time ON positions (device_id, time DESC);
 ```
 
-> A hard-earned production tip: never let your application run unbound `SELECT *` queries against this table. Always bound your time ranges. The `(device_id, time DESC)` index makes querying "device 1 positions today" dirt cheap, but without a time limit, you force PostgreSQL to scan the device's entire historical timeline.
+> A production tip I learned the hard way: do not run an unbounded `SELECT *` against this table. Put a time range on the query. The `(device_id, time DESC)` index makes "device 1 positions today" cheap, but without a time limit PostgreSQL still has to scan that device's entire history. The index is not magic, sadly.
 
 ## Inserting from Go with pgx
 
-On the application side, the pattern I use in production is simple: the protocol listener (Part 2) never talks directly to the database. It pushes parsed coordinates into a message queue, and dedicated consumer workers handle persistence. For inserting batches, `pgx` with batching is more than fast enough:
+In the production application, the protocol listener (Part 2) does not talk to the database. It pushes parsed coordinates into a queue, and workers handle the inserts. For batching inserts, `pgx` is more than fast enough:
 
 ```go
 func insertPositions(ctx context.Context, pool *pgxpool.Pool, pts []Position) error {
@@ -116,7 +116,7 @@ With the `(device_id, time DESC)` index, this query stays fast as the table grow
 
 ## Continuous Aggregates: Precomputed Reporting
 
-The next requirement is "calculate maximum and average speed per hour, per vehicle, over the last 7 days". Without a continuous aggregate, PostgreSQL has to scan every raw point whenever someone reloads the dashboard. A continuous aggregate computes the summary in the background:
+Then there is a request like "maximum and average speed per hour, per vehicle, over the last 7 days". Without a continuous aggregate, PostgreSQL has to read all the raw points again whenever someone opens the dashboard. A continuous aggregate keeps a summary up to date in the background:
 
 ```sql
 CREATE MATERIALIZED VIEW positions_hourly
@@ -149,7 +149,7 @@ Real benchmark numbers from my test dataset (155,000 rows, 3 devices, 7 days, lo
 | Direct `GROUP BY time_bucket` on `positions`   | **158 ms**     |
 | Query against `positions_hourly`               | **0.5 ms**     |
 
-The query against the aggregate is over 300x faster on this dataset. The gap grows as raw data accumulates because the continuous aggregate table grows much slower than the raw data table.
+On this small dataset, the aggregate query is about 300 times faster. Please do not assume my laptop just solved everyone’s database problems. The main win is that the dashboard does not have to redo the raw-data calculation every time it loads.
 
 ## Compression: Shrinking Historical Data Automatically
 
@@ -174,20 +174,20 @@ FROM show_chunks('positions', older_than => INTERVAL '3 days') c
 LIMIT 1;
 ```
 
-On a chunk holding one day of data, its size went from 2,856 kB to **24 kB**. This synthetic data compresses exceptionally well. For real-world GPS feeds, the realistic ratio is around 10x to 20x because sensor data is noisier. At 260 million rows per month, though, saving 90%+ in disk space means hundreds of gigabytes.
+In this test, a one-day chunk shrank from 2,856 kB to **24 kB**. The synthetic data compresses very easily. For real GPS feeds, a more reasonable estimate is 10x to 20x because sensor data is noisier. At 260 million rows a month, saving more than 90% still means a lot of disk space.
 
 **Compressed chunks remain queryable** via standard SQL. TimescaleDB decompresses them transparently when needed.
 
-> The natural partner to compression is a **retention policy** (`add_retention_policy`) to automatically drop chunks older than N months, depending on legal or business compliance rules. While I didn't attach one in this demo, you should define your retention timeline from day one in production.
+> Compression usually goes with a **retention policy** (`add_retention_policy`) to automatically drop chunks older than N months. The number depends on legal rules and business needs. I did not add one to this demo, but in production it is better to decide early, before storage starts asking awkward questions.
 
-## Key Takeaways Before Moving Forward
+## A Few Notes Before Moving On
 
 - **Keep registry and time-series data apart.** `devices` is a standard relational table; `positions` is a hypertable. Don't mix them together.
 - **Always bound queries by time.** The `(device_id, time DESC)` index only helps when your query specifies which time range it cares about.
-- **Use continuous aggregates for all reporting metrics.** Precompute summaries in the background instead of calculating them on demand every time a user opens a dashboard. In production, this pattern turns multi-minute queries into sub-second responses.
-- **Implement compression and retention from day one.** Neither can be retrofitted effortlessly down the road. Deciding how long raw data lives is a business requirement, don't let it become an operational emergency.
+- **Use continuous aggregates for reporting.** Summarize in the background so the dashboard does not have to calculate everything again. In the production system I work on, this pattern helped take reporting from minutes to seconds.
+- **Think about compression and retention early.** How long to keep data is a business decision too. Do not wait until storage is full to ask, "do we still need last year's data?"
 
-Coordinates are now stored and queryable. Fleet tracking also needs to answer questions like "Did my vehicle leave the delivery zone?" In [Part 5](/en/writing/2026/geofencing-postgis/), I cover geofencing with PostGIS: polygons, `ST_Contains`, and real-time zone entry/exit detection.
+The coordinates are stored and queryable now. Fleet tracking also needs to answer questions like "Did my vehicle leave the delivery zone?" In [Part 5](/en/writing/2026/geofencing-postgis/), I will get into geofencing with PostGIS, polygons, `ST_Contains`, and detecting when a vehicle enters or leaves an area.
 
 ## What's Next
 

@@ -1,6 +1,6 @@
 ---
 title: "Migrasi Legacy PHP ke Go: Kenapa, Bagaimana, dan Pelajarannya"
-description: "Catatan pengalaman mengkonversi sistem backend dari PHP (CodeIgniter 3 & Laravel) ke Go, 370+ endpoint, 33 entity, dan 194K baris kode yang berhasil dimigrasi bertahap."
+description: "Cerita saya memigrasikan backend PHP (CodeIgniter 3 dan Laravel) ke Go, satu endpoint demi satu endpoint."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-04
 lastmod: 2026-09-11T09:28:00+07:00
@@ -14,11 +14,11 @@ tags:
   - migration
 ---
 
-_Codebase_ PHP yang saya tangani makin sulit dipelihara: fitur baru susah ditambahkan, _bug_ lebih sering muncul, dan setiap _deploy_ terasa seperti melempar koin. Masalahnya bukan PHP. Sistem ini tumbuh selama bertahun-tahun tanpa arsitektur yang jelas. Suatu hari, saya sampai harus _rollback_ tiga kali dalam sehari setelah _deploy_ sederhana. Cukup membuat stres.
+_Codebase_ PHP yang saya tangani makin susah dipelihara. Fitur baru susah ditambahkan, _bug_ makin sering muncul, dan setiap _deploy_ rasanya seperti lempar koin. Bukan berarti PHP yang salah. Sistemnya tumbuh bertahun-tahun tanpa arsitektur yang jelas. Sampai suatu hari saya harus _rollback_ tiga kali dalam sehari gara-gara _deploy_ yang seharusnya sederhana. Lumayan bikin stres.
 
-Tulisan ini bukan argumen bahwa _"Go lebih baik dari PHP"_ atau _"PHP sudah mati"_. Saya ingin mencatat pengalaman memigrasikan sistem _backend_ dari PHP (CodeIgniter 3 dan Laravel) ke Go dalam proyek yang saya kerjakan. Ini bukan tutorial atau ajakan untuk ikut pindah bahasa. Mudah-mudahan pengalaman dan kesalahan saya bisa berguna bagi yang sedang menghadapi situasi serupa.
+Saya tidak sedang bilang _"Go lebih baik dari PHP"_ atau _"PHP sudah mati"_. Ini catatan pengalaman saya memigrasikan sistem _backend_ dari PHP (CodeIgniter 3 dan Laravel) ke Go. Bukan tutorial, apalagi ajakan pindah bahasa. Siapa tahu cerita dan kesalahan saya berguna buat yang sedang menghadapi situasi serupa.
 
-## Masalahnya Bukan Bahasa, Tapi Arsitektur
+## Yang Bikin Repot: Arsitekturnya
 
 Sistem yang saya tangani punya profil seperti ini:
 
@@ -27,39 +27,39 @@ Sistem yang saya tangani punya profil seperti ini:
 - **~194.000 baris kode** PHP yang terdiri dari campuran CodeIgniter 3 dan Laravel
 - _Testing?_ Ada, tetapi _coverage_-nya saat itu masih sangat rendah.
 
-Masalah sebenarnya bukan di bahasa pemrogramannya. PHP itu bagus kok. Masalahnya ada di:
+PHP-nya sendiri bukan biang masalah. PHP juga bisa dipakai dengan baik. Yang bikin repot di sistem ini antara lain:
 
 1. **Tidak ada pemisahan _layer_**: _controller_ langsung mengakses database, sementara _business logic_ bercampur dengan _presentation logic_. Kodenya seperti nasi goreng campur, sulit membedakan bagian yang satu dari yang lain.
 2. **Sulit di-_test_**: kode yang _tightly coupled_ membuat _unit testing_ jadi sulit. Untuk menguji satu fungsi, saya harus menyiapkan database, _mock_ tiga _dependency_, lalu berharap semuanya berjalan.
 3. **_Developer experience_ menurun**: _onboarding developer_ baru semakin lama dan _bug fix_ semakin berisiko. Seorang _developer_ baru pernah bilang, _"Mas, ini kodenya... ehem, menarik sekali arsitekturnya."_ Maksudnya, _chaotic_.
 
-Sistem ini membutuhkan lebih dari sekadar pergantian bahasa. Arsitekturnya juga perlu ditata ulang.
+Jadi, mengganti bahasa saja tidak akan cukup. Arsitekturnya juga perlu dibereskan.
 
-## Kenapa Go?
+## Kenapa Saya Pilih Go?
 
-Kalau ditanya kenapa tidak _refactor_ saja di PHP, jawabannya: **bisa saja**. Namun, dalam kasus ini Go lebih sesuai karena beberapa pertimbangan. Bukan semata-mata karena _hype_ Go.
+Kalau ditanya kenapa tidak _refactor_ saja di PHP, jawabannya: **bisa saja**. Tapi untuk kasus yang saya hadapi, Go terasa lebih cocok karena beberapa alasan. Bukan cuma karena lagi ramai dibicarakan.
 
 ### 1. _Type Safety_ Menghemat Waktu _Debug_
 
 PHP bersifat _dynamically typed_[^2], sehingga banyak _bug_ baru diketahui saat _runtime_. _Static typing_ di Go dapat menangkap _error_ terkait tipe saat _compile time_, sebelum error tersebut mencapai _production_.
 
-### 2. _Concurrency_ Lebih Mudah
+### 2. _Goroutine_ Membantu Urusan _Concurrency_
 
 Sistem ini menangani banyak _request_ sekaligus, mulai dari _tracking GPS real-time_ hingga _report generation_. Dibandingkan pendekatan lain yang pernah saya coba, _goroutine_ membuat _concurrent programming_ lebih sederhana. Saat pertama kali menggunakannya, saya sempat berpikir, _"Kok bisa sesederhana ini?"_
 
-### 3. _Deployment_ yang Bersih
+### 3. Urusan _Deploy_ Lebih Ringkas
 
 Go menghasilkan satu _binary_. Tidak perlu _composer install_ di _server_ atau khawatir soal konflik versi PHP. Dulu, _deploy_ PHP mengharuskan saya memastikan _composer dependencies_ terpasang, versi PHP cocok, dan semua _extension_ tersedia. Sekarang saya cukup melakukan _build_ di lokal lalu mengirim satu berkas dengan `scp`.
 
-### 4. _Performance_ yang Terukur
+### 4. _Resource_ Lebih Mudah Diperkirakan
 
 Yang saya pertimbangkan bukan angka _benchmark_, melainkan **penggunaan _resource_ yang dapat diprediksi**. Penggunaan memori Go yang konsisten memudahkan perencanaan kapasitas. Sistem PHP sebelumnya bisa mengalami _memory spike_ tanpa sebab yang jelas, sedangkan penggunaan memori sekarang lebih rata dan dapat diprediksi.
 
 Go tentu tidak sempurna. _Error handling_-nya _verbose_ (semua `if err != nil` itu)[^3], dan _ecosystem_-nya lebih kecil daripada PHP. Untuk kebutuhan proyek ini, _trade-off_-nya sepadan.
 
-## Pendekatan Migrasi: Per-_Module_, Bukan _Big Bang_
+## Cara Migrasinya: Per Modul, Bukan Sekaligus
 
-Salah satu risiko migrasi adalah keputusan untuk menulis ulang semuanya sekaligus. Saya pernah mendengar cerita tim yang menghabiskan dua tahun untuk _big-bang rewrite_, tetapi tidak pernah menyelesaikannya. Penyebabnya beragam, mulai dari _burnout_ dan _scope creep_ hingga _business requirement_ yang berubah di tengah jalan.
+Salah satu risiko migrasi adalah menulis ulang semuanya sekaligus. Saya pernah dengar cerita tim yang menghabiskan dua tahun untuk _big-bang rewrite_, tapi akhirnya tidak selesai. Ada yang _burnout_, ada _scope creep_, ada juga kebutuhan bisnis yang berubah di tengah jalan. Ya, banyak cara proyek bisa melenceng.
 
 Pendekatan yang saya pakai:
 
@@ -67,20 +67,20 @@ Pendekatan yang saya pakai:
 
 Pertama, saya memetakan semua _endpoint_ dan _entity_ ke modul yang jelas. Dari 370+ _endpoint_, saya mengelompokkannya ke beberapa domain seperti _authentication_, _tracking_, _reporting_, dan _user management_. Saya menghabiskan beberapa hari untuk membuat _spreadsheet_ pemetaan _endpoint_. Pekerjaan itu cukup membosankan, tetapi membantu proses berikutnya.
 
-### 2. Service–Repository Pattern
+### 2. Service-Repository Pattern
 
-Setiap modul di-_design_ dengan pola **service–repository**:
+Setiap modul saya _design_ dengan pola **service-repository**:
 
 - **Repository layer**: bertanggung jawab atas akses data (query ke database)
 - **Service layer**: berisi _business logic_, memanggil repository
 
-Pemisahan ini membuat:
+Pembagian ini lumayan membantu:
 
 - _Repository_ bisa di-_mock_ saat testing _service_
 - _Business logic_ bisa diuji tanpa database
 - Penambahan fitur tidak merusak bagian lain
 
-Dengan _layer_ yang jelas, setiap bagian punya tanggung jawab sendiri. Awalnya pola ini terasa seperti _over-engineering_, tetapi setelah beberapa bulan digunakan, pemisahan tersebut membantu.
+Dengan _layer_ yang jelas, tiap bagian punya urusannya sendiri. Awalnya pola ini terasa seperti _over-engineering_. Setelah dipakai beberapa bulan, saya mulai merasakan gunanya.
 
 ### 3. Satu _Endpoint_ pada Satu Waktu
 
@@ -88,16 +88,16 @@ Prosesnya kurang lebih:
 
 1. Ambil satu _endpoint_ dari PHP
 2. Tulis _test case_ berdasarkan _behavior_ yang sudah ada[^4]
-3. Implementasi di Go dengan pola service–repository
+3. Implementasi di Go dengan pola service-repository
 4. _Test_ sampai _pass_
 5. _Deploy_ dan _monitor_
 6. Ulangi
 
 Proses ini memang lambat, tetapi **terukur dan dapat diprediksi**. Setiap _endpoint_ yang selesai menjadi kemajuan yang bisa dilihat _stakeholder_. Laporan _"Minggu ini berhasil migrasi 5 endpoint"_ lebih jelas daripada berbulan-bulan mengatakan _"kami masih mengerjakan migrasi"_ tanpa hasil yang terlihat.
 
-## Hasil yang Terukur
+## Hasilnya Sejauh Ini
 
-Beberapa angka dari proyek ini:
+Ini beberapa angka dari proyeknya:
 
 - **370+ _endpoint_** berhasil dimigrasi
 - **33 _entity_** dikonversi dari MySQL ke PostgreSQL[^5]
@@ -108,31 +108,31 @@ Beberapa angka dari proyek ini:
 
 Hal yang tidak tercatat dalam angka, tetapi terasa, adalah lebih tenangnya proses _deploy_. Saya tidak lagi berharap semoga tidak ada yang rusak. _Deploy_ tetap membuat sedikit gugup, tetapi tidak sampai mengganggu tidur.
 
-## Pelajaran
+## Hal yang Saya Pelajari
 
-Proses ini mengajarkan beberapa hal:
+Ada beberapa hal yang saya pelajari selama proses ini:
 
-### 1. Pahami Dulu Sistem yang Ada
+### Kenali Sistem Lama Dulu
 
-Sebelum menulis kode Go, saya meluangkan waktu untuk memahami _behavior_ sistem yang sudah ada. Saya tidak hanya membaca kodenya, tetapi juga mencari tahu **mengapa** keputusan tertentu dibuat. Kode yang terlihat _"aneh"_ bisa saja punya alasan yang masuk akal pada saat itu. Jangan buru-buru menganggap kode _legacy_ sebagai kode buruk; mungkin ada _constraint_ yang melatarbelakanginya.
+Sebelum menulis kode Go, saya coba pahami dulu _behavior_ sistem lama. Saya baca kodenya sambil mencari tahu **kenapa** keputusan tertentu pernah dibuat. Kode yang kelihatan _"aneh"_ mungkin punya alasan yang masuk akal pada masanya. Jadi, jangan buru-buru menyebut kode _legacy_ jelek. Bisa saja ada _constraint_ yang sekarang sudah tidak kelihatan.
 
-### 2. _Big Bang_ Rewrite itu _Trap_
+### Jangan Langsung Tulis Ulang Semuanya
 
-_Kalau bisa sedikit-sedikit, mengapa harus sekaligus?_ Pendekatan _incremental_ memang terasa lambat, tetapi risikonya lebih kecil. Setiap _endpoint_ yang selesai bisa ditunjukkan kepada _stakeholder_, sementara sistem tetap berjalan selama proses migrasi.
+_Kalau bisa dicicil, kenapa harus sekaligus? _Incremental_ memang terasa pelan, tapi risikonya lebih kecil. Tiap _endpoint_ yang selesai bisa ditunjukkan ke _stakeholder_, sementara sistem lama tetap berjalan.
 
-### 3. _Test_ Dulu, Migrasi Kemudian
+### Tes Sebelum Pindah
 
-Menulis _test_ untuk sistem _legacy_ memang membosankan. Namun, _test_ menjadi **jaring pengaman** untuk memastikan _behavior_ sistem tidak berubah setelah migrasi. Tanpa _test_, kita mengambil risiko mengubah perilaku yang sudah diharapkan pengguna.
+Menulis _test_ untuk sistem _legacy_ memang membosankan (saya tahu). Tapi _test_ jadi jaring pengaman supaya _behavior_ tidak berubah diam-diam setelah migrasi. Tanpanya, kita bisa saja mengubah sesuatu yang sudah diandalkan pengguna.
 
-### 4. Jangan _Prematurely Optimize_
+### Jangan Keburu Membuatnya Rumit
 
-Awalnya saya tergoda memakai _microservices_, _message queue_, dan arsitektur lain yang lebih rumit. Namun, sistem dengan arsitektur yang belum stabil membutuhkan **fondasi yang kuat**, bukan _microservices_. _Monolith_ yang _well-structured_ lebih baik daripada _microservices_ yang _chaotic_. Prinsip KISS (_Keep It Simple, Stupid_)[^6] tetap relevan.
+Awalnya saya tergoda memakai _microservices_, _message queue_, dan macam-macam arsitektur rumit lainnya. Tapi sistem yang arsitekturnya belum stabil butuh fondasi dulu, bukan tambahan komponen. _Monolith_ yang _well-structured_ lebih enak dirawat daripada _microservices_ yang _chaotic_. Prinsip KISS (_Keep It Simple, Stupid_)[^6] masih kepakai.
 
-## Penutup
+## Jadi, Perlukah Pindah ke Go?
 
-Migrasi dari PHP ke Go bukan soal _"bahasa A lebih baik dari bahasa B"_. Intinya adalah **memilih _tool_ yang sesuai dengan masalah**. Dalam proyek ini, _static typing_, _concurrency model_, dan kemudahan _deployment_ membuat Go menjadi pilihan yang tepat.
+Buat saya, migrasi PHP ke Go bukan lomba _"bahasa A lebih baik dari bahasa B"_. Yang penting memilih _tool_ yang pas untuk masalahnya. Di proyek ini, _static typing_, model _concurrency_, dan _deployment_ yang lebih sederhana membuat Go terasa cocok.
 
-Apakah semua sistem PHP perlu dimigrasi ke Go? Tidak. Jika sistem berjalan baik, arsitekturnya jelas, dan tim nyaman menggunakan PHP, tidak ada alasan untuk pindah hanya karena _hype_. Migrasi sebaiknya dilakukan ketika ada _business value_ yang jelas dan manfaat yang bisa diukur.
+Apakah semua sistem PHP perlu pindah ke Go? Tidak juga. Kalau sistemnya berjalan baik, arsitekturnya jelas, dan tim nyaman dengan PHP, pindah cuma karena _hype_ malah menambah pekerjaan. Menurut saya, migrasi baru masuk akal kalau _business value_-nya jelas dan manfaatnya bisa diukur.
 
 Kalau sistem _legacy_ yang kamu tangani mulai sulit dikembangkan dan kamu ingin mendiskusikan pendekatan migrasinya, [hubungi saya](/contact/). Kamu juga bisa melihat [layanan](/services/) yang saya tawarkan.
 

@@ -1,6 +1,6 @@
 ---
 title: "Hijrah Backend (7): Dari Paket TCP ke _Time-Series Database_"
-description: "Ep 7 seri Hijrah Backend: bagaimana paket-paket TCP dari ribuan tracker GPS menjadi baris data rapi, kenapa ada antrean, producer yang dulu membuang segalanya, dan database yang mengerti waktu."
+description: "Pengalaman saya memindahkan paket GPS lewat antrean sampai TimescaleDB, termasuk pesan yang dulu saya buang dan pilihan kecil yang nyaris membuang lebih banyak data."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:07+07:00
 lastmod: 2026-09-11T09:00:00+07:00
@@ -17,33 +17,33 @@ series: "Hijrah Backend"
 
 Setiap detik, armada mengirim kabar. Puluhan ribu _tracker_ GPS mengirim paket TCP berisi posisi, status mesin, dan kekuatan sinyal. Sistem harus menerima semuanya sepanjang hari, tanpa kampanye "ayo hemat kirim data" hahaha.
 
-Di [episode pertama](/writing/2026/hijrah-backend-01/) saya sempat bercerita bahwa sistem lama menerima paket dan menulis ke _database_ dalam layanan yang sama. Sistem baru memisahkan pekerjaan itu ke tiga tempat: _listener_ menerima dan menerjemahkan paket, antrean pesan menampungnya, lalu _consumer_ menulisnya ke _database_. Di episode ini saya ceritakan cara kerja tiap bagian, termasuk dua kesalahan yang saya buat hehe~
+Di [episode pertama](/writing/2026/hijrah-backend-01/) saya sempat cerita bahwa sistem lama menerima paket dan menulisnya ke _database_ dalam layanan yang sama. Sekarang tugasnya dipisah: _listener_ menerima dan menerjemahkan paket, antrean menampungnya, lalu _consumer_ menulis ke _database_. Di episode ini saya ceritakan alurnya, termasuk kesalahan yang baru kelihatan setelah jalan hehe~
 
 ## Kenapa Ada Antrean di Tengah Jalan
 
-Pertanyaan yang wajar: bukankah menambah satu _hop_ berarti menambah waktu?
+Mungkin kamu bertanya, bukankah menambah satu _hop_ berarti menambah waktu?
 
-Kecepatan menerima paket dan menulis ke _database_ memang berbeda. _Tracker_ tetap mengirim meski _database_ sedang sibuk. Jika penerimaan dan penulisan diikat, _database_ yang lambat akan memperlambat penerimaan juga. Paket yang gagal masuk hanya bisa berharap _device_-nya mengirim ulang.
+Menerima paket dan menulis ke _database_ itu kecepatannya beda. _Tracker_ tetap mengirim meski _database_ sedang sibuk. Kalau penerimaan dan penulisan disatukan, _database_ yang lambat ikut memperlambat _listener_. Paket yang gagal masuk tinggal berharap _device_-nya mencoba lagi.
 
-Antrean memisahkan dua pekerjaan itu. _Listener_ menerima paket lalu menitipkannya di antrean; _consumer_ mengambil paket secepat _database_ sanggup menulis. _Buffer_ menyerap lonjakan pada siang hari. Namun, tiap komponen baru juga membawa cara gagal yang baru. Saya menemukannya dengan cara paling klasik: langsung di produksi hahaha.
+Antrean jadi tempat menitipkan paket sementara. _Listener_ bisa lanjut menerima, sementara _consumer_ mengambil data secepat _database_ sanggup menulis. _Buffer_ membantu saat ada lonjakan siang hari. Tapi komponen baru berarti ada cara baru untuk gagal juga. Saya baru sadar setelah ketemu masalahnya di produksi hahaha.
 
-## Ketika Broker Tidur: Producer yang Membuang Segalanya
+## Saat Broker Mati, Pesan Ikut Hilang
 
-Sistem lama tidak mengenal skenario antrean mati karena ia langsung melakukan _insert_. Kalau _database_-nya ngambek, _device_ bisa mencoba lagi nanti. Sistem baru saya punya masalah lain, dan jawaban pertama saya sekarang saya sesali: kalau koneksi ke _broker_ putus... **pesan dibuang**.
+Sistem lama tidak punya urusan dengan antrean mati, karena ia langsung melakukan _insert_. Kalau _database_-nya ngambek, _device_ bisa mencoba lagi nanti. Sistem baru punya masalah sendiri. Solusi pertama saya? Kalau koneksi ke _broker_ putus, **pesannya dibuang**. Sampai sekarang saya masih heran kenapa dulu rasanya itu masuk akal.
 
-Diam-diam, efisien, dan mengerikan. Data posisi kendaraan pelanggan hilang tanpa suara hanya karena infrastruktur sedang bersin.
+Koneksi _broker_ putus tanpa peringatan, lalu data posisi kendaraan pelanggan ikut hilang begitu saja. Infrastrukturnya bersin, datanya yang tumbang.
 
-Perbaikannya berlapis. Pertama, jangan cepat menyerah: lakukan _retry_ bertingkat selama beberapa detik agar _broker_ yang hanya tersendat tidak membuat paket hilang. Kedua, kalau _broker_ mati lebih lama, jangan diam-diam membuang pesan. **Bunyikan alarmnya** lewat log _error_ yang jelas, bukan peringatan yang baru ditemukan tiga minggu kemudian. Ketiga, dan ini favorit saya, terapkan _backpressure_ yang jujur. Antrean saya menampung sekitar 8 ribu paket;[^2] saat penuh, `Send()` ikut menunggu. _Listener_ melambat, lalu _tracker_ di ujung sana mencoba lagi lewat TCP. Hasil akhirnya cukup filosofis: **data tidak hilang, hanya datang terlambat.** Membuat sumber menunggu bukan kegagalan; bagi saya, itulah mekanisme penyimpanan termurah hehe.
+Saya memperbaikinya bertahap. Koneksi yang cuma tersendat diberi _retry_ selama beberapa detik. Kalau _broker_ tetap mati, masalahnya harus kelihatan di log _error_, bukan diam-diam menunggu ada yang menemukan peringatan berminggu-minggu kemudian. Lalu saya pasang _backpressure_. Antrean menampung sekitar 8 ribu paket;[^2] kalau penuh, `Send()` ikut menunggu. _Listener_ melambat dan _tracker_ mencoba lagi lewat TCP. Jadi, **data tidak hilang, cuma telat datang**. Membuat sumber menunggu ternyata lebih murah daripada kehilangan paket hehe.
 
-Komentar di kode producer saya sampai mendokumentasikan rantai ini dengan bangga: antrean penuh → `Send()` blok → _listener_ melambat → _device retry_. Rantai yang tadinya terlihat seperti _bug_ ternyata dirancang sebagai pengaman.
+Komentar di kode producer sekarang mencatat alurnya: antrean penuh → `Send()` blok → _listener_ melambat → _device_ mencoba lagi. Dulu terlihat seperti _bug_, ternyata bisa jadi pengaman.
 
 ## Disiplin yang Salah Tempat
 
-Di tahap kedua, _consumer_ menulis ribuan baris lokasi sekaligus (_bulk insert_). Saya pernah membuat kesalahan ironis di sini: jika satu baris gagal dalam _loop_ penulisan massal, fungsi langsung menjalankan `return err`. **Semua baris lokasi setelahnya ikut dibuang.**
+Di tahap berikutnya, _consumer_ menulis ribuan baris lokasi sekaligus (_bulk insert_). Saya pernah membuat kesalahan yang agak ironis: kalau satu baris gagal di dalam _loop_, fungsi langsung menjalankan `return err`. **Baris-baris lokasi setelahnya ikut dibuang.**
 
-Lucunya, sistem PHP lama justru menjalankan `continue` dalam kasus ini. Versi Go saya yang "lebih disiplin soal _error_" malah membuang lebih banyak data daripada versi yang saya kira santai. Perbaikan pertamanya cuma mengganti sembilan huruf: `return` menjadi `continue`. Saya tambahkan log agar baris yang gagal tetap terlihat, lalu menerapkan perbaikan yang sama ke semua _sender_ lain. Terakhir, _buffer_ konsumen saya naikkan sepuluh kali lipat dan jumlah _worker_ saya tambah. Keputusan itu tercatat di komentar _config_, bukan disimpan sebagai angka misterius hahaha.[^1]
+Sistem PHP lama malah memakai `continue` untuk kasus seperti ini. Versi Go saya yang katanya "lebih disiplin soal _error_" justru membuang lebih banyak data. Perbaikan pertamanya sederhana: ganti `return` dengan `continue`, lalu catat baris yang gagal di log. Saya lakukan hal yang sama di _sender_ lain, menaikkan _buffer_ konsumen sepuluh kali lipat, dan menambah _worker_. Angka-angkanya saya tulis di komentar _config_ supaya tidak jadi angka misterius hahaha.[^1]
 
-Pelajarannya masih saya ingat: **memperhatikan _error_ itu bagus; menyerah total karena satu _error_ bukan disiplin, itu drama.** Di _pipeline_ data, pilihan antara `continue` dan `return` bisa menentukan nasib ribuan baris. Jadi, setiap kali pilihan itu muncul, pikirkan dampaknya.
+Dari kejadian ini saya belajar bahwa pilihan `continue` atau `return` di _loop_ bukan soal gaya saja. Satu _error_ bisa menghentikan pemrosesan ribuan baris. Jadi saya berusaha memikirkan dampaknya dulu, bukan sekadar memilih yang kelihatan paling disiplin.
 
 ## Database yang Mengerti Waktu
 
@@ -51,17 +51,15 @@ Tahap terakhir menyimpan data lokasi, yang selalu terkait waktu dan tempat. Untu
 
 Ada dua hal yang tidak saya dapatkan di sistem lama. Pertama, **kompresi**: _chunk_ lama dikompresi otomatis. Kini lebih dari seratus _chunk_ disimpan dengan cara itu, dan _index_ tertentu bisa dibangun langsung di atas data terkompresi tanpa membongkarnya. Kedua, **retensi otomatis**: kebijakan mingguan membuang data yang melewati batas usia. Dulu, data lama dibersihkan secara manual, sambil berdoa. Sekarang _database_-nya yang mengurus jadwal hehe~
 
-Dengan keduanya, pertanyaan "kapan kita beres-beres data?" berubah dari ritual menjadi urusan konfigurasi.
+Sekarang kalau ada yang bertanya kapan data lama dibersihkan, saya tinggal menunjuk policy-nya hehe.
 
-## Pelajaran
+## Catatan Saya
 
-1. **Setiap komponen baru punya cara gagal baru.** Menambah antrean berarti harus menjawab sejak awal: kalau broker mati, apa yang terjadi pada data?
-2. **Gagal boleh, gagal diam-diam jangan.** Coba lagi, lalu tampilkan _error_ dengan jelas. _Warning_ yang menunggu dibaca bisa membuat masalah luput.
-3. **`continue` vs `return` di _loop_ massal adalah keputusan hidup-mati data.** Satu kata mengubah "satu baris gagal" menjadi "seribu baris dibuang".
-4. **_Backpressure_ itu fitur.** Saat kapasitas habis, membiarkan sumber menunggu adalah penyimpanan termurah yang ada.
-5. **Retensi otomatis menggantikan ritual.** Apa yang dulu rutin manual dan penuh doa, kini cuma kebijakan yang jalan sendiri.
+Yang paling terasa dari perubahan ini bukan karena antrean atau _database_ baru terdengar keren. Saya harus memutuskan dulu apa yang dilakukan sistem saat ada bagian yang gagal, dan memastikan kegagalannya kelihatan. `continue` dan `return` juga sama-sama punya tempatnya. Salah pilih, banyak baris bisa ikut hilang.
 
-Berikutnya adalah episode terakhir seri ini. Saya akan bercerita tentang hampir dua tahun perjalanan, hal-hal yang akan saya ubah jika mengulang, dan bagian yang paling saya syukuri.
+Di sisi penyimpanan, _backpressure_ bikin sumber menunggu daripada membuang data, sementara kompresi dan retensi otomatis mengurangi pekerjaan beres-beres manual. Ternyata beberapa urusan yang dulu bikin saya berdoa sekarang tinggal jadi aturan _database_ hehe.
+
+Berikutnya episode terakhir seri ini. Saya akan menengok perjalanan hampir dua tahun, hal yang akan saya ubah kalau mengulang, dan bagian yang paling saya syukuri.
 
 Versi tutorial dari dua babak episode ini, dari _TCP listener_ sampai _time-series database_, ada di [GPS Backend Part 2](/writing/2026/tcp-listener-gps-go/) dan [Part 4](/writing/2026/gps-data-postgresql-timescaledb/).
 

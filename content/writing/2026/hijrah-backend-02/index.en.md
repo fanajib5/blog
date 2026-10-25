@@ -1,6 +1,6 @@
 ---
 title: "Hijrah Backend (2): Anatomy of a 15-Second Endpoint"
-description: "Episode 2 of the Hijrah Backend series: forensics on an endpoint that took 15 seconds, four wrong hypotheses, one correct config line, and the lesson of reading logs before theorizing."
+description: "My notes from digging into an endpoint that felt like 15 seconds, including the wrong theories I was very confident about."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:02+07:00
 lastmod: 2026-09-10T23:00:00+07:00
@@ -15,17 +15,17 @@ tags:
 series: "Hijrah Backend"
 ---
 
-In [the previous episode](/en/writing/2026/hijrah-backend-01/) I mentioned an endpoint that took 15 seconds per call. What made the investigation memorable wasn't its technical complexity; it was how confidently I settled on several wrong explanations.
+In [the previous episode](/en/writing/2026/hijrah-backend-01/) I mentioned an endpoint that could take 15 seconds per call. What I remember most wasn't the technical part, but how confident I was in explanations that turned out to be wrong. Ahem.
 
-## One Click, Seventeen Seconds
+## One Click, Then a Wait
 
-One click on the fuel-estimation-per-vehicle-group endpoint, then a wait of about 17 seconds. For a dashboard people open every day, it felt like waiting on dial-up.
+One click on the fuel-estimation-per-vehicle-group endpoint, then a wait of about 17 seconds. If you open that dashboard every day, the wait feels like going back to dial-up.
 
 For weeks, the investigation had a soundtrack: _"Faiq, why is it erroring?" "Faiq, why is it slow?"_ Relax, sir, I am tracing it hehe.
 
 The endpoint runs one CTE query[^1] against a device-summary table holding tens of millions of rows. I had my first suspect.
 
-## Suspect #1: The Query, Obviously
+## Suspect #1, The Query
 
 _If it's slow, it's the query._ Every developer's reflex. Including mine.
 
@@ -33,7 +33,7 @@ So I opened EXPLAIN. And EXPLAIN answered: your query is fine, sir. The executio
 
 Seventy-eight milliseconds. The endpoint: 17,000 milliseconds. Suspect #1, dismissed. Oops hehe.
 
-## Suspect #2: Geography
+## Suspect #2, The Distance
 
 This part is embarrassing, but important: the architecture I inherited ran the application in a European cloud region while its main database lived in Indonesia. Thousands of kilometers apart, every MySQL query paid a toll of about 190 milliseconds one way. The users and database were both in Indonesia, but the data took a detour through Europe.
 
@@ -41,13 +41,13 @@ With that setup, theory two sounded very reasonable: a small connection pool mak
 
 Result: 16.57 seconds became 15.64 seconds. I suspected the drop was just noise. The pool change hadn't explained the problem.
 
-## Suspect #3: Connection Age
+## Suspect #3, An Old Connection
 
 Still on the same track, theory three arrived: the database server kills idle connections at the ten-minute mark, while the application believed its connections lived for 30. An age mismatch = zombie connections = failures mid-flight.
 
 This theory wasn't entirely wrong, the mismatch was real, and fixing it was worthwhile anyway. But it also didn't answer the main mystery: the number stayed above 15 seconds. Three accusations, three misses. Time to stop theorizing and start listening.
 
-## The Logs Speak, Every Theory Collapses
+## Then I Read the Logs
 
 That night I opened the application logs:
 
@@ -64,7 +64,7 @@ After that, two clues I'd missed became clear:
 
 What differs between the app and the CLI? **The protocol.** My app was using prepared statements (the MySQL binary protocol, three round-trips per query), while the CLI speaks the text protocol (one round-trip). And on that binary path, the server was resetting the connection mid-execution. The road itself wasn't bare internet either: the connection to the database servers in Indonesia crossed a VPN tunnel, and inside that corridor the binary-protocol CTE queries were killed mid-flight, while the slim text-protocol queries slipped through without a scratch.
 
-## One Line That Ended It All
+## One Config Line
 
 The final fix was a single DSN line:
 
@@ -78,7 +78,7 @@ Deployed. Clicked the dashboard. And _invalid connection_ never appeared again. 
 
 ## What's Proven, What's Still a Guess
 
-Now for the part rarely written down: separating what's **proven** from what's still a **guess**.
+Now I want to separate what's **proven** from what's still a **guess**.
 
 **Proven**: over a VPN tunnel to the database, binary-protocol CTE queries were killed mid-flight repeatedly; the text-protocol path avoids it; the one-line fix eliminated the errors entirely in production.
 
@@ -86,12 +86,12 @@ Now for the part rarely written down: separating what's **proven** from what's s
 
 Oh, and those two "wrong" fixes along the way (pool size and connection lifetime)? I kept both, they happen to be best practices anyway. So not a total loss, right? hehe~
 
-## Lessons
+## What I Took Away
 
-1. **Measure before accusing.** One EXPLAIN killed a theory that nearly made me rewrite an innocent query.
-2. **Read the logs before building theories.** The answer had been sitting in the logs for weeks while I was busy judging queries, geography, and connection ages.
-3. **Asymmetry is a golden clue.** What always fails vs. what always succeeds, once you underline that line, the cause reveals itself.
-4. **"Slow" is sometimes really "failing repeatedly".** Odd latency always deserves suspicion of stacked retries.
+1. **Measure before accusing.** One EXPLAIN saved an innocent query from a rewrite. It had done nothing wrong hehe.
+2. **Read the logs.** The answer had been there for weeks while I was busy blaming the query, distance, and connection age.
+3. **Compare what fails with what works.** Once I noticed the CTE query always failed while the simple one worked, the clue was hard to miss.
+4. **"Slow" can mean failing over and over.** If the latency looks odd, I now wonder whether retries are piling up.
 
 As I write this, the lighter endpoints in that system still have a floor of about 2-3 seconds because of the same transcontinental architecture. The remaining latency is a story of its own.
 

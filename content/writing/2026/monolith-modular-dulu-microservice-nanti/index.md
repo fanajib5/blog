@@ -1,6 +1,6 @@
 ---
 title: "Monolith Modular Dulu, Microservice Nanti: Filosofi Kesederhanaan di Backend"
-description: "Microservice bukan gelar kedewasaan arsitektur — ia solusi untuk masalah organisasi yang belum semua tim punya. Kenapa monolith modular tetap pilihan utama saya, dan kapan tepat naik kelas."
+description: "Kenapa monolith modular masih jadi pilihan default saya, dan masalah seperti apa yang baru layak dibayar dengan microservice."
 author: "Faiq Najib Al-Aziz"
 date: 2026-11-24
 lastmod: 2026-11-24
@@ -17,71 +17,63 @@ tags:
 pillar: "backend"
 ---
 
-Belakangan, saya makin sering mendengar pertanyaan interview ini: "kenapa sistem kamu belum microservice?" Biasanya nadanya bukan benar-benar bertanya, melainkan menuduh. Seolah arsitektur punya tangga prestise: mulai dari monolith yang memalukan, naik ke "monolith modular" yang lumayan, lalu jadi dewa setelah sistemnya dipecah menjadi dua puluh service dengan service mesh.
+Akhir-akhir ini saya sering mendengar pertanyaan interview: "kenapa sistem kamu belum microservice?" Kadang rasanya bukan bertanya, tapi menguji apakah saya cukup keren. Seolah monolith itu memalukan, lalu monolith modular lumayan, dan baru dianggap hebat setelah dipecah jadi entah berapa service. Padahal, apa masalah yang sebenarnya sedang kita selesaikan?
 
-Posisi saya sederhana: **monolith modular adalah pilihan default yang tepat untuk mayoritas backend. Microservice baru menjawab masalah yang memang harus kamu hadapi sebelum membelinya.** Saya akan menjelaskannya dari pengalaman, bukan dogma.
+Pilihan saya sejauh ini: **monolith modular jadi titik awal yang masuk akal untuk banyak backend. Microservice baru berguna ketika masalah yang diselesaikannya memang sudah ada.** Ini bukan aturan untuk semua orang, cuma kesimpulan dari sistem yang pernah saya kerjakan.
 
-## Sistem yang Membayar Tagihannya
+## Contoh dari Kerjaan Saya
 
-Supaya ini bukan sekadar opini, saya pegang backend GPS fleet tracking yang terus menerima data posisi dari armada device, menyimpan jutaan titik per hari ke TimescaleDB, melayani ratusan endpoint API, serta menangani billing dan geofencing. Beban seperti ini sering dijawab dengan, "pasti butuh microservice".
+Contoh yang saya pegang adalah backend GPS fleet tracking. Sistemnya menerima posisi dari banyak device, menyimpan jutaan titik per hari ke TimescaleDB, melayani ratusan endpoint API, dan menangani billing serta geofencing. Kalau diceritakan begitu, biasanya ada saja yang menyahut, "berarti butuh microservice, dong."
 
-Arsitekturnya? **Satu binary Go.**
+Tapi arsitekturnya masih **satu binary Go**. (Iya, satu saja.)
 
-Di dalamnya ada disiplin: package `listener`, `decoder`, `ingest`, `api`, dan `ws`, dengan batas modul yang tegas, contract internal, serta layer usecase/repository yang rapi. Deploy-nya satu container, observability-nya satu log stream, dan debugging-nya satu trace. Sistem ini, seperti yang saya ceritakan di [seri GPS Backend](/writing/2026/memahami-gps-protocol/), menangani beban yang sering dianggap hanya bisa ditangani armada service.
+Di dalam satu binary itu ada package `listener`, `decoder`, `ingest`, `api`, dan `ws`. Batas modulnya jelas, kontrak internalnya ada, dan layer usecase/repository tidak dicampur aduk. Deploy-nya satu container. Saat ada masalah, saya tidak perlu mencari log dari banyak service sekaligus. Di [seri GPS Backend](/writing/2026/memahami-gps-protocol/) saya bercerita lebih jauh soal sistem ini.
 
-Bukan karena kami anti-microservice. Karena kami menghitung.
+Bukan berarti kami anti-microservice. Kami cuma menghitung biaya dan manfaatnya dulu.
 
 ## Yang Sebenarnya Dibeli Microservice
 
-Microservice jarang menyelesaikan masalah teknis yang tidak bisa diselesaikan monolith. Yang dia selesaikan hampir selalu **masalah organisasi**:
+Microservice bukan satu-satunya cara menyelesaikan masalah teknis. Sering kali, manfaat terbesarnya ada di **masalah organisasi**:
 
-- Banyak tim yang saling menginjak deploy satu sama lain → deploy independence
-- Codebase yang tidak muat di kepala satu tim → ownership boundary
-- Conway's law yang sudah memecah organisasi → arsitektur yang mengikutinya
+Biasanya masalahnya terlihat saat beberapa tim mulai saling menghalangi jadwal deploy, codebase sudah terlalu besar untuk dikelola satu tim, atau struktur organisasi memang terbagi mengikuti Conway's law. Di titik itu, batas kepemilikan yang lebih mandiri bisa membantu.
 
-Itu masalah nyata untuk perusahaan dengan puluhan engineer. Kalau timmu lima orang dan deploy-mu dua kali seminggu, masalah itu belum kamu hadapi. Yang ada baru bayangan bahwa suatu saat kamu akan menghadapinya, dan bayangan itu sudah dibayar hari ini dengan **distributed system tax**: kegagalan jaringan antar-service yang harus ditangani, konsistensi data yang tidak lagi gratis, tracing yang butuh infrastruktur sendiri, pipeline deploy yang berlipat mengikuti jumlah service, serta bug yang dulu bisa ditemukan dalam satu stack trace tetapi kini tersebar di lima log.
+Semua itu memang masalah nyata untuk organisasi besar. Tapi kalau timmu lima orang dan deploy dua kali seminggu, belum tentu kamu punya masalah tersebut. Bisa jadi yang dibayar sekarang adalah antisipasi untuk masalah masa depan, dalam bentuk **distributed system tax**: menangani network failure, menjaga konsistensi data, menyiapkan tracing, mengurus pipeline deploy untuk tiap service, lalu mencari bug yang tersebar di beberapa log.
 
-Pajak itu bukan mitos. Tagihannya datang tiap bulan, sering kali saat tim kecil sedang sibuk membangun produk.
+Biaya tambahan ini terasa terus, termasuk saat tim kecil sebetulnya sedang sibuk membangun produknya.
 
 ## Monolith Modular Bukan Monolith Sembarangan
 
-Membela monolith **tidak** sama dengan membela codebase tanpa batas. Monolith yang membusuk, dengan controller 2.000 baris dan semua file saling mengimpor, bisa membuatmu _benar-benar butuh_ microservice karena tak ada yang berani menyentuh apa pun tanpa merusak semuanya.
+Saya bukan membela monolith yang semua bagiannya saling impor dan controllernya 2.000 baris. Codebase seperti itu memang menyulitkan perubahan. Kadang tim sampai berpikir perlu pindah ke microservice, padahal masalah awalnya adalah batas modul yang tidak pernah dijaga.
 
-Yang saya pertahankan adalah **monolith modular**: batas modulnya ditegakkan sama ketatnya dengan batas service, tetapi komunikasinya tetap di dalam proses tanpa tambahan network di antaranya.
+Yang saya pilih adalah **monolith modular**. Batas modulnya jelas dan dijaga, tetapi komunikasi antar-modul tetap terjadi di dalam proses. Tidak perlu menambah network hop untuk setiap panggilan.
 
-- Modul berkomunikasi lewat antarmuka eksplisit, bukan saling megang database orang
-- Satu modul bisa dibaca dan dipahami sendirian
-- Dependency mengalir satu arah (seperti usecase → repository, tidak bolak-balik)
+Di proyek saya, modul berkomunikasi lewat antarmuka yang jelas, bukan dengan mengakses tabel domain lain seenaknya. Saya juga berusaha membuat setiap modul bisa dibaca sendiri dan menjaga arah dependency, misalnya usecase → repository, bukan bolak-balik.
 
 Buktinya ada di proyek yang sama: migrasi Laravel → Go dilakukan **tanpa big-bang rewrite**. Dua backend berjalan paralel, lalu endpoint dipindahkan satu per satu lewat proxy. Itu mungkin karena batas modul dan contract-nya sudah rapi. Batas yang bisa dipindah antar-runtime kelak bisa dipindah antar-service.
 
 ## Kapan Saya Akan Memecah Sistem
 
-"Microservice nanti" bukan sekadar alasan untuk menunda. Ada sinyal konkret yang akan membuat saya memecah sistem. Tidak satu pun alasannya "karena sekarang trenya":
+Bagi saya, "microservice nanti" bukan berarti menolak selamanya. Ada beberapa kondisi yang akan membuat saya mempertimbangkan pemisahan. Bukan karena sedang tren:
 
-1. **Deploy benar-benar saling menginjak** — tim berbeda harus rilis komponen berbeda dengan ritme berbeda, dan antrian koordinasi jadi bottleneck yang terasa tiap minggu.
-2. **Profil beban yang ekstrem timpang** — satu modul butuh resource kelas beda (mis. komputasi berat yang layak di-scale terpisah dari API yang ringan).
-3. **Isolasi kegagalan yang sudah terbukti menyakitkan** — crash satu modul berulang kali menyeret keseluruhan sistem, dan bukan karena bug yang bisa diperbaiki.
-4. **Organisasi memang sudah terpecah** — tim-tim dengan ownership berbeda, siklus rilis berbeda, bahkan runtime berbeda.
+1. **Deploy benar-benar saling menginjak**: tim berbeda harus rilis komponen berbeda dengan ritme berbeda, dan antrian koordinasi jadi bottleneck yang terasa tiap minggu.
+2. **Profil beban yang ekstrem timpang**: satu modul butuh resource kelas beda (mis. komputasi berat yang layak di-scale terpisah dari API yang ringan).
+3. **Isolasi kegagalan yang sudah terbukti menyakitkan**: crash satu modul berulang kali menyeret keseluruhan sistem, dan bukan karena bug yang bisa diperbaiki.
+4. **Organisasi memang sudah terpecah**: tim-tim dengan ownership berbeda, siklus rilis berbeda, bahkan runtime berbeda.
 
-Saat sinyal itu muncul, saya tidak akan memulai dari nol. Saya akan memakai **strangler pattern**: mengekstrak modul yang paling mature menjadi service pertama, mengalihkan lalu lintas lewat proxy, lalu menyusul dengan modul lain bila perlu. Ekstraksi ini murah hanya kalau batas modulnya sudah rapi. Modul yang berantakan di dalam monolith tidak otomatis menjadi service yang sehat; kekacauannya hanya berpindah ke jaringan.
+Kalau salah satu kondisi itu muncul, saya tidak perlu memulai semuanya dari nol. Saya bisa memakai **strangler pattern**, mengambil modul yang paling siap menjadi service pertama, lalu mengalihkan traffic lewat proxy. Modul lain menyusul kalau memang perlu. Tapi ekstraksi hanya lebih mudah kalau batas modul di dalam monolith sudah rapi. Kalau berantakan, ya kekacauannya ikut pindah ke jaringan.
 
-Urutannya bukan "monolith dulu, microservice kalau sudah jago", melainkan **modular dulu, distribusi kalau sudah dibutuhkan**. Monolith modular yang rapi adalah jalan menuju microservice yang tepat, bukan lawannya.
+Jadi urutan yang saya pilih: **rapikan modul dulu, distribusikan saat memang dibutuhkan**. Monolith modular bukan lawan microservice. Ia bisa jadi titik berangkat yang lebih tenang.
 
 ## Kapan Microservice Masuk Akal Sejak Awal
 
-Ada kondisi ketika microservice memang tepat sejak awal, dan saya akan memilihnya tanpa ragu:
+Tentu ada juga situasi ketika microservice masuk akal sejak awal. Misalnya, regulasi mengharuskan data pribadi tinggal di yurisdiksi tertentu atau tenant perlu isolasi fisik. Bisa juga sistemnya memang perlu beberapa runtime dengan siklus hidup berbeda, seperti pipeline yang menjalankan Python, Go, dan JVM. Atau produk bisnisnya sejak awal memang platform untuk banyak tim, misalnya marketplace dengan divisi independen.
 
-- Boundary organisasi sudah keras dari regulasi (data pribadi satu yurisdiksi, audit terpisah, tenant yang menuntut isolasi fisik)
-- Sistem memang federasi runtime sejak lahir — misal pipeline yang harus menjalankan komponen Python, Go, dan JVM bersamaan dengan siklus hidup berbeda
-- Produkmu secara bisnis memang platform multi-team dari hari pertama (marketplace dengan divisi-divisi independen)
+Itu semua **batasan nyata dari luar**, bukan optimasi yang dibayangkan. Kalau kebutuhanmu datang dari tim, regulasi, atau runtime yang berbeda, microservice bisa jadi pilihan yang tepat. Kalau cuma supaya terlihat modern, mungkin perlu duduk sebentar dan tanya lagi masalah apa yang ingin diselesaikan.
 
-Semua itu **constraint eksternal yang nyata**, bukan optimasi teknis yang dibayangkan. Kalau alasanmu ber-subjek "tim/regulasi/runtime", microservice masuk akal. Kalau alasannya "biar kelihatan modern", kembali ke meja gambar.
+## Kenapa Saya Memilih Ini untuk Sekarang
 
-## Pilihan Default yang Lebih Sederhana
+Saya pernah menulis bahwa [memilih tech stack itu soal bisnis, bukan ego](/writing/2026/tech-stack-ego-vs-business/). Untuk sistem yang sekarang saya pegang, saya memilih monolith modular karena belum ada alasan kuat untuk menambah urusan operasional. Kalau kebutuhannya berubah, baru saya pikirkan lagi. Batas modul yang rapi setidaknya membuat pilihan itu tidak tertutup.
 
-Saya pernah menulis bahwa [memilih tech stack itu soal bisnis, bukan ego](/writing/2026/tech-stack-ego-vs-business/). Arsitektur juga soal yang sama. Microservice dibayar dengan kompleksitas, monolith modular dengan disiplin. Untuk kebanyakan tim dan masalah yang kita hadapi, disiplin lebih murah. Batas modul yang rapi juga memberi jalan untuk menambah kompleksitas saat memang diperlukan; arah sebaliknya lebih sulit.
-
-## CTA
+## Ngobrol?
 
 Kalau kamu pernah memisahkan sistem dengan alasan berbeda, [hubungi saya](/contact/). Kamu juga bisa mengikuti tulisan berikutnya lewat [RSS](/writing/index.xml).

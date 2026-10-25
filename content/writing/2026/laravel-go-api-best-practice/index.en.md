@@ -1,6 +1,6 @@
 ---
 title: "Best Practices for Building APIs in Laravel and Go: Notes from a Real Project"
-description: "Lessons from auditing 460+ routes and 58 controllers—patterns to keep, patterns to ditch, and how each maps to Go."
+description: "Notes from auditing 460+ routes and 58 controllers in a PHP-to-Go migration: patterns worth keeping, patterns to ditch, and how each maps to Go."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
 lastmod: 2026-09-11T09:28:00+07:00
@@ -24,13 +24,13 @@ The project profile looked like this:
 - **5 auth guards**: `user-api`, `partner-api`, `open-api`, `open-api-limited`, `tms-api`
 - **Varied rate limiting**: from 3/minute up to 100/minute
 
-This isn't a _"how to build an API"_ tutorial. It's a record of the patterns and anti-patterns I found, with examples of how they map to Go. If you're migrating or starting a project, I hope these notes help you avoid a few of the same mistakes.
+This isn't a _"how to build an API"_ tutorial. It's a record of the patterns and anti-patterns I found, with examples of how they map to Go. If you're migrating or starting a project, I hope it helps you dodge a few mistakes I ran into first.
 
 ## 1. Route Organization: Group with Intention
 
 ### What I Found
 
-The project had route grouping that was actually pretty well-structured. Auth guards were separated by domain:
+The project actually had pretty well-structured route grouping. Auth guards were separated by domain:
 
 ```php
 // routes/api.php - Good structure
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth:open-api']], function() {
 });
 ```
 
-Rate limiting was also applied strategically:
+Rate limiting was also applied with some thought:
 
 ```php
 // Heavy AI analysis → strict rate limit
@@ -65,7 +65,7 @@ Route::get('/google/reverse_geocode','GoogleController@reverseGeocodeLocation')
 
 ### Problems Found
 
-But there were issues:
+But yeah, there were issues:
 
 **Issue 1: Naming inconsistency.** Some routes used `snake_case`, others used `kebab-case`, and some used verbs:
 
@@ -79,7 +79,7 @@ Route::resource('devices', 'DeviceController'); // RESTful
 Route::post('/devices/check_device_type', ...);  // verb under resource
 ```
 
-**Issue 2: Controllers doing too much.** `DeviceController` had **40+ methods** and **2000+ lines of code**. It handled CRUD, location tracking, reports, commands, dashboards, and AI. _One controller to rule them all_ hahaha.
+**Issue 2: Controllers with too many responsibilities.** `DeviceController` had **40+ methods** and **2000+ lines of code**. CRUD, location tracking, reports, commands, dashboards, and AI, all in one. _One controller to rule them all_ hahaha.
 
 ### Best Practice: Route Structure in Go
 
@@ -133,13 +133,13 @@ func SetupRouter(
 }
 ```
 
-Here, each middleware chain and route group is code rather than array configuration. You can follow the flow from top to bottom, and your IDE can open a handler's definition directly. The middleware for each route is visible where the route is registered.
+Here, each middleware chain and route group is code rather than array configuration. You can read the flow from top to bottom, and your IDE can jump straight to a handler's definition. The middleware for each route is visible right where the route is registered.
 
 ## 2. Controller Pattern: Thin, Separated, Injected
 
 ### Anti-Pattern: Fat Controller
 
-Let's look at real code from this project. Here's the pattern that appears most often (and should **be avoided**):
+Let's look at real code from this project. This is the pattern that shows up most often (and should be **left behind**):
 
 ```php
 // app/Http/Controllers/Auth/LoginController.php
@@ -178,7 +178,7 @@ public function login(Request $request)
 }
 ```
 
-If the same login logic is needed elsewhere, such as in a CLI command or job queue, it would have to be duplicated or extracted into a service. Separating it from the start avoids that extra step.
+If the same login logic is needed elsewhere, such as in a CLI command or job queue, it has to be duplicated or extracted into a service. Easier to separate it from the start.
 
 ### Anti-Pattern: Manual Permission Checks
 
@@ -213,11 +213,11 @@ public function store(Request $request)
 // And so on in every method...
 ```
 
-This is a good fit for a **Laravel Policy** or **Middleware**. With 10 methods, there is no need to repeat and maintain the same check in each one. DRY (_Don't Repeat Yourself_)[^2] helps avoid that duplication.
+This one fits a **Laravel Policy** or **Middleware** better. With 10 methods, why call and maintain the same check ten times? DRY (_Don't Repeat Yourself_)[^2] exists for exactly this.
 
 ### Best Practice: Thin Controller + Service Layer
 
-In the same project, there's a controller that **already follows the right pattern**. Example: `GeminiAIController`:
+In the same project, one controller **already follows the right pattern**: `GeminiAIController`:
 
 ```php
 // app/Http/Controllers/GeminiAIController.php
@@ -255,7 +255,7 @@ class GeminiAIController extends AuthenticatedController
 }
 ```
 
-This is the pattern to follow:
+This pattern is worth copying:
 
 1. **Form Request** for validation (not `Validator::make()` in controller)
 2. **Service Injection** for business logic (not logic in controller)
@@ -351,13 +351,13 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest) (*dto.Log
 }
 ```
 
-In this example, there is no inheritance, magic method, or constructor middleware. Dependencies are passed explicitly through dependency injection. That adds boilerplate, but each layer can be tested independently and the data flow is visible.
+In this example there's no inheritance, magic method, or constructor middleware. Dependencies are passed explicitly through dependency injection. Yes, it's more boilerplate (my fingers got tired, honestly), but each layer can be tested on its own and the data flow is easy to see.
 
 ## 3. Validation: Consistent, One Approach, One Place
 
 ### What I Found
 
-The project used **three validation approaches** simultaneously:
+The project used **three validation approaches** at the same time:
 
 **Approach 1: Manual `Validator::make()`** (most common, 80%+ of controllers):
 ```php
@@ -396,11 +396,11 @@ class GeminiAnalyzeDeviceRequest extends FormRequest
 }
 ```
 
-With approaches 1 and 2, the `device_id` rule can be repeated across endpoints. When it changes, each copy needs an update.
+With approaches 1 and 2, the `device_id` rule can end up repeated across endpoints. When it changes, every copy needs an update (and one will surely be forgotten).
 
 ### Best Practice
 
-**Use Form Requests for rules that need to be managed together.** They offer a few benefits:
+**Use Form Requests for rules that need to be managed together.** The upsides:
 
 1. **Reusable**: one form request can serve several endpoints that use the same rules
 2. **Testable**: form requests can be tested independently without hitting endpoints
@@ -426,7 +426,7 @@ type AnalyzeDeviceRequest struct {
 }
 ```
 
-In this Go example, validation rules are written as struct tags and checked in the handler. The applicable rules are visible alongside the request type.
+In this Go example, validation rules are written as struct tags and checked in the handler. The rules that apply sit right next to the request type.
 
 ## 4. Response Consistency: One Format, All Endpoints
 
@@ -527,7 +527,7 @@ func ValidationError(c *gin.Context, err error) {
 }
 ```
 
-As long as handlers use these helpers, the response shape stays consistent. Call `response.Success()` for a successful result or `response.Error()` for an error.
+As long as handlers use these helpers, the response shape is the same. `response.Success()` for success, `response.Error()` for errors. Done.
 
 ## 5. Auth & Authorization: Guards, Not Manual Checks
 
@@ -580,7 +580,7 @@ class AuthenticatedController extends Controller
 }
 ```
 
-Why is this a problem? Because token validation logic is embedded in the controller constructor, not in a dedicated middleware. This means:
+Why is this a problem? Because the token validation logic is stuck in the controller constructor, not in a dedicated middleware. As a result:
 
 - Can't be used in controllers that don't extend `AuthenticatedController`
 - Hard to test independently
@@ -668,17 +668,17 @@ userAPI := r.Group("/")
 userAPI.Use(authMiddleware.Guard("user-api"))
 ```
 
-In Go, middleware functions can be composed as needed without complex inheritance chains. The _composition over inheritance_[^3] principle fits this approach.
+In Go, middleware is just a function you compose as needed, with no inheritance chain. The _composition over inheritance_[^3] principle fits this approach.
 
 ## 6. Split Fat Controllers into Separate Handlers
 
 ### The Big Problem
 
-`DeviceController` had **40+ methods**. A bug in the report feature meant scrolling past location, command, and dashboard code to find the relevant method. Searching through more than 1000 lines for one method is not a pleasant experience.
+`DeviceController` had **40+ methods**. A bug in the report feature meant scrolling past location, command, and dashboard code to find the relevant method. Hunting for one method among 1000+ lines is not a fun experience (trust me).
 
 ### Solution: One Domain = One Handler
 
-To separate responsibilities in Go, each handler can live in its own struct:
+To separate responsibilities in Go, each handler can get its own struct:
 
 ```go
 // internal/handler/device_handler.go - CRUD only
@@ -714,7 +714,7 @@ _Migration tip_: Before converting to Go, split PHP controllers into smaller han
 
 ## Summary: Best Practice Checklist
 
-Here's a checklist drawn from the patterns discussed:
+Here's the checklist from the patterns above:
 
 | Aspect | ❌ Don't | ✅ Do |
 |--------|----------|-------|
@@ -727,17 +727,15 @@ Here's a checklist drawn from the patterns discussed:
 | Rate limiting | Only on "dangerous" routes | All expensive endpoints |
 | Auth | Logic in controller constructor | Dedicated middleware |
 
-## Closing Thoughts
+## Closing
 
-The clearest lesson from this audit, for me, was the value of **consistency**. In the codebase I looked at, a decent pattern used consistently is easier to follow than a mix of patterns each treated as perfect.
+What stuck with me most from this audit was **consistency**. In the codebase I looked at, a decent pattern used by everyone is easier to follow than hopping between patterns that are each supposedly perfect.
 
-If you're looking at a codebase with 40 methods in one controller, three validation styles, and inconsistent response formats, start by improving one pattern. I found the same mix during this audit.
+If you're staring at a codebase with 40 methods in one controller, three validation styles, and inconsistent response formats, relax, you're not alone. I found the same mix. Just start by fixing one pattern.
 
-If you're migrating from PHP to Go, or want to start a new project with cleaner architecture, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
+If you're migrating from PHP to Go, or want to start a new project with a tidier architecture, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
 
-Thanks for reading to the end. I hope these notes help when you're auditing an API or preparing a migration.
-
-That's all. Cheers.
+Thanks for reading to the end!
 
 [^1]: This number includes public routes, authenticated routes, partner routes, and various integrations. Quite a lot to audit one by one.
 [^2]: DRY (Don't Repeat Yourself) is a simple principle that's easy to forget as a deadline approaches.

@@ -1,6 +1,6 @@
 ---
 title: "Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi"
-description: "Sebuah catatan pengambilan keputusan, kapan tech stack yang sudah ada perlu dimigrasi, kapan cukup di-refactor, dan bagaimana membaca sinyal dari sisi bisnis."
+description: "Catatan saya soal kapan tech stack lama perlu dimigrasi, kapan cukup di-refactor, dan cara membaca sinyalnya dari sisi bisnis."
 author: "Faiq Najib Al-Aziz"
 date: 2026-04-10
 lastmod: 2026-04-10
@@ -29,7 +29,7 @@ Proyek GPS _tracker_ yang saya tangani bukan proyek kecil. Angkanya kurang lebih
 - **33 _database entity_** yang saling berhubungan
 - **~194.000 baris kode** yang sudah ditulis bertahun-tahun oleh beberapa _developer_[^2]
 
-Tapi bukan angka-angka itu yang menjadi masalah. Jumlah baris kode memang terlihat banyak; yang mengganggu justru **gejala-gejala** yang muncul:
+Tapi bukan angka-angka itu yang jadi masalah. Jumlah baris kode memang kelihatan banyak, tapi yang bikin pusing justru **gejala-gejalanya**:
 
 ### 1. Fitur Baru yang Seharusnya Cepat, Jadi Lambat
 
@@ -109,7 +109,7 @@ Kalau setelah migrasi, angka-angka ini membaik, maka migrasi berhasil. Kalau tid
 
 ## Kerangka Berpikir: Bukan Soal Bahasa, Soal Momentum
 
-Dari pertanyaan-pertanyaan itu, saya merangkum **tiga kondisi yang harus dipenuhi** sebelum migrasi masuk akal.
+Dari pertanyaan-pertanyaan itu, saya merangkum **tiga kondisi** yang harus terpenuhi sebelum migrasi masuk akal.
 
 ### 1. Masalahnya Struktural, Bukan Masalah _Skill_
 
@@ -125,7 +125,7 @@ Migrasi butuh waktu, energi, dan fokus. Kalau tim sedang di _peak season_, atau 
 
 ---
 
-Kalau ketiga kondisi terpenuhi, **migrasi masuk akal**. Kalau satu saja belum terpenuhi, lebih baik _refactor_ atau menunggu sampai kondisinya mendukung.
+Kalau ketiganya terpenuhi, **migrasi masuk akal**. Kalau satu saja belum, mending _refactor_ atau tunggu sampai kondisinya pas.
 
 ## Keputusan dan Apa yang Terjadi
 
@@ -155,9 +155,9 @@ Kita sering fokus pada "berapa biaya migrasi" dan lupa bertanya "berapa biaya ka
 
 ## Penutup
 
-Keputusan migrasi _tech stack_ tetap personal, karena bergantung pada konteks, tim, _timeline_, dan faktor lainnya. Tidak ada _framework_ yang berlaku untuk semua situasi. Pertanyaan yang tepat dan data yang cukup membantu kita mengambil keputusan tanpa sekadar mengikuti _hype_.
+Keputusan migrasi _tech stack_ itu personal, tergantung konteks, tim, _timeline_, dan lain-lain. Tidak ada _framework_ yang cocok untuk semua situasi, jadi tulisan ini juga bukan resep. Yang saya bawa pulang cuma satu: tanya yang benar, kumpulkan data, dan jangan migrasi cuma karena _hype_.
 
-Semoga catatan ini berguna kalau kamu sedang menimbang migrasi. Kalau ingin mendiskusikan dilema serupa, [hubungi saya](/contact/), atau lihat [layanan](/services/) yang bisa saya bantu.
+Semoga catatan ini ada gunanya kalau kamu sedang menimbang migrasi. Kalau mau ngobrol soal dilema serupa, [hubungi saya](/contact/), atau lihat [layanan](/services/) yang bisa saya bantu.
 
 [^1]: Sistem GPS _tracker_ yang sudah berjalan sejak beberapa tahun lalu, dengan berbagai penambahan fitur dan _patch_ di sana-sini.
 

@@ -14,7 +14,7 @@ tags:
   - personal
 ---
 
-Istri saya baru saja menceritakan sesuatu. Saya sampai tidak tahu harus menertawakan siapa.
+Istri saya baru saja cerita sesuatu, dan saya bingung harus menertawakan siapa.
 
 Jadi, ibu mertua saya mengajar les bahasa Inggris. Suatu hari, ada muridnya yang sedang berlatih mengerjakan soal. Lalu percakapannya kira-kira seperti ini:
 
@@ -26,59 +26,49 @@ Jadi, ibu mertua saya mengajar les bahasa Inggris. Suatu hari, ada muridnya yang
 >
 > Murid B: "Iyo! Kertas buffalo. Kan berarti kertas."
 
-Setelah mendengarnya, saya sempat diam. Bukan karena bingung. Saya justru sadar: _logikanya masuk akal_. Itu yang bikin saya makin bingung.
+Saya sempat diam setelah mendengarnya. Bukan karena tidak paham, tapi karena logikanya memang masuk akal. Nah, itu yang bikin saya tambah bingung.
 
-## Otak Itu _Cache_-nya Terlalu Kuat
+## _Cache_ di Otak Anak Itu Kuat Banget
 
-Kalau kamu pernah belajar bahasa asing, mungkin kamu tahu rasanya: otak tidak menyimpan kata seperti kamus. Kata-kata tersimpan seperti _folder_ yang isinya berdesakan.
+Kalau pernah belajar bahasa asing, mungkin kamu pernah mengalami ini juga. Otak kita tidak menyimpan kata serapi kamus. Rasanya lebih seperti _folder_ yang isinya sudah berdesakan.
 
-Kata _"buffalo"_ masuk ke telinga si anak. Otak langsung melakukan pencarian. Dan yang pertama muncul di hasil pencarian bukan gambar hewan berbulu besar yang hidup di padang rumput Amerika Utara, tapi... **kertas buffalo**. Itu yang paling sering dia temui. Itu yang paling dekat. Itu yang paling _relevan_ menurut otaknya.
+Begitu mendengar kata _"buffalo"_, otaknya langsung mencari asosiasi. Yang muncul duluan bukan hewan besar berbulu di padang rumput Amerika Utara, tapi... **kertas buffalo**. Wajar juga, itu yang paling sering dia temui. Buat dia, ya itu yang paling _relevan_ hehe.
 
 Para linguis dan peneliti bahasa menyebut fenomena ini _**association-based translation**_, atau **terjemahan berbasis asosiasi**.[^1]
 
-Intinya sederhana: manusia menerjemahkan kata bukan dari kamus, tapi dari memori yang paling kuat terasosiasi dengan kata tersebut. Dan memori itu tidak selalu benar. Tapi selalu _merasa_ benar.
+Sederhananya, manusia sering menerjemahkan kata lewat ingatan yang paling kuat menempel, bukan lewat kamus. Ingatan itu belum tentu tepat, tapi rasanya bisa meyakinkan sekali.
 
-## Ini Bukan Cuma Soal Anak-Anak
+## Orang Dewasa Juga Bisa Begini
 
-Sebelum ikut tersenyum dan bilang, _"ya wajar, itu kan anak kecil"_, tahan dulu.
+Sebelum senyum-senyum lalu bilang, _"ya wajar, anak kecil"_, tahan dulu. Saya juga pernah salah paham soal kata, dan mungkin kamu juga pernah.
 
-Saya mau berbagi beberapa contoh yang sedikit lebih dekat dengan keseharian kita.
+Misalnya _"deadline"_. Kalau belum pernah mendengar kata itu di konteks kerja, _dead_ berarti mati dan _line_ berarti garis. Jadi, garis kematian? Kalau ditebak dari potongan katanya, ya ada logikanya. Artinya dalam pekerjaan tentu bukan itu.
 
-**Contoh pertama.** Pernah ada yang mengira _"deadline"_ artinya "sudah mati"? Bagi orang yang belum pernah bekerja di lingkungan yang memakai istilah itu, tafsirnya masuk akal. _Dead_ artinya mati. _Line_ artinya garis. Jadi _deadline_: garis kematian? Secara asosiasi, masuk akal. Dalam konteks kerja, tentu bukan itu artinya.
+Ada juga yang mengira _"overtime"_ berarti waktu ekstra untuk istirahat. _Over_ itu lebih, _time_ itu waktu. Ya, waktu lebih untuk kerja, sayangnya haha.
 
-**Contoh kedua.** Beberapa orang yang baru masuk dunia kerja mengartikan _"overtime"_ sebagai "waktu ekstra untuk istirahat". _Over_ = lebih. _Time_ = waktu. Jadi waktu lebih? _Ya, waktu lebih untuk kerja_. Tapi yang terbayang bisa saja sebaliknya haha.
+Nah, yang ini pengalaman saya sendiri. Dulu saya mengira _"hardware"_ itu nama merek alat tulis karena dekat rumah ada toko bernama _"Toko Hardware"_. Yang dijual memang peralatan keras. Sampai SMA saya masih agak rancu. Silakan tertawa, saya juga sekarang ikut ketawa.[^2]
 
-**Contoh ketiga, dan ini yang paling ironis.** Saya sendiri. Dulu pernah mengira _"hardware"_ adalah nama merek alat tulis. Karena di dekat rumah ada toko yang namanya _"Toko Hardware"_. Dan yang dijual memang peralatan keras. Sampai SMA pun saya masih agak rancu. _Silakan tertawa._[^2]
+## Kok Bisa Otak Begitu?
 
-## Kenapa Otak Kita Melakukan Ini
+Ini bukan bug evolusi, sepertinya memang begini cara otak menghemat tenaga.
 
-Ini bukan kesalahan evolusi. Ini justru fitur.
+Otak lebih suka jalur cepat daripada harus memeriksa setiap kemungkinan. Saat mendengar kata, ia seperti bertanya ke _cache_-nya: _"pernah ketemu di mana, ya? Konteksnya apa?"_ Asosiasi yang paling cepat muncul sering langsung dipakai.[^3]
 
-Otak manusia lebih mengutamakan efisiensi daripada akurasi. Saat mendengar atau membaca sebuah kata, otak tidak membuka kamus internal untuk mencari satu definisi resmi. Otak bertanya kepada _cache_-nya sendiri: _"kata ini pernah ketemu di mana? Di konteks apa? Dengan siapa?"_ Jawaban yang paling cepat muncul itulah yang dipakai.[^3]
+Anak yang menjawab _"kertas"_ itu bukan bodoh. Pengalaman bahasanya saja belum banyak, dan sejauh ini _"buffalo"_ paling sering ia temui dalam konteks kertas. Asosiasinya ya kertas buffalo.
 
-Anak yang menjawab _"kertas"_ itu tidak bodoh. Otaknya bekerja seperti biasa, hanya saja pengalaman bahasanya belum beragam. Dia belum cukup sering menjumpai kata _"buffalo"_ di luar konteks kertas. Asosiasi yang ia punya hanya kertas buffalo.
+Kalau dipikir-pikir, berapa banyak orang dewasa yang melakukan hal serupa tanpa sadar? Saya sendiri bisa jadi salah satunya.
 
-Dan kalau dipikir lebih jauh lagi: **berapa banyak orang dewasa yang juga begitu, tapi tidak menyadarinya?**
+Bisa jadi ada asumsi yang kita pegang karena itulah asosiasi pertama yang pernah masuk ke kepala. Belum tentu kebenaran, mungkin cuma _cache_ lama yang belum sempat di-_update_.
 
-Banyak asumsi yang kita pegang erat ternyata hanya asosiasi pertama yang pernah masuk ke kepala. Bukan kebenaran. Hanya _cache_ lama yang belum pernah di-_update_.
+## Soal Jawaban "Kertas" Tadi
 
-## Yang Bisa Dipelajari dari Jawaban "Kertas"
+Jawaban tadi bikin saya kepikiran soal konteks. Satu kata bisa punya beberapa arti, jadi kalimat di sekitarnya membantu kita menebak mana yang dimaksud. Asosiasi pertama juga belum tentu benar, meski rasanya familiar. Itu bisa terjadi waktu belajar bahasa, bahkan saat mengambil keputusan. _Tapi ini sudah mulai berat untuk cerita yang awalnya cuma soal buffalo._
 
-Jawaban si anak tadi mengingatkan saya pada beberapa hal.
-
-Pertama: **konteks menentukan arti**. Satu kata bisa punya beberapa arti; kalimat di sekitarnya membantu kita tahu arti mana yang dimaksud.
-
-Kedua: **asosiasi pertama belum tentu yang tepat**. Otak sering memberi jawaban yang _familiar_, bukan yang _benar_. Ini bisa terjadi saat memahami bahasa maupun saat mengambil keputusan. _Tapi itu bahasan yang terlalu berat untuk postingan yang dimulai dari cerita buffalo._
-
-Ketiga: **saat mengajar, jangan buru-buru menyalahkan anak**. Respons _"seng nggenah tah!"_ di cerita tadi bisa dimengerti, tetapi asosiasi si penjawab memang masuk akal dalam dunianya. Kita bisa meluruskan sambil menghargai logikanya: _"Iya ada kertas buffalo, tapi kalau ditanya arti bahasa Inggrisnya, buffalo itu hewannya. Kerbau."_ Dengan begitu, anak tidak dibuat merasa bodoh.
+Dan kalau sedang mengajar, mungkin kita tidak perlu buru-buru menganggap anaknya tidak paham. Respons _"seng nggenah tah!"_ tadi bisa dimengerti, tapi logika si anak juga masuk akal dari pengalamannya. Tinggal diluruskan: _"Iya, ada kertas buffalo. Kalau arti bahasa Inggrisnya, buffalo itu kerbau."_ Begitu saja, tidak perlu bikin anak merasa bodoh.
 
 ---
 
-Istri saya waktu cerita itu sambil menahan tawa. Saya ikut tertawa juga.
-
-Setelah ikut tertawa, saya malah bertanya-tanya: _berapa banyak hal lain yang saya "terjemahkan" berdasarkan asosiasi pertama, lalu tidak pernah saya pertanyakan lagi?_
-
-Mungkin banyak. Saya sendiri belum tahu berapa.
+Istri saya cerita sambil menahan tawa, saya ikut ketawa juga. Tapi habis itu saya malah mikir: berapa banyak hal yang saya "terjemahkan" dari asosiasi pertama, lalu tidak pernah saya pertanyakan lagi? Banyak kayaknya. Saya belum tahu berapa. Hehe.
 
 [^1]: Istilah yang lebih sering muncul di literatur adalah _lexical association_ atau _associative meaning_. Tapi "terjemahan berbasis asosiasi" terasa lebih pas untuk menggambarkan apa yang terjadi saat seseorang menerjemahkan kata berdasarkan ingatan konteks, bukan makna dasar.
 

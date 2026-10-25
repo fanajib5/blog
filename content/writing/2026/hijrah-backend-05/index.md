@@ -1,6 +1,6 @@
 ---
 title: "Hijrah Backend (5): Query yang Bilang 'Pakai _Index_-ku'"
-description: "Ep 5 seri Hijrah Backend: ketika index yang sempurna diam-diam didiamkan oleh satu pembungkus DATE(), pelajaran sargable di tabel puluhan juta baris, tersangka COLLATE yang tidak bersalah, dan utang yang saya akui."
+description: "Cerita episode 5 Hijrah Backend: satu DATE() membuat index tak terpakai, tersangka COLLATE ternyata tidak bersalah, dan ada utang yang belum sempat saya bereskan."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-10T15:30:05+07:00
 lastmod: 2026-09-10T23:45:00+07:00
@@ -15,19 +15,19 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Di [episode kedua](/writing/2026/hijrah-backend-02/), _query_-nya tidak bersalah: 78 milidetik di CLI, sementara _endpoint_-nya makan 15 detik. Episode ini kebalikannya. Kali ini _query_-nya memang bersalah, bukan karena rumit atau jelek, tetapi karena satu pembungkus fungsi kecil membuatnya **mendiamkan _index_ yang disiapkan khusus untuknya**.
+Di [episode kedua](/writing/2026/hijrah-backend-02/), _query_-nya tidak bersalah. Di CLI cuma 78 milidetik, sementara _endpoint_-nya makan 15 detik. Kali ini kebalikannya: _query_-nya memang bersalah. Bukan karena rumit, tapi karena satu pembungkus fungsi membuatnya **mengabaikan _index_ yang sudah disiapkan**.
 
-## _Index_ yang Dirancang Sempurna (Dikali Tiga)
+## _Index_-nya Ada, Malah Tiga
 
 Korbannya: _endpoint_ hitungan _alert_ per _device_. Satu tabel _alert_ berisi puluhan juta baris,[^2] dan di atasnya ada _index_ komposit: (tanggal, _device_, tipe _alert_). Kalau kamu membaca kebutuhan _endpoint_-nya, "ambil jumlah _alert_ per _device_ per tipe, dalam rentang tanggal", _index_ itu persis seperti dibuat untuk _query_ ini. Seseorang di masa lalu memahami masalahnya dengan benar.
 
-Dan ini bagian favorit saya, yang baru saya sadari saat menulis episode ini: di skema _database_, _index_ yang sama itu... ada **tiga salinan**. Nama berbeda, isi identik. Sepertinya tiga orang di tiga masa berbeda saling menambahkan tanpa membuka skema dulu hahaha. Jadi _index_ yang dibutuhkan itu bukan cuma ada, dia ada berlebih.
+Bagian favorit saya baru ketahuan saat menulis episode ini: di skema _database_, _index_ yang sama ternyata punya **tiga salinan**. Namanya beda, isinya sama. Sepertinya ada tiga orang dari tiga masa berbeda yang menambahkannya tanpa mengecek skema dulu hahaha. Jadi _index_-nya bukan cuma tersedia, malah kebanyakan.
 
 Namun _query_-nya tetap tidak memakainya. _Full table scan_ di puluhan juta baris membuat _endpoint_ merayap sampai ±10 detik. _Index_ yang tepat sudah tersedia, tetapi _query_ ini tidak bisa menggunakannya.
 
-## Buku Telepon yang Dilitari
+## Buku Telepon yang Harus Dibaca dari Awal
 
-Istilah teknisnya _non-sargable_, _query_ yang membuat _index_ tidak bisa dipakai. Cara paling gampang membayangkannya: _index_ itu buku telepon yang tersusun alfabetis.
+Istilah teknisnya _non-sargable_, alias _query_ yang membuat _index_ tidak bisa dipakai. Bayangkan _index_ sebagai buku telepon yang disusun alfabetis.
 
 Tanya buku telepon: _"cari semua nama yang dimulai huruf B"_, dia langsung buka halaman B, selesai sepersekian detik. Sekarang tanya: _"cari semua nama yang kalau huruf-hurufnya diacak ulang, dimulai huruf B"_, bukunya cuma bisa baca dari halaman satu sampai tamat, karena urutan alfabetisnya tidak lagi membantu.
 
@@ -45,34 +45,31 @@ WHERE DATE(a.dt) >= DATE(?) AND DATE(a.dt) <= DATE(?)
 WHERE a.dt >= ? AND a.dt <= ?
 ```
 
-Konsekuensinya: parameter yang dikirim harus lengkap dengan jamnya. Di kode saya, batas waktunya memang sudah disiapkan lengkap dari _usecase_, mulai `00:00:00`, berakhir `23:59:59`, jadi hasilnya tetap identik: semua baris tanggal yang sama, tanpa kehilangan satu detik pun di tengah.
+Konsekuensinya, parameter harus dikirim lengkap dengan jamnya. Di kode saya, batas waktunya memang sudah disiapkan di _usecase_, dari `00:00:00` sampai `23:59:59`. Hasilnya tetap sama, semua baris di tanggal yang dimaksud ikut terambil.
 
 Hasil akhirnya: dari ±10 detik _full scan_ menjadi pencarian _index_ yang sekejap mata. _Deploy_, dan _endpoint_ itu pulih tanpa satu baris _business logic_ disentuh.
 
-## Tersangka yang Tidak Bersalah
+## COLLATE Ternyata Bukan Pelakunya
 
 Supaya adil, cerita episode ini punya subplot. Di penyelidikan yang sama, ada satu _join_ yang tampak sangat mencurigakan: perbandingan antar tabel dengan penanda _collate_ eksplisit di tengahnya. Wajahnya persis tersangka klasik _query_ lambat: "beda _collation_ bikin _join_ tidak memakai _index_".
 
 Setelah dicek, kedua sisi yang di-_join_ memakai _collation_ yang sama. Penandanya redundan, bukan penyebab masalah. Tersangka dibebaskan.
 
-Dua episode beruntun ini mengajarkan pelajaran yang sama dari arah berlawanan: di [episode dua](/writing/2026/hijrah-backend-02/), _EXPLAIN_ menggugurkan tuduhan terhadap CTE; di episode ini, pemeriksaan membuktikan pembungkus `DATE()` memang penyebabnya. _Intuisi_ boleh menunjuk tersangka, tetapi pengukuran yang menjatuhkan vonis.
+Dua episode ini arahnya berlawanan. Di [episode dua](/writing/2026/hijrah-backend-02/), _EXPLAIN_ menunjukkan CTE bukan masalahnya. Kali ini, pemeriksaan membuktikan `DATE()` memang pelakunya. Intuisi boleh menunjuk tersangka, tapi tetap perlu diperiksa dulu.
 
-## Utang yang Diakui
+## Ada Tiga Lagi yang Belum Saya Bereskan
 
-Satu bagian yang menurut saya penting untuk ditulis jujur: setelah memperbaiki satu kasus `DATE()`, pola yang sama saya cari di seisi _codebase_, dan menemukan tiga _join_ lain dengan bentuk identik di modul bahan bakar. `DATE()` dipanggil pada kolom di sisi kiri dan kanan _join_.
+Setelah memperbaiki satu kasus `DATE()`, saya mencari pola yang sama di _codebase_. Ketemu tiga _join_ lain dengan bentuk identik di modul bahan bakar. `DATE()` dipanggil pada kolom di sisi kiri dan kanan _join_.
 
 Statusnya saat episode ini ditulis: **belum saya perbaiki**. _Endpoint_-nya belum pernah dilaporkan lambat, jadi belum mendapat jatah waktu perbaikan. Polanya sudah masuk daftar; kalau nanti dikerjakan, `EXPLAIN` akan ikut memeriksanya.
 
-Migrasi dengan paritas memang meninggalkan utang-utang kecil seperti ini. Yang penting bukan nol utang; yang penting utangnya tercatat dan tidak main sembunyi-sembunyian.
+Migrasi dengan paritas memang meninggalkan utang kecil seperti ini. Buat saya, yang penting utangnya tercatat. Jangan sampai pura-pura lupa, hahaha.
 
-## Pelajaran
+## Catatan Buat Saya
 
-1. **Jangan panggil fungsi pada kolom di `WHERE`/`JOIN`.** Taruh fungsinya di sisi parameter, biar kolom tetap dalam bentuk yang dikenali _index_-nya.
-2. **_Index_ terbaik pun bisa sia-sia oleh satu pembungkus kecil.** Desain _index_ dan desain _query_ adalah satu paket; salah satunya saja yang melenceng, keduanya gagal.
-3. **Setelah menemukan satu bug pola, cari saudara-saudaranya.** Bug yang lahir dari satu kebiasaan menulis biasanya tidak lahir sendirian.
-4. **Utang teknis yang dicatat itu wajar; yang disembunyikan itu berbahaya.** Saya mengakuinya di tulisan publik supaya tidak terlupakan.
+Kalau saya tarik benang merahnya, satu fungsi kecil di sisi kolom bisa bikin _index_ yang sudah ada jadi tidak berguna. Jadi setelah menemukan satu pola, saya cari juga saudara-saudaranya. Kali ini ketemu tiga, dan saya catat dulu sebagai utang. Bukan berarti dibiarkan selamanya, ya. Semoga saya ingat pas ada waktu mengerjakannya hehe.
 
-Episode berikutnya kita beralih dari satu _query_ ke bentuk kotanya: bagaimana _monolith_ puluhan ribu baris dirombak menjadi 14 modul _domain_, sambil pesawatnya tetap terbang.
+Di episode berikutnya saya pindah dari satu _query_ ke bentuk kotanya: bagaimana _monolith_ puluhan ribu baris dirombak jadi 14 modul _domain_, sementara pesawatnya tetap terbang.
 
 Sekian. Salam.
 

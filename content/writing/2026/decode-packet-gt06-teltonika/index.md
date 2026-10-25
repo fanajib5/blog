@@ -1,6 +1,6 @@
 ---
 title: "Decode Packet: GT06 & Teltonika Protocol"
-description: "Mengurai packet binary GPS tracker di Go: CRC-ITU GT06 yang ternyata bukan CCITT biasa, decode IMEI BCD, ekstraksi koordinat, sampai struktur AVL Teltonika — semua diverifikasi terhadap datasheet."
+description: "Mengurai packet binary GPS tracker di Go: CRC-ITU GT06 yang ternyata bukan CCITT biasa, IMEI BCD, koordinat, sampai AVL Teltonika. Semuanya dicocokkan dengan datasheet."
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-14
 lastmod: 2026-10-14
@@ -19,17 +19,17 @@ series: "gps-backend-series"
 series_part: 3
 ---
 
-Di [Part 2](/writing/2026/tcp-listener-gps-go/) kita sudah punya listener yang merapikan _stream_ TCP menjadi frame utuh. Sekarang kita baca isinya. Byte `0x78 0x78 0x0D 0x01 ...` perlu diterjemahkan menjadi informasi seperti `IMEI 123456789012345, posisi -7.2575, 112.7521, arah 180°`.
+Di [Part 2](/writing/2026/tcp-listener-gps-go/) kita sudah punya listener yang merapikan _stream_ TCP menjadi frame utuh. Nah, sekarang saatnya baca isinya. Byte `0x78 0x78 0x0D 0x01 ...` perlu diterjemahkan jadi informasi seperti `IMEI 123456789012345, posisi -7.2575, 112.7521, arah 180°`.
 
-Saat menulis artikel ini, saya sempat yakin contoh packet login dari datasheet GT06 adalah `... 6C 00 01 8C ...` dan implementasi CRC-nya cukup memakai CRC-CCITT standar. **Dua-duanya salah.** Saya baru tahu setelah kode saya sendiri menolak contoh datasheet. Pengalaman itu mengingatkan saya bahwa saat menangani protokol binary, lebih baik menguji dengan vektor daripada mengandalkan ingatan.
+Waktu menulis artikel ini, saya sempat yakin contoh packet login dari datasheet GT06 adalah `... 6C 00 01 8C ...` dan CRC-nya cukup pakai CRC-CCITT standar. **Dua-duanya salah**, hahaha. Saya baru sadar setelah kode saya sendiri menolak contoh dari datasheet. Pelajarannya: untuk protokol binary, lebih baik uji pakai vektor daripada percaya ingatan sendiri.
 
-Kita akan membedah GT06, lalu melihat struktur Teltonika dan perbedaan desainnya. Semua kode di bawah sudah diuji terhadap contoh resmi datasheet Concox GT06 v1.8.1 dan struktur decoder [Traccar](https://www.traccar.org/)[^traccar] yang dipakai di production bertahun-tahun.
+Kita bedah GT06 dulu, lalu lihat Teltonika dan bedanya di mana. Semua kode di bawah sudah diuji terhadap contoh resmi datasheet Concox GT06 v1.8.1 dan struktur decoder [Traccar](https://www.traccar.org/)[^traccar] yang sudah dipakai di production bertahun-tahun.
 
 ## Jebakan #1: "CRC-ITU" GT06 Bukan CRC-CCITT yang Kamu Kirim
 
-Datasheet GT06 cuma bilang: field CRC berisi _CRC-ITU value_. Referensi paling umum tentang CRC-ITU adalah CRC-16/CCITT dengan polynomial 0x1021. Di sinilah jebakannya: ada belasan varian CRC dengan polynomial yang sama, dibedakan oleh nilai awal (_init_), arah pemrosesan (_reflected_), dan XOR akhir.
+Datasheet GT06 cuma bilang: field CRC berisi _CRC-ITU value_. Referensi paling umum soal CRC-ITU adalah CRC-16/CCITT dengan polynomial 0x1021. Nah, di sinilah jebakannya: ada belasan varian CRC dengan polynomial yang sama, dan bedanya ada di nilai awal (_init_), arah pemrosesan (_reflected_), dan XOR akhir.
 
-Saya brute-force semua varian 0x1021 yang umum terhadap contoh resmi datasheet. Packet login `78 78 0D 01 01 23 45 67 89 01 23 45 00 01 8C DD 0D 0A` memiliki CRC `0x8CDD`:
+Saya brute-force semua varian 0x1021 yang umum terhadap contoh resmi datasheet. Packet login `78 78 0D 01 01 23 45 67 89 01 23 45 00 01 8C DD 0D 0A` punya CRC `0x8CDD`:
 
 | Varian (poly 0x1021) | Init   | Reflected | XOR out    | Hasil           |
 | -------------------- | ------ | --------- | ---------- | --------------- |
@@ -37,7 +37,7 @@ Saya brute-force semua varian 0x1021 yang umum terhadap contoh resmi datasheet. 
 | XMODEM               | 0x0000 | tidak     | 0x0000     | `0x55F9` ❌     |
 | X25                  | 0xFFFF | **ya**    | **0xFFFF** | **`0x8CDD` ✅** |
 
-Jawabannya: **varian X25**, diproses _reflected_ dan di-XOR `0xFFFF` di akhir. CRC dihitung bukan dari protocol number, melainkan **dari byte _length_ sampai _serial number_ (inklusif)**, sesuai redaksi datasheet WD-209: _"from packet length to information serial number (including)"_.
+Jawabannya: **varian X25**, diproses _reflected_ dan di-XOR `0xFFFF` di akhir. CRC dihitung bukan dari protocol number, tapi **dari byte _length_ sampai _serial number_ (inklusif)**, sesuai redaksi datasheet WD-209: _"from packet length to information serial number (including)"_.
 
 Implementasinya di Go:
 
@@ -61,7 +61,7 @@ func crcITU(data []byte) uint16 {
 }
 ```
 
-Di sisi produksi, Traccar, server GPS open source yang paling banyak dipakai di dunia, **tidak memvalidasi CRC masukan untuk GT06**. Pasar dipenuhi klon/OEM GT06 dengan perhitungan CRC yang sedikit berbeda. Di artikel ini, kita tetap memvalidasi CRC dan membuang paket yang cacat sesuai anjuran datasheet. Perbedaan implementasi CRC pada perangkat klon bisa membuat sebagian paket ditolak.
+Di sisi produksi, Traccar (server GPS open source yang paling banyak dipakai) ternyata **tidak memvalidasi CRC masukan untuk GT06**. Pasarnya penuh klon/OEM GT06 dengan perhitungan CRC yang sedikit beda. Di artikel ini kita tetap memvalidasi CRC dan membuang paket cacat sesuai anjuran datasheet. Konsekuensinya, perangkat klon yang CRC-nya nyeleneh bisa saja ikut ditolak.
 
 ## Parser Frame dengan Validasi CRC
 
@@ -79,7 +79,7 @@ func parseGT06(frame []byte) (*GT06Frame, error) {
         return nil, fmt.Errorf("bukan frame GT06")
     }
     length := int(frame[2])
-    body := frame[2 : 3+length] // length..crc — scope CRC!
+    body := frame[2 : 3+length] // length..crc, scope CRC!
 
     got := binary.BigEndian.Uint16(body[len(body)-2:])
     want := crcITU(body[:len(body)-2])
@@ -95,11 +95,11 @@ func parseGT06(frame []byte) (*GT06Frame, error) {
 }
 ```
 
-Uji pertama yang wajib lolos: contoh login datasheet tadi harus lolos validasi, dan CRC yang kita hitung ulang harus sama persis dengan `0x8CDD`.
+Tes pertama yang wajib lolos: contoh login datasheet tadi harus lolos validasi, dan CRC hasil hitung ulang harus sama persis dengan `0x8CDD`.
 
 ## Login: IMEI BCD dan ACK yang Wajib Dibalas
 
-Packet login (protocol `0x01`) berisi **IMEI dalam format BCD**. Delapan byte menyimpan 16 digit desimal, padahal IMEI hanya 15 digit. Digit pertama adalah padding `0` dan harus dibuang:
+Packet login (protocol `0x01`) berisi **IMEI dalam format BCD**. Delapan byte menyimpan 16 digit desimal, padahal IMEI cuma 15 digit. Digit pertama adalah padding `0` dan harus dibuang:
 
 ```go
 // IMEI: 8 byte BCD → 16 digit hex → buang digit pertama → 15 digit
@@ -110,7 +110,7 @@ func decodeIMEI(data []byte) string {
 
 Contoh datasheet: `01 23 45 67 89 01 23 45` → `"0123456789012345"` → IMEI `123456789012345`.
 
-Setelah IMEI dikenali, wajib membalas. Ingat Part 1: device yang tidak di-ACK akan mengirim ulang terus sampai ngambek. Format balasan login: `78 78 05 <protocol> <serial> <crc> 0D 0A`:
+Setelah IMEI dikenali, wajib dibalas. Ingat Part 1: device yang tidak di-ACK akan kirim ulang terus sampai ngambek. Format balasan login: `78 78 05 <protocol> <serial> <crc> 0D 0A`:
 
 ```go
 // buildAck: 78 78 05 <protocol> <serial> <crc> 0D 0A
@@ -125,7 +125,7 @@ func buildAck(f *GT06Frame) []byte {
 }
 ```
 
-Vektor ujinya: untuk serial `0001`, balasan yang benar adalah `78 78 05 01 00 01 D9 DC 0D 0A`. Implementasi di atas menghasilkan nilai yang sama. (Perhatikan `D9 DC` lahir dari CRC X25 dengan scope `05 01 00 01`, termasuk byte length.)
+Vektor ujinya: untuk serial `0001`, balasan yang benar adalah `78 78 05 01 00 01 D9 DC 0D 0A`, dan implementasi di atas menghasilkan nilai yang sama. (`D9 DC` itu lahir dari CRC X25 dengan scope `05 01 00 01`, jadi byte length ikut dihitung.)
 
 ## Location: Dari Byte Menjadi Koordinat
 
@@ -140,12 +140,12 @@ Packet posisi yang paling umum adalah protocol `0x12`. Isi bagian GPS-nya:
 | +15    | 1      | Speed          | km/jam                               |
 | +16    | 2      | Course + flags | lihat bawah                          |
 
-Ada dua detail yang perlu diperhatikan:
+Ada dua hal yang gampang kelewat:
 
 1. **Koordinatnya bukan derajat.** Nilainya harus dibagi `60 × 30000 = 1.800.000`. Contoh: Surabaya di -7.2575° tersimpan sebagai `7.2575 × 60 × 30000 = 13.063.500` → `00 C7 55 4C`.
-2. **Tanda (selatan/barat) tidak tersimpan di angkanya:** semua nilai positif. Tanda ada di bit _flags_ byte course.
+2. **Tanda (selatan/barat) tidak tersimpan di angkanya:** semua nilai positif. Tandanya ada di bit _flags_ byte course.
 
-Layout _flags_ (2 byte): bit 0–9 = arah (0–359°), bit 10 = arah lintang (**1 = utara/positif, 0 = selatan**), bit 11 = arah bujur (**1 = barat/negatif**), bit 12 = fix GPS valid. (Nomor bit ini mengikuti perilaku decoder Traccar yang teruji production; redaksi datasheet berbeda-beda antar versi. Tetap uji dengan device asli.)
+Layout _flags_ (2 byte): bit 0 sampai 9 = arah (0 sampai 359°), bit 10 = arah lintang (**1 = utara/positif, 0 = selatan**), bit 11 = arah bujur (**1 = barat/negatif**), bit 12 = fix GPS valid. (Nomor bit ini saya ikuti dari perilaku decoder Traccar yang teruji production, karena redaksi datasheet beda-beda antar versi. Tetap uji dengan device asli ya.)
 
 ```go
 func decodeLocation(data []byte, tz *time.Location) Location {
@@ -174,13 +174,13 @@ func decodeLocation(data []byte, tz *time.Location) Location {
 func bcd(b byte) int { return int(b>>4)*10 + int(b&0x0F) }
 ```
 
-Menguji decode tanpa device asli: saya bangun packet 0x12 di kode uji (Surabaya, 12 satelit, 42 km/jam, arah 180°, fix valid), lalu decode kembali. Hasilnya `-7.2575, 112.7521, arah 180, fix valid`. Frame lengkapnya `78 78 17 12 26 09 12 14 30 00 0C 00 C7 55 4C 0C 18 D4 34 2A 10 B4 00 01 00 A2 0D 0A` bisa kamu replay lewat `/dev/tcp` seperti di Part 2.
+Cara mengujinya tanpa device asli: saya bangun packet 0x12 di kode uji (Surabaya, 12 satelit, 42 km/jam, arah 180°, fix valid), lalu decode lagi. Hasilnya `-7.2575, 112.7521, arah 180, fix valid`. Frame lengkapnya `78 78 17 12 26 09 12 14 30 00 0C 00 C7 55 4C 0C 18 D4 34 2A 10 B4 00 01 00 A2 0D 0A` bisa kamu replay lewat `/dev/tcp` seperti di Part 2.
 
-> Catatan: setelah blok GPS, packet `0x12` asli masih berisi data seluler (LBS) untuk fallback posisi saat GPS mati, plus terminal info. Bagian itu menyusul saat kita butuh — untuk membangun _core tracking_, blok GPS sudah cukup.
+> Catatan: setelah blok GPS, packet `0x12` asli masih berisi data seluler (LBS) untuk fallback posisi saat GPS mati, plus terminal info. Bagian itu menyusul nanti kalau sudah dibutuhkan. Untuk membangun _core tracking_, blok GPS sudah cukup.
 
 ## Teltonika: Desain Paket yang Berbeda
 
-Teltonika menangani kebutuhan yang sama dengan format paket dan alur yang berbeda dari GT06. Perbedaannya terlihat pada handshake, pengiriman data, koordinat, dan ACK:
+Teltonika mengurus kebutuhan yang sama dengan format paket dan alur yang lain dari GT06. Bedanya terasa di handshake, pengiriman data, koordinat, dan ACK:
 
 **1. Handshake dulu, data kemudian.** Koneksi baru diawali packet identifikasi: 2 byte panjang (`00 0F`) + IMEI 15 digit ASCII + `\r\n`. Server membalas satu byte: `01` (IMEI dikenal) atau `00` (tolak):
 
@@ -200,11 +200,11 @@ func decodeIMEITeltonika(b []byte) (string, bool) {
 }
 ```
 
-**2. Batch, bukan kirim-kirim.** Satu packet AVL berisi banyak record sekaligus. Struktur codec 8:
+**2. Batch, bukan kirim satu-satu.** Satu packet AVL berisi banyak record sekaligus. Struktur codec 8:
 
 ```text
 00 00 00 00        preamble (4 byte nol)
-00 00 00 39        data length (4 byte — codec sampai num2)
+00 00 00 39        data length (4 byte, codec sampai num2)
 08                 codec ID (0x08 = codec8)
 01                 jumlah record
 ... record AVL ...   (timestamp 8B, prioritas 1B, GPS element, IO element)
@@ -233,7 +233,7 @@ func crc16IBM(data []byte) uint16 {
 }
 ```
 
-Untuk mengonfirmasi penerimaan, server membalas **jumlah record yang diterima** sebagai integer 4 byte. Jika menerima 1 record, server mengirim `00 00 00 01`. Device akan mengirim ulang jika jumlahnya tidak cocok, tanpa memerlukan serial number per paket.
+Untuk konfirmasi penerimaan, server membalas **jumlah record yang diterima** sebagai integer 4 byte. Kalau menerima 1 record, kirim `00 00 00 01`. Device akan mengirim ulang kalau jumlahnya tidak cocok, jadi tidak perlu serial number per paket.
 
 ## Hasil Uji
 
@@ -248,25 +248,25 @@ Semua kode di artikel ini lolos 13 asersi[^uji]:
 | Handshake Teltonika `356307042441013`                            | ✓     |
 | AVL codec8: CRC valid, koordinat & speed benar                   | ✓     |
 
-## Hal yang Perlu Diuji
+## Catatan Buat yang Mau Menguji
 
-- **Cocokkan varian dan cakupan CRC dengan vektor datasheet.** Untuk GT06, keduanya menentukan apakah validasi berhasil.
-- **Uji IMEI dan ACK dari contoh login.** Pastikan hasil BCD dan byte balasan sesuai dengan serial packet.
-- **Uji konversi koordinat dengan round-trip.** GT06 memakai menit×30000, sedangkan Teltonika memakai derajat×10⁷.
-- **Perhatikan perilaku perangkat saat memvalidasi CRC.** Traccar tidak memvalidasi CRC masukan GT06/Teltonika karena variasi firmware klon; tentukan apakah paket yang tidak cocok akan ditolak atau dicatat.
+- **Cocokkan varian dan cakupan CRC dengan vektor datasheet.** Di GT06, dua-duanya menentukan validasi lolos atau tidak.
+- **Uji IMEI dan ACK dari contoh login.** Pastikan hasil BCD dan byte balasan sesuai serial packet.
+- **Uji konversi koordinat dengan round-trip.** GT06 pakai menit×30000, Teltonika pakai derajat×10⁷.
+- **Putuskan sikap soal validasi CRC.** Traccar tidak memvalidasi CRC masukan GT06/Teltonika karena firmware klon beragam. Tentukan sendiri apakah paket yang tidak cocok ditolak atau cuma dicatat.
 
-Langkah berikutnya adalah menyimpan posisi yang sudah didekode. Jika 500 device mengirim posisi tiap 10 detik, jumlahnya mencapai 4,3 juta titik per hari. Tabel PostgreSQL biasa akan kewalahan menangani volume itu tanpa optimasi; Part 4 membahas TimescaleDB untuk kebutuhan tersebut.
+Berikutnya adalah menyimpan posisi yang sudah didekode. Kalau 500 device mengirim posisi tiap 10 detik, jumlahnya 4,3 juta titik per hari. Tabel PostgreSQL biasa bakal kewalahan tanpa optimasi, jadi Part 4 membahas TimescaleDB.
 
 ## What's Next
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
-- Sebelumnya: [Part 2 — Membangun TCP Listener untuk GPS Device di Go](/writing/2026/tcp-listener-gps-go/)
-- Selanjutnya: [Part 4 — Menyimpan Data GPS dengan PostgreSQL + TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/)
+- Sebelumnya: [Part 2: Membangun TCP Listener untuk GPS Device di Go](/writing/2026/tcp-listener-gps-go/)
+- Selanjutnya: [Part 4: Menyimpan Data GPS dengan PostgreSQL + TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/)
 
 ## CTA
 
-Jika Anda menemukan hasil berbeda saat menguji packet GT06 atau Teltonika, diskusikan melalui [Contact](/contact/). Ikuti artikel berikutnya dengan subscribe [RSS](/writing/index.xml).
+Kalau hasil ujimu berbeda saat mencoba packet GT06 atau Teltonika, ngobrol saja lewat [Contact](/contact/). Mau ikut artikel berikutnya? Subscribe [RSS](/writing/index.xml).
 
 [^traccar]: Source code decoder Traccar untuk [GT06](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java) dan [Teltonika](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java) adalah referensi perilaku yang teruji production. Saya pakai untuk memverifikasi layout field dan satuan koordinat.
 

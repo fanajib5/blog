@@ -1,6 +1,6 @@
 ---
 title: "Membangun TCP Listener untuk GPS Device di Go"
-description: "Cara membuat TCP server di Go untuk menerima koneksi dari ratusan GPS tracker secara concurrent — dari net.Listen, framing paket binary dari stream TCP, read deadline, sampai graceful shutdown."
+description: "Cara membuat TCP server di Go untuk menerima koneksi dari ratusan GPS tracker secara concurrent: dari net.Listen, framing paket binary dari stream TCP, read deadline, sampai graceful shutdown."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-22
 lastmod: 2026-09-22
@@ -19,24 +19,24 @@ series: "gps-backend-series"
 series_part: 2
 ---
 
-Bayangkan 500 GPS tracker terhubung ke server secara bersamaan. Masing-masing mengirim posisi setiap 10–30 detik, sementara sebagian hanya mengirim _heartbeat_ saat diam. Koneksi bisa bertahan berjam-jam, terputus tanpa pemberitahuan, atau mengirim data dalam potongan.
+Bayangkan 500 GPS tracker nyambung ke server bersamaan. Masing-masing kirim posisi tiap 10-30 detik, sementara sebagian cuma kirim _heartbeat_ kalau lagi diam. Koneksinya bisa awet berjam-jam, putus tanpa pamit, atau kirim data dalam potongan-potongan. Ehem, ramai sekali.
 
-Kalau terbiasa dengan HTTP API, ingat bahwa TCP sendiri tidak memberi struktur _request-response_; listener menerima aliran byte yang perlu ditafsirkan aplikasi.
+Kalau kamu terbiasa dengan HTTP API, ingat bahwa TCP sendiri tidak punya struktur _request-response_. Listener cuma menerima aliran byte, dan aplikasilah yang harus menafsirkannya.
 
-Di [Part 1](/writing/2026/memahami-gps-protocol/) kita membahas cara device berkomunikasi melalui koneksi TCP persisten dan paket _binary_ dengan aturan berbeda di tiap vendor. Di sini, kita membuat _TCP listener_ di Go untuk menerima koneksi-koneksi itu.
+Di [Part 1](/writing/2026/memahami-gps-protocol/) kita sudah membahas cara device berkomunikasi lewat koneksi TCP persisten dan paket _binary_ dengan aturan berbeda di tiap vendor. Nah, di sini kita bikin _TCP listener_ di Go untuk menerima koneksi-koneksi itu.
 
-Pola di artikel ini sama dengan yang menangani ratusan device di sistem produksi saya. Implementasinya hanya memakai _standard library_ Go, tanpa _framework_.
+Polanya sama dengan yang menangani ratusan device di sistem produksi saya. Implementasinya hanya pakai _standard library_ Go, tanpa _framework_.
 
 ## Yang Kita Bangun di Artikel Ini
 
 Targetnya satu program kecil yang:
 
-1. Menerima banyak koneksi secara _concurrent_ — satu _goroutine_ per koneksi
-2. Menyusun ulang **frame GT06** dari _stream_ TCP mentah (ini bagian yang paling sering bikin salah)
+1. Menerima banyak koneksi secara _concurrent_, satu _goroutine_ per koneksi
+2. Menyusun ulang **frame GT06** dari _stream_ TCP mentah (bagian ini yang paling sering bikin salah)
 3. Memutus koneksi "zombie" yang sudah mati tanpa kabar
 4. Mati dengan sopan saat di-_deploy_ ulang (_graceful shutdown_)
 
-Kita belum akan men-_decode_ isi paket, menyimpan data ke database, atau menambahkan antrean pesan. Paket login dan posisi serta balasan ACK yang valid memerlukan CRC-ITU; bagian itu dibahas di [Part 3](/writing/2026/decode-packet-gt06-teltonika/). Listener cukup menerima dan menyusun frame, tanpa menangani proses setelahnya.
+Kita belum akan men-_decode_ isi paket, menyimpan data ke database, atau menambah antrean pesan. Paket login, paket posisi, dan balasan ACK yang valid butuh CRC-ITU; itu dibahas di [Part 3](/writing/2026/decode-packet-gt06-teltonika/). Listener cukup menerima dan menyusun frame, urusan setelahnya belakangan.
 
 ## TCP Server Dasar
 
@@ -59,23 +59,23 @@ for {
 }
 ```
 
-`net.Listen` membuka port, lalu _loop_ `Accept` menerima koneksi. Setiap koneksi ditangani oleh _goroutine_ sendiri. **Goroutine itu murah**: stack awalnya beberapa kilobyte, bukan megabytes seperti thread OS. Karena itu, pola "satu goroutine per koneksi" tetap ringan pada 500, 5.000, bahkan 50.000 koneksi.
+`net.Listen` membuka port, lalu _loop_ `Accept` menerima koneksi. Setiap koneksi ditangani _goroutine_ sendiri. **Goroutine itu murah**: stack awalnya cuma beberapa kilobyte, bukan megabyte seperti thread OS. Jadi pola "satu goroutine per koneksi" tetap ringan di 500, 5.000, bahkan 50.000 koneksi.
 
-Untuk GPS listener, saya tidak merekomendasikan HTTP: ada overhead _header_ per request, koneksi berumur pendek, dan _parsing_ HTTP yang tidak berguna untuk paket _binary_ mentah. Device kamu juga tidak mengirim `Content-Type`.
+Untuk GPS listener, saya tidak menyarankan HTTP: ada overhead _header_ per request, koneksi berumur pendek, dan _parsing_ HTTP tidak berguna untuk paket _binary_ mentah. Lagipula device kamu tidak kirim `Content-Type` hehe.
 
 ## Jebakan Pertama: TCP Itu Stream, Bukan Pesan
 
-Ini perbedaan utama antara TCP listener GPS dan HTTP handler.
+Ini beda utama antara TCP listener GPS dan HTTP handler.
 
-Kode HTTP terbiasa dengan asumsi: satu request = satu paket utuh. Di TCP **tidak ada jaminan begitu**. `conn.Read(buf)` cuma bilang "berikan aku byte yang ada sekarang", artinya:
+Kode HTTP terbiasa dengan asumsi: satu request = satu paket utuh. Di TCP **tidak ada jaminan begitu**. `conn.Read(buf)` cuma bilang "kasih aku byte yang ada sekarang", artinya:
 
 - **Satu frame bisa terpotong.** Device kirim frame 70 byte, `Read` pertama dapat 40 byte, sisanya datang 200 ms kemudian.
 - **Dua frame bisa nempel jadi satu.** Device kirim dua frame beruntun, `Read` dapat keduanya sekaligus.
 - **Byte sampah bisa muncul.** Device yang baru _boot_ kadang menyembur junk sebelum paket pertamanya.
 
-Kalau hasil `Read` dianggap sebagai satu paket utuh, proses decode bisa gagal secara acak. Masalahnya mudah disangka berasal dari device. (Saya pernah.)
+Kalau hasil `Read` dianggap satu paket utuh, proses decode bisa gagal secara acak, dan masalahnya gampang disangka dari device. (Saya pernah. Lama.)
 
-Solusinya adalah **framing manual**. Kita gunakan `bufio.Reader` untuk membaca _stream_, mencari _start bit_ GT06 (`0x78 0x78`), membaca _length_, lalu mengambil sisa frame sesuai panjangnya:
+Solusinya **framing manual**. Kita pakai `bufio.Reader` untuk membaca _stream_, cari _start bit_ GT06 (`0x78 0x78`), baca _length_, lalu ambil sisa frame sesuai panjangnya:
 
 ```go
 // readFrame membaca satu frame GT06 dari stream:
@@ -89,14 +89,14 @@ func readFrame(r *bufio.Reader) ([]byte, error) {
 			return nil, err
 		}
 		if b != 0x78 {
-			continue // byte sampah — lewati
+			continue // byte sampah, lewati
 		}
 		b2, err := r.ReadByte()
 		if err != nil {
 			return nil, err
 		}
 		if b2 != 0x78 {
-			continue // 0x78 tunggal, bukan start bit — lanjut cari
+			continue // 0x78 tunggal, bukan start bit; lanjut cari
 		}
 		break
 	}
@@ -125,13 +125,13 @@ func readFrame(r *bufio.Reader) ([]byte, error) {
 }
 ```
 
-`io.ReadFull` **menunggu sampai buffer terisi penuh**, sehingga byte yang datang terpotong-potong tersusun menjadi satu frame. `bufio.Reader` menyimpan byte yang belum terpakai; jika dua frame datang berurutan, byte frame kedua tetap tersedia untuk pembacaan berikutnya.
+`io.ReadFull` **menunggu sampai buffer terisi penuh**, jadi byte yang datang terpotong-potong tetap tersusun jadi satu frame. `bufio.Reader` menyimpan byte yang belum terpakai; kalau dua frame datang berurutan, byte frame kedua tetap tersedia untuk pembacaan berikutnya.
 
-Ingat ingar-bingar dari Part 1: angka `len` dihitung dari _protocol number_ sampai CRC inklusif. Itulah kenapa setelah _length byte_ kita tarik `len + 2` byte lagi (isi frame + CRC + _stop bit_).
+Ingat aturan framing dari Part 1: angka `len` dihitung dari _protocol number_ sampai CRC inklusif. Itulah kenapa setelah _length byte_ kita tarik `len + 2` byte lagi (isi frame + CRC + _stop bit_).
 
 ## handleConnection: Loop Baca Frame
 
-Dengan framing tersebut, handler membaca frame dari tiap koneksi:
+Dengan framing tadi, handler tinggal membaca frame dari tiap koneksi:
 
 ```go
 func handleConnection(ctx context.Context, conn net.Conn) {
@@ -158,17 +158,17 @@ func handleConnection(ctx context.Context, conn net.Conn) {
 }
 ```
 
-Untuk saat ini, handler hanya mencatat frame dalam format _hex_. Di Part 3, baris `TODO` akan diganti dengan decoder.
+Untuk sekarang, handler cuma mencatat frame dalam format _hex_. Di Part 3, baris `TODO` itu kita ganti dengan decoder.
 
 ## Koneksi Zombie dan Read Deadline
 
 Baris `conn.SetReadDeadline(...)` menentukan berapa lama handler menunggu data.
 
-Device GPS di jaringan GSM bisa terputus tanpa mengirim paket penutup TCP (FIN), misalnya saat sinyal hilang, baterai dicabut, atau _carrier_ me-_reset_ koneksi. Server lalu masih mencatat koneksi yang **sudah mati tapi masih tercatat hidup**. Tanpa penanganan, koneksi seperti ini menumpuk dan memakai _file descriptor_.
+Device GPS di jaringan GSM bisa putus tanpa mengirim paket penutup TCP (FIN), misalnya karena sinyal hilang, baterai dicabut, atau _carrier_ me-_reset_ koneksi. Server lalu masih mencatat koneksi yang **sudah mati tapi dikira hidup**. Kalau dibiarkan, koneksi begini menumpuk dan menghabiskan _file descriptor_.
 
-Dengan `SetReadDeadline`, jika tidak ada byte yang datang sebelum batas waktu, `Read` gagal dengan _timeout error_. Handler keluar dan koneksi ditutup.
+Dengan `SetReadDeadline`, kalau tidak ada byte yang datang sebelum batas waktu, `Read` gagal dengan _timeout error_. Handler keluar dan koneksi ditutup.
 
-**Deadline harus lebih besar dari interval heartbeat device.** Seperti dijelaskan di Part 1, device yang diam mengirim _heartbeat_ tiap 2–5 menit. Deadline 90 detik akan memutus device sehat yang sedang diam. Karena itu, nilainya saya set:
+**Deadline harus lebih besar dari interval heartbeat device.** Seperti di Part 1, device yang diam mengirim _heartbeat_ tiap 2-5 menit. Deadline 90 detik akan memutus device sehat yang cuma lagi diam. Makanya nilainya saya set:
 
 ```go
 // harus LEBIH BESAR dari interval heartbeat device (GT06: 2-5 menit saat idle)
@@ -179,9 +179,9 @@ Deadline di-_reset_ setiap kali frame berhasil dibaca, sehingga device yang akti
 
 ## Mati dengan Sopan: Graceful Shutdown
 
-Listener production dapat di-_restart_ saat deploy, _scaling_, atau pemeliharaan. Saat container atau sistem dihentikan, OS biasanya mengirim sinyal `SIGTERM` dan memberi proses waktu untuk menutup diri sebelum dihentikan paksa.
+Listener production bisa di-_restart_ saat deploy, _scaling_, atau pemeliharaan. Saat container atau sistem dihentikan, OS biasanya mengirim sinyal `SIGTERM` dan memberi proses waktu untuk menutup diri sebelum dimatikan paksa.
 
-Kita gunakan waktu itu untuk menutup _listener_, menutup koneksi aktif, dan menunggu _goroutine_ selesai sebelum program keluar.
+Waktu itu kita pakai untuk menutup _listener_, menutup koneksi aktif, dan menunggu _goroutine_ selesai sebelum program keluar.
 
 ```go
 func main() {
@@ -293,22 +293,22 @@ Berikut output log dari saat server mulai hingga berhenti:
 2026/09/12 20:25:33 bye
 ```
 
-## Yang Harus Kamu Pahami Sebelum Lanjut
+## Catatan Sebelum Lanjut
 
-- **Goroutine per koneksi** adalah pola standar untuk TCP server di Go. Goroutine ringan dan bisa menangani ratusan ribu koneksi secara bersamaan.
-- **TCP adalah stream.** Satu `Read` ≠ satu paket. Framing manual (start bit + length + `io.ReadFull`) adalah satu-satunya cara yang benar membaca protokol binary.
-- **Deadline > interval heartbeat.** SetReadDeadline membantu membersihkan koneksi yang terputus, tetapi nilai yang terlalu pendek akan memutus device sehat.
+- **Goroutine per koneksi** itu pola standar untuk TCP server di Go. Goroutine ringan, ratusan ribu koneksi pun masih sanggup.
+- **TCP adalah stream.** Satu `Read` ≠ satu paket. Framing manual (start bit + length + `io.ReadFull`) satu-satunya cara yang benar untuk membaca protokol binary.
+- **Deadline > interval heartbeat.** SetReadDeadline membantu membersihkan koneksi yang putus, tapi nilai yang terlalu pendek akan memutus device sehat.
 - **Tutup koneksi saat shutdown.** `SIGTERM` memberi kesempatan untuk menutup listener dan koneksi aktif dengan rapi.
 
-Listener ini sudah menerima dan menyusun frame, tetapi belum membaca payload atau membalas ACK. Tanpa ACK, device sungguhan akan menganggap server tidak merespons dan terus mengirim ulang paket lama. Keduanya memerlukan pemahaman CRC-ITU dan struktur payload GT06.
+Listener ini sudah menerima dan menyusun frame, tapi belum membaca payload atau membalas ACK. Tanpa ACK, device sungguhan mengira server tidak merespons dan terus mengirim ulang paket lama. Dua-duanya butuh CRC-ITU dan pemahaman struktur payload GT06.
 
-## What's Next
+## Selanjutnya
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
-- Sebelumnya: [Part 1 — Memahami GPS Protocol](/writing/2026/memahami-gps-protocol/)
-- Selanjutnya: [Part 3 — Decode Packet: GT06 & Teltonika Protocol](/writing/2026/decode-packet-gt06-teltonika/) — kita akan menulis decoder asli: parse login & posisi, hitung CRC, dan balas ACK yang valid.
+- Sebelumnya: [Part 1: Memahami GPS Protocol](/writing/2026/memahami-gps-protocol/)
+- Selanjutnya: [Part 3: Decode Packet: GT06 & Teltonika Protocol](/writing/2026/decode-packet-gt06-teltonika/). Di sana kita tulis decoder asli: parse login & posisi, hitung CRC, dan balas ACK yang valid.
 
-## CTA
+## Ngobrol
 
-Jika ada yang ingin didiskusikan tentang listener GPS ini, hubungi saya lewat [Contact](/contact/). Kamu juga bisa subscribe [RSS](/writing/index.xml) untuk mengikuti artikel berikutnya.
+Kalau ada yang mau didiskusikan soal listener GPS ini, hubungi saya lewat [Contact](/contact/). Kamu juga bisa subscribe [RSS](/writing/index.xml) untuk mengikuti artikel berikutnya.

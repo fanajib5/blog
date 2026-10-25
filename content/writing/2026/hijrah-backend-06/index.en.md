@@ -15,39 +15,39 @@ tags:
 series: "Hijrah Backend"
 ---
 
-My Go system came out of the migration with one inherited illness. All repositories lived in two giant folders named `repository` and `usecase`, mixing alerts, billing, geofence, fuel, everything together. Technically nothing was wrong. But it felt like a big city with no districts: to find one house, I had to memorize the whole town.
+After the migration to Go, one inherited mess was still there: all the repositories were piled into two big folders, `repository` and `usecase`. Alerts, billing, geofence, fuel, everything was mixed together. The system worked, technically. But finding one house in that city meant knowing every street.
 
-This episode is about tidying that city into 14 domain modules while its endpoints kept serving production. A system used by tens of thousands of people has no pause button.
+In this episode, I reorganized that city into 14 domain modules while keeping the endpoints running in production. Tens of thousands of people use the system, so there was no pause button to press.
 
 ## Why Not Microservices
 
-The first question usually goes: if you want separated domains, why not go straight to microservices?
+Maybe the first question is: if you want to separate domains, why not use microservices right away?
 
-The answer: our team is small, and microservices aren't just an architecture structure; they're an infrastructure decision. Every service means a new deployment, a new monitoring surface, a new set of network problems, plus inter-service communication that used to be free becoming expensive. For a team our size, trading tidy folders for six extra servers is like buying a house to store unused rooms.
+Our team is small. Microservices are not just a folder or diagram choice; they add infrastructure work too. Each service needs deploying and monitoring, and calls that used to be function calls become network communication. For our team, adding six servers just to tidy up folders would be like buying another house to store empty rooms.
 
-What I needed wasn't process separation; it was responsibility separation. That has a name: the **modular monolith**, one binary, one deployment, but inside it every domain has a house with walls.
+I did not need separate processes. I needed clear responsibility boundaries. That is why we chose the **modular monolith**: one binary and one deployment, with clear boundaries between domains inside it.
 
 ## A Module Is a House with One Door
 
-My module convention is simple:[^2] one domain folder (say, `geofence`) holding its repositories and use cases; one `api` folder as the only exit, containing interfaces; and walls enforced by the **compiler**, not by good intentions.
+The module rule is simple:[^2] one folder per domain, say `geofence`, with its repositories and use cases inside. The `api` folder is the exit, with interfaces that other modules can use. The boundary is enforced by the **compiler**, not just a promise in the README.
 
 The compile-time wall is the whole trick. Module rules that live only in a README are easy to break during a busy sprint. But if a module's internal repos can't be imported from outside its folder, the build turns red on the spot. Architecture violations become things you can't commit, not things you have to remember.
 
 ## Census First, Move Later
 
-The step most people skip when refactoring: counting who uses what before moving anything.
+Before refactoring, I started by counting who uses what. This is the step that is easy to skip when you are eager to start moving folders.
 
 For the biggest module, device, I wrote a census document before touching a single line. The results surprised even me: 51 files outside the module consumed its repositories; the device-family repos offered 321 exported methods... and only **100** were ever called from outside.[^1] More than two-thirds of the stock had no customers. One "god" repository alone carried 122 methods, 49 in use.
 
-The census had its own traps. I counted consumers by searching names, but the suffix "-device" showed up all over: the shared-link-device and user-group-device repos weren't part of the device family. Another repo had a digit in its name, so my letters-only search pattern missed it. The lesson: **a census that doesn't suspect itself will count the wrong world**.
+The census had its own traps. I counted consumers by searching names, but the suffix "-device" showed up all over: the shared-link-device and user-group-device repos weren't part of the device family. Another repo had a digit in its name, so my letters-only search pattern missed it. I learned to check the census method too. Otherwise, the result can look convincing while counting the wrong things.
 
 ## Moves That Are Byte-Identical
 
-Here the principle from [episode four](/en/writing/2026/hijrah-backend-04/) came back around, and it applies to my own house too: **moving is not the moment for fixing.**
+I used the principle from [episode four](/en/writing/2026/hijrah-backend-04/) again, this time for my own folders: **moving is not the time to tidy everything up too.**
 
 The working rule: repository files move into their module without changing a single byte, Git itself admits they're 100% identical moves. What changes is only the door map: interfaces in the `api` folder, adapters forwarding to them, and the import paths of consumers. If a diff shows anything other than moves and renames, something has cheated on the plan.
 
-Why so strict? Reviewing a byte-identical move is cheaper: you're not checking "is this logic right", you're checking "did anything change at all". Tens of thousands of lines can change address with review questions answerable in minutes. The tempting little fixes along the way, like "let's also rename this variable", get postponed. One PR, one intention.
+Why keep the moves identical? The review is much lighter. Instead of checking whether the new logic is right, reviewers only need to confirm that nothing changed. Tens of thousands of lines can move without rereading each one. I held off on tempting little fixes like "let’s rename this variable too." One PR, one job.
 
 ## Modules Are Allowed to Differ
 
@@ -57,20 +57,20 @@ The device module, the largest, I deliberately left with an open door for now: i
 
 ## Cache Without Redis
 
-One infrastructure decision people often ask about: the cache is in-process, [ristretto](https://github.com/dgraph-io/ristretto), not Redis. The office doesn't run Redis, and nobody wanted a new service just for caching. It also fits my deployment philosophy: one binary, shift, run. The cache dying with its process is fine; it isn't the source of truth, just an accelerator. If scale ever demands a shared cache across instances, we can revisit that decision. What matters is that it still has a reason, not that it's an inheritance nobody dares touch.
+About the cache: we use an in-process cache, [ristretto](https://github.com/dgraph-io/ristretto), not Redis. The office does not run Redis, and no one seemed keen to add a service just for caching. It fits the way we deploy: one binary, shift, run. It is fine for the cache to die with its process because it is not the source of truth, just an accelerator. If several instances need to share a cache one day, we can revisit the choice.
 
 ## The Debt That Remains
 
-As in [episode five](/en/writing/2026/hijrah-backend-05/), I'll admit the debt here too: a few repositories inside modules still read other domains' tables through direct SQL, pre-module-era footprints not yet converted to going through the `api` door. Two other modules aren't sealed yet. It's all recorded and waiting its turn. Cities don't get renovated in one night.
+There is still technical debt, as I mentioned in [episode five](/en/writing/2026/hijrah-backend-05/). A few repositories inside modules still read other domains’ tables through direct SQL, and two modules are not sealed yet. I have written it all down. They can be handled one at a time; the whole city does not need to be renovated tonight.
 
-## Lessons
+## My Notes
 
 1. **Census before moving.** Consumer counts and actually-used methods decide the shape of a module's door, not guesses, not taste.
 2. **Walls enforced by the compiler beat verbal agreements.** An architecture rule that can't be broken without a red build is the only rule that survives busy sprints.
 3. **Byte-identical moves make reviews cheap.** Separate "moving" from "fixing", mix them, and both become hard to verify.
 4. **Exceptions between modules are fine, as long as they're conscious and documented.** Perfect uniformity looks great in diagrams; living projects need doors with clear policies.
 
-Next episode we step off the dashboard and onto the highway: how TCP packets from GPS trackers become rows in a time-series database.
+In the next episode, I will follow TCP packets from GPS trackers into rows in a time-series database.
 
 Cheers.
 

@@ -1,6 +1,6 @@
 ---
 title: "Best Practice Membangun API di Laravel dan Go: Catatan dari Proyek Nyata"
-description: "Pelajaran dari proyek migrasi 460+ route dan 58 controller—pola yang harus dipertahankan, yang harus ditinggalkan, dan bagaimana implementasinya di Go."
+description: "Catatan dari audit 460+ route dan 58 controller di proyek migrasi PHP ke Go: pola yang layak dipertahankan, yang sebaiknya ditinggal, dan versi Go-nya."
 author: "Faiq Najib Al-Aziz"
 date: 2026-05-07T10:28:00+07:00
 lastmod: 2026-09-11T09:28:00+07:00
@@ -15,22 +15,22 @@ tags:
   - arsitektur
 ---
 
-Di proyek migrasi PHP ke Go yang saya kerjakan, saya mengaudit semua _route_ dan _controller_ yang sudah ada. Sebelum migrasi, saya perlu memahami _pattern_ mana yang layak dipertahankan dan mana yang perlu ditinggalkan. Hasil auditnya cukup membuka mata, hahaha.
+Di proyek migrasi PHP ke Go yang saya kerjakan, saya mengaudit semua _route_ dan _controller_ yang ada. Sebelum migrasi, saya harus tahu _pattern_ mana yang layak dibawa dan mana yang lebih baik ditinggal. Hasil auditnya lumayan bikin melek, hahaha.
 
-Proyek ini punya profil seperti ini:
+Profil proyeknya begini:
 
 - **460+ route** di `api.php`[^1]
-- **58 controller** dengan berbagai ukuran dan _pattern_
+- **58 controller** dengan ukuran dan _pattern_ yang macam-macam
 - **5 auth guard**: `user-api`, `partner-api`, `open-api`, `open-api-limited`, `tms-api`
 - **Rate limiting** yang bervariasi: dari 3/menit sampai 100/menit
 
-Artikel ini bukan tutorial _"cara bikin API"_. Ini catatan tentang _pattern_ dan _anti-pattern_ yang saya temukan, serta contoh penerapannya di Go. Kalau kamu sedang _migrate_ atau memulai proyek baru, semoga catatan ini bisa membantumu menghindari beberapa kesalahan yang saya temukan.
+Ini bukan tutorial _"cara bikin API"_. Ini catatan tentang _pattern_ dan _anti-pattern_ yang saya temukan, plus contoh penerapannya di Go. Kalau kamu sedang _migrate_ atau mulai proyek baru, semoga bisa membantu menghindari beberapa kesalahan yang sudah saya temui duluan.
 
 ## 1. Route Organization: Kelompokkan dengan Jelas
 
 ### Apa yang Saya Temukan
 
-Proyek ini punya struktur _route grouping_ yang _actually_ cukup bagus. Auth guard dipisah per _domain_:
+Proyek ini ternyata punya struktur _route grouping_ yang cukup bagus. Auth guard dipisah per _domain_:
 
 ```php
 // routes/api.php - Struktur yang bagus
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth:open-api']], function() {
 });
 ```
 
-_Rate limiting_ juga diterapkan secara _strategic_:
+_Rate limiting_ juga dipasang dengan perhitungan:
 
 ```php
 // AI analysis yang berat → rate limit ketat
@@ -65,9 +65,9 @@ Route::get('/google/reverse_geocode','GoogleController@reverseGeocodeLocation')
 
 ### Masalah yang Ditemukan
 
-Tapi ada beberapa masalah:
+Tapi ya, ada beberapa masalah:
 
-**Masalah 1: _Naming inconsistency_.** Ada route yang pakai `snake_case`, ada yang pakai `kebab-case`, ada yang pakai verb:
+**Masalah 1: _Naming inconsistency_.** Ada route yang pakai `snake_case`, ada yang `kebab-case`, ada yang pakai verb:
 
 ```php
 // Campur aduk
@@ -79,7 +79,7 @@ Route::resource('devices', 'DeviceController'); // RESTful
 Route::post('/devices/check_device_type', ...);  // verb di bawah resource
 ```
 
-**Masalah 2: _Controller_ yang terlalu banyak tanggung jawab.** `DeviceController` punya **40+ method** dan **2000+ baris kode**. Dia menangani CRUD, lokasi, laporan, perintah, _dashboard_, dan AI. _One controller to rule them all_ hahaha.
+**Masalah 2: _Controller_ yang kebanyakan tanggung jawab.** `DeviceController` punya **40+ method** dan **2000+ baris kode**. Isinya CRUD, lokasi, laporan, perintah, _dashboard_, sampai AI. _One controller to rule them all_ hahaha.
 
 ### Best Practice: Struktur Route di Go
 
@@ -133,13 +133,13 @@ func SetupRouter(
 }
 ```
 
-Di sini, setiap _middleware chain_ dan _route group_ ditulis sebagai kode, bukan konfigurasi array. Alurnya bisa ditelusuri dari atas ke bawah, dan _IDE_ bisa membuka definisi _handler_ langsung. Jadi, middleware yang dipakai tiap route terlihat di tempat route itu didaftarkan.
+Di sini setiap _middleware chain_ dan _route group_ ditulis sebagai kode, bukan konfigurasi array. Alurnya bisa dibaca dari atas ke bawah, dan _IDE_ bisa langsung lompat ke definisi _handler_. Middleware yang dipakai tiap route kelihatan di tempat route itu didaftarkan.
 
 ## 2. Controller Pattern: Kurangi, Pisahkan, _Inject_
 
 ### Anti-Pattern: Fat Controller
 
-Mari kita lihat _real code_ dari proyek ini. Ini contoh _pattern_ yang paling sering muncul (dan sebaiknya **ditinggalkan**):
+Coba kita lihat _real code_ dari proyek ini. Ini _pattern_ yang paling sering muncul (dan sebaiknya **ditinggal**):
 
 ```php
 // app/Http/Controllers/Auth/LoginController.php
@@ -178,7 +178,7 @@ public function login(Request $request)
 }
 ```
 
-Kalau _logic login_ yang sama dibutuhkan di tempat lain, misalnya CLI command atau _job queue_, kodenya perlu diduplikasi atau diekstrak ke _service_. Lebih mudah memisahkannya sejak awal.
+Kalau _logic login_ yang sama dibutuhkan di tempat lain, misalnya CLI command atau _job queue_, kodenya harus diduplikasi atau diekstrak ke _service_. Lebih enak dipisah dari awal.
 
 ### Anti-Pattern: Permission Check Manual
 
@@ -213,11 +213,11 @@ public function store(Request $request)
 // Dan seterusnya di setiap method...
 ```
 
-Contoh ini lebih cocok ditangani dengan **Laravel Policy** atau **Middleware**. Kalau ada 10 method, fungsi yang sama tidak perlu dipanggil dan dipelihara berulang kali. Prinsip _DRY_ (_Don't Repeat Yourself_)[^2] membantu menghindari duplikasi seperti ini.
+Kasus ini lebih cocok ditangani **Laravel Policy** atau **Middleware**. Kalau ada 10 method, ya jangan panggil dan rawat fungsi yang sama 10 kali. Prinsip _DRY_ (_Don't Repeat Yourself_)[^2] memang dibuat untuk situasi begini.
 
 ### Best Practice: Thin Controller + Service Layer
 
-Di proyek yang sama, ada _controller_ yang **sudah pakai _pattern_ yang benar**. Contoh: `GeminiAIController`:
+Di proyek yang sama, ada _controller_ yang **sudah benar _pattern_-nya**. Contohnya `GeminiAIController`:
 
 ```php
 // app/Http/Controllers/GeminiAIController.php
@@ -255,7 +255,7 @@ class GeminiAIController extends AuthenticatedController
 }
 ```
 
-Ini _pattern_ yang harus ditiru:
+Ini _pattern_ yang layak ditiru:
 
 1. **Form Request** untuk validasi (bukan `Validator::make()` di controller)
 2. **Service Injection** untuk _business logic_ (bukan logic di controller)
@@ -264,7 +264,7 @@ Ini _pattern_ yang harus ditiru:
 
 ### Implementasi di Go
 
-Contoh Go berikut memisahkan _business logic_ ke _service layer_. Tanpa _framework magic_ seperti Laravel, dependensi dan alur pemanggilan perlu ditulis secara _explicit_:
+Contoh Go berikut memisahkan _business logic_ ke _service layer_. Tanpa _framework magic_ ala Laravel, dependensi dan alur pemanggilan ditulis secara _explicit_:
 
 ```go
 // internal/handler/auth_handler.go
@@ -351,13 +351,13 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest) (*dto.Log
 }
 ```
 
-Di contoh ini, tidak ada _inheritance_, _magic method_, atau _middleware constructor_. Dependensi diberikan secara _explicit_ lewat _dependency injection_. Memang ada lebih banyak _boilerplate_, tetapi tiap _layer_ dapat diuji secara _independen_ dan alur datanya terlihat jelas.
+Di contoh ini tidak ada _inheritance_, _magic method_, atau _middleware constructor_. Dependensi diberikan secara _explicit_ lewat _dependency injection_. Memang lebih banyak _boilerplate_ (capek ngetiknya, jujur), tapi tiap _layer_ bisa diuji sendiri-sendiri dan alur datanya kelihatan jelas.
 
 ## 3. Validasi: Konsisten, Satu Cara, di Satu Tempat
 
 ### Apa yang Saya Temukan
 
-Di proyek ini ada **tiga cara validasi** yang dipakai secara bersamaan:
+Di proyek ini ada **tiga cara validasi** yang dipakai bersamaan:
 
 **Cara 1: Manual `Validator::make()`** (paling umum, 80%+ _controller_):
 ```php
@@ -396,11 +396,11 @@ class GeminiAnalyzeDeviceRequest extends FormRequest
 }
 ```
 
-Dengan cara 1 dan 2, rule `device_id` bisa ditulis berulang di beberapa _endpoint_. Saat rule berubah, setiap salinannya perlu diperbarui.
+Dengan cara 1 dan 2, rule `device_id` bisa tertulis berulang di beberapa _endpoint_. Begitu rule berubah, semua salinannya harus ikut diperbarui (dan pasti ada satu yang kelewat).
 
 ### Best Practice
 
-**Gunakan Form Request untuk aturan yang perlu dikelola bersama.** Beberapa manfaatnya:
+**Pakai Form Request untuk aturan yang perlu dikelola bersama.** Manfaatnya:
 
 1. **Reusable**: satu _form request_ bisa dipakai di beberapa _endpoint_ yang memakai aturan sama
 2. **Testable**: _form request_ bisa di-_test_ secara _independen_ tanpa _hit endpoint_
@@ -426,7 +426,7 @@ type AnalyzeDeviceRequest struct {
 }
 ```
 
-Di contoh Go ini, rule validasi ditulis sebagai _struct tags_ dan diperiksa pada _handler_. Dengan begitu, aturan yang berlaku bisa dilihat bersama tipe request yang digunakan.
+Di contoh Go ini, rule validasi ditulis sebagai _struct tags_ dan diperiksa di _handler_. Jadi aturan yang berlaku kelihatan bersama tipe request-nya.
 
 ## 4. Response Consistency: Satu Format, Semua Endpoint
 
@@ -479,7 +479,7 @@ Bayangkan _frontend developer_ yang harus _handle_ dua format response berbeda u
 
 ### Best Practice
 
-**Usahakan satu format response untuk semua _endpoint_.** Kalau perlu _versioning_, gunakan _header_ atau _URL prefix_ daripada mengubah _format response_.
+**Usahakan satu format response untuk semua _endpoint_.** Kalau butuh _versioning_, pakai _header_ atau _URL prefix_, jangan ubah _format response_.
 
 ```php
 // Gunakan API Resource secara konsisten
@@ -527,7 +527,7 @@ func ValidationError(c *gin.Context, err error) {
 }
 ```
 
-Selama _handler_ memakai _helper function_ ini, bentuk _response_-nya tetap sama. Untuk hasil sukses, panggil `response.Success()`; untuk error, panggil `response.Error()`.
+Selama _handler_ memakai _helper function_ ini, bentuk _response_-nya pasti sama. Sukses panggil `response.Success()`, error panggil `response.Error()`. Selesai.
 
 ## 5. Auth & Authorization: Guard, bukan Manual Check
 
@@ -580,7 +580,7 @@ class AuthenticatedController extends Controller
 }
 ```
 
-Kenapa ini masalah? Karena _token validation logic_ di-_embed_ di _constructor_ _controller_, bukan di _dedicated middleware_. Artinya:
+Kenapa ini masalah? Karena _token validation logic_ ditanam di _constructor_ _controller_, bukan di _dedicated middleware_. Akibatnya:
 
 - Tidak bisa dipakai di _controller_ yang tidak _extend_ `AuthenticatedController`
 - Sulit di-_test_ secara _independen_
@@ -668,17 +668,17 @@ userAPI := r.Group("/")
 userAPI.Use(authMiddleware.Guard("user-api"))
 ```
 
-Di Go, _middleware_ berupa fungsi yang dapat di-_compose_ sesuai kebutuhan, tanpa _inheritance chain_. Prinsip _composition over inheritance_[^3] cocok dengan pendekatan ini.
+Di Go, _middleware_ cuma fungsi yang bisa di-_compose_ sesuai kebutuhan, tanpa _inheritance chain_. Prinsip _composition over inheritance_[^3] cocok dengan pendekatan ini.
 
 ## 6. Pecah Fat Controller jadi Handler Terpisah
 
 ### Masalah Besar
 
-`DeviceController` punya **40+ method**. Kalau ada _bug_ di fitur _report_, kamu perlu melewati kode untuk fitur lokasi, perintah, dan _dashboard_ sebelum menemukan bagian yang dicari. Mencari satu _method_ di antara lebih dari 1000 baris kode bukan pengalaman yang menyenangkan.
+`DeviceController` punya **40+ method**. Kalau ada _bug_ di fitur _report_, kamu harus melewati kode fitur lokasi, perintah, dan _dashboard_ dulu sebelum ketemu yang dicari. Mencari satu _method_ di antara 1000+ baris itu bukan pengalaman yang menyenangkan (percayalah).
 
 ### Solusi: Satu Domain = Satu Handler
 
-Untuk memisahkan tanggung jawab di Go, tiap _handler_ bisa ditempatkan di struct terpisah:
+Untuk memisahkan tanggung jawab di Go, tiap _handler_ bisa ditaruh di struct sendiri:
 
 ```go
 // internal/handler/device_handler.go - CRUD only
@@ -714,7 +714,7 @@ _Tips migrasi_: Sebelum konversi ke Go, pecah _controller_ PHP menjadi _handler_
 
 ## Ringkasan: Checklist Best Practice
 
-Berikut _checklist_ dari pola yang dibahas:
+Ini _checklist_ dari pola-pola di atas:
 
 | Aspek | ❌ Jangan | ✅ Lakukan |
 |-------|-----------|-----------|
@@ -729,15 +729,13 @@ Berikut _checklist_ dari pola yang dibahas:
 
 ## Penutup
 
-Dari audit ini, pelajaran yang paling terasa buat saya adalah pentingnya **konsistensi**. Di _codebase_ yang saya lihat, lebih mudah mengikuti _pattern_ yang cukup baik dan dipakai bersama daripada berpindah-pindah _pattern_ yang dianggap sempurna.
+Dari audit ini, yang paling terasa buat saya adalah soal **konsistensi**. Di _codebase_ yang saya lihat, lebih enak mengikuti _pattern_ yang cukup baik tapi dipakai bersama, daripada lompat-lompat antar _pattern_ yang katanya sempurna.
 
-Kalau kamu sedang menatap _codebase_ dengan 40 _method_ di satu _controller_, tiga cara validasi, dan _response format_ yang tidak konsisten, mulai benahi satu pola dulu. Saya juga menemukan campuran seperti ini saat audit.
+Kalau kamu sedang menatap _codebase_ dengan 40 _method_ di satu _controller_, tiga cara validasi, dan _response format_ yang tidak konsisten, tenang, kamu tidak sendirian. Saya juga menemukan campuran seperti ini. Mulai benahi satu pola dulu saja.
 
-Kalau kamu sedang _migrate_ dari PHP ke Go, atau mau mulai proyek baru dengan arsitektur yang lebih bersih, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
+Kalau kamu sedang _migrate_ dari PHP ke Go, atau mau mulai proyek baru dengan arsitektur yang lebih rapi, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 
-Terima kasih sudah membaca sampai akhir. Semoga catatan ini membantu saat kamu mengaudit API atau menyiapkan migrasi.
-
-Sekian. Salam.
+Terima kasih sudah membaca sampai akhir!
 
 [^1]: Angka ini termasuk _public route_, _authenticated route_, _partner route_, dan berbagai integrasi. Cukup banyak untuk di-_audit_ satu per satu.
 [^2]: _DRY (Don't Repeat Yourself)_ adalah prinsip sederhana yang mudah dilupakan saat _deadline_ mendekat.
