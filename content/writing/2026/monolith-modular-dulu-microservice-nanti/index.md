@@ -55,7 +55,7 @@ Yang saya pertahankan adalah **monolith modular**: batas modulnya ditegakkan sam
 
 Buktinya ada di proyek yang sama: migrasi Laravel → Go dilakukan **tanpa big-bang rewrite**. Dua backend berjalan paralel, lalu endpoint dipindahkan satu per satu lewat proxy. Itu mungkin karena batas modul dan contract-nya sudah rapi. Batas yang bisa dipindah antar-runtime kelak bisa dipindah antar-service.
 
-## Kapan Sistem Ini Perlu Dipecah
+## Kapan Saya Akan Memecah Sistem
 
 "Microservice nanti" bukan sekadar alasan untuk menunda. Ada sinyal konkret yang akan membuat saya memecah sistem. Tidak satu pun alasannya "karena sekarang trenya":
 
@@ -84,4 +84,4 @@ Saya pernah menulis bahwa [memilih tech stack itu soal bisnis, bukan ego](/writi
 
 ## CTA
 
-Kalau pengalamanmu soal kapan service perlu dipisah berbeda, saya terbuka untuk berdiskusi lewat [Contact](/contact/) atau mengikuti tulisan berikutnya lewat [RSS](/writing/index.xml).
+Kalau kamu pernah memisahkan sistem dengan alasan berbeda, [hubungi saya](/contact/). Kamu juga bisa mengikuti tulisan berikutnya lewat [RSS](/writing/index.xml).

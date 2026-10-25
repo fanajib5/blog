@@ -45,7 +45,7 @@ Not a sponsored pitch, just context. Here is what actually lives on my workstati
 
 **Living documentation (context7).** Before writing code that uses a specific API version, I ask the agent to read the current documentation. This helps avoid answers that rely on an API that used to be correct.
 
-**Thinking checkpoints (sequential thinking).** When debugging several interacting layers—a Dockerfile, reverse proxy, and environment variables—I use an explicit reasoning process that can be revised along the way. It does not make the AI smarter, but it helps me hold off on a conclusion until each layer has been checked.
+**Thinking checkpoints (sequential thinking).** When debugging several interacting layers, such as a Dockerfile, reverse proxy, and environment variables, I use an explicit reasoning process that can be revised along the way. It does not make the AI smarter, but it helps me hold off on a conclusion until each layer has been checked.
 
 ## The Routine I Use
 
@@ -76,7 +76,7 @@ The question inevitably comes up: writing technical articles with AI assistance,
 
 My stance: what matters is not who types the keys, but **who is responsible for the content**. I disclose that the GPS series was written with AI assistance because its claims can be checked: the CRC was brute-force verified, the SQL has `EXPLAIN ANALYZE` results, and the numbers come from actual tests. AI can be confidently wrong, but people can fall into the same trap when they rely on memory and skip verification.
 
-If you want to start, choose one habit: **do not treat code as correct until it has been run**. Memory, documentation, and checkpoints help me, but they all start with being willing to check the output—including when an AI confidently writes a 16-digit IMEI.
+If you want to start, choose one habit: **do not treat code as correct until it has been run**. Memory, documentation, and checkpoints help me, but they all start with being willing to check the output, even when an AI confidently writes a 16-digit IMEI.
 
 ## What's Next
 
@@ -84,4 +84,4 @@ I will follow up with another practical piece on AI: automating Google Apps Scri
 
 ## CTA
 
-Share this article if you found it useful. For further discussion, visit [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).
+If you spot an error in the packet examples or test results, [contact me](/en/contact/). You can also subscribe via [RSS](/en/writing/index.xml) to follow future articles.

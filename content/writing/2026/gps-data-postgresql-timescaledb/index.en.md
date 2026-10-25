@@ -198,6 +198,6 @@ This post is part of the **Building a GPS Backend from Scratch** series.
 
 ## CTA
 
-For questions or discussion, reach me through [Contact](/en/contact/) or follow new posts via [RSS](/en/writing/index.xml).
+For questions about storing GPS data with PostgreSQL or TimescaleDB, [contact me](/en/contact/). You can also subscribe to [RSS](/en/writing/index.xml) to follow future posts.
 
 [^ts]: All SQL examples in this post were verified on TimescaleDB 2.30.0 (PostgreSQL 16, Docker image `timescale/timescaledb:latest-pg16`) with 155,523 synthetic rows. You can reproduce the full setup using `docker run` combined with the SQL commands above.

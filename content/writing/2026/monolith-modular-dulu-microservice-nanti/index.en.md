@@ -39,7 +39,7 @@ Microservices rarely solve technical problems that cannot be solved within a mon
 - Codebases too massive to fit into one team's collective head -> ownership boundaries
 - Conway's law already fracturing the organization -> architecture reflecting team structure
 
-Those are real problems for companies with dozens or hundreds of engineers. If your team has five people and deploys twice a week, you do not have them yet. What you have is the expectation that you might someday, and that expectation is already costing you the **distributed system tax**: network failures between services that you now have to handle, data consistency that is no longer free, tracing that needs its own infrastructure, deployment pipelines multiplied by the number of services, and bugs that once took one stack trace to find but are now scattered across five logs.
+Those are real problems for companies with dozens or hundreds of engineers. If your team has five people and deploys twice a week, you do not have them yet. What you have is the expectation that you might someday, and that expectation is already costing you the **distributed system tax**: network failures between services that you now have to handle, data consistency that is no longer free, tracing that needs its own infrastructure, deployment pipelines multiplied by the number of services, and bugs that once took one stack trace to find but are now scattered across five different log aggregators.
 
 That tax is real. The bill arrives every month, often when a small team is busiest building the product.
 
@@ -84,4 +84,4 @@ I once wrote that [choosing a tech stack is a business decision, not an ego trip
 
 ## CTA
 
-If your experience differs on when services should be split, I would be glad to discuss it via [Contact](/en/contact/) or follow future posts via [RSS](/en/writing/index.xml).
+If you've split a system for different reasons, you can [contact me](/en/contact/). You can also subscribe to [RSS](/en/writing/index.xml) to follow future posts.

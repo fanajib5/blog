@@ -39,7 +39,7 @@ Arsitektur akhirnya seperti ini:
                                               [Bridge (subscribe)] → [Hub] ──▶ N × browser WebSocket
 ```
 
-Ingest worker tidak tahu ada browser; ia hanya `PUBLISH`. Hub tidak tahu ada device; ia hanya broadcast. Dua dunia dipisahkan Redis — dan bisa diproses berbeda saat skala menuntut.
+Ingest worker tidak tahu ada browser; ia hanya `PUBLISH`. Hub tidak tahu ada device; ia hanya broadcast. Redis memisahkan dua dunia ini, sehingga masing-masing bisa diskalakan sendiri saat dibutuhkan.
 
 ## Hub: Registry Klien dan Broadcast
 
@@ -211,7 +211,7 @@ Pada skenario browser, setiap device memiliki satu marker yang posisinya diperba
 
 ## Jebakan yang Tersisa di Production
 
-- **Ping/pong.** Proxy dan load balancer suka memutus koneksi "diam". Kirim ping periodik dari server (gorilla: `SetReadDeadline` + pong handler) dan balas dari klien — atau set `TCP keepalive`.
+- **Ping/pong.** Proxy dan load balancer suka memutus koneksi "diam". Kirim ping periodik dari server (gorilla: `SetReadDeadline` + pong handler) dan balas dari klien atau set `TCP keepalive`.
 - **Autentikasi koneksi.** Di production, `CheckOrigin` jangan `return true` untuk semua, dan token/tenant diverifikasi saat upgrade (cookie/header) — koneksi WS tidak bisa divalidasi sesering HTTP biasa.
 - **Backpressure adalah fitur.** Buffer 64 × drop itu kebijakan sadar: pesan dashboard bersifat _latest-wins_ (yang penting posisi terakhir), bukan semua-posisi-harus-sampai. Data yang harus lengkap tetap lewat jalur database.
 
@@ -222,9 +222,9 @@ Pada skenario browser, setiap device memiliki satu marker yang posisinya diperba
 - **Latest-wins**: marker per `device_id` di-update, bukan dibuat ulang; klien baru dihidrasi dari cache posisi terakhir.
 - **Reconnect itu bagian dari protokol** — klien yang didrop harus bisa kembali dan menyegarkan diri tanpa intervensi.
 
-## Seri Selesai — Lalu ke Mana?
+## Seri Selesai: Lalu ke Mana?
 
-Dengan dashboard ini, keenam artikel menyusun satu backend GPS utuh: dari byte mentah di socket sampai titik bergerak di peta pelanggan. Seluruh seri akan dikompilasi menjadi **ebook gratis "Membangun GPS Backend dengan Go"** — pantau [RSS](/writing/index.xml) atau [hubungi saya](/contact/) untuk info rilisnya.
+Dengan dashboard ini, keenam artikel menyusun satu backend GPS utuh: dari byte mentah di socket sampai titik bergerak di peta pelanggan. Seluruh seri akan dikompilasi menjadi **ebook gratis "Membangun GPS Backend dengan Go"**. Pantau [RSS](/writing/index.xml) atau [hubungi saya](/contact/) untuk info rilisnya.
 
 Seri lanjutan yang sudah masuk kandidat: antrean pesan (RabbitMQ/Kafka), API layer dengan Fiber + pgx, dan deployment Coolify. Kalau salah satu topik itu yang kamu tunggu, [bilang saja](/contact/).
 

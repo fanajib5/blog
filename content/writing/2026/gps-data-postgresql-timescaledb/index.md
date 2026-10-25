@@ -198,6 +198,6 @@ Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
 ## CTA
 
-Kalau ada pertanyaan atau ingin berdiskusi, hubungi saya lewat [Contact](/contact/) atau ikuti tulisan baru melalui [RSS](/writing/index.xml).
+Kalau ingin membahas penyimpanan data GPS dengan PostgreSQL atau TimescaleDB, [hubungi saya](/contact/). Kamu juga bisa mengikuti tulisan berikutnya lewat [RSS](/writing/index.xml).
 
 [^ts]: Semua SQL di artikel ini diuji di TimescaleDB 2.30.0 (PostgreSQL 16, container Docker `timescale/timescaledb:latest-pg16`) dengan 155.523 baris data sintetis — skrip lengkapnya bisa direplikasi dengan `docker run` + SQL di atas.
