@@ -17,13 +17,13 @@ _"Ini cuma bug kecil kan? Paling 5 menit selesai."_
 
 Pernah denger kalimat ini? Atau mungkin variasinya: _"Tinggal ganti satu baris doang, kan?"_, _"Kok bisa seharian cuma buat fix ini?"_
 
-Kalau kamu _developer_, hampir pasti pernah. Dan kalimat itu biasanya datang dari atasan, _project manager_, atau _client_, orang yang tidak perlu tahu apa itu _N+1 query_, tapi perlu tahu **kenapa sesuatu yang terlihat simpel memakan waktu yang tidak simpel**.
+Kalau kamu _developer_, mungkin pernah mendengarnya dari atasan, _project manager_, atau _client_. Mereka tidak perlu tahu apa itu _N+1 query_, tetapi perlu tahu **kenapa sesuatu yang terlihat simpel bisa memakan waktu lama**.
 
-Ini bukan tentang menyalahkan siapa. Ini tentang **kenapa _gap_ komunikasi ini terjadi dan bagaimana menjembataninya**.
+Mari lihat apa saja yang bisa terjadi di balik bug yang tampak sederhana, lalu bagaimana menjelaskannya.
 
 ## Anatomi "1 Bug = 3 Hari"
 
-Ceritanya begini. Ada _bug_: **data laporan tidak muncul di dashboard**. Di _surface_, terlihat simpel, tinggal _fix_ tampilannya, kan?
+Misalnya ada _bug_: **data laporan tidak muncul di dashboard**. Sekilas terlihat sederhana, tinggal _fix_ tampilannya, kan?
 
 Ternyata, setelah diperiksa:
 
@@ -48,27 +48,27 @@ Tapi setelah diperiksa ternyata:
 - Sambungan berkarat karena **ventilasi di atap tersumbat**, jadi uap air menumpuk
 - Untuk memperbaiki semuanya, harus **buka atap dulu**, baru ganti pipa, baru cat ulang dinding
 
-Pemilik rumah melihat noda. Tukang melihat pipa, sambungan, ventilasi, dan atap. Keduanya melihat masalah yang sama, tapi **tingkat kedalaman yang berbeda**.
+Pemilik rumah melihat noda. Tukang melihat pipa, sambungan, ventilasi, dan atap. Masalahnya sama, tapi yang terlihat oleh masing-masing berbeda.
 
-Ini yang terjadi antara atasan dan _developer_.
+Begitu juga saat atasan dan _developer_ membicarakan bug.
 
 ## Tiga Langkah Menjelaskan Masalah Teknis
 
-Setelah beberapa kali mengalami _miskomunikasi_ (dan belajar dari kesalahan), saya menemukan pola yang konsisten membantu. Saya sebut **Terjemah, Visualkan, Kaitkan**.
+Setelah beberapa kali mengalami _miskomunikasi_, saya menemukan pola yang membantu: **Terjemah, Visualkan, Kaitkan**.
 
 ### 1. Terjemah: Dari Bahasa Teknis ke Bahasa Risiko
 
-Kesalahan paling umum: menjelaskan masalah teknis dengan istilah teknis.
+Jangan berhenti pada istilah teknis. Jelaskan dampaknya:
 
 **Tidak efektif:**
 > _"Ada N+1 query di endpoint laporan. Setiap kali load, dia query satu-satu ke database. Kalau datanya 1000 row, berarti 1001 query. Makanya lambat."_
 
-Atasan tidak peduli berapa _query_-nya. Yang dia pedulikan: **dampaknya ke bisnis apa?**
+Daripada hanya menyebut jumlah _query_, jelaskan **dampaknya ke bisnis**.
 
 **Lebih efektif:**
 > _"Sistem sekarang mengambil data satu per satu, padahal datanya bisa ratusan. Jadi semakin banyak data, semakin lambat. Kalau dibiarkan, saat user mencapai seribu, halaman laporan bisa load sampai 30 detik, user akan berpikir sistemnya error dan meninggalkan aplikasi."_
 
-Perhatikan pergeserannya:
+Contohnya:
 
 | Bahasa Developer | Bahasa Bisnis |
 |---|---|
@@ -76,11 +76,11 @@ Perhatikan pergeserannya:
 | 1001 query | Load sampai 30 detik |
 | Perlu _refactor_ | Kalau dibiarkan, user akan pergi |
 
-Bukan berarti kamu menyederhanakan, kamu **menterjemahkan konsekuensinya**.
+Kamu bukan sedang menyederhanakan masalah, tapi **menerjemahkan konsekuensinya**.
 
 ### 2. Visualkan: Pakai Analogi, Bukan Diagram Arsitektur
 
-Diagram arsitektur bagus untuk sesama _developer_. Untuk non-teknis, analogi jauh lebih kuat.
+Kalau pendengar tidak akrab dengan diagram arsitektur, analogi sehari-hari bisa membantu.
 
 Beberapa analogi yang sering saya pakai:
 
@@ -94,15 +94,11 @@ Kuncinya: analogi harus dari dunia yang **familiar** bagi pendengar. Kalau atasa
 
 ### 3. Kaitkan ke Prioritas Mereka
 
-Atasan punya prioritas yang berbeda dengan _developer_. Prioritas kita: kode bersih, _maintainable_, _scalable_. Prioritas mereka: **deadline, budget, risiko**.
-
-Jadi saat menjelaskan, kaitkan ke prioritas mereka:
+Hubungkan penjelasan dengan hal yang perlu mereka putuskan, seperti **deadline, budget, dan risiko**:
 
 - _"Kalau kita fix sekarang dengan 2 hari, kita mencegah downtime yang bisa 10x lebih mahal nanti."_
 - _"Ini bukan tentang membuat fitur baru, ini tentang memastikan fitur yang sudah jalan tidak tiba-tiba berhenti."_
 - _"Risikonya: kalau tidak ditangani, data laporan bisa tidak akurat. Dan data laporan itu yang dipakai untuk keputusan bisnis."_
-
-Kalimat _"technical debt"_ mungkin tidak menggerakkan atasan. Tapi _"kalau tidak ditangani sekarang, kita bisa kehilangan data transaksi"_, itu baru didengar.
 
 ## Template Praktis
 
@@ -130,17 +126,9 @@ Contoh:
 >
 > **Risiko kalau ditunda?** Data bisa makin banyak yang hilang, dan perbaikannya makin lama karena jumlah data yang harus disesuaikan makin besar.
 
-Singkat, jelas, dan, yang paling penting, **tidak ada istilah teknis**.
+## Dari Bug ke Dampak
 
-## Komunikasi Itu Skill
-
-Banyak _developer_, termasuk saya dulu, berpikir bahwa kalau kode sudah bagus, kerjaan sudah selesai. Tapi kenyataannya, **kalau tidak bisa dijelaskan, tidak akan didukung**. Dan tanpa dukungan, baik itu waktu, resource, atau kepercayaan, kode terbaik pun tidak akan pernah _deploy_.
-
-Komunikasi bukan bakat. Ini _skill_ yang bisa dilatih, persis seperti menulis kode. Setiap kali kamu menjelaskan masalah teknis ke non-teknis, kamu _sharpen_ skill itu. Awalnya mungkin canggung. Tapi lama-lama, jadi refleks.
-
-Dan refleks itu sangat berguna, bukan cuma di dunia kerja, tapi juga saat mengajar. Karena mengajar, pada dasarnya, adalah menjelaskan hal kompleks dengan cara yang _accessible_.
-
-Kalau kamu tertarik dengan topik _teaching_ dan komunikasi teknik, atau punya pengalaman serupa yang ingin didiskusikan, [hubungi saya](/contact/).
+Dua contoh laporan tadi menunjukkan cara menjelaskan masalah: mulai dari data yang tidak muncul, lalu sampaikan dampak dan rencana perbaikannya. Kalau kamu punya pengalaman serupa saat menjelaskan masalah teknis, [hubungi saya](/contact/).
 
 ---
 
