@@ -13,5 +13,8 @@ public/
 # Internal planning documents
 docs/
 
+# Local Git worktrees
+.worktrees/
+
 # Hugo asset cache (regenerated)
 resources/_gen/assets/
