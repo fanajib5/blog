@@ -56,7 +56,7 @@ HTTP request punya overhead besar. Headers saja bisa 500+ bytes (`Host`, `Conten
 
 ### 2. Persistent Connection
 
-Device tracker perlu maintain koneksi yang **selalu aktif**. Server harus bisa mengirim command kapan saja, misalnya "matikan mesin" (engine cut), "update interval reporting", atau "request lokasi sekarang". HTTP request-response tidak cocok untuk model ini karena connection-nya berumur singkat.
+Device tracker perlu mempertahankan koneksi aktif agar server bisa mengirim command kapan saja, misalnya "matikan mesin" (engine cut), "update interval reporting", atau "request lokasi sekarang". HTTP memakai pola request-response; untuk mengirim command saat tidak ada request baru dari device, perlu mekanisme lain seperti polling atau kanal terpisah.
 
 ### 3. Kontrol Penuh atas Format Data
 
@@ -165,7 +165,7 @@ Teltonika (seri FMB, FMTC) memakai pendekatan yang sedikit berbeda. Strukturnya 
 0000 0039         Data field length (4 byte)
 08               Codec ID (1 byte — 0x08 = codec8, 0x0E = codec8 extended)
 01               Number of data (1 byte — jumlah AVL records)
-...              AVL data (IMEI + records)
+...              AVL data (records saja; IMEI dikirim terpisah saat handshake)
 ...              Number of data (repeat)
 0000 0XXX         CRC-16 (4 byte)
 ```
@@ -205,7 +205,7 @@ Protokol GPS terbagi dua kategori besar:
 
 ### Tren: MQTT dan JSON
 
-GPS tracker generasi baru (4G/LTE, Cat-M1, NB-IoT) mulai beralih ke MQTT dengan payload JSON:
+Dalam pengalaman saya menangani GPS tracking di Indonesia, saya mulai menjumpai tracker generasi baru (4G/LTE, Cat-M1, NB-IoT) yang memakai MQTT dengan payload JSON:
 
 ```json
 {
@@ -219,7 +219,7 @@ GPS tracker generasi baru (4G/LTE, Cat-M1, NB-IoT) mulai beralih ke MQTT dengan 
 }
 ```
 
-JSON lebih mudah di-parse, lebih human-readable, dan tidak memerlukan protocol manual khusus. Namun, device 2G/3G masih mendominasi pasar Indonesia dan tetap memakai binary TCP. Keduanya akan hidup berdampingan selama beberapa tahun ke depan.
+JSON lebih mudah di-parse, lebih human-readable, dan tidak memerlukan protocol manual khusus. Namun, di Indonesia perangkat 2G/3G masih banyak dipakai dan tetap menggunakan binary TCP. Kedua pendekatan ini akan hidup berdampingan selama beberapa tahun ke depan.
 
 ## Kesalahpahaman Umum yang Saya Alami
 
@@ -243,9 +243,9 @@ Mayoritas, tetapi beberapa brand mengirim timestamp dalam timezone lokal (UTC+7 
 
 Sebelum menulis decoder, saya "melihat" data yang masuk dengan beberapa tools:
 
-### 1. TCP Proxy Logger
+### 1. TCP Packet Logger
 
-Bikin TCP proxy sederhana yang hanya men-logging setiap byte yang lewat, lalu forward ke server asli:
+Untuk melihat struktur packet, jalankan TCP listener sederhana yang mencatat byte masuk. Contoh ini hanya menerima dan menampilkan data, bukan meneruskannya ke server lain:
 
 ```go
 // Minimal TCP logger — log semua byte yang masuk

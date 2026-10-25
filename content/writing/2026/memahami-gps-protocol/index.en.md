@@ -56,7 +56,7 @@ HTTP requests add overhead. Headers alone can easily consume 500+ bytes (`Host`,
 
 ### 2. Persistent Connections
 
-A vehicle tracker needs an **always-on persistent connection**. The server must be able to send downlink commands at any moment: "cut the engine" (engine kill), "update reporting interval", or "request immediate location update". HTTP's short-lived request-response cycle does not fit because connections close after each exchange.
+A vehicle tracker needs an **always-on persistent connection** so the server can send downlink commands at any moment: "cut the engine" (engine kill), "update reporting interval", or "request immediate location update". HTTP uses a request-response model; sending a command when the device has not made a new request requires another mechanism, such as polling or a separate channel.
 
 ### 3. Granular Control Over Data Layout
 
@@ -165,7 +165,7 @@ Teltonika (FMB and FMTC series) uses a different, more structured design built a
 0000 0039         Data field length (4 bytes)
 08               Codec ID (1 byte: 0x08 = codec8, 0x0E = codec8 extended)
 01               Number of data (1 byte: count of AVL records)
-...              AVL data (IMEI + records)
+...              AVL data (records only; IMEI is sent separately during the handshake)
 ...              Number of data (repeat verification)
 0000 0XXX         CRC-16 (4 bytes)
 ```
@@ -205,7 +205,7 @@ GPS protocols fall into two broad architectural families:
 
 ### The Trend: MQTT and JSON
 
-Next-generation GPS trackers (4G/LTE, Cat-M1, NB-IoT) are increasingly adopting MQTT with JSON payloads. The payload can look like this:
+In the GPS-tracking work I've seen in Indonesia, newer trackers (4G/LTE, Cat-M1, NB-IoT) are starting to use MQTT with JSON payloads. A payload can look like this:
 
 ```json
 {
@@ -219,7 +219,7 @@ Next-generation GPS trackers (4G/LTE, Cat-M1, NB-IoT) are increasingly adopting 
 }
 ```
 
-JSON is easier to parse, human-readable, and does not require a low-level protocol specification. However, 2G/3G devices still dominate the market and use binary TCP. Both approaches will coexist for the next few years.
+JSON is easier to parse, human-readable, and does not require a low-level protocol specification. In Indonesia, 2G/3G devices are still common and continue to use binary TCP. Both approaches will coexist for the next few years.
 
 ## Common Misconceptions I Learned the Hard Way
 
@@ -243,9 +243,9 @@ Most do, but some vendors send timestamps in local vehicle time (such as UTC+7 f
 
 Before writing a decoder, inspect the incoming traffic. These are the tools I use:
 
-### 1. TCP Proxy Logger
+### 1. TCP Packet Logger
 
-A simple TCP proxy can dump raw bytes to standard output before forwarding them to an upstream server:
+A simple TCP listener can dump received bytes to standard output for inspection. This example only receives and prints data; it does not forward anything to another server:
 
 ```go
 // Minimal TCP logger: dump all inbound bytes
