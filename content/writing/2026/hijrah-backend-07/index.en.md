@@ -15,43 +15,43 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Every second, the fleet talks. Tens of thousands of GPS trackers send TCP packets carrying positions, ignition status, signal strength, and the system must swallow all of it, around the clock, with no "please send less data" campaign hahaha.
+Every second, the fleet has something to report. Tens of thousands of GPS trackers send TCP packets with positions, ignition status, and signal strength. The system has to take them all in, around the clock, with no "please send less data" campaign hahaha.
 
-In [episode one](/en/writing/2026/hijrah-backend-01/) I mentioned it briefly: the old system received and wrote within a single service. The new system splits that into three stages: a listener that only receives and decodes packets; a message queue in the middle; and a consumer that writes to the database. This episode walks through each stage, including two moments where I tripped, classically hehe~
+In [episode one](/en/writing/2026/hijrah-backend-01/) I mentioned that the old system received packets and wrote them to the database in one service. The new system separates that work into three parts: a listener receives and decodes packets, a message queue holds them, and a consumer writes them to the database. This episode covers how each part works, including two mistakes I made hehe~
 
 ## Why Is There a Queue in the Middle
 
-A fair question: doesn't an extra hop mean extra latency?
+A fair question: doesn't adding a hop add latency?
 
-Here's the logic: the speed of receiving packets and the speed of writing to the database are two different speeds. The fleet doesn't care if the database is busy, trackers keep sending. If receiving and writing are chained together, a slow database slows reception down, and failed data can only hope the device politely resends.
+Receiving packets and writing them to the database happen at different speeds. The trackers keep sending even when the database is busy. If receiving and writing are tied together, a slow database slows reception too. Any packet that fails to get in can only hope the device sends it again.
 
-The queue separates those two speeds. The listener receives as fast as the fleet talks and drops packets into the queue; the consumer pulls from the queue as fast as the database allows. Midday spikes get absorbed by the buffer. But, and this is the big lesson of this episode, every new component brings a new way to fail. And I found mine in the most classic way possible: directly in production hahaha.
+The queue keeps those two jobs separate. The listener receives packets and puts them in the queue; the consumer takes them out as fast as the database can write. The buffer absorbs midday spikes. Each new component also brings a new way to fail. I discovered mine the classic way: in production hahaha.
 
 ## When the Broker Sleeps: The Producer That Threw Everything Away
 
-A scenario the old system never had: what if the queue itself dies? The old system had no such failure mode, it inserted directly; if the database sulked, the device would just retry later. My new system's first answer, which I now regret: if the broker connection dropped... **the messages got discarded**.
+A dead queue wasn't a scenario the old system had to handle because it inserted directly. If the database sulked, the device could retry later. My new system had a different problem, and my first answer is one I regret: if the broker connection dropped... **the messages got discarded**.
 
-Silent, efficient, and horrifying. Customer vehicle positions, thrown away quietly because infrastructure sneezed.
+Quiet, efficient, and horrifying. Customer vehicle positions disappeared just because the infrastructure sneezed.
 
-The fix came in layers. First: don't give up quickly, stepped retries over several seconds, so a briefly stumbling broker costs zero packets. Second: if it stays down longer, don't discard quietly, **throw loudly**: a clear error log, not a warning someone might find three weeks later. Third, and my favorite: honest backpressure. My queue holds around 8,000 packets;[^2] when it fills, `Send()` waits, the listener slows down automatically, and the trackers on the other end start TCP retries. The net effect is almost philosophical: **data isn't lost, it just arrives late.** A source that waits isn't failure; it's the cheapest storage ever invented hehe.
+The fix came in layers. First, don't give up quickly: use stepped retries over several seconds so a broker that's only stalling doesn't cost us packets. Second, if it stays down, don't discard messages quietly. **Make the failure visible** with a clear error log, not a warning someone might find three weeks later. Third, and my favorite, use honest backpressure. My queue holds around 8,000 packets;[^2] when it fills, `Send()` waits. The listener slows down, and the trackers at the other end retry over TCP. The result is almost philosophical: **data isn't lost; it just arrives late.** Making the source wait isn't a failure. To me, it's the cheapest storage there is hehe.
 
 The comment in my producer code documents this chain with some pride: queue full → `Send()` blocks → listener slows → device retries. A chain that once looked like a bug turned out to be a designed safety net.
 
 ## Discipline in the Wrong Place
 
-Stage two: the consumer writing thousands of location rows at once (bulk insert). Here I once made a beautifully ironic mistake: inside the mass-write loop, if one row failed, the function returned an error immediately, and **all remaining locations in that pile got thrown away with it**.
+In stage two, the consumer writes thousands of location rows at once (bulk insert). I once made a beautifully ironic mistake here: if one row failed in the mass-write loop, the function returned an error immediately. **Every location after it got thrown away too.**
 
-The funny part: the old PHP system actually `continue`d in this case. My Go version, "more disciplined about errors", turned out to be more wasteful with data than the version I considered lax. The first fix was nine letters: `return` became `continue`, plus a log so failed rows stay visible. Then the same treatment went to every other sender, capped by tuning: the consumer buffer grew tenfold with more workers to drain it, all recorded in config comments as decisions, not mysterious numbers hahaha.[^1]
+The funny part is that the old PHP system `continue`d in this case. My Go version, "more disciplined about errors", wasted more data than the version I thought was lax. The first fix took nine letters: change `return` to `continue`, then add a log so failed rows stay visible. I applied the same fix to every other sender. Finally, I increased the consumer buffer tenfold and added more workers to drain it. The config comments record those choices instead of leaving mysterious numbers behind hahaha.[^1]
 
-The lesson stuck: **caring about errors is good; giving up entirely because of one error isn't discipline, it's drama.** In a data pipeline, choosing between `continue` and `return` is a data-life-or-death decision, and it deserves to be taken seriously every time it appears.
+The lesson stuck with me: **caring about errors is good; giving up entirely because of one error isn't discipline, it's drama.** In a data pipeline, `continue` versus `return` can decide what happens to thousands of rows. It's worth thinking through each time that choice comes up.
 
 ## A Database That Understands Time
 
-The final stage: location data is time data, its value is the link (when, where), and its rows are born without pause. For this I use PostgreSQL with a time-series extension: the location table becomes a hypertable, partitioned automatically by time.
+The final stage stores location data, which is always tied to a time and a place. For that I use PostgreSQL with a time-series extension. The location table becomes a hypertable, partitioned automatically by time.
 
-Two luxuries the old system never had. First, **compression**: aged data chunks get compressed automatically, more than a hundred chunks now live frugally, and certain indexes are built directly over the compressed form without unpacking it. Second, **retention that runs itself**: a weekly policy drops data older than a set age. The old system cleaned up old data manually, back then, with prayers. Now the database owns the calendar hehe~
+There are two things the old system never had. First, **compression**: old chunks are compressed automatically. More than a hundred chunks now live that way, and certain indexes can be built directly on the compressed data without unpacking it. Second, **automatic retention**: a weekly policy drops data past a set age. The old system cleaned up old data by hand, with prayers. Now the database keeps the schedule hehe~
 
-Together they turned "when do we tidy up old data?" from a ritual into a configuration.
+Together, they turned "when do we tidy up old data?" from a ritual into a configuration setting.
 
 ## Lessons
 
@@ -61,9 +61,7 @@ Together they turned "when do we tidy up old data?" from a ritual into a configu
 4. **Backpressure is a feature.** When capacity runs out, letting the source wait is the cheapest storage there is.
 5. **Automatic retention replaces ritual.** What used to be a routine manual chore full of prayers is now just a policy that runs itself.
 
-The next episode is the last of this series: a retrospective of almost two years, what I'd do differently, and the part I'm most grateful for. See you at the finale.
-
-Cheers.
+The next episode is the series finale: a look back at almost two years, what I'd do differently, and the part I'm most grateful for.
 
 [^1]: Code snippets and configuration figures are simplified, the originals are longer and carry internal details.
 

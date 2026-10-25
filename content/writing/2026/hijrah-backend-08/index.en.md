@@ -15,43 +15,43 @@ tags:
 series: "Hijrah Backend"
 ---
 
-This is the final episode of the series. And as you might have guessed from the title, the "eighteen months" figure itself needs quotation marks: counted from day one to when this post was written, the number is larger. But fine, numbers on slides each get their own version; this series has been a story about that gap since the beginning hahaha.[^1]
+This is the series' final episode. The "eighteen months" in the title needs quotation marks: by the time I wrote this, more time had passed since day one. But numbers on slides have a way of making their own rules. This series has been about that gap from the start hahaha.[^1]
 
-The previous seven episodes handled technical lessons one by one. This episode holds the rest: what I'd do differently, the architecture debt I promised to discuss back in [episode two](/en/writing/2026/hijrah-backend-02/), one act that never happened, and the thank-yous.
+The previous seven episodes covered the technical lessons. In this final part, I look at what I'd change if I started over, the architecture debt I promised to discuss in [episode two](/en/writing/2026/hijrah-backend-02/), a teaching plan that never happened, and what I'm grateful for.
 
 ## What I'd Do Differently If I Started Over
 
-**First, I'd debate the target number with data, from day zero.** [Episode one](/en/writing/2026/hijrah-backend-01/) showed the arithmetic: 370+ endpoints, three months, roughly four endpoints per day with no days off. If I started over, I'd put that spreadsheet on the table during the interview itself: here's the count, here's the complexity, here's the headcount (one person). An honest number early is cheaper than burnout in the middle.
+**First, I'd discuss the target with data from day one.** [Episode one](/en/writing/2026/hijrah-backend-01/) showed the arithmetic: 370+ endpoints, three months, roughly four endpoints a day with no days off. If I started over, I'd bring that spreadsheet to the interview: here's the count, here's the complexity, and here's the available headcount (one person). An honest number early is cheaper than burnout halfway through.
 
-**Second, documentation written from day one.** One of the hardest parts of the old system's inheritance wasn't the code, it was the knowledge: everything lived in one person's head, with the code as the only specification. I enjoyed playing "walking documentation" when answering questions; I don't want anyone, including myself a few years from now, depending on that. This blog series is partly its repayment hehe.
+**Second, write the documentation from day one.** The hardest part of inheriting the old system wasn't just its code; it was the knowledge held in one person's head. The code became the only specification. I liked being "walking documentation" when answering questions, but I don't want anyone, including me a few years from now, to depend on that. This blog series is one way I'm repaying that debt hehe.
 
-**Third, parity verification gets scheduled, not felt.** [Episode three](/en/writing/2026/hijrah-backend-03/) told the story: I announced "done" while verification was below 100%, and I was proven right. If I started over, verification would be a checklist with its own time budget, not a feeling I wait for.
+**Third, schedule parity verification instead of relying on a feeling.** In [episode three](/en/writing/2026/hijrah-backend-03/) I wrote about announcing "done" before verification reached 100%. If I started over, verification would have a checklist and its own time budget, not a feeling I wait to have.
 
-**Fourth, mental health goes into the project estimate.** There was a three-month period early on that collected its payment from my head. I don't regret working hard; I'd just write that duration in equally honest ink as the endpoint estimate.
+**Fourth, include mental health in the project estimate.** The first three months took a toll on my mental health. I don't regret working hard, but if I started over, I'd write down the duration and its toll as honestly as the endpoint estimate.
 
-**Fifth, architecture gets discussed before it gets inherited.** Which brings us to my promise.
+**Fifth, discuss architecture before inheriting it.** That brings me to the promise I still owe.
 
 ## The Architecture Debt Promised Since Ep 2
 
-In [episode two](/en/writing/2026/hijrah-backend-02/) I promised to cover one thing in the final episode: why the lighter endpoints in this system still carry a floor of about 2-3 seconds after all the fixes.
+In [episode two](/en/writing/2026/hijrah-backend-02/) I promised to explain why the lighter endpoints in this system still have a floor of about 2-3 seconds after all the fixes.
 
-The cause isn't code; it's architecture. Users in Indonesia, main database in Indonesia, but the application in a European cloud region. Every click pays for two crossings. As long as that's inherited, every optimization has a limit: we went from 17 seconds to 3, but three seconds is the floor, and floors can't be patched by code.
+The cause isn't code but architecture. The users and main database are in Indonesia, but the application is in a European cloud region. Every click makes two crossings. As long as that arrangement stays in place, every optimization has a limit. We got the response time down from 17 seconds to 3, but code alone can't break through that three-second floor.
 
-The way out is clear and long identified: move the application closer to the database and users, or pull a replica closer. Neither is a refactoring; both are infrastructure decisions involving budget and cross-party coordination. So here is the honest confession of a solo writer: **some debts cannot be repaid alone, and admitting that is part of the job.**[^2] May a follow-up episode someday be written as a success story, not just a blueprint hahaha.
+The way out has been clear for a while: move the application closer to the database and users, or bring a replica closer. Neither is a refactoring; both are infrastructure decisions that need a budget and coordination across parties. Here's what I have to admit as the person working on it alone: **some debts cannot be repaid alone, and admitting that is part of the job.**[^2] I hope I can write a follow-up someday as a success story, not just a blueprint hahaha.
 
 ## The Act That Never Happened
 
-There's one act I almost told as my favorite part of this series: being asked to teach Go to the team. The plan existed since August 2025. I prepared the material myself, structured into four weeks: Go fundamentals, functions and data structures, OOP and concurrency, up to web development with Go. One colleague even bought an online course to join the learning.
+There's one part I almost called my favorite: the plan to teach Go to the team. It had been on the calendar since August 2025. I prepared four weeks of material: Go fundamentals, functions and data structures, OOP and concurrency, then web development with Go. One colleague even bought an online course to join in.
 
 As of this episode, the class has never happened.
 
-And on reflection, it makes a fitting closer for a series full of stories about the gap between plans and reality: the last plan to fall through was the plan about me teaching. The material still hangs neatly in its repo, waiting to be scheduled, queued behind other schedules that started waiting earlier hehe.
+On reflection, it fits a series about the gap between plans and reality: the last plan to fall through was my plan to teach. The material is still sitting neatly in its repo, waiting to be scheduled behind other things that have been waiting even longer hehe.
 
 > Honestly, I do feel some disappointment. The reason is simple: I had hoped that teaching Go to the team would let them see, up close, the importance of planning in coding and of using proper data types, the kind of thing that should feel important through experience, not through my class. I admit I'm not a structured reader myself; I read whatever I currently need, so my knowledge feels like scavenged knowledge. But from that habit I instead learned debugging and system analysis, to better understand how programs behave and how to handle production issues.
 
 ## What I'm Most Grateful For
 
-This series started with a job opening that asked me to execute someone else's decision, went through a three-month mandate, an endpoint eating 15 seconds, a speeding parked car, and hundreds of small decisions in between.
+This series started with a job opening that asked me to carry out someone else's decision. Then came the three-month mandate, an endpoint taking 15 seconds, a speeding parked car, and hundreds of small decisions in between.
 
 But if you ask what I'm most grateful for, the answer isn't technical.
 
@@ -61,13 +61,9 @@ I'll add just one sentence of my own: not many jobs let you watch something you 
 
 ## Closing the Series
 
-Seven episodes, one retrospect, and one journey that was supposedly three months.
+Seven technical episodes, one retrospect, and a journey that was supposedly three months.
 
-Thank you for following along this far. If you happen to be in the middle of a migration like this: measure first, write the docs, take care of yourself, and remember that "done" is a spectrum. See you in future writings, which hopefully won't need another migration to happen first hehe.
-
-Thanks for stopping by. Have a great day!
-
-Cheers.
+Thank you for following the series. If you're in the middle of a similar migration, measure the work, write things down, and take care of yourself. As I learned along the way, "done" has more than one meaning.
 
 [^1]: Figures in this retrospect refer to earlier episodes, each of which carries its own rounding notes.
 
