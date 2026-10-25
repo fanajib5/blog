@@ -15,7 +15,7 @@ tags:
   - arsitektur
 ---
 
-Di proyek migrasi PHP ke Go yang saya kerjakan, ada _phase_ di mana saya harus _audit_ semua _route_ dan _controller_ yang sudah ada. Tujuannya sederhana: sebelum migrasi, harus pahami dulu _pattern_ apa yang sudah bagus dan mana yang harus ditinggalkan. Hasilnya? _Yah_, cukup... _enlightening_ hahaha.
+Di proyek migrasi PHP ke Go yang saya kerjakan, saya mengaudit semua _route_ dan _controller_ yang sudah ada. Sebelum migrasi, saya perlu memahami _pattern_ mana yang layak dipertahankan dan mana yang perlu ditinggalkan. Hasil auditnya cukup membuka mata, hahaha.
 
 Proyek ini punya profil seperti ini:
 
@@ -24,7 +24,7 @@ Proyek ini punya profil seperti ini:
 - **5 auth guard**: `user-api`, `partner-api`, `open-api`, `open-api-limited`, `tms-api`
 - **Rate limiting** yang bervariasi: dari 3/menit sampai 100/menit
 
-Artikel ini bukan tutorial _"cara bikin API"_. Ini catatan _pattern_ dan _anti-pattern_ yang saya temukan, plus bagaimana _pattern_ yang sama diimplementasi di Go. Jadi kalau kamu lagi _migrate_ atau mulai proyek baru, _hopefully_ bisa _skip_ beberapa kesalahan yang sudah saya temukan hehe~
+Artikel ini bukan tutorial _"cara bikin API"_. Ini catatan tentang _pattern_ dan _anti-pattern_ yang saya temukan, serta contoh penerapannya di Go. Kalau kamu sedang _migrate_ atau memulai proyek baru, semoga catatan ini bisa membantumu menghindari beberapa kesalahan yang saya temukan.
 
 ## 1. Route Organization: Kelompokkan dengan Jelas
 
@@ -83,7 +83,7 @@ Route::post('/devices/check_device_type', ...);  // verb di bawah resource
 
 ### Best Practice: Struktur Route di Go
 
-Di Go, _route grouping_ dan _middleware_ jauh lebih _explicit_:
+Di contoh Go ini, _route grouping_ dan _middleware_ ditulis secara _explicit_:
 
 ```go
 // internal/router/router.go
@@ -133,7 +133,7 @@ func SetupRouter(
 }
 ```
 
-_Kenapa ini lebih baik?_ Karena di Go, setiap _middleware chain_ dan _route group_ adalah kode eksplisit, bukan konfigurasi array. Kamu bisa _trace_ _flow_-nya secara linear, dan _IDE_ bisa _navigate_ langsung ke _handler_-nya. Tidak ada _"lho, ini route pakai middleware apa ya?"_ karena semuanya _visible_ hehe~
+Di sini, setiap _middleware chain_ dan _route group_ ditulis sebagai kode, bukan konfigurasi array. Alurnya bisa ditelusuri dari atas ke bawah, dan _IDE_ bisa membuka definisi _handler_ langsung. Jadi, middleware yang dipakai tiap route terlihat di tempat route itu didaftarkan.
 
 ## 2. Controller Pattern: Kurangi, Pisahkan, _Inject_
 
@@ -178,7 +178,7 @@ public function login(Request $request)
 }
 ```
 
-Masalahnya? Kalau kamu mau pakai _logic login_ yang sama di tempat lain (misalnya CLI command atau _job queue_), kamu harus _duplicate code_ atau _extract_ ke _service_ nanti. _Kenapa tidak dari awal saja dipisah?_ hehe~
+Kalau _logic login_ yang sama dibutuhkan di tempat lain, misalnya CLI command atau _job queue_, kodenya perlu diduplikasi atau diekstrak ke _service_. Lebih mudah memisahkannya sejak awal.
 
 ### Anti-Pattern: Permission Check Manual
 
@@ -213,7 +213,7 @@ public function store(Request $request)
 // Dan seterusnya di setiap method...
 ```
 
-Ini contoh _pattern_ yang seharusnya pakai **Laravel Policy** atau **Middleware**. Bayangkan kalau ada 10 method, kamu _call_ fungsi yang sama 10 kali. _DRY_ (_Don't Repeat Yourself_)[^2] itu bukan cuma _buzzword_, itu _survival strategy_ hahaha.
+Contoh ini lebih cocok ditangani dengan **Laravel Policy** atau **Middleware**. Kalau ada 10 method, fungsi yang sama tidak perlu dipanggil dan dipelihara berulang kali. Prinsip _DRY_ (_Don't Repeat Yourself_)[^2] membantu menghindari duplikasi seperti ini.
 
 ### Best Practice: Thin Controller + Service Layer
 
@@ -264,7 +264,7 @@ Ini _pattern_ yang harus ditiru:
 
 ### Implementasi di Go
 
-Di Go, _service layer_ bukan opsi, itu **keharusan**. Karena Go tidak punya _framework magic_ seperti Laravel, kamu harus _explicit_:
+Contoh Go berikut memisahkan _business logic_ ke _service layer_. Tanpa _framework magic_ seperti Laravel, dependensi dan alur pemanggilan perlu ditulis secara _explicit_:
 
 ```go
 // internal/handler/auth_handler.go
@@ -351,7 +351,7 @@ func (s *authService) Login(ctx context.Context, req dto.LoginRequest) (*dto.Log
 }
 ```
 
-_Perbedaan utama dari PHP/Laravel_: tidak ada _inheritance_, tidak ada _magic method_, tidak ada _middleware constructor_. Semuanya _explicit_ lewat _dependency injection_. Awalnya memang terasa lebih banyak _boilerplate_—dan iya, memang lebih banyak—tapi _trade-off_-nya adalah setiap _layer_ bisa di-_test_ secara _independen_, dan _flow_ data selalu terlihat jelas. Tidak ada yang tersembunyi di belakang layar hehe~
+Di contoh ini, tidak ada _inheritance_, _magic method_, atau _middleware constructor_. Dependensi diberikan secara _explicit_ lewat _dependency injection_. Memang ada lebih banyak _boilerplate_, tetapi tiap _layer_ dapat diuji secara _independen_ dan alur datanya terlihat jelas.
 
 ## 3. Validasi: Konsisten, Satu Cara, di Satu Tempat
 
@@ -396,16 +396,16 @@ class GeminiAnalyzeDeviceRequest extends FormRequest
 }
 ```
 
-Masalah dengan cara 1 dan 2? Kalau ada 5 _endpoint_ yang membutuhkan validasi `device_id`, kamu nulis rule yang sama 5 kali. Dan kalau _rule_-nya berubah, kamu harus cari dan update di 5 tempat berbeda. _Fun times_ hahaha.
+Dengan cara 1 dan 2, rule `device_id` bisa ditulis berulang di beberapa _endpoint_. Saat rule berubah, setiap salinannya perlu diperbarui.
 
 ### Best Practice
 
-**Gunakan Form Request secara konsisten.** Alasannya:
+**Gunakan Form Request untuk aturan yang perlu dikelola bersama.** Beberapa manfaatnya:
 
-1. **Reusable**: satu _form request_ bisa dipakai di banyak _endpoint_
+1. **Reusable**: satu _form request_ bisa dipakai di beberapa _endpoint_ yang memakai aturan sama
 2. **Testable**: _form request_ bisa di-_test_ secara _independen_ tanpa _hit endpoint_
 3. **Readable**: semua _rule_ di satu tempat, tidak tersebar di _controller_
-4. **Auto-documentation**: kalau pakai _tool_ seperti Swagger/L5-Swagger, _form request_ otomatis ter-_generate_ docs-nya
+4. **Dokumentasi**: _form request_ dapat menjadi sumber informasi saat menyusun dokumentasi dengan _tool_ seperti Swagger/L5-Swagger
 
 ### Implementasi di Go
 
@@ -426,7 +426,7 @@ type AnalyzeDeviceRequest struct {
 }
 ```
 
-_Kelebihannya_: di Go, karena struct adalah _first-class citizen_, validasi otomatis ter-_attach_ ke tipe data. Tidak mungkin ada _"lho, validasi mana yang dipakai di _endpoint_ ini?"_ karena struct-nya langsung _visible_ di _handler_ signature hehe~
+Di contoh Go ini, rule validasi ditulis sebagai _struct tags_ dan diperiksa pada _handler_. Dengan begitu, aturan yang berlaku bisa dilihat bersama tipe request yang digunakan.
 
 ## 4. Response Consistency: Satu Format, Semua Endpoint
 
@@ -479,7 +479,7 @@ Bayangkan _frontend developer_ yang harus _handle_ dua format response berbeda u
 
 ### Best Practice
 
-**Satu format response, semua _endpoint_, tidak ada pengecualian.** Kalau perlu _versioning_, pakai _header_ atau _URL prefix_, bukan _format response_ yang berbeda.
+**Usahakan satu format response untuk semua _endpoint_.** Kalau perlu _versioning_, gunakan _header_ atau _URL prefix_ daripada mengubah _format response_.
 
 ```php
 // Gunakan API Resource secara konsisten
@@ -527,13 +527,13 @@ func ValidationError(c *gin.Context, err error) {
 }
 ```
 
-Dengan _helper function_ ini, semua _handler_ pasti mengembalikan format yang sama. Tidak ada lagi _"loh, ini _endpoint_ pakai `ResponseCode` atau `success`?"_ karena tinggal panggil `response.Success()` atau `response.Error()`. _Done_. _Simple_, _predictable_, _happy frontend developer_ hehe~
+Selama _handler_ memakai _helper function_ ini, bentuk _response_-nya tetap sama. Untuk hasil sukses, panggil `response.Success()`; untuk error, panggil `response.Error()`.
 
 ## 5. Auth & Authorization: Guard, bukan Manual Check
 
 ### Apa yang Saya Temukan
 
-Proyek ini punya _auth guard_ yang cukup matang:
+Proyek ini memakai lima _auth guard_ untuk domain yang berbeda:
 
 ```php
 // 5 guard untuk 5 domain berbeda
@@ -668,17 +668,17 @@ userAPI := r.Group("/")
 userAPI.Use(authMiddleware.Guard("user-api"))
 ```
 
-Di Go, karena setiap _middleware_ adalah fungsi yang bisa di-_compose_, kamu bisa _mix and match_ sesuai kebutuhan tanpa _inheritance chain_ yang _rumit_. _Composition over inheritance_[^3] bukan cuma _jargon_, di Go itu cara hidup hahaha.
+Di Go, _middleware_ berupa fungsi yang dapat di-_compose_ sesuai kebutuhan, tanpa _inheritance chain_. Prinsip _composition over inheritance_[^3] cocok dengan pendekatan ini.
 
 ## 6. Pecah Fat Controller jadi Handler Terpisah
 
 ### Masalah Besar
 
-`DeviceController` punya **40+ method**. Mari bayangkan: kalau ada _bug_ di fitur _report_, kamu harus _scroll_ melewati 1000+ baris kode fitur lokasi, fitur perintah, fitur _dashboard_... baru nemu yang kamu cari. _Developer experience_-nya kurang lebih kayak cari jarum di tumpukan jerami, tapi jeraminya _code_ hahaha.
+`DeviceController` punya **40+ method**. Kalau ada _bug_ di fitur _report_, kamu perlu melewati kode untuk fitur lokasi, perintah, dan _dashboard_ sebelum menemukan bagian yang dicari. Mencari satu _method_ di antara lebih dari 1000 baris kode bukan pengalaman yang menyenangkan.
 
 ### Solusi: Satu Domain = Satu Handler
 
-Di Go, ini terjadi secara _natural_ karena Go tidak punya _class inheritance_. Setiap _handler_ adalah struct terpisah:
+Untuk memisahkan tanggung jawab di Go, tiap _handler_ bisa ditempatkan di struct terpisah:
 
 ```go
 // internal/handler/device_handler.go - CRUD only
@@ -710,11 +710,11 @@ func (h *DeviceCommandHandler) CutOffEngine(c *gin.Context) { ... }
 func (h *DeviceCommandHandler) TurnOnEngine(c *gin.Context) { ... }
 ```
 
-_Tips migrasi_: Sebelum konversi ke Go, _pecah dulu_ _controller_ PHP-mu menjadi _handler_ yang lebih kecil. Ini membuat proses migrasi jauh lebih mudah karena setiap _handler_ sudah punya _scope_ yang jelas. _Clean before you move_, bukan _move then clean_ hehe~
+_Tips migrasi_: Sebelum konversi ke Go, pecah _controller_ PHP menjadi _handler_ yang lebih kecil. Dengan begitu, tiap _handler_ sudah punya _scope_ yang jelas saat mulai dipindahkan.
 
 ## Ringkasan: Checklist Best Practice
 
-Berikut _checklist_ yang bisa langsung kamu pakai:
+Berikut _checklist_ dari pola yang dibahas:
 
 | Aspek | ❌ Jangan | ✅ Lakukan |
 |-------|-----------|-----------|
@@ -729,16 +729,16 @@ Berikut _checklist_ yang bisa langsung kamu pakai:
 
 ## Penutup
 
-_Best practice_ itu bukan soal _"cara yang paling sempurna"_. Tapi soal **konsistensi**. Lebih baik konsisten pakai _pattern_ yang "cukup bagus" di seluruh _codebase_, daripada _mix and match_ _pattern_ "sempurna" yang bikin _developer_ baru bingung harus ikut yang mana.
+Dari audit ini, pelajaran yang paling terasa buat saya adalah pentingnya **konsistensi**. Di _codebase_ yang saya lihat, lebih mudah mengikuti _pattern_ yang cukup baik dan dipakai bersama daripada berpindah-pindah _pattern_ yang dianggap sempurna.
 
-Dan kalau kamu sekarang lagi menatap _codebase_ yang punya 40 _method_ di satu _controller_, tiga cara validasi berbeda, dan _response format_ yang tidak konsisten — tenang. Banyak yang sudah lewat fase itu. Termasuk saya. Bedanya, sekarang ada catatan ini hehe~
+Kalau kamu sedang menatap _codebase_ dengan 40 _method_ di satu _controller_, tiga cara validasi, dan _response format_ yang tidak konsisten, mulai benahi satu pola dulu. Saya juga menemukan campuran seperti ini saat audit.
 
 Kalau kamu sedang _migrate_ dari PHP ke Go, atau mau mulai proyek baru dengan arsitektur yang lebih bersih, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
 
-Terima kasih buat yang sudah tersasar ke sini dan membaca sampai akhir. Semoga bermanfaat!
+Terima kasih sudah membaca sampai akhir. Semoga catatan ini membantu saat kamu mengaudit API atau menyiapkan migrasi.
 
 Sekian. Salam.
 
-[^1]: Angka ini termasuk _public route_, _authenticated route_, _partner route_, dan berbagai integrasi. _Yah_, cukup banyak untuk di-_audit_ satu-satu hahaha.
-[^2]: _DRY (Don't Repeat Yourself)_ — prinsip yang sederhana tapi sering dilupakan saat _deadline_ mendekat. _Guilty as charged_ hehe~
-[^3]: _Composition over inheritance_ — prinsip di mana lebih baik menyusun _behavior_ dari komponen-komponen kecil daripada membuat _inheritance tree_ yang dalam. Di Go, ini bukan pilihan, tapi _default_.
+[^1]: Angka ini termasuk _public route_, _authenticated route_, _partner route_, dan berbagai integrasi. Cukup banyak untuk di-_audit_ satu per satu.
+[^2]: _DRY (Don't Repeat Yourself)_ adalah prinsip sederhana yang mudah dilupakan saat _deadline_ mendekat.
+[^3]: _Composition over inheritance_ adalah prinsip menyusun _behavior_ dari komponen-komponen kecil alih-alih membuat _inheritance tree_ yang dalam. Pendekatan ini digunakan dalam contoh Go di atas.
