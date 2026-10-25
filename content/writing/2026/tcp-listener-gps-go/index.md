@@ -21,7 +21,7 @@ series_part: 2
 
 Bayangkan 500 GPS tracker terhubung ke server secara bersamaan. Masing-masing mengirim posisi setiap 10–30 detik, sementara sebagian hanya mengirim _heartbeat_ saat diam. Koneksi bisa bertahan berjam-jam, terputus tanpa pemberitahuan, atau mengirim data dalam potongan.
 
-Kalau terbiasa dengan HTTP API, peralihan ke TCP terasa berbeda. Koneksi bisa tetap terbuka berjam-jam, dan data tidak selalu tiba dalam satu bagian utuh.
+Kalau terbiasa dengan HTTP API, ingat bahwa TCP sendiri tidak memberi struktur _request-response_; listener menerima aliran byte yang perlu ditafsirkan aplikasi.
 
 Di [Part 1](/writing/2026/memahami-gps-protocol/) kita membahas cara device berkomunikasi melalui koneksi TCP persisten dan paket _binary_ dengan aturan berbeda di tiap vendor. Di sini, kita membuat _TCP listener_ di Go untuk menerima koneksi-koneksi itu.
 

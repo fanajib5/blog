@@ -21,7 +21,7 @@ series_part: 2
 
 Imagine 500 GPS trackers connected to your server at once. Each sends location data every 10–30 seconds, while some send only a heartbeat when idle. Connections can stay open for hours, drop without notice, or deliver data in fragments.
 
-If you are used to HTTP APIs, moving to TCP feels different. Connections can stay open for hours, and data does not always arrive in one complete piece.
+If you are used to HTTP APIs, remember that TCP itself does not provide a request-response structure; the listener receives a stream of bytes for the application to interpret.
 
 In [Part 1](/en/writing/2026/memahami-gps-protocol/) we covered how devices communicate through persistent TCP connections and binary packets governed by vendor-specific rules. Here, we will build a TCP listener in Go to accept those connections.
 
