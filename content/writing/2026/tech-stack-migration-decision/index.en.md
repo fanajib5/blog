@@ -19,7 +19,7 @@ I was debugging a bug in a GPS tracker system that had been running for years[^1
 
 It wasn't the bug that made me reconsider. It was **the time it took to find those two lines**. It felt like looking for a needle in a haystack, only to find it was in my own pocket the whole time hehe~
 
-_So anyway_, this article isn't about a specific programming language or a specific technical solution. This is a personal journal about the **thinking process** behind a tech stack migration decision, when it's time, when it's not yet, and how I evaluated it from a perspective that goes beyond just the technical side. Because honestly, how often do we hear technical discussions that devolve into Language A vs Language B debates, when that's not even the real problem hahaha.
+_So anyway_, this isn't about a particular language or technical solution. I want to capture the **thinking process** behind a tech stack migration decision: when it makes sense, when it doesn't, and how to weigh the business side too. Technical discussions often turn into Language A vs Language B debates, even when that isn't the source of the problem.
 
 ## What the System Looked Like
 
@@ -29,7 +29,7 @@ The GPS tracker project I was handling wasn't ~~exactly~~ small. The numbers wer
 - **33 database entities** with complex relationships
 - **~194,000 lines of code** written over several years by multiple developers[^2]
 
-But those numbers weren't really the problem. Sure, that line count looks intimidating, but believe me that wasn't what was causing the headache. The problem was in the **symptoms** that emerged:
+But the numbers weren't really the problem. The line count looks intimidating; what got in the way were the **symptoms**:
 
 ### 1. Features That Should Be Fast, Became Slow
 
@@ -59,7 +59,7 @@ From a business perspective, this meant **the team became conservative**. Featur
 
 ## The Questions I Asked Myself
 
-After realizing that the symptoms above weren't _normal_, I started asking myself these questions. Not technical questions, but questions that helped me understand **whether the problem could be solved without migration**.
+After seeing those symptoms, I started asking myself: **could the problem be solved without migrating?**
 
 ### "Is the Problem in the Tool or in How We Use It?"
 
@@ -71,7 +71,7 @@ In this GPS tracker case, the answer was: **both**. The way code was written did
 
 The second question: if we invested time in cleaning up the architecture on the existing tech stack, would the results be worth it?
 
-In this case, I did a rough calculation: to refactor 370+ endpoints with proper architecture in PHP would take almost the same time as migrating to a new stack. The difference was, if we refactored in PHP, we'd still be stuck with some fundamental limitations (type safety, concurrency, deployment complexity). If we migrated, we'd unlock new capabilities.
+In this case, my rough estimate was that refactoring 370+ endpoints with proper architecture in PHP would take almost as long as migrating to a new stack. The difference: after refactoring in PHP, we'd still be stuck with some fundamental limitations (type safety, concurrency, deployment complexity). Migration would give us new capabilities.
 
 But this was **my case**, right. It doesn't mean refactoring is always the wrong choice. If the system is smaller, or if the stack's limitations aren't too constraining, refactoring is a far wiser choice. Don't read this and immediately start migrating your whole system without thinking it through. You don't want to end up like one horror story I once heard: two years of migration work, only to end up reverting to the old system hahaha.
 
@@ -109,7 +109,7 @@ If after migration, these numbers improve, then the migration succeeded. If not,
 
 ## A Thinking Framework: It's Not About the Language, It's About Momentum
 
-After going through the Q&A process above, I arrived at a simple framework: **three conditions that must be met** before migration makes sense.
+Those questions led me to a simple framework: **three conditions that must be met** before migration makes sense.
 
 ### 1. The Problem Is Structural, Not a Skill Gap
 
@@ -125,7 +125,7 @@ Migration requires time, energy, and focus. If the team is in peak season, or if
 
 ---
 
-If all three conditions are met: **migration makes sense**. If even one isn't met: it's better to refactor, or hold off until the conditions support it.
+If all three conditions are met, **migration makes sense**. If even one isn't, it's better to refactor or wait until the conditions support it.
 
 ## The Decision and What Happened
 
@@ -133,13 +133,13 @@ I decided to migrate. Not a decision made overnight, but a process of several we
 
 The result? _Alhamdulillah_. Features that used to take two weeks could now be shipped in days. Production bugs decreased. New developer onboarding was faster. And most importantly: deploys were no longer feared. Now even Friday afternoon deploys are... well, still a little nerve-wracking, but nowhere near as bad as before hahaha.
 
-For the technical details of how the migration was done, the per-module approach, patterns used, and technical lessons learned, there's a [separate write-up](/en/writing/2026/legacy-php-to-go-migration/) I wrote specifically for the implementation side.
+I cover the per-module approach, patterns, and technical lessons in a [separate write-up](/en/writing/2026/legacy-php-to-go-migration/).
 
 ## Lessons Learned
 
 ### 1. Collect Data First, Decide Later
 
-Don't migrate because "it feels like we need to" or because a new tech stack is trending[^4]. Collect the data, how long new features take to ship, how often bugs appear, how long onboarding takes. When the data supports it, the decision is far easier to sell to stakeholders. Trust me, telling your boss _"we should migrate because Go is cool"_ won't work. But _"features that used to take 2 days now take 2 weeks, here's the data"_? Now that's a conversation hehe.
+Don't migrate because "it feels like we need to" or because a new tech stack is trending[^4]. Collect the data: how long new features take to ship, how often bugs appear, and how long onboarding takes. Evidence makes the decision easier to explain to stakeholders. Telling your boss _"we should migrate because Go is cool"_ won't work. But _"features that used to take 2 days now take 2 weeks, here's the data"_? Now that's a conversation hehe.
 
 ### 2. Migration Is a Business Decision, Not Just a Technical One
 
@@ -147,7 +147,7 @@ Migration discussions often get stuck on "language A is better than language B."
 
 ### 3. Refactoring vs Migration Isn't Binary
 
-It's not a choice between "refactor everything" or "migrate everything." Sometimes the answer is refactor first, then migrate incrementally. Sometimes refactoring alone is enough. Context and system scale determine the answer. Life isn't always black and white, and neither are technical decisions hehe~
+It's not a choice between "refactor everything" or "migrate everything." Sometimes the answer is refactor first, then migrate incrementally. Sometimes refactoring alone is enough. Context and system scale determine the answer; technical decisions are rarely black and white hehe~
 
 ### 4. Also Calculate the Cost of Doing Nothing
 
@@ -155,11 +155,9 @@ We often focus on "how much does migration cost" and forget to ask "how much doe
 
 ## Closing Thoughts
 
-The decision to migrate a tech stack is personal, it depends on context, team, timeline, and many other factors. There's no framework that can answer every situation. But by asking the right questions and gathering enough data, the decision made is far more sound than following hype.
+A tech stack migration decision is personal: it depends on context, team, timeline, and other factors. No framework applies to every situation. Asking the right questions and gathering enough data can lead to a sounder decision than simply following hype.
 
-Hope these notes are useful for anyone wrestling with whether to migrate or not. If you're facing a similar dilemma and want to discuss it, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
-
-That's all. Cheers.
+I hope these notes are useful if you're weighing a migration. If you'd like to discuss a similar dilemma, [get in touch](/en/contact/) or check out my [services](/en/services/).
 
 [^1]: A GPS tracker system that had been running for several years, with various feature additions and patches layered on top over time.
 
