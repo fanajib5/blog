@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Di [episode kedua](/writing/2026/hijrah-backend-02/), query-nya tidak bersalah, 78 milidetik di CLI, sementara _endpoint_-nya makan 15 detik. Episode ini cermin kebalikannya: kali ini query-nya benar-benar bersalah. Tapi bukan karena rumit atau jelek, dia bersalah karena satu pembungkus fungsi kecil yang membuatnya **mendiamkan _index_ yang disiapkan khusus untuknya** hehe~
+Di [episode kedua](/writing/2026/hijrah-backend-02/), _query_-nya tidak bersalah: 78 milidetik di CLI, sementara _endpoint_-nya makan 15 detik. Episode ini kebalikannya. Kali ini _query_-nya memang bersalah, bukan karena rumit atau jelek, tetapi karena satu pembungkus fungsi kecil membuatnya **mendiamkan _index_ yang disiapkan khusus untuknya**.
 
 ## _Index_ yang Dirancang Sempurna (Dikali Tiga)
 
@@ -23,7 +23,7 @@ Korbannya: _endpoint_ hitungan _alert_ per _device_. Satu tabel _alert_ berisi p
 
 Dan ini bagian favorit saya, yang baru saya sadari saat menulis episode ini: di skema _database_, _index_ yang sama itu... ada **tiga salinan**. Nama berbeda, isi identik. Sepertinya tiga orang di tiga masa berbeda saling menambahkan tanpa membuka skema dulu hahaha. Jadi _index_ yang dibutuhkan itu bukan cuma ada, dia ada berlebih.
 
-Dan tetap saja, _query_-nya tidak memakainya. _Full table scan_ di puluhan juta baris, _endpoint_ merayap sampai ±10 detik. Luar biasa kan, rasanya saat kebutuhan paling dasar diabaikan di depan mata? hehe~
+Namun _query_-nya tetap tidak memakainya. _Full table scan_ di puluhan juta baris membuat _endpoint_ merayap sampai ±10 detik. _Index_ yang tepat sudah tersedia, tetapi _query_ ini tidak bisa menggunakannya.
 
 ## Buku Telepon yang Dilitari
 
@@ -53,15 +53,15 @@ Hasil akhirnya: dari ±10 detik _full scan_ menjadi pencarian _index_ yang sekej
 
 Supaya adil, cerita episode ini punya subplot. Di penyelidikan yang sama, ada satu _join_ yang tampak sangat mencurigakan: perbandingan antar tabel dengan penanda _collate_ eksplisit di tengahnya. Wajahnya persis tersangka klasik _query_ lambat: "beda _collation_ bikin _join_ tidak memakai _index_".
 
-Setelah dicek: kedua sisi yang di-_join_ ternyata memakai _collation_ yang sama persis. Penandanya redundan, bukan beracun. Tersangka dibebaskan.
+Setelah dicek, kedua sisi yang di-_join_ memakai _collation_ yang sama. Penandanya redundan, bukan penyebab masalah. Tersangka dibebaskan.
 
-Jadinya dua episode beruntun mengajarkan pelajaran yang sama dari arah berlawanan: di [episode dua](/writing/2026/hijrah-backend-02/) yang menuduh harus bukti (_EXPLAIN_ menggugurkan tuduhan ke CTE), dan di episode ini yang diduga polos pun harus dicek (pembungkus `DATE()` ternyata memang pendekat). _Intuisi_ boleh menunjuk tersangka, tapi hanya pengukuran yang boleh menjatuhkan vonis hehe~
+Dua episode beruntun ini mengajarkan pelajaran yang sama dari arah berlawanan: di [episode dua](/writing/2026/hijrah-backend-02/), _EXPLAIN_ menggugurkan tuduhan terhadap CTE; di episode ini, pemeriksaan membuktikan pembungkus `DATE()` memang penyebabnya. _Intuisi_ boleh menunjuk tersangka, tetapi pengukuran yang menjatuhkan vonis.
 
 ## Utang yang Diakui
 
 Satu bagian yang menurut saya penting untuk ditulis jujur: setelah memperbaiki satu kasus `DATE()`, pola yang sama saya cari di seisi _codebase_, dan menemukan tiga _join_ lain dengan bentuk identik di modul bahan bakar. `DATE()` dipanggil pada kolom di sisi kiri dan kanan _join_.
 
-Statusnya sampai episode ini ditulis: **belum saya perbaiki**. _Endpoint_-nya belum pernah dilaporkan lambat, jadi dia belum mempan dapat jatah waktu perbaikan. Tapi dia sudah masuk daftar, dan suatu hari, mungkin di episode lain, mungkin diam-diam, dia akan ketemu dengan yang mulia `EXPLAIN` juga hahaha.
+Statusnya saat episode ini ditulis: **belum saya perbaiki**. _Endpoint_-nya belum pernah dilaporkan lambat, jadi belum mendapat jatah waktu perbaikan. Polanya sudah masuk daftar; kalau nanti dikerjakan, `EXPLAIN` akan ikut memeriksanya.
 
 Migrasi dengan paritas memang meninggalkan utang-utang kecil seperti ini. Yang penting bukan nol utang; yang penting utangnya tercatat dan tidak main sembunyi-sembunyian.
 
@@ -70,9 +70,9 @@ Migrasi dengan paritas memang meninggalkan utang-utang kecil seperti ini. Yang p
 1. **Jangan panggil fungsi pada kolom di `WHERE`/`JOIN`.** Taruh fungsinya di sisi parameter, biar kolom tetap dalam bentuk yang dikenali _index_-nya.
 2. **_Index_ terbaik pun bisa sia-sia oleh satu pembungkus kecil.** Desain _index_ dan desain _query_ adalah satu paket; salah satunya saja yang melenceng, keduanya gagal.
 3. **Setelah menemukan satu bug pola, cari saudara-saudaranya.** Bug yang lahir dari satu kebiasaan menulis biasanya tidak lahir sendirian.
-4. **Utang teknis yang dicatat itu wajar; yang disembunyikan itu berbahaya.** Saya mengakuinya di tulisan publik, sekarang kalian semua saksinya, jadi tidak mungkin dilupakan hahaha.
+4. **Utang teknis yang dicatat itu wajar; yang disembunyikan itu berbahaya.** Saya mengakuinya di tulisan publik supaya tidak terlupakan.
 
-Episode berikutnya kita naik kelas dari satu _query_ ke bentuk kotanya: bagaimana _monolith_ puluhan ribu baris dirombak menjadi 14 modul _domain_, sambil pesawatnya tetap terbang. Sampai ketemu di sana.
+Episode berikutnya kita beralih dari satu _query_ ke bentuk kotanya: bagaimana _monolith_ puluhan ribu baris dirombak menjadi 14 modul _domain_, sambil pesawatnya tetap terbang.
 
 Sekian. Salam.
 

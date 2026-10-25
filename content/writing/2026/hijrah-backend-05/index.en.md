@@ -15,7 +15,7 @@ tags:
 series: "Hijrah Backend"
 ---
 
-In [episode two](/en/writing/2026/hijrah-backend-02/), the query was innocent, 78 milliseconds in the CLI while the endpoint burned 15 seconds. This episode is the mirror image: this time the query was truly guilty. But not because it was complex or ugly, it was guilty because one small function wrapper made it **ignore an index built specifically for it** hehe~
+In [episode two](/en/writing/2026/hijrah-backend-02/), the query was innocent: 78 milliseconds in the CLI while the endpoint burned 15 seconds. This episode is the mirror image. This time the query really was guilty, not because it was complex or ugly, but because one small function wrapper made it **ignore an index built specifically for it**.
 
 ## A Perfectly Designed Index (Times Three)
 
@@ -23,7 +23,7 @@ The victim: an endpoint counting alerts per device. Its alert table holds tens o
 
 And here's my favorite part, which I only noticed while writing this episode: in the database schema, that same index exists... in **three identical copies**. Different names, identical contents. Apparently three people in three different eras each added it without checking the schema first hahaha. So the index this query needed wasn't just present, it was present in surplus.
 
-And still, the query didn't use it. A full table scan across tens of millions of rows, the endpoint crawling at around 10 seconds. Remarkable, isn't it, watching a basic need get ignored right in front of you? hehe~
+Yet the query still didn't use it. A full table scan across tens of millions of rows left the endpoint crawling at around 10 seconds. The right index was there, but the query couldn't use it.
 
 ## The Phone Book Told to Reread Itself
 
@@ -53,15 +53,15 @@ Final result: from a ~10-second full scan to an index seek in the blink of an ey
 
 To be fair, this episode has a subplot. During the same investigation, one join looked deeply suspicious: a cross-table comparison carrying an explicit collate marker in the middle. It had the exact face of the classic slow-query suspect: "mismatched collations make joins skip indexes."
 
-I checked: both sides of the join used the exact same collation. The marker was redundant, not poisonous. Suspect released.
+I checked, and both sides of the join used the same collation. The marker was redundant, not the cause. Suspect released.
 
-So two consecutive episodes taught the same lesson from opposite directions: in [episode two](/en/writing/2026/hijrah-backend-02/), the accuser needed proof (EXPLAIN dismissed the CTE accusation), and in this one, the presumed-innocent had to be checked anyway (the `DATE()` wrapper really was the culprit). Intuition may point at suspects; only measurement may hand down verdicts hehe~
+These two consecutive episodes taught the same lesson from opposite directions: in [episode two](/en/writing/2026/hijrah-backend-02/), EXPLAIN cleared the CTE; in this one, checking the `DATE()` wrapper confirmed it was the culprit. Intuition can point to suspects, but measurement delivers the verdict.
 
 ## The Debt I Admit
 
 One section I think deserves to be written honestly: after fixing that one `DATE()` case, I searched the codebase for the same pattern, and found three more joins shaped identically in the fuel module. `DATE()` called on the column on both sides of the join.
 
-As of this writing, they are **not fixed**. The endpoints have never been reported slow, so they haven't earned repair time yet. But they're on the list, and one day, maybe in another episode, maybe quietly, they'll meet the honorable EXPLAIN too hahaha.
+As of this writing, they are **not fixed**. The endpoints have never been reported slow, so they haven't earned repair time yet. The pattern is on the list; if I tackle it, EXPLAIN will be part of the investigation.
 
 A parity-first migration does leave small debts like these. What matters isn't zero debt; it's that the debt is recorded and not hiding.
 
@@ -70,9 +70,9 @@ A parity-first migration does leave small debts like these. What matters isn't z
 1. **Don't call functions on columns in `WHERE`/`JOIN`.** Put the function on the parameter side, keep the column in the shape the index recognizes.
 2. **Even the best index can be wasted by one small wrapper.** Index design and query design are one package; if either drifts, both fail.
 3. **When you find a pattern-shaped bug, hunt for its siblings.** Bugs born from a writing habit are rarely born alone.
-4. **Recorded technical debt is fine; hidden debt is dangerous.** I admitted mine in a public post, now you're all witnesses, so it can't be forgotten hahaha.
+4. **Recorded technical debt is fine; hidden debt is dangerous.** I admitted mine in public so it won't be forgotten.
 
-Next episode we move up a class, from one query to the shape of the city: how a monolith of tens of thousands of lines was rebuilt into 14 domain modules, while the plane kept flying. See you there.
+Next episode, we move from one query to the shape of the city: how a monolith of tens of thousands of lines was rebuilt into 14 domain modules while the plane kept flying.
 
 Cheers.
 

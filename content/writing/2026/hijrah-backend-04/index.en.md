@@ -17,7 +17,7 @@ series: "Hijrah Backend"
 
 If I had to compress the one rule that governed this entire migration, it would be this: **the old system is right.**[^2]
 
-I know how that sounds. You're trusted to move a system to a new language, and rule number one is: nothing changes. Not faster. Not cleaner. Not better. **Identical.** This episode unpacks why the most anticlimactic rule turned out to be the sanest decision I've ever worked under hehe~
+I know how that sounds. You're trusted to move a system to a new language, and rule number one is: change nothing. Not faster, cleaner, or better. **Identical.** After living with that rule, I understand why it was the sanest decision I could have made.
 
 ## Why the New System Must Stay Loyal to the Old One
 
@@ -29,7 +29,7 @@ Second, **the debugging surface**. If the new system's output differs from the o
 
 Third, and most often forgotten: **documentation lies, code doesn't**. The system I inherited had almost no documentation, all the knowledge lived in one person's head, and when that person wasn't around, the legacy app was an old city without a map. The old code is the only specification that can be executed. An executable spec cannot lie; it always admits exactly what it does, warts included.
 
-One footnote about this spec, though: it is honest, but sometimes it speaks in riddles. The old system loved repeating the same query inside loops when one combined query would do. And then there is the framework's signature magic: you write `$this->device()`, and suddenly a method exists, defined who-knows-where, since who-knows-when, and, most mind-boggling of all, it successfully returns data. PHP treats all that as normal. In Go, every conjured trick has to be written out explicitly, one by one. At first it felt like losing shortcuts; eventually it felt like finally knowing what is in the kitchen hehe.
+This spec is honest, but sometimes it speaks in riddles. The old system loved repeating the same query inside loops when one combined query would do. Then there's the framework's signature magic: write `$this->device()`, and a method appears, defined who-knows-where and since who-knows-when. Most mind-boggling of all, it successfully returns data. PHP treats that as normal. In Go, every conjured trick has to be written out explicitly. At first I missed the shortcuts; eventually I knew what was in the kitchen.
 
 ## The Rules: What Must Match, What's Free
 
@@ -39,13 +39,13 @@ Parity doesn't mean everything is a twin. I drew the line like this:
 
 **Free to differ**: how the data is fetched. My favorite example is in [episode two](/en/writing/2026/hijrah-backend-02/): an endpoint that ran hundreds of small chained queries in PHP became a single CTE query in Go. The result must match; the road there is free.
 
-That split is what kept the migration interesting: you're not photocopying a dictionary, you're building a new bridge with an exactly identical town square at each end.
+That split kept the migration interesting: I wasn't photocopying a dictionary; I was building a new bridge with an identical town square at each end.
 
 ## The Story: The "Improvement" I Had to Delete Myself
 
 This is my favorite part, because it was an expensive lesson.
 
-One vehicle-history endpoint in the old system returned a few extra fields: alarm history, geofence activity, and driving-behavior incidents. My first Go version filled all three properly, speed-limit alarms, SOS, geofence entries and exits. Richer, more useful. I felt briefly heroic.
+One vehicle-history endpoint in the old system returned a few extra fields: alarm history, geofence activity, and driving-behavior incidents. My first Go version filled all three properly: speed-limit alarms, SOS, and geofence entries and exits. It was richer and more useful, or so I thought at the time.
 
 Then I traced the old system and found the view that is now my favorite picture in this whole codebase:[^1]
 
@@ -59,7 +59,7 @@ The original query had been **commented out by someone**. Not deleted, commented
 
 So the decision came out as a sentence that sounds strange coming from an engineer: _"delete my improvement. Match the old system: keep it empty."_
 
-And it felt exactly as strange as it sounds. Deliberately lowering your own code's "quality" to stay faithful to the system you're replacing. But that's the point: **silent improvements are poison in a migration**. If filling that alarm data ever becomes necessary, it should be an explicit, separate decision, not a surprise that slipped through alongside the migration. Improvements are allowed; surprises are not hehe~
+It felt strange, deliberately lowering your own code's "quality" to stay faithful to the system you're replacing. But **silent improvements are poison in a migration**. If filling that alarm data becomes necessary, it should be a separate, explicit decision, not something slipped into the migration.
 
 ## Small Quirks That Must Be Copied
 
@@ -67,7 +67,7 @@ Parity goes all the way down to things that look trivial. A real example: when a
 
 One more edge case: unreasonable date ranges (say, an end date in the future). The old system replies with a specially-shaped empty envelope; my first version replied with a bare array. No user would ever notice, until the day their response-parsing script does hahaha.
 
-Deliberately copying odd behavior, then writing it into tests with a straight face, is a unique experience. You know it isn't "the right way". You know it's "the way that's already trusted". And in a migration, the second one wins.
+Copying odd behavior and writing it into tests with a straight face feels unusual. I know it isn't "the right way", but it is "the way that's already trusted". In a migration, the second one wins.
 
 ## The Parity Tax: Fields by the Bucketful
 
@@ -79,7 +79,7 @@ And the inconsistency didn't stop at data sources. Types improvised too: the sam
 
 It gets more creative: the same field, sent from different pages to similar endpoints, arrived once as a number and once as a string. PHP accepted both with a smile. Go rejects both with a lengthy decoding error hahaha.
 
-One more that is almost a joke among developers: the old system loved answering empty results with HTTP 200 carrying `[]` or `null`. It could have returned an honest status code that actually says the data was not found. But the frontend had built its life around that empty `[]` for years, and the parity rule says: copy it. So my Go system also reports "all clear" while carrying empty news hahaha.
+One more that is almost a joke among developers: the old system loved answering empty results with HTTP 200 carrying `[]` or `null`. Another status code could have said the data wasn't there, but the frontend had relied on `[]` for years. The parity rule says: copy it. So my Go system also reports "all clear" while carrying empty news.
 
 Because I knew my responses would be bucketfuls, I also built the evidence tool: a small audit that checks the frontend for every field, which ones are actually read, which ones are just passing through. That audit became the receipt when cleanup time arrived. It also helped me in the alarm-history story above: nobody was reading any of it.
 
@@ -99,7 +99,7 @@ The funny part: months into the project, that inspection never came. And reality
 
 The philosophy I actually ended up living isn't "standard library only". It's looser, and paradoxically stricter: **every dependency must answer one question, why isn't the standard library enough for this?** An HTTP framework? The stdlib genuinely isn't comfortable there. Date/time handling? The stdlib is enough, so no extra library. The rule isn't about counting; it's about every line having a reason.
 
-The small lesson: rules enforced through fear get obeyed, but rules obeyed without understanding don't survive. Luckily the second thing happened to me, and the outcome was healthier than the rule itself hahaha.
+The lesson: rules enforced through fear may get obeyed, but rules followed without understanding don't last. Luckily, I found a healthier principle than simply following that rule.
 
 ## Lessons
 
@@ -108,7 +108,7 @@ The small lesson: rules enforced through fear get obeyed, but rules obeyed witho
 3. **Parity exceptions must be conscious and documented.** The default is copy; whatever you don't copy needs a reason you can say out loud.
 4. **Good dependency rules contain reasons, not numbers.** "Standard library only" sounds disciplined; "every dependency must have a reason" is what actually survives contact with reality.
 
-Next episode we head into the database kitchen: why a query with a perfectly good index can choose not to use it, and how a wrapper as small as `DATE()` can punish a table with tens of millions of rows. See you there.
+Next episode, the database kitchen: a query with a good index that chooses not to use it, and how a small `DATE()` wrapper slows a table with tens of millions of rows.
 
 Cheers.
 
