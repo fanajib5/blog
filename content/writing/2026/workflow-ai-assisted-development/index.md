@@ -4,7 +4,7 @@ description: "Cara saya bekerja bareng AI coding agent sehari-hari — bukan rev
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-13
 lastmod: 2026-10-13
-draft: true
+draft: false
 toc: true
 comments: true
 images:

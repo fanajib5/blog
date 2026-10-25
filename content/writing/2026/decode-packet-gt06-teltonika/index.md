@@ -4,7 +4,7 @@ description: "Mengurai packet binary GPS tracker di Go: CRC-ITU GT06 yang ternya
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-14
 lastmod: 2026-10-14
-draft: true
+draft: false
 toc: true
 comments: true
 images:

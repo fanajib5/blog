@@ -4,7 +4,7 @@ description: "Parsing binary GPS tracker packets in Go: why GT06's CRC-ITU isn't
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-14
 lastmod: 2026-10-14
-draft: true
+draft: false
 toc: true
 comments: true
 images:

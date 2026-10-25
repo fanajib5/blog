@@ -4,7 +4,7 @@ description: "How I work alongside AI coding agents daily: not a feature review,
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-13
 lastmod: 2026-10-13
-draft: true
+draft: false
 toc: true
 comments: true
 images:
