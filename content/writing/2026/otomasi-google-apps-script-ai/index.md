@@ -17,15 +17,15 @@ tags:
 pillar: "ai-dev"
 ---
 
-Di setiap bisnis ada pekerjaan kelas ini: terlalu kecil untuk dibuat aplikasi, terlalu sering untuk dikerjakan manual. Mengingatkan klien yang invoice-nya mau jatuh tempo. Merekap submitan Google Form tiap akhir pekan. Menyalin data antar-spreadsheet. Kalau hidupmu ada di Google Workspace, jawaban untuk kelas pekerjaan ini sudah menunggu sejak lama: **Google Apps Script** — JavaScript yang berjalan di server Google, punya akses langsung ke Sheets, Gmail, dan Calendar, gratis untuk akun biasa.
+Banyak pekerjaan di Google Workspace terlalu kecil untuk dibuatkan aplikasi, tetapi terlalu sering jika dikerjakan manual. Misalnya, mengingatkan klien tentang invoice yang akan jatuh tempo, merekap submitan Google Form tiap akhir pekan, atau menyalin data antar-spreadsheet. **Google Apps Script** bisa membantu mengotomasi pekerjaan seperti ini. Skrip JavaScript ini berjalan di server Google, punya akses langsung ke Sheets, Gmail, dan Calendar, serta gratis untuk akun biasa.
 
-Masalahnya bukan bahasanya, tapi dua hal: menulis skrip dari nol itu membosankan, dan _debugging_ di editor Apps Script itu menyiksa (log kecil, tanpa breakpoint yang layak, eksekusi lambat). Masukkan AI ke persamaan dan kamu dapat kombinasi yang manis — **kalau** tahu cara memakainya.
+Bahasanya bukan kendala utama. Menulis skrip dari nol itu membosankan, sementara _debugging_ di editor Apps Script terasa menyiksa: log kecil, tanpa breakpoint yang layak, dan eksekusi lambat. AI bisa membantu, asalkan digunakan dengan cara yang tepat.
 
-Artikel ini studi kasus nyata: reminder invoice otomatis dari Google Sheets, ditulis dengan bantuan AI dan diuji di laptop saya sebelum sekali pun menyentuh editor Google.
+Artikel ini membahas reminder invoice otomatis dari Google Sheets yang saya tulis dengan bantuan AI. Saya mengujinya di laptop sebelum membuka editor Google.
 
 ## Kasus: Reminder Invoice dari Spreadsheet
 
-Spreadsheet-nya sederhana — lima kolom:
+Spreadsheet-nya berisi lima kolom:
 
 ```text
 A: Nama Klien      B: Nominal     C: Jatuh Tempo   D: Status   E: Terakhir Reminder
@@ -34,15 +34,15 @@ CV Berkah          1.200.000      11/11/2026       UNPAID
 PT Sejahtera       3.000.000      01/12/2026       UNPAID
 ```
 
-Kebutuhannya: sekali sehari, kirim email ke klien yang invoice-nya jatuh tempo dalam ≤ 3 hari, lalu catat tanggal reminder-nya supaya tidak spam. Skenario pinggiran yang harus benar: invoice yang sudah lunas dilewati, yang sudah lewat jatuh tempo tidak ditagih dua kali, dan yang sudah diingatkan kemarin tidak diingatkan lagi hari ini.
+Skrip perlu mengirim email sekali sehari kepada klien yang invoice-nya jatuh tempo dalam ≤ 3 hari, lalu mencatat tanggal reminder supaya tidak spam. Ada beberapa kasus yang harus ditangani: invoice yang sudah lunas dilewati, invoice yang sudah lewat jatuh tempo tidak ditagih dua kali, dan klien yang sudah diingatkan kemarin tidak diingatkan lagi hari ini.
 
 ## Kunci Workflow: Pisahkan Logika dari Layanan Google
 
-Kalau kamu minta AI "buatkan script Apps Script reminder invoice", dia akan menghasilkan satu gumpalan kode: baca sheet, hitung tanggal, format email, kirim, tulis balik — semuanya karam dan **tidak bisa diuji** tanpa menjalankannya di Google. Setiap iterasi perbaikan = deploy mental ke editor Google dan menebak-nebak dari log.
+Kalau kamu meminta AI "buatkan script Apps Script reminder invoice", hasilnya bisa berupa satu gumpalan kode: membaca sheet, menghitung tanggal, memformat email, mengirim, lalu menulis balik. Semua bagian itu tercampur dan **tidak bisa diuji** tanpa menjalankannya di Google. Setiap perbaikan berarti menyalin ulang kode ke editor Google dan menebak-nebak dari log.
 
-Workflow yang benar (dan yang saya pakai): minta AI memecah jadi dua lapis.
+Workflow yang saya pakai adalah meminta AI memecah kode menjadi dua lapis.
 
-**Lapisan 1 — logika murni**, JavaScript polos tanpa satu pun panggilan layanan Google:
+**Lapisan 1: logika murni**, JavaScript polos tanpa panggilan layanan Google:
 
 ```javascript
 function filterDueInvoices(rows, today, leadDays) {
@@ -74,7 +74,7 @@ function composeReminderEmail(inv) {
 }
 ```
 
-**Lapisan 2 — lapisan Google**, tipis, cuma pipa:
+**Lapisan 2: integrasi Google**, lapisan tipis yang menghubungkan layanan:
 
 ```javascript
 function kirimReminder() {
@@ -96,7 +96,7 @@ function kirimReminder() {
 }
 ```
 
-Kenapa pemisahan ini penting? Karena **lapisan 1 bisa diuji di laptop** — dengan Node.js dan tiga mock kecil:
+Pemisahan ini membuat **lapisan 1 bisa diuji di laptop** dengan Node.js dan tiga mock kecil:
 
 ```javascript
 // mock layanan Google — hanya untuk uji lokal
@@ -111,21 +111,21 @@ global.GmailApp = {
 };
 ```
 
-Lalu tanamkan skenario lengkap — enam baris data yang mengandung semua kasus pinggiran tadi — dan asersikan hasilnya. Begitulah cara skrip ini lahir, dan uji lokalnya langsung membayar dirinya sendiri.
+Berikutnya, siapkan skenario dengan enam baris data yang mencakup semua kasus tadi, lalu asersikan hasilnya. Begitulah cara skrip ini saya buat. Uji lokal langsung berguna.
 
 ## Yang Ketangkap Saat Uji Lokal
 
-Dua bug yang lolos pandangan mata tapi mati di asersi — keduanya hadiah khas workflow ini:
+Uji lokal menangkap dua bug yang mudah terlewat saat membaca kode:
 
-**Pertama, jam dan tanggal.** Kode pertama menghitung `new Date('2026-11-12')` — yang di-parse sebagai tengah malam **UTC**. Dibandingkan dengan `today` zona WIB, hasilnya bergeser: invoice H-2 terbaca H-3. Klasik, diam-diam, dan hanya ketahuan karena angka yang diassert tidak cocok. Di Apps Script, pastikan juga `timeZone` project di `appsscript.json` diset (`"timeZone": "Asia/Jakarta"`) — kalau tidak, `new Date()` mengikuti zona project, bukan zona kamu.
+**Pertama, jam dan tanggal.** Kode pertama menghitung `new Date('2026-11-12')`, yang di-parse sebagai tengah malam **UTC**. Saat dibandingkan dengan `today` di zona WIB, hasilnya bergeser: invoice H-2 terbaca H-3. Perbedaan ini baru terlihat saat angka yang diassert tidak cocok. Di Apps Script, pastikan `timeZone` project di `appsscript.json` diset (`"timeZone": "Asia/Jakarta"`). Jika tidak, `new Date()` mengikuti zona project, bukan zona kamu.
 
-**Kedua, nama layanan.** Versi awal menulis `Utilities_formatDate(...)` — gaya fungsi underscore yang tidak ada di Apps Script; yang benar `Utilities.formatDate(...)`. Kecil, memalukan, dan persis jenis kesalahan yang AI (dan manusia) buat ketika menulis dari ingatan tanpa dijalankan.
+**Kedua, nama layanan.** Versi awal menulis `Utilities_formatDate(...)`, gaya fungsi underscore yang tidak ada di Apps Script. Yang benar adalah `Utilities.formatDate(...)`. Kesalahan seperti ini bisa terjadi ketika AI maupun manusia menulis dari ingatan tanpa menjalankan kodenya.
 
-Hasil akhir uji lokal: 2 dari 6 baris lolos filter (yang benar), email terformat `Rp7.500.000` dan `12 November 2026`, dan semua asersi hijau.
+Uji lokal akhirnya meloloskan 2 dari 6 baris, sesuai yang diharapkan. Email terformat sebagai `Rp7.500.000` dan `12 November 2026`, dan semua asersi hijau.
 
 ## Menyalakan: Trigger dan Jebakan Terakhir
 
-Di editor Apps Script (Extensions → Apps Script dari spreadsheet-mu), tempel kedua lapisan, lalu pasang pemicu waktu: jalankan `kirimReminder` tiap pagi.
+Dari spreadsheet, buka editor Apps Script (Extensions → Apps Script) dan tempel kedua lapisan. Lalu pasang pemicu waktu agar `kirimReminder` berjalan tiap pagi.
 
 ```javascript
 // jalankan sekali saja untuk memasang trigger harian jam 07:00
@@ -138,23 +138,23 @@ function pasangTrigger() {
 }
 ```
 
-Tiga jebakan terakhir sebelum produksi:
+Sebelum dipakai, periksa tiga hal ini:
 
-- **Kuota email.** Akun Gmail gratis dibatasi ±100 email/hari via `GmailApp` (Workspace lebih besar). Reminder itu kirim-dikit-tiap-hari, jadi aman — tapi jangan pakai pola ini untuk _blast_ ratusan email.
-- **Tulis-balik baris.** Mencatat tanggal reminder ke baris yang benar butuh mapping indeks — `getValues()` memberi array; saat menulis pakai `sheet.getRange(row, 5).setValue(today)` dengan nomor baris asli (jangan lupa `+1` untuk header dan `+1` karena indeks sheet 1-based).
-- **Gagal harus terlihat.** Bungkus `GmailApp.sendEmail` dengan `try/catch` dan catat ke `console.error` — eksekusi trigger yang gagal diam-diam adalah otomasi yang lebih buruk dari manual: kamu _merasa_ sudah diingatkan padahal tidak.
+- **Kuota email.** Akun Gmail gratis dibatasi ±100 email/hari via `GmailApp` (Workspace lebih besar). Reminder ini dikirim dalam jumlah kecil setiap hari, jadi aman. Jangan gunakan pola ini untuk _blast_ ratusan email.
+- **Tulis-balik baris.** Untuk mencatat tanggal reminder di baris yang benar, indeksnya perlu dipetakan. `getValues()` memberi array; saat menulis dengan `sheet.getRange(row, 5).setValue(today)`, gunakan nomor baris asli. Tambahkan `+1` untuk header dan `+1` karena indeks sheet dimulai dari 1.
+- **Gagal harus terlihat.** Bungkus `GmailApp.sendEmail` dengan `try/catch` dan catat ke `console.error`. Kegagalan trigger yang tidak terlihat lebih buruk daripada mengerjakan ini secara manual: kamu _merasa_ sudah diingatkan padahal tidak.
 
-## Pola Prompt yang Terbukti
+## Menyusun Prompt
 
-Untuk menutup, ini bagian AI-nya — pola prompt yang membuat semua di atas mengalir:
+Beberapa hal yang saya minta dalam prompt:
 
-1. **Beri skema data nyata** (nama kolom + 3 contoh baris), bukan deskripsi abstrak. AI menulis kode jauh lebih akurat terhadap bentuk data konkret.
-2. **Minta dua lapis secara eksplisit**: "pisahkan logika murni dari panggilan layanan Google supaya bisa diuji dengan Node". Tanpa perintah ini, kode pasti menyatu.
-3. **Sebutkan kasus pinggiran sebagai daftar**: lunas, terlewat jatuh tempo, dedup 3 hari. AI tidak akan menebak dedup sendiri — kebijakan bisnis harus diantarkan.
-4. **Uji dulu, tempel kemudian.** Logika hijau di lokal → baru salin ke editor Google. Yang tersisa untuk diuji di sana hanya pipa (ID sheet, izin akses, jam trigger).
+1. **Beri skema data nyata** (nama kolom dan tiga contoh baris), bukan deskripsi abstrak. Bentuk data yang konkret membantu AI menulis kode dengan lebih akurat.
+2. **Minta dua lapis secara eksplisit**: "pisahkan logika murni dari panggilan layanan Google supaya bisa diuji dengan Node". Tanpa instruksi ini, kode bisa tercampur.
+3. **Sebutkan kasus pinggiran**: lunas, terlewat jatuh tempo, dan dedup 3 hari. AI tidak akan menebak aturan dedup; kebijakan bisnis perlu disebutkan.
+4. **Uji dulu, tempel kemudian.** Setelah logika lolos uji lokal, salin ke editor Google. Di sana, yang perlu diuji tinggal bagian penghubungnya, seperti ID sheet, izin akses, dan jam trigger.
 
-Pola ini, kebetulan, sama persis dengan prinsip [artikel sebelumnya](/writing/2026/workflow-ai-assisted-development/): AI menulis, verifikasi yang memutuskan. Spreadsheet hanyalah panggungnya — ganti dengan Form, Calendar, atau Drive dan kerangkanya tidak berubah.
+Prinsip ini sejalan dengan [artikel sebelumnya](/writing/2026/workflow-ai-assisted-development/): AI menulis, verifikasi yang memutuskan. Contoh di sini memakai spreadsheet, tetapi alur yang sama bisa digunakan dengan Form, Calendar, atau Drive.
 
 ## CTA
 
-Bagikan artikel ini jika bermanfaat. Untuk diskusi lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Jika artikel ini bermanfaat, silakan bagikan. Untuk membahas workflow ini lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
