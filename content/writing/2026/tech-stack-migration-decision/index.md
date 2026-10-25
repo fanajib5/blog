@@ -139,7 +139,7 @@ Pendekatan per-_module_, _pattern_ yang dipakai, dan pelajaran teknisnya saya ba
 
 ### 1. Kumpulkan Data Dulu, Keputusan Kemudian
 
-Jangan migrasi karena "kayaknya sih butuh" atau karena _tech stack_ baru lagi _trending_[^4]. Kumpulkan data: berapa lama fitur baru dikirim, seberapa sering _bug_ muncul, dan berapa lama onboarding. Data yang mendukung akan lebih mudah dibawa ke _stakeholder_. Bilang ke atasan _"kita harus migrasi karena Go itu keren"_ nggak akan berhasil. Tapi kalau bilang _"fitur yang dulu 2 hari sekarang 2 minggu, ini datanya"_, baru deh ngobrol hehe.
+Jangan migrasi karena "kayaknya sih butuh" atau karena _tech stack_ baru lagi _trending_[^4]. Kumpulkan data: berapa lama fitur baru dikirim, seberapa sering _bug_ muncul, dan berapa lama onboarding. Dengan data konkret, kita bisa menjelaskan alasan keputusan ini ke _stakeholder_ dengan lebih mudah. Bilang ke atasan _"kita harus migrasi karena Go itu keren"_ nggak akan berhasil. Tapi kalau bilang _"fitur yang dulu 2 hari sekarang 2 minggu, ini datanya"_, baru deh ngobrol hehe.
 
 ### 2. Migrasi Itu Keputusan Bisnis, Bukan Cuma Teknis
 
