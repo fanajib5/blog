@@ -14,40 +14,40 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-The [Hijrah Backend](/en/writing/2026/hijrah-backend-01/) series has graduated. The GPS backend now stands on Go, 14 domain modules are in order, and the endpoint that used to eat 15 seconds has recovered.
+The [Hijrah Backend](/en/writing/2026/hijrah-backend-01/) series is over. The GPS backend now runs on Go, its 14 domain modules are in order, and the endpoint that used to take 15 seconds is much faster.
 
-Now it's the neighboring building's turn.
+Now it's the neighboring building's turn: the frontend.
 
-I am a backend engineer. My world: queries, indexes, binary packet parsers, and database welfare. The frontend is a country I visit occasionally, on a tourist visa. This episode is about the day that tourist visa got revoked and replaced with a resident ID hehe~
+I'm a backend engineer. Most days I'm dealing with queries, indexes, binary packet parsers, and database welfare. The frontend is somewhere I usually visit as a tourist. Then I was asked to help take care of it, not just stop by hehe~
 
-## First Impressions: A Backend Nose Works Fine
+## First Impressions: The Smell of Spaghetti
 
-When I first opened the inherited frontend, one thing registered immediately: even someone who isn't a frontend expert could smell its spaghetti, armed with nothing but a programmer's mental model and years of reading code other people wrote. You don't need to be a chef to know the soup is seven days old; a working nose suffices.
+When I opened the inherited frontend, I could see the spaghetti almost immediately. I'm no frontend expert, but years of reading code have given me a sense for the pattern. You don't need to be a chef to notice soup that's been sitting out too long; sometimes a look is enough.
 
-And that smell isn't an accusation. The frontend is what it is: built over years, touched by many hands with many tastes, surviving while serving tens of thousands of users daily. Exactly like the backend I once migrated. How can a different building smell exactly the same? Because the caretaker is the same: **time and urgency** hehe~
+I don't mean that as an accusation. The app had been built over years, touched by many hands with different tastes, and kept serving tens of thousands of users every day. The backend I migrated had a similar story. Different building, same cause: **time and emergencies**.
 
 ## The Decision: Fork, Not Rewrite
 
-After the experience of [migrating the backend](/en/writing/2026/hijrah-backend-01/), one belief stuck: total rewrites are attractive on slides and terrifying in production.
+My experience [migrating the backend](/en/writing/2026/hijrah-backend-01/) made me even more convinced that total rewrites look attractive on slides and terrifying in production.
 
-So for the frontend, the decision was similar: **fork the old system, do a thin port**. Not redrawing from scratch with the trendiest framework, but moving the old application into the new house as-is first. The repo even kept its exact old name; as if it hasn't been informed that it changed course hahaha.
+For the frontend, we chose a similar path: **fork the old system, then do a thin port**. We moved the existing app into its new home as-is instead of drawing it again from scratch with the trendiest framework. Even the repo kept its old name; maybe nobody had told it about the move yet.
 
-And on day one in the new house, I started counting the closets:
+I spent my first day in the new house counting the closets:
 
 - **76 pages** in the app router,[^2] of which 60 are JSX, 15 are JS, and one backup file sleeps among them[^1]
 - Two major UI libraries living side by side in the same application
 - A legacy state management layer that has been gardener and electrician at once for years
 - A document named `TAILWIND_FIX.md` at the repo root: a small monument to an illness that got cured hehe~
 
-Sixty of those pages are JSX. Not a complaint; just a reminder that this country speaks another language. I, who used to shout `if err != nil`, now have to learn to weave `className`s hahaha.
+Sixty pages use JSX. That's not a complaint, just a reminder that I'm learning another language. I used to shout `if err != nil`; now I have to learn how to weave `className`s.
 
 ## Why Thin Port, Not Redesign
 
-The same question as on the backend: why not rebuild everything at once, all tidy, all modern?
+The question is the same as it was for the backend: why not rebuild everything at once and make it tidy and modern?
 
-The same answer, too: users don't care about your internal architecture; they care that the buttons they press every day keep behaving the same. Redesigning the looks while moving the house is two changes at once, and [episode four of the backend series](/en/writing/2026/hijrah-backend-04/) already showed the cost of fixing while migrating: silent improvements are poison.
+The answer is simple: users want the buttons they press every day to keep working. Redesigning the interface while moving the app means changing two things at once. In [episode four of the backend series](/en/writing/2026/hijrah-backend-04/), I learned how costly silent improvements can be during a migration.
 
-So, frontend edition of parity: looks and behavior get carried over as-is first, internal structure gets tidied later, one decision at a time. Legacy code that boards the train gets recorded, not hidden. Episode two covers exactly what boarded that train, and why some of it had to board despite the smell hehe~
+For the frontend, that means preserving its looks and behavior for now. We can tidy the internal structure later, one decision at a time. We record the legacy code that comes along instead of hiding it. In episode two, I'll go through what boarded the train and why some of it couldn't be left behind.
 
 ## The Map
 
@@ -60,15 +60,11 @@ This **Hijrah Frontend** series contains five episodes:
 
 If you came from the backend series: welcome back, same building, we just changed floors. If you're new: [the opening episode of the other series](/en/writing/2026/hijrah-backend-01/) is the best place to start, or just stay here; this story stands on its own hehe~
 
-## Closing
+## Settling In Next Door
 
-The tourist visa is revoked. From today, this inherited frontend is officially my responsibility too: spaghetti and all, two UI libraries and all, and seventy-six pages waiting to be recounted.
+I came as a tourist, but this inherited frontend is now part of my responsibility too. I've seen what's in the new place: spaghetti, two UI libraries, and 76 pages that still need to work after the move.
 
-Next episode: the inventory of the inheritance that boarded the train. See you there.
-
-Thanks for stopping by and reading hehe. Have a great day!
-
-Cheers.
+Next, I'll start keeping an inventory of what came along. The list was longer than I expected.
 
 [^1]: That file is nobody's fault; it's a loyal backup corpse, the same kind as the commented-out corpses I once met on the backend.
 

@@ -15,52 +15,50 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Pindahan di [episode pertama](/writing/2026/hijrah-frontend-01/) akhirnya selesai, dan hari penyerahan barang tiba. Manifestnya pendek dan membosankan, persis seperti manifest pindahan terbaik: **tujuh puluh enam kotak masuk, tujuh puluh enam kotak keluar. Nol halaman tertinggal.**
+Pindahan di [episode pertama](/writing/2026/hijrah-frontend-01/) selesai. Pada hari serah terima, manifestnya hanya punya satu angka penting: **tujuh puluh enam kotak masuk, tujuh puluh enam kotak keluar. Tidak ada halaman yang tertinggal.**
 
-Itu bukan kebetulan. Itu keputusan. Dan episode ini cerita tentang keputusan itu: apa yang sengaja kita naikkan, apa yang ternyata ikut naik tanpa undangan, dan satu rencana besar yang memilih untuk tidak jadi hehe~
+Tidak ada yang tertinggal karena memang begitu keputusan kami. Ada yang sengaja dibawa, ada yang ikut tanpa diundang, dan ada satu rencana besar yang akhirnya batal. Saya ceritakan satu per satu.
 
 ## Kenapa Nol Halaman Ditinggalkan
 
-Kalau Anda pernah pindah rumah, Anda tahu momen paling membebaskan: saat memutuskan "yang ini buang aja". Migrasi _frontend_ punya momen yang sama, dengan godaan yang lebih besar, karena membuang halaman terasa seperti membereskan _produk_ sekalian.
+Kalau pernah pindah rumah, mungkin Anda pernah merasa lega saat berkata, "yang ini buang aja". Migrasi _frontend_ punya godaan serupa. Menghapus halaman bisa terasa seperti merapikan _produk_ sekaligus.
 
-_Amit-amit_ lagi. Memutuskan hidup-mati sebuah halaman saat pindah rumah itu dua keputusan digabung jadi satu: pindah, dan merombak cakupan produk. [Seri sebelah](/writing/2026/hijrah-backend-04/) sudah membayar biaya pembelajaran untuk kombinasi itu. Jadi aturannya sederhana: **tujuh puluh enam masuk, tujuh puluh enam keluar**, halaman demi halaman, satu per satu, tanpa skrip pembuangan.
+Tapi menentukan hidup-mati halaman saat pindahan berarti mengambil dua keputusan sekaligus: memindahkan aplikasi dan mengubah cakupan produk. [Seri sebelah](/writing/2026/hijrah-backend-04/) sudah mengajari saya mahalnya kombinasi itu. Jadi aturannya jelas: **tujuh puluh enam masuk, tujuh puluh enam keluar**, diperiksa halaman demi halaman, tanpa skrip untuk membuangnya.
 
-Hasilnya membosankan, tapi terverifikasi: _repo_ baru menghitung 76 halaman, _repo_ lama juga 76, dan daftar foldernya cocok satu per satu. Bahkan halaman-halaman yang namanya menimbulkan tanda tanya, semacam _demo_ dan _docs_ dan jalur-jalur khusus, ikut naik juga. Bukan karena penting; tapi karena membuangnya bukan keputusan untuk fase ini hahaha.
+Hasilnya memang tidak dramatis, tetapi angkanya cocok: _repo_ baru berisi 76 halaman, sama seperti _repo_ lama, dan daftar foldernya cocok satu per satu. Halaman yang namanya bikin bertanya-tanya, seperti _demo_, _docs_, dan jalur khusus, ikut dipindahkan. Bukan karena semuanya penting; keputusan untuk menghapusnya memang bukan bagian dari fase ini.
 
 ## Isi Kotak yang Dibuka Pertama
 
-Dua kotak pertama yang kami buka: dua _library_ UI yang selama ini hidup berdampingan. Di rumah baru, hitungannya jujur dan terukur: satu _library_ dipakai di **101 _file_**, _library_ satunya tinggal bertahan di **13 _file_**.
+Dua _library_ UI yang sudah lama hidup berdampingan menjadi kotak pertama yang kami buka. Di rumah baru, hitungannya terlihat jelas: satu _library_ dipakai di **101 _file_**, sementara yang satunya tinggal bertahan di **13 _file_**.
 
-Angka itu bercerita sendiri: ada era dominasi dan era sisipan, berdampingan dalam satu aplikasi yang sama, tanpa perang terbuka.[^1] Keduanya tetap harus dibawa dulu, karena membuang _library_ berarti menyentuh semua _file_-nya, dan menyentuh semua _file_ saat pindah rumah itu pelanggaran aturan [episode empat](/writing/2026/hijrah-backend-04/).
+Angka itu memperlihatkan dua era: satu _library_ dominan, satu lagi muncul belakangan, dan keduanya hidup dalam aplikasi yang sama tanpa perang terbuka.[^1] Kami tetap membawa keduanya. Menghapus satu _library_ berarti mengubah semua _file_ yang memakainya, sedangkan mengubah semua _file_ saat pindahan bertentangan dengan aturan [episode empat](/writing/2026/hijrah-backend-04/).
 
-Satu _wire_ lagi yang ikut naik: sambungan _state management_ warisan. Di _app router_ baru dia cuma tinggal satu titik sambungan, tapi satu titik yang menyala itu tetap jantung bagi halaman-halaman yang memakainya. Dipotong sekarang? Bukan wewenang momen ini juga hahaha.
+Ada juga sambungan _state management_ warisan. Di _app router_ baru, hanya satu titik sambungan yang tersisa. Namun, titik itu masih menjadi jantung bagi halaman-halaman yang menggunakannya. Memotongnya sekarang berarti mengubah hal lain lagi, bukan pekerjaan pindahan ini.
 
 ## Yang Sadar Dibawa, yang Terekam
 
-Selain kotak-kotak besar, ada warisan kecil yang sengaja kami catat saat menaikkannya:
+Kami juga mencatat beberapa warisan kecil saat memindahkannya:
 
 - **JSX tanpa tipe**: negeri ini memang belum bicara _TypeScript_. Bukan keputusan episode ini; dia tercatat untuk keputusan lain, di hari lain.[^2]
 - **Penamaan dua era**: sebagian berjudul kapital di awal, sebagian lagi mengikuti selera yang berbeda. Kami tidak menyeragamkan saat pindah; menyeragamkan itu kerjaannya epilog, bukan koper.
 - **Satu `page.backup`**: satu halaman membawa jenazah _backup_-nya sendiri. Aku tertawa saat menemukannya, karena [dia punya saudara](/writing/2026/hijrah-backend-04/) di gedung sebelah hahaha.
 
-Catatannya satu: warisan yang dibawa sadar itu beda nasibnya dengan warisan yang lolos. Yang sadar dibawa punya catatan, punya alasan, dan punya giliran untuk dibersihkan kelak. Yang lolos malah sering beranak pinak.
+Ada bedanya membawa sesuatu dengan sadar dan baru menemukannya setelah pindahan. Yang pertama punya catatan, alasan, dan giliran untuk dibersihkan nanti. Yang kedua sering luput dari perhatian, lalu ikut bertambah.
 
 ## Rencana Besar yang Tidak Jadi
 
-Supaya adil dengan tradisi jujur di seri sebelah: ada satu rencana besar yang memilih mundur sebelum dimulai, yaitu mengganti _state management_ warisan dengan yang baru.
+Seperti di seri sebelah, ada rencana yang perlu dicatat meski tidak jadi dijalankan: mengganti _state management_ warisan dengan yang baru.
 
-Batalnya bukan karena gagal; prioritasnya bergeser ke hal yang lebih terasa dampaknya bagi _user_. Dan saya tenang dengan itu: rencana yang dibatalkan sebelum menelan sumber daya itu bukan kegagalan, itu _kontrol kualitas_ atas rencana sendiri hehe~
+Rencana itu batal bukan karena gagal. Prioritasnya bergeser ke pekerjaan yang dampaknya lebih terasa bagi _user_. Membatalkan sesuatu sebelum menghabiskan sumber daya juga bagian dari _kontrol kualitas_ atas rencana sendiri.
 
 ## Pelajaran
 
-1. **Pindahkan dulu 1:1, putuskan skope belakangan.** Membuang halaman saat pindah itu dua keputusan dalam satu tarikan napas; pisahkan.
-2. **Hitung isi kotak dengan angka.** 76 ke 76, 101 ke 13, angka-angka itu yang membuat percakapan soal warisan tidak berubah jadi perang selera.
-3. **Dua _library_ berdampingan itu dua era, bukan dua pilihan.** Jangan hakimi yang lama; dia menang lebih banyak _battle_ daripada yang baru.
-4. **Rencana yang dibatalkan sebelum menelan biaya adalah menang.** Catat dia di daftar yang tidak jadi, dengan kepala tegak.
+1. **Pindahkan dulu 1:1, putuskan cakupan belakangan.** Menghapus halaman saat pindahan berarti membuat dua keputusan sekaligus.
+2. **Hitung isi kotak.** Angka 76 ke 76 dan 101 ke 13 membuat pembicaraan soal warisan lebih konkret, bukan sekadar soal selera.
+3. **Dua _library_ yang hidup berdampingan menandai dua era.** Keduanya punya alasan masing-masing untuk masih ada di aplikasi.
+4. **Rencana yang dibatalkan sebelum menghabiskan biaya juga keputusan yang baik.** Catat alasannya agar jelas kapan perlu dibuka lagi.
 
-Episode berikutnya kita buka kotak paling berduri: _type chaos_, di mana satu _field_ yang sama dikirim sebagai angka, _string_ kosong, dan _string_ biasa, tergantung halamannya yang mengirim. Sampai ketemu di sana.
-
-Sekian. Salam.
+Kotak berikutnya isinya bukan _library_, melainkan tipe data yang tidak seragam. Satu _field_ yang sama bisa dikirim sebagai angka, _string_ kosong, atau _string_ biasa, tergantung halaman yang mengirimnya. Di situlah _type chaos_ mulai terlihat.
 
 [^1]: Angka halaman, _file_, dan pemakaian _library_ dihitung langsung dari _repo_ saat episode ini ditulis, dengan pemisahan detail internal untuk bercerita.
 
