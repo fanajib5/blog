@@ -67,7 +67,7 @@ To me, trusting them with that decision is not negligence. I consider them old e
 
 Students who use Copilot as a learning companion, a way to explore concepts, or a way to understand things faster can benefit from it. They'll have a meaningful head start when they enter the workforce.
 
-Students who use it as a shortcut, completing assignments without understanding them or handing everything off to AI without reflection, will face consequences too. They may not show up immediately. They can surface in a job interview, while solving a problem in the field, or when students have to modify code they don't understand or know the origin of.
+Students who use it as a shortcut, completing assignments without understanding them or handing everything off to AI without reflection, will face consequences too. They may not show up immediately. They can surface in a job interview, while solving a problem in the field, or when students have to modify code without understanding it or knowing where it came from.
 
 I can't protect them from those consequences. I care, but facing them is part of learning to take responsibility for their own choices.
 

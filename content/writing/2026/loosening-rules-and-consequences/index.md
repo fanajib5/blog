@@ -27,7 +27,7 @@ Saya menutupnya dengan "salam dari rekan dosen genzi angkatan pertama," sambil t
 
 Saya menyarankan mahasiswa mendaftarkan email kampus mereka ke GitHub Education. Prosesnya tidak rumit: daftar, verifikasi status mahasiswa aktif, lalu mereka bisa mengakses berbagai layanan secara gratis. Termasuk GitHub Copilot dengan 300 kuota _prompt_ per bulan beserta akses ke beragam model AI di dalamnya.
 
-Satu catatan yang saya tekankan: GitHub Copilot ini bukan alat untuk mengerjakan tugas secara penuh dilepas ke AI. Ini untuk dijadikan partner belajar, biar tidak seperti saya dulu yang harus _marathon_ forum StackOverflow atau video tutorial dari orang Indonesia, Barat, sampai orang India hahaha.
+Satu catatan yang saya tekankan: GitHub Copilot bukan alat untuk menyerahkan pengerjaan tugas sepenuhnya kepada AI. Alat ini untuk dijadikan partner belajar, biar tidak seperti saya dulu yang harus _marathon_ forum StackOverflow atau video tutorial dari orang Indonesia, Barat, sampai orang India hahaha.
 
 Saya hanya memberi imbauan. Tidak ada larangan tertulis, konsekuensi formal, atau sistem pengawasan. Saya memberi mereka akses dan menyerahkan keputusan penggunaannya kepada masing-masing mahasiswa. Itu yang saya maksud dengan kelonggaran.
 
@@ -47,7 +47,7 @@ Jadi ketika saya memberi mahasiswa akses Copilot dengan sebuah imbauan saja, say
 
 Saya tetap merekomendasikannya karena menolak memberi akses bukan berarti mahasiswa tidak akan mencari alat-alat itu sendiri.
 
-Mahasiswa yang penasaran akan menemukan alat-alat ini dengan atau tanpa arahan dari pengajarnya. Bagi saya, bedanya ada pada pemahaman tentang batasannya: mereka bisa menemukannya dengan sedikit arahan, atau tanpa pemahaman sama sekali.
+Mahasiswa yang penasaran akan menemukan alat-alat ini dengan atau tanpa arahan dari pengajarnya. Bagi saya, bedanya adalah apakah mereka menemukan alat-alat itu dengan sedikit pemahaman tentang batasannya atau tanpa pemahaman sama sekali.
 
 Satu kalimat di pesan itu menjelaskan kekhawatiran saya:
 
