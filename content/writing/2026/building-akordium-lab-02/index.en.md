@@ -63,8 +63,8 @@ _(fill in: 1–3 decisions this month along with their reasoning. Candidates alr
 
 ---
 
-Writing the second report honestly still takes effort. That is a sign the format is working. Next month, I’ll publish the third report and take stock at mid-quarter before choosing the series’ next topics: message queues, API layer, or deployment.
+Writing the second report honestly still takes effort. Next month, I’ll publish the third report and take stock at mid-quarter before choosing the series’ next topics: message queues, API layer, or deployment.
 
-If you’re building something too, [get in touch](/en/contact/). You can follow the next report via [RSS](/en/writing/index.xml).
+If you’re also building something and want to keep each other accountable, [get in touch](/en/contact/). You can follow the next report via [RSS](/en/writing/index.xml).
 
 Cheers.
