@@ -25,7 +25,7 @@ The previous seven episodes covered the technical lessons. In this final part, I
 
 **Second, write the documentation from day one.** The hardest part of inheriting the old system wasn't just its code; it was the knowledge held in one person's head. The code became the only specification. I liked being "walking documentation" when answering questions, but I don't want anyone, including me a few years from now, to depend on that. This blog series is one way I'm repaying that debt hehe.
 
-**Third, schedule parity verification instead of relying on a feeling.** In [episode three](/en/writing/2026/hijrah-backend-03/) I wrote about announcing "done" before verification reached 100%. If I started over, verification would have a checklist and its own time budget, not a feeling I wait to have.
+**Third, schedule parity verification instead of relying on a feeling.** In [episode three](/en/writing/2026/hijrah-backend-03/) I wrote about announcing "done" while verification was below 100%, and I was proven right. If I started over, verification would have a checklist and time budget of its own, instead of waiting on me to feel ready.
 
 **Fourth, include mental health in the project estimate.** The first three months took a toll on my mental health. I don't regret working hard, but if I started over, I'd write down the duration and its toll as honestly as the endpoint estimate.
 
@@ -41,7 +41,7 @@ The way out has been clear for a while: move the application closer to the datab
 
 ## The Act That Never Happened
 
-There's one part I almost called my favorite: the plan to teach Go to the team. It had been on the calendar since August 2025. I prepared four weeks of material: Go fundamentals, functions and data structures, OOP and concurrency, then web development with Go. One colleague even bought an online course to join in.
+There's one part I almost called my favorite: being asked to teach Go to the team. The plan had been on the calendar since August 2025. I prepared four weeks of material: Go fundamentals, functions and data structures, OOP and concurrency, then web development with Go. One colleague even bought an online course to join in.
 
 As of this episode, the class has never happened.
 

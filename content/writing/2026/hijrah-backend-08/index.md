@@ -25,7 +25,7 @@ Tujuh episode sebelumnya membahas pelajaran teknis. Di bagian terakhir ini, saya
 
 **Kedua, dokumentasi harus ditulis sejak hari pertama.** Kesulitan terbesar dari sistem lama bukan hanya kodenya, melainkan pengetahuan yang tersimpan di kepala satu orang. _Kode_ menjadi satu-satunya spesifikasi. Saya senang menjawab pertanyaan sebagai "manusia dokumentasi", tetapi saya tidak ingin siapa pun, termasuk diri saya beberapa tahun lagi, bergantung pada itu. Seri blog ini salah satu cara saya membayar utang tersebut hehe.
 
-**Ketiga, verifikasi paritas harus dijadwalkan, bukan mengandalkan perasaan.** Di [episode tiga](/writing/2026/hijrah-backend-03/) saya sudah bercerita bahwa saya mengumumkan "selesai" sebelum verifikasi mencapai 100%. Kalau mengulang, verifikasi akan punya _checklist_ dan jatah waktunya sendiri, bukan menunggu sampai saya merasa siap.
+**Ketiga, verifikasi paritas harus dijadwalkan, bukan mengandalkan perasaan.** Di [episode tiga](/writing/2026/hijrah-backend-03/) saya sudah bercerita bahwa saya mengumumkan "selesai" sebelum verifikasi mencapai 100%, dan benar saja. Kalau mengulang, verifikasi akan punya _checklist_ dan jatah waktunya sendiri, bukan menunggu sampai saya merasa siap.
 
 **Keempat, kesehatan mental harus masuk estimasi proyek.** Tiga bulan pertama menagih bayarannya ke kepala saya. Saya tidak menyesal bekerja keras, tetapi jika mengulang, durasi dan bebannya akan saya tulis sejujur estimasi _endpoint_.
 
@@ -41,7 +41,7 @@ Jalan keluarnya sudah lama jelas: pindahkan aplikasi lebih dekat ke _database_ d
 
 ## Satu Babak yang Tidak Jadi
 
-Ada satu babak yang hampir saya masukkan sebagai bagian favorit seri ini: rencana mengajari Go ke tim. Rencana itu sudah ada sejak Agustus 2025. Saya menyiapkan materi untuk empat minggu: pengenalan Go, fungsi dan struktur data, OOP dan _concurrency_, sampai _web development_ dengan Go. Salah satu rekan bahkan sudah membelikan kursus _online_ agar bisa ikut belajar.
+Ada satu babak yang hampir saya masukkan sebagai bagian favorit seri ini: saya diminta mengajari Go ke tim. Rencananya sudah ada sejak Agustus 2025. Saya menyiapkan materi untuk empat minggu: pengenalan Go, fungsi dan struktur data, OOP dan _concurrency_, sampai _web development_ dengan Go. Salah satu rekan bahkan sudah membelikan kursus _online_ agar bisa ikut belajar.
 
 Sampai episode ini ditulis, kelas itu belum pernah terjadi.
 
