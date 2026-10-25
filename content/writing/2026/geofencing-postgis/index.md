@@ -40,6 +40,7 @@ CREATE TABLE geofences (
 );
 
 CREATE INDEX idx_geofences_geom ON geofences USING GIST (geom);
+CREATE INDEX idx_geofences_geog ON geofences USING GIST ((geom::geography));
 ```
 
 Untuk demo, saya pakai persegi panjang yang kira-kira membungkus area pelabuhan Tanjung Perak Surabaya (di production, polygon digambar pelanggan di peta dan bisa berbentuk apa pun):
@@ -148,9 +149,9 @@ func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
 }
 ```
 
-Dua detail yang membuat ini efisien untuk ribuan fence:
+Dua detail membantu query ini saat jumlah fence bertambah:
 
-1. **Pre-filter `ST_DWithin` geography 5 km** memakai index GiST untuk memangkas fence yang jauh, lalu `_Within` yang eksak hanya dijalankan untuk kandidat dekat.
+1. **Pre-filter `ST_DWithin` geography 5 km** dapat memakai index ekspresi `idx_geofences_geog` pada `geom::geography` untuk memangkas fence yang jauh. Index `idx_geofences_geom` tetap digunakan untuk operasi geometry seperti `ST_Within`. Planner bisa memilih scan lain bergantung ukuran dan statistik tabel, jadi cek rencana query dengan `EXPLAIN (ANALYZE, BUFFERS)`.
 2. **Status sebelumnya tidak di-query dari `positions`**. Worker cukup membaca cache (`device_id:fence_id → inside`), informasi satu bit yang hanya berubah saat event.
 
 Kenapa bukan _trigger_ PostgreSQL? Trigger bisa dipakai, tetapi mengikat logika bisnis ke schema, sulit dites terpisah, dan menyembunyikan pekerjaan dari pengamat aplikasi. Dengan pola worker, notifikasi alert (push/WhatsApp/email) cukup dikirim lewat fungsi Go biasa.

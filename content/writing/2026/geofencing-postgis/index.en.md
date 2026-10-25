@@ -40,6 +40,7 @@ CREATE TABLE geofences (
 );
 
 CREATE INDEX idx_geofences_geom ON geofences USING GIST (geom);
+CREATE INDEX idx_geofences_geog ON geofences USING GIST ((geom::geography));
 ```
 
 For this demo, I will use a bounding box roughly covering the Tanjung Perak Port area in Surabaya (in production, polygons are drawn by customers on a map and can take any shape):
@@ -148,9 +149,9 @@ func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
 }
 ```
 
-Two key details make this approach efficient across thousands of fences:
+Two details help this query scale as the number of fences grows:
 
-1. **Pre-filtering with `ST_DWithin` on geography at 5 km** utilizes the GiST index to prune distant fences, so exact `_Within` checks run only for nearby candidates.
+1. **The 5 km geography `ST_DWithin` pre-filter** can use the `idx_geofences_geog` expression index on `geom::geography` to prune distant fences. The `idx_geofences_geom` index remains available for geometry operations such as `ST_Within`. The planner may choose a different scan depending on table size and statistics, so check the query plan with `EXPLAIN (ANALYZE, BUFFERS)`.
 2. **Previous state is not queried from `positions`**; it is retrieved directly from cache (`device_id:fence_id -> inside`). It is literally a single bit of state that only updates upon a change event.
 
 Why not use PostgreSQL triggers? They can work, but couple business logic tightly to your schema, are difficult to unit-test in isolation, and hide background workloads from application metrics. With the worker pattern, alert notifications (push, WhatsApp, email) can be sent with regular Go code.
