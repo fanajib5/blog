@@ -13,7 +13,7 @@ tags:
   - catatan
 ---
 
-_Nganu_, jadi pertengahan April lalu saya mengetik pesan yang lumayan panjang di grup WhatsApp mahasiswa, tempat saya mengajar sebagai dosen. Isinya tentang program [GitHub Education](https://education.github.com/pack), sebuah inisiatif dari GitHub yang memberikan akses gratis ke berbagai _tools_ pengembangan bagi mahasiswa dan pengajar aktif.
+_Nganu_, pertengahan April lalu saya mengetik pesan yang lumayan panjang di grup WhatsApp mahasiswa tempat saya mengajar sebagai dosen. Isinya tentang program [GitHub Education](https://education.github.com/pack), sebuah inisiatif dari GitHub yang memberikan akses gratis ke berbagai _tools_ pengembangan bagi mahasiswa dan pengajar aktif.
 
 Di antara paket manfaatnya ada GitHub Copilot. Asisten AI yang sudah cukup dikenal di kalangan _developer_ sebagai partner ngoding, dengan autocomplete, code review, sampai langsung mengerjakan sebagian kodingan kita.
 
@@ -23,71 +23,63 @@ Pesan itu saya tutup dengan kalimat yang, kalau dipikir-pikir ulang, cukup mengg
 
 Saya menutupnya dengan "salam dari rekan dosen genzi angkatan pertama," sambil tertawa sendiri mengetiknya hahaha.
 
-Tulisan ini adalah refleksi dari momen itu.
-
 ## Yang Saya Lakukan (dan Alasannya)
 
-Intinya saya menyarankan mahasiswa untuk mendaftarkan email kampus mereka ke GitHub Education. Prosesnya tidak rumit: daftar, verifikasi status mahasiswa aktif, dan mereka bisa mengakses berbagai layanan secara gratis. Termasuk GitHub Copilot dengan 300 kuota _prompt_ per bulan beserta akses ke beragam model AI di dalamnya.
+Saya menyarankan mahasiswa mendaftarkan email kampus mereka ke GitHub Education. Prosesnya tidak rumit: daftar, verifikasi status mahasiswa aktif, lalu mereka bisa mengakses berbagai layanan secara gratis. Termasuk GitHub Copilot dengan 300 kuota _prompt_ per bulan beserta akses ke beragam model AI di dalamnya.
 
 Satu catatan yang saya tekankan: GitHub Copilot ini bukan alat untuk mengerjakan tugas secara penuh dilepas ke AI. Ini untuk dijadikan partner belajar, biar tidak seperti saya dulu yang harus _marathon_ forum StackOverflow atau video tutorial dari orang Indonesia, Barat, sampai orang India hahaha.
 
-Hanya itu. Tidak ada larangan tertulis, tidak ada konsekuensi formal, tidak ada sistem pengawasan. Hanya sebuah imbauan, dan kepercayaan.
-
-Ini yang saya sebut kelonggaran: bukan aturan yang dihapus, tapi batasan yang diserahkan ke kesadaran masing-masing.
+Saya hanya memberi imbauan. Tidak ada larangan tertulis, konsekuensi formal, atau sistem pengawasan. Saya memberi mereka akses dan menyerahkan keputusan penggunaannya kepada masing-masing mahasiswa. Itu yang saya maksud dengan kelonggaran.
 
 ## Saya Juga Pernah Jadi Mahasiswa
 
-Sebelum saya terkesan terlalu idealis soal kepercayaan ini, izinkan saya jujur sebentar: saya tahu persis apa yang mungkin dilakukan sebagian mahasiswa dengan akses ini.
-
-Karena saya pernah ada di posisi mereka.
+Saya tahu apa yang mungkin dilakukan sebagian mahasiswa dengan akses ini karena saya pernah ada di posisi mereka.
 
 Waktu kuliah S2 dulu, dosen pembimbing saya memberikan kebebasan yang luar biasa dalam mengerjakan tesis. Tidak banyak yang diharuskan, tidak banyak yang dibatasi. Intinya: _kamu yang menentukan arahnya, saya yang membimbing_[^1].
 
-Dan apa yang saya lakukan dengan kebebasan itu? Saya menundanya. Berkali-kali. Berbulan-bulan. Dengan berbagai alasan yang kalau dipikir ulang sekarang, semuanya terasa seperti dalih yang lemah hehe~
+Saya memakai kebebasan itu untuk menunda tesis. Berkali-kali, berbulan-bulan. Alasan-alasan yang saya pakai waktu itu, kalau dipikir ulang sekarang, terasa seperti dalih yang lemah hehe~
 
 Bukan karena tidak mampu. Tapi karena ketika batasan dikendurkan, godaan untuk menggunakan ruang itu untuk hal lain menjadi sangat nyata. _Webtoon_ dibaca habis. Gim dimainkan sampai larut. Tesis? Nanti dulu.
 
-Jadi ketika saya memberikan akses Copilot kepada mahasiswa hanya dengan sebuah imbauan, saya tidak buta terhadap kemungkinannya. Saya justru sangat sadar.
+Jadi ketika saya memberi mahasiswa akses Copilot dengan sebuah imbauan saja, saya tahu sebagian mungkin menjadikannya jalan pintas.
 
 ## Lalu Kenapa Tetap Dilakukan?
 
-Karena menurut saya, menolak memberikan akses bukan berarti menutup akses.
+Saya tetap merekomendasikannya karena menolak memberi akses bukan berarti mahasiswa tidak akan mencari alat-alat itu sendiri.
 
-GitHub Copilot sudah ada. AI sudah ada. Mahasiswa yang penasaran pasti akan menemukan caranya sendiri, dengan atau tanpa arahan dari pengajarnya. Perbedaannya hanya satu: apakah mereka menemukannya dengan sedikit pemahaman tentang batasannya, atau tanpa pemahaman sama sekali.
+Mahasiswa yang penasaran akan menemukan alat-alat ini dengan atau tanpa arahan dari pengajarnya. Bagi saya, bedanya ada pada pemahaman tentang batasannya: mereka bisa menemukannya dengan sedikit arahan, atau tanpa pemahaman sama sekali.
 
-Ada kalimat yang saya tulis di pesan itu yang ingin saya elaborasi:
+Satu kalimat di pesan itu menjelaskan kekhawatiran saya:
 
 > _Kita tidak digantikan AI sepenuhnya — setidaknya belum untuk saat ini. Tapi kita ada kemungkinan untuk digantikan seseorang yang bisa memaksimalkan AI di kehidupan, terutama pekerjaan kita._
 
-Ini bukan nakut-nakutin. Ini kenyataan yang sudah mulai terasa di lapangan. Saya melihatnya sendiri: dua orang dengan kemampuan teknis yang setara, tapi satu lebih mahir menggunakan AI sebagai _tool_. Hasilnya beda jauh dari segi kecepatan dan kualitas _output_.
+Saya tidak menulis itu untuk nakut-nakutin. Di lapangan, saya melihat dua orang dengan kemampuan teknis setara, tetapi yang satu lebih mahir menggunakan AI sebagai _tool_. Kecepatan dan kualitas _output_ mereka berbeda jauh.
 
-Kalau saya bisa memberikan mahasiswa satu langkah awal untuk memahami bagaimana bekerja berdampingan dengan AI — itu lebih bernilai daripada menutup aksesnya atas dasar kekhawatiran yang, bagaimanapun, tidak sepenuhnya bisa dicegah.
+Menurut saya, memberi mahasiswa langkah awal untuk belajar bekerja berdampingan dengan AI lebih berguna daripada menutup akses karena khawatir mereka akan menggunakannya. Kekhawatiran itu tidak sepenuhnya bisa dicegah.
 
 ## Kelonggaran dan Konsekuensinya
 
-Tapi kembali ke inti: memberikan kelonggaran itu bukan tanpa taruhan.
+Memberi kelonggaran tetap ada taruhannya.
 
-Ketika saya berkata _"sudah saya anggap dewasa"_, saya bukan sedang melempar tanggung jawab. Saya sedang memindahkan tanggung jawab, secara sadar, ke tangan yang bersangkutan. Dan itu berbeda.
+Ketika saya berkata _"sudah saya anggap dewasa"_, bukan berarti saya melempar tanggung jawab. Saya sengaja menyerahkan keputusan penggunaan Copilot kepada mahasiswa yang bersangkutan.
 
-Memindahkan tanggung jawab ke orang yang sudah cukup dewasa untuk menerimanya adalah bentuk penghormatan, bukan kelalaian.
+Bagi saya, memberi mereka kepercayaan bukan berarti lalai. Saya menganggap mereka cukup dewasa untuk bertanggung jawab atas pilihannya.
 
-Konsekuensinya berlaku dua arah.
+Mahasiswa yang memakai Copilot sebagai teman belajar, alat untuk mengeksplorasi konsep, atau cara mempercepat pemahaman akan mendapat manfaat nyata. Mereka punya _head start_ saat masuk dunia kerja.
 
-Bagi mahasiswa yang menggunakannya dengan baik — sebagai teman belajar, sebagai alat eksplorasi konsep, sebagai cara mempercepat pemahaman — manfaatnya nyata. Mereka akan punya _head start_ yang tidak kecil ketika masuk dunia kerja.
+Mahasiswa yang menjadikannya jalan pintas, mengerjakan tugas tanpa memahami isinya atau menyerahkan semuanya ke AI tanpa refleksi, juga akan menghadapi konsekuensi. Mungkin tidak langsung. Konsekuensi itu bisa terasa saat wawancara kerja, _problem solving_ di lapangan, atau ketika mereka harus memodifikasi kode yang tidak dipahami asal-usulnya.
 
-Bagi yang memilih menggunakannya sebagai jalan pintas — mengerjakan tugas tanpa memahami, menyerahkan semuanya ke AI tanpa refleksi — konsekuensinya juga nyata. Hanya saja tidak langsung terasa. Biasanya baru terasa ketika menghadapi situasi yang membutuhkan pemahaman yang sesungguhnya: wawancara kerja, _problem solving_ di lapangan, atau saat harus memodifikasi kode yang mereka sendiri tidak paham dari mana asalnya.
-
-Dan saya tidak bisa menjaga mereka dari konsekuensi itu. Bukan karena tidak peduli, tapi karena itu bagian dari proses belajar menjadi orang dewasa yang bertanggung jawab atas pilihannya sendiri.
+Saya tidak bisa menjaga mereka dari konsekuensi itu. Bukan karena tidak peduli, tetapi karena menghadapinya juga bagian dari belajar bertanggung jawab atas pilihan sendiri.
 
 ## Tentang Menjadi Pengajar yang Belum Terlalu Tua
 
-Ada hal yang sedikit menggelikan dari momen itu. Saya menyebut diri sendiri "dosen genzi angkatan pertama," dan itu terasa akurat sekaligus sedikit absurd hahaha.
+Momen menyebut diri sendiri "dosen genzi angkatan pertama" terasa akurat sekaligus sedikit absurd hahaha.
 
-Karena jujurnya, jarak antara pengalaman saya sebagai mahasiswa dan posisi saya sekarang sebagai pengajar tidak terlalu jauh. Saya masih ingat betul bagaimana rasanya duduk di sisi yang satunya: kurang tidur, setengah paham, dan sesekali mencari jalan pintas.
+Jarak antara pengalaman saya sebagai mahasiswa dan posisi saya sekarang sebagai pengajar tidak terlalu jauh. Saya masih ingat rasanya duduk di sisi yang satunya: kurang tidur, setengah paham, dan sesekali mencari jalan pintas.
 
-Mungkin itu yang membuat saya lebih memilih memberikan kepercayaan daripada larangan. Bukan karena naif, tapi karena saya tahu bahwa larangan jarang benar-benar mengubah perilaku. Yang mengubah perilaku adalah konsekuensi yang dialami sendiri, dan kalau beruntung, sedikit pemahaman yang datang sebelum konsekuensi itu tiba.
+Pengalaman menunda tesis mungkin yang membuat saya memilih kepercayaan daripada larangan. Saya tahu sendiri kebebasan bisa membuat pekerjaan tertunda berbulan-bulan. Saya juga tahu larangan tidak otomatis membuat mahasiswa berhenti mencari akses ke AI. Setidaknya, saya ingin mereka memahami alat yang mereka pakai sebelum berhadapan dengan konsekuensinya.
 
-Jadi ya, saya memberikan kelonggaran itu. Dengan mata terbuka, dan dengan kesadaran bahwa hasilnya tidak sepenuhnya dalam kendali saya.
+Saya memberi mereka kelonggaran itu dengan sadar, meski hasilnya tidak sepenuhnya dalam kendali saya.
 
 Semoga rekan-rekan bisa amanah. 🙏
 
