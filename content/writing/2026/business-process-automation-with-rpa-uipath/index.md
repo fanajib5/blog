@@ -97,7 +97,7 @@ Bagian ini sering diremehkan, padahal skenario gagal pasti ada:
 - Sistem target lambat atau timeout
 - Kredensial tidak valid
 
-Bot yang hanya berjalan dalam skenario ideal belum siap dipakai. Sejak awal, saya menganggap error sebagai hal yang wajar dan memastikan bot menghasilkan log yang jelas serta bisa di-retry dengan aman.
+Kalau bot hanya berjalan di skenario ideal, itu bukan otomasi, itu demo. Sejak awal, saya memakai pendekatan "anggap error itu normal" dan memastikan bot menghasilkan log yang jelas serta bisa di-retry dengan aman.
 
 ## Hasil yang Terasa Setelah Berjalan
 

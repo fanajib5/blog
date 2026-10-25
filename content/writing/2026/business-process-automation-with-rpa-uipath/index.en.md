@@ -97,7 +97,7 @@ This part is often underestimated, even though failures are inevitable:
 - Target system is slow or times out
 - Credentials are invalid
 
-If a bot only works in ideal scenarios, it is not ready for real use. I treated errors as normal events and made sure the bot produced clear logs and could retry safely from the start.
+If a bot only works in ideal scenarios, that is not automation, that is a demo. I treated errors as normal events and made sure the bot produced clear logs and could retry safely from the start.
 
 ## Outcomes We Actually Felt
 
