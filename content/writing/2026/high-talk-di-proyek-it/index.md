@@ -21,7 +21,7 @@ Dan ironisnya, saya paling sering bertemu tipe ini justru di proyek IT.
 
 ## Kenapa Mereka Seperti Ini?
 
-Saya sudah cukup lama bertanya-tanya kenapa bisa begitu. Di beberapa proyek yang saya alami, ada tiga kemungkinan.
+Saya sudah cukup lama bertanya-tanya kenapa bisa begitu. Dari pengalaman di beberapa proyek, ada tiga kemungkinan.
 
 **Pertama, mereka terlalu dalam di bidangnya.**
 
@@ -66,7 +66,7 @@ Di proyek IT, teknik ini bisa dilihat dari dua sisi.
 - _"Bisa dianalogikan dulu, Mas/Pak, seolah-olah saya anak SMA yang baru belajar coding?"_
 - _"Bisa kasih contoh nyata dari kasus kita dulu sebelum masuk ke teorinya?"_
 
-Orang yang paham biasanya bisa menjawabnya. Kalau dia malah tambah bingung saat diminta menyederhanakan, mungkin penjelasan awalnya memang belum membantu haha.
+Orang yang benar-benar memahami konsepnya biasanya bisa menjelaskannya dengan lebih sederhana. Kalau dia malah tambah bingung saat diminta menyederhanakan, mungkin dia sendiri belum benar-benar paham konsep itu haha.
 
 **Sebagai pembicara**, teknik ini melatih kita sendiri untuk tidak terjebak dalam kebiasaan yang sama. Sebelum menjelaskan sesuatu ke tim, coba tanya diri sendiri dulu: _kalau teman saya yang baru sebulan belajar coding mendengar ini, apakah dia akan mengerti?_
 
@@ -106,4 +106,4 @@ Setelah beberapa kali berhadapan dengan cara komunikasi seperti ini, saya sadar 
 
 Ada masa-masa di mana saya sangat antusias dengan sesuatu yang baru dipelajari, entah itu _clean architecture_, _hexagonal pattern_, atau konsep apa pun yang baru saya temukan dari blog luar, dan langsung menyebutkannya di setiap kesempatan. Padahal tidak semua orang butuh mendengar itu saat itu juga. Dan mungkin saya sendiri pun belum benar-benar menguasainya~~
 
-Saya menulis ini bukan untuk menghakimi siapa pun. Saya juga perlu mengingatkan diri sendiri bahwa istilah yang baru saya pelajari belum tentu perlu saya bawa ke setiap obrolan.
+Saya menulis ini bukan untuk menghakimi siapa pun. Saya juga perlu mengingatkan diri sendiri bahwa komunikasi bukan soal berapa banyak istilah yang kita tahu, melainkan apakah orang lain memahami maksud kita. Istilah yang baru saya pelajari belum tentu perlu saya bawa ke setiap obrolan.

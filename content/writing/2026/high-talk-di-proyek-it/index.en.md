@@ -66,7 +66,7 @@ In an IT project, the technique has two sides.
 - _"Could you give me an analogy first, as if I'm a high schooler just starting to learn coding?"_
 - _"Could you give me a real example from our case before going into the theory?"_
 
-Someone who understands can usually answer. If they get even more confused when asked to simplify, maybe the original explanation wasn't helping haha.
+Someone who truly understands the concept can usually explain it more simply. If they get even more confused when asked to simplify, maybe they don't fully understand the concept themselves haha.
 
 **As a speaker**, this technique trains you to avoid falling into the same habit. Before explaining something to your team, ask yourself: _if my teammate who just started learning a month ago heard this, would they understand?_
 
@@ -106,4 +106,4 @@ After running into this communication style a few times, I realized I've been a 
 
 There were periods where I was extremely enthusiastic about something I'd just learned, whether it was clean architecture, hexagonal patterns, or whatever concept I'd just found on some foreign blog, and I'd bring it up at every opportunity. Even though not everyone needed to hear it right then. And honestly, I probably hadn't fully mastered it myself~~
 
-I'm not writing this to judge anyone. I need the reminder myself: a term I've just learned doesn't have to come up in every conversation.
+I'm not writing this to judge anyone. I need the reminder myself that communication isn't about how many terms we know, but whether the other person understands what we mean. A term I've just learned doesn't have to come up in every conversation.
