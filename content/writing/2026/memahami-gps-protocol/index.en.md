@@ -245,7 +245,7 @@ Before writing a decoder, inspect the incoming traffic. These are the tools I us
 
 ### 1. TCP Packet Logger
 
-A simple TCP listener can dump received bytes to standard output for inspection. This example only receives and prints data; it does not forward anything to another server:
+A simple TCP connection handler can dump received bytes to standard output for inspection. This example only receives and prints data; it does not forward anything to another server:
 
 ```go
 // Minimal TCP logger: dump all inbound bytes

@@ -245,7 +245,7 @@ Sebelum menulis decoder, saya "melihat" data yang masuk dengan beberapa tools:
 
 ### 1. TCP Packet Logger
 
-Untuk melihat struktur packet, jalankan TCP listener sederhana yang mencatat byte masuk. Contoh ini hanya menerima dan menampilkan data, bukan meneruskannya ke server lain:
+Untuk melihat struktur packet, gunakan handler koneksi TCP sederhana yang mencatat byte masuk. Contoh ini hanya menerima dan menampilkan data, bukan meneruskannya ke server lain:
 
 ```go
 // Minimal TCP logger — log semua byte yang masuk
