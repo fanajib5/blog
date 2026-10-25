@@ -15,23 +15,23 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Let's start with the most confusing report I've ever handled: a vehicle parked with its engine off, while the system read its speed as **66 km/h**. Satellites healthy, data flowing in. If you've ever wondered how one wrong punctuation mark can make a parked car speed, this story is for you hehe~
+The vehicle was parked, its engine off, but the system read its speed as **66 km/h**. Satellites were healthy and data kept arriving. It took me a while to find that a single character in the parser explained the number.
 
 ## Rewind: January 2025
 
-As covered in [episode one](/en/writing/2026/hijrah-backend-01/), the migration mandate had been waiting since before I was even hired. One of its largest chunks landed on my desk: the protocols. The front door for all fleet data.
+As I described in [episode one](/en/writing/2026/hijrah-backend-01/), the migration mandate was waiting before I was hired. One of its biggest tasks was rewriting the protocol parsers, the front door for all fleet data.
 
 It looked like this: dozens of GPS tracker types, each vendor speaking its own binary dialect, and the old system had one parser per dialect. My job was rewriting all of them in Go while the fleet kept transmitting every second. There was no "let's shut it down for tonight" window.
 
-So my daily routine in January 2025: read a PHP parser, write a Go parser, repeat. The office even bought me a premium AI subscription of that era to speed up the conversion.
+My routine throughout January 2025 was simple: read a PHP parser, write a Go parser, repeat. The office even bought me a premium AI subscription available at the time to speed up the conversion.
 
-The trail still exists today: my first conversation with the mandate holder is timestamped January 2nd, three in the afternoon, containing the project folder location; and my first work sentence there was a request to convert the first CodeIgniter file to Go. The sprint's result is also officially recorded in the bosses' group chat: the listener conversion finished ten days ahead of the timeline. The only part of that mandate that arrived early hahaha. Everyone has their own way of spending late nights; mine happened to be rewriting twenty-one parser variants hehe~
+The trail is still there: my first conversation with the mandate holder is timestamped January 2 at three in the afternoon, and contains the project folder location. My first work message there asked to convert the first CodeIgniter file to Go. The sprint result is also recorded in the bosses' group chat: the listener conversion finished ten days ahead of schedule. It may have been the only part of the mandate to finish early. I spent those nights rewriting 21 parser variants.
 
 ## The Luck Nobody Talks About
 
-Before the misunderstanding in this story, let me note the luck: for every Go parser I wrote, the original PHP code was available to compare against. Porting became a 1:1 exercise, not guesswork from protocol specs.
+One thing worked in my favor: I had the original PHP code to compare with every Go parser I wrote. Porting could be a 1:1 exercise instead of guesswork from protocol specs.
 
-The method was simple but strict: compare the GPS read offsets, the IO-element read structure (the starting position), and the branch counts, file by file. Twenty-one variants, one at a time. Not all at once, not "the pattern is probably the same". Because, as you're about to see, the "same" pattern almost defeated me hahaha.
+The method was simple but required care: compare the GPS read offsets, the IO-element read structure (the starting position), and the branch counts, file by file. I checked all 21 variants individually, not in one sweep or by assuming "the pattern is probably the same." That assumption nearly led me to the wrong fix.
 
 ## The Parked Car That Was Speeding
 
@@ -39,11 +39,11 @@ The symptom surfaced later, in one parser family: trackers on a certain codec re
 
 My first theory sounded very reasonable. The parser had a branch overwriting the GPS-block speed with the value of IO element number 24. "Ah, IO-24 is overwriting it wrongly! Just remove the overwrite." So I removed it, across nine parsers at once, because "the pattern is the same".
 
-That patch survived less than a day. On re-checking: the overwrite branch was actually correct, the PHP version had it too, and removing it broke other cases. Reverted the same day hahaha. The commit history records it gracefully: fix at this hour, revert at that one.
+That patch survived less than a day. On re-checking, the overwrite branch was correct and the PHP version had it too. Removing it broke other cases, so I reverted the patch the same day. The commit history records both the fix and its reversal.
 
 ## Data Detective: Device or Parser?
 
-Before accusing anyone again, I studied how to tell apart two suspects that constantly get mixed up: a broken tracker, or a broken parser.
+Before guessing again, I studied how to distinguish two possibilities that are easy to mix up: a faulty tracker or a faulty parser.
 
 The heuristics turned out simple and dependable:
 
@@ -55,11 +55,11 @@ Then I compared the same packet on the old and new systems: same time, same coor
 
 ## The One Character That Moved the Car
 
-The root cause finally surfaced, and it's my favorite part: the original PHP code read `startPosition =+ startRecord`.[^1] Yes, `=+`. In PHP that parses as a plain assignment with a unary plus. My hands, already growing used to Go, wrote it back as `+=`, which means add-and-assign.
+The root cause was in the original PHP code: `startPosition =+ startRecord`.[^1] In PHP, `=+` is a regular assignment with a unary plus. My hands, getting used to Go, changed it to `+=`, which means add and assign.
 
-One character of difference. The consequence: the IO-element read start shifted by a few bytes, so the parser "found" IO elements that weren't there, including IO-24 carrying the number 66. Parked cars everywhere got drafted into running without their consent hahaha.
+One character made the difference. The IO-element read start shifted by a few bytes, so the parser "found" IO elements at the wrong position, including IO-24 carrying the number 66. Parked cars seemed to be sent speeding without their owners' permission.
 
-The fix: one character, two files. Both commits landed that same day, alongside the band-aid's funeral. Weeks of forensic struggle, closed out by the difference between `=` and `+=` hehe.
+The fix was one character across two files. That same day, I committed the fix and reverted the band-aid. The investigation had narrowed down to the difference between `=` and `+=`.
 
 ## The Laundry: Returning 514,380 Rows
 
@@ -67,13 +67,13 @@ Correct code isn't enough. The data that had gone wrong also had to come home.
 
 For the two contaminated weeks, I pulled archives from the old system, matched packet by packet, and corrected 514,380 location rows in the new system.[^2] The match rate was 100%: not a single row failed to return. And the old glitch was verified gone, at the same timestamps, 66 became 9.
 
-This part isn't glamorous and appears in no tutorial: a migration isn't just about new code being right, it's also about cleaning up the wrong footprints the old code left behind. Data shouldn't leave the past in a broken state.
+This part isn't glamorous and rarely makes it into a tutorial: a migration isn't only about getting the new code right; it also means cleaning up data that was already wrong. Old data can't simply be left that way.
 
 ## Honestly, About the Word "Done"
 
-This sprint was part of a three-month period that collected its payment from my mental health. That's a fact, and I'm writing it as it was.
+This sprint was part of a three-month period that affected my mental health. I'm writing that down as it happened.
 
-And about the word "done": back then I declared it done with half-confident swagger, because parity verification wasn't 100%. And indeed, even as I write this episode, parser fixes still trickle in now and then. I've made peace with it: "done" is a spectrum, not a button. What matters isn't the claim; it's treating every new report as data, not as an insult hahaha.
+Back then I declared the work done without much confidence because parity verification wasn't 100%. Sure enough, parser fixes still come in now and then, even as I write this episode. I now think of "done" as a spectrum, not a button. Each new report is data to investigate.
 
 ## Lessons
 
@@ -83,9 +83,7 @@ And about the word "done": back then I declared it done with half-confident swag
 4. **"Done" is a hypothesis until verified.** That's normal; what's not normal is stopping the verification.
 5. **Migrations include old data.** Correct new code must be followed by cleanup of the wrong traces left behind.
 
-Next episode we unpack the philosophy holding all the previous ones up: why "the old system is right", and what happens when an "improvement" has to be deleted by its own author. See you there.
-
-Cheers.
+Episode four picks up a question raised here: when should the old code be treated as the reference, and what happens when I have to remove my own "improvement"?
 
 [^1]: Code snippets are simplified; protocol and IO field names kept just enough to tell the story.
 

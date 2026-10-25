@@ -18,7 +18,7 @@ series: "building-akordium-lab"
 series_part: 2
 ---
 
-In [BAL #1](/en/writing/2026/building-akordium-lab-01/), I promised a monthly report with a fixed format: content vs. plan, product progress, metrics, one mistake, and one decision. This is the first report that actually reads into the numbers, and the first few weeks after making that commitment were precisely what determined whether the format would survive.
+In [BAL #1](/en/writing/2026/building-akordium-lab-01/), I promised a monthly report with a fixed format: content vs. plan, product progress, metrics, one mistake, and one decision. This is the first report to include numbers. The first few weeks after making that promise tested whether I could keep the format going.
 
 > **Draft status**: sections marked _(fill in)_ are waiting for October data, to be completed before the November 26 release. The outline and evergreen narrative are final.
 
@@ -63,8 +63,8 @@ _(fill in: 1–3 decisions this month along with their reasoning. Candidates alr
 
 ---
 
-Doing this format for the second time still feels expensive to write honestly, and that is precisely proof that the format works. Next month: the third report, plus a mid-quarter review to decide the next candidates for the series (message queues, API layer, deployment).
+Writing the second report honestly still takes effort. Next month, I’ll publish the third report and take stock at mid-quarter before choosing the series’ next topics: message queues, API layer, or deployment.
 
-If you are also building something and want to keep each other accountable, [reach out to me](/en/contact/). Follow along via [RSS](/en/writing/index.xml).
+If you’re also building something and want to keep each other accountable, [get in touch](/en/contact/). You can follow the next report via [RSS](/en/writing/index.xml).
 
 Cheers.

@@ -15,52 +15,50 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Di [episode kedua](/writing/2026/hijrah-frontend-02/) saya menyebut angkanya: satu _library_ UI dipakai di 101 _file_, satunya bertahan di 13. Episode ini saya buka lebih dalam, karena di dalamnya ada dua temuan yang membuat saya tertawa sendirian di depan layar hehe~
+Di [episode kedua](/writing/2026/hijrah-frontend-02/) saya menyebut angkanya: satu _library_ UI dipakai di 101 _file_, satunya hanya di 13. Kali ini saya melihat lebih dekat cara keduanya dipakai. Ada dua temuan menarik, termasuk satu yang membuat saya tertawa sendiri di depan layar hehe.
 
-Temuan pertama: keduanya **tidak pernah bertemu di satu _file_ yang sama**. Temuan kedua: _library_ yang kalah popularitas itu menyimpan barang paling dicari se-kota. Mari berurutan.
+Pertama, keduanya **tidak pernah bertemu di satu _file_ yang sama**. Kedua, _library_ yang lebih jarang dipakai justru menyimpan komponen yang paling sering dicari. Saya ceritakan satu per satu.
 
 ## Dua Peradaban dengan Garis Demarkasi
 
-Peradaban pertama adalah _library_ mayoritas: dia menyediakan _paginator_, _button_, _skeleton_, _card_, sampai _galleria_ gambar. Dia fondasi tampilan hampir semua halaman; panggilannya terdengar di seratus satu _file_.[^1]
+_Library_ pertama dipakai di lebih banyak halaman. Isinya _paginator_, _button_, _skeleton_, _card_, sampai _galleria_ gambar. Hampir semua halaman memakai komponen darinya; ada 101 _file_ yang memanggilnya.[^1]
 
-Peradaban kedua lebih kecil, tapi punya monopoli. Dia yang menyimpan _DatePicker_, _TimePicker_, dan _Select_, komponen paling dicari se-_kota_ ketika sebuah halaman butuh laporan dengan kalender. Tiga belas _file_ menggantungkan hidup padanya, mayoritas halaman _report_.
+_Library_ kedua hanya dipakai di 13 _file_, kebanyakan halaman _report_. Namun, komponen _DatePicker_, _TimePicker_, dan _Select_ hanya tersedia di sana. Saat halaman laporan membutuhkan kalender, ketiganya yang dicari.
 
-Dan yang membuat saya lega sekaligus kagum: setelah dicek satu per satu, **nol _file_ memakai keduanya sekaligus**. Dua peradaban itu hidup berdampingan tanpa pernah berbagi kamar. Ada garis demarkasi yang tidak tertulis di dokumen mana pun, tapi dipatuhi sempurna, entah oleh siapa dan sejak kapan hehe~
-
-Garis seperti ini biasanya lahir bukan dari kebijakan, tapi dari pengalaman: sekali mencoba mencampur keduanya, seseorang pernah merasakan _styling_ yang saling makan, lalu seluruh tim lupa tidak-lupa. Demarkasi dengan trauma sebagai notaris hahaha.
+Setelah saya cek satu per satu, ternyata **tidak ada _file_ yang memakai keduanya sekaligus**. Keduanya hidup berdampingan dengan batas yang tidak pernah saya temukan tertulis di dokumen. Saya juga tidak tahu sejak kapan batas ini terbentuk. Yang jelas, pola itu masih terlihat di seluruh _file_ yang saya periksa.
 
 ## Kamus di Kantong Reducer
 
-Temuan kedua ini favorit saya. Salah satu _library_ itu butuh _locale_: label kalender dalam bahasa Indonesia. Wajar; semua orang butuh kalender berbahasa sendiri. Yang tidak wajar adalah di mana _locale_-nya di-_import_: **di dalam _reducer_**.
+Temuan kedua ini yang paling saya suka. Salah satu _library_ membutuhkan _locale_ agar label kalender tampil dalam bahasa Indonesia. Itu wajar. Yang membuat saya heran adalah tempat _locale_ itu di-_import_: **di dalam _reducer_**.
 
-_Pengurus data_, yang seharusnya mengurus angka dan status, ternyata membawa kamus lapisan tampilan di kantongnya. Tiga _reducer_ berbeda, tiga kali kamus yang sama.[^2]
+_Reducer_ biasanya mengurus data seperti angka dan status. Di sini, tiga _reducer_ berbeda masing-masing membawa kamus yang sama untuk lapisan tampilan.[^2]
 
-Untuk apa? Mungkin supaya label _locale_ tersedia saat _state_ disusun. Mungkin sekadar ikut _copy-paste_ zaman dulu. Tidak ada yang tahu pasti, dan memangnya perlu? Inilah peta dan kota tua: arsitektur yang rapi ada di kepala orang asing, sementara kenyataannya adalah kota yang tumbuh liar tapi berfungsi. _Reducer_ membawa kamus itu aneh, tapi dia sudah bertahun-tahun menunjukkan jalan dengan benar, jadi biarlah dia membawa kamusnya hahaha.
+Kenapa _locale_ ada di sana? Mungkin supaya labelnya tersedia saat _state_ disusun, atau mungkin terbawa _copy-paste_ lama. Saya tidak menemukan jawabannya. Import itu memang terasa janggal, tetapi sudah bertahun-tahun berfungsi. Untuk port ini, saya cukup mencatatnya; belum perlu memindahkannya.
 
 ## Tiga Era Styling
 
-Lapisan berikutnya: bagaimana komponen-komponen ini berdandan. Di _repo_ ada tiga generasi yang hidup damai:
+Untuk _styling_, ada tiga generasi di _repo_:
 
-1. **_Global CSS_ klasik**: empat puluh delapan _file_ _stylesheet_ yang memengaruhi siapa pun yang kebetulan memakai nama _class_ yang sama. Era kepercayaan buta.
-2. **Bawaan _library_ UI**: tema dari masing-masing peradaban, yang kadang saling menyusup ke wilayah satu sama lain.
-3. **Tailwind**: generasi baru, dengan _config_-nya, plus satu dokumen perbaikan di akar _repo_ yang sudah saya ceritakan di [episode pertama](/writing/2026/hijrah-frontend-01/), monumen penyakit yang sembuh.
+1. **_Global CSS_ klasik**: 48 _file stylesheet_ yang bisa memengaruhi elemen lain dengan nama _class_ yang sama.
+2. **Bawaan _library_ UI**: tema dari masing-masing _library_, yang kadang masuk ke wilayah satu sama lain.
+3. **Tailwind**: generasi baru dengan _config_-nya, serta satu dokumen perbaikan di akar _repo_ yang sudah saya ceritakan di [episode pertama](/writing/2026/hijrah-frontend-01/).
 
-Tiga era itu tidak saling menghapus. Halaman era pertama tetap bergaya era pertama, dan begitu seterusnya, seperti kota dengan arsitektur kolonial, modern, dan kontemporer berjajar di satu jalan. Berantakan? Tergantung siapa yang ditanya. Berkarakter? Tanpa debat hahaha.
+Ketiganya masih dipakai. Halaman yang lebih lama tetap memakai gaya lama, sementara halaman lain memakai _library_ UI atau Tailwind. Hasilnya tidak seragam, tetapi itulah kondisi _frontend_ yang kami port.
 
 ## Yang Kami Lakukan (dan Tidak)
 
-Supaya setia pada tradisi: saat port tipis ini berjalan, kami **tidak menyeragamkan** apa pun dari daftar di atas. Tidak ada migrasi _library_, tidak ada pemisahan _reducer_ dari kamusnya, tidak ada penghapusan era styling.
+Selama port tipis ini, kami **tidak menyeragamkan** hal-hal di atas. Tidak ada migrasi _library_, pemisahan _reducer_ dari _locale_, atau penghapusan era _styling_.
 
-Yang kami jaga justru garis demarkasinya: nol _file_ campuran itu kami pertahankan sebagai aturan tidak tertulis yang resmi kami tulis. Karena standardisasi besar saat pindah rumah itu [pelanggaran aturan episode empat](/writing/2026/hijrah-backend-04/) versi _frontend_. Standardisasi itu nyata dan bagus; tempatnya adalah epilog, bukan koper hehe~
+Yang kami jaga adalah batas antarlibrary: tidak ada _file_ yang mencampur keduanya. Aturan yang tadinya tidak tertulis itu sekarang kami tulis. Standardisasi besar saat pindah rumah akan menjadi [pelanggaran aturan episode empat](/writing/2026/hijrah-backend-04/) versi _frontend_. Standardisasi tetap penting, tetapi lebih baik dikerjakan setelah port selesai.
 
 ## Pelajaran
 
-1. **Dua _library_ berdampingan itu sejarah, bukan dosa.** Selama garis demarkasi jelas, mereka berdamai lebih baik daripada banyak tim.
-2. **Larang campuran di level _file_; itu demarkasi termurah yang paling efektif.** Tidak butuh _tooling_; cukup disiplin dan rasa trauma bersama.
-3. **Kebocoran lapisan itu petunjuk.** Kamus UI di kantong _reducer_ lucu dibaca, dan sekaligus menunjukkan di mana batas lapisan bocor. Tertawa dulu, catat kemudian.
-4. **Menyeragamkan itu epilog.** Jangan gabungkan pindah rumah dengan renovasi total; koper akan robek di tengah jalan.
+1. **Dua _library_ bisa berdampingan.** Yang penting, batas pemakaiannya jelas.
+2. **Mulai dari aturan sederhana di level _file_.** Kami tidak membutuhkan _tooling_ khusus untuk menjaga agar keduanya tidak tercampur.
+3. **Import _locale_ di _reducer_ menunjukkan batas lapisan yang kurang rapi.** Untuk sekarang, cukup catat dulu karena kode itu masih berfungsi.
+4. **Pisahkan port dari standardisasi.** Pindahkan dulu; perbaikan besar bisa menyusul.
 
-Episode berikutnya episode penutup berseri: dua sisi satu gedung, apa yang berubah setelah _backend_ dan _frontend_ sama-sama pindah, dan warisan mana yang kami pilih untuk dirawat. Sampai ketemu di sana.
+Episode berikutnya menjadi penutup seri ini. Saya akan membahas dua sisi satu gedung, apa yang berubah setelah _backend_ dan _frontend_ sama-sama dipindahkan, serta warisan mana yang kami pilih untuk dirawat. Sampai di sana.
 
 Sekian. Salam.
 

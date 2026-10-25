@@ -17,7 +17,7 @@ series: "Hijrah Backend"
 
 Kalau boleh merangkum satu aturan yang memegang kendali penuh atas migrasi ini, kukalimatkan begini: **yang benar adalah yang lama.**[^2]
 
-Kedengarannya menyebalkan, saya tahu. Kamu dipercaya memindahkan sistem ke bahasa baru, dan aturan nomor satu-nya justru: jangan berubah apa-apa. Bukan lebih cepat. Bukan lebih bersih. Bukan lebih baik. **Identik.** Tulisan ini bedah kenapa aturan yang anti-klimaks itu justru keputusan paling masuk akal yang pernah saya jalani hehe~
+Kedengarannya menyebalkan, saya tahu. Kamu dipercaya memindahkan sistem ke bahasa baru, dan aturan nomor satunya justru: jangan ubah apa-apa. Bukan lebih cepat, lebih bersih, atau lebih baik. **Identik.** Setelah menjalaninya, saya paham kenapa aturan yang terdengar antiklimaks ini masuk akal.
 
 ## Kenapa Sistem Baru Harus Setia pada Sistem Lama
 
@@ -29,7 +29,7 @@ Kedua, **permukaan _debugging_**. Kalau output sistem baru berbeda dari yang lam
 
 Ketiga, dan ini yang paling sering dilupakan: **dokumentasi yang bohong, kode yang jujur**. Sistem yang saya terima nyaris tanpa dokumentasi, semua pengetahuan ada di kepala satu orang yang kalau sedang tidak ada, aplikasi eksisting itu seperti kota tua tanpa peta. Kode lama adalah satu-satunya spesifikasi yang bisa dijalankan. Spesifikasi yang bisa dijalankan tidak bisa bohong; dia selalu mengaku apa yang benar-benar dia lakukan, termasuk aibnya.
 
-Tinggal satu catatan soal spesifikasi ini: dia jujur, tapi kadang berbicara dalam bahasa misterius. Sistem lama hobi mengulang _query_ yang sama dalam _loop_, padahal sebenarnya bisa digabung jadi satu. Lalu ada sulap khas _framework_: tulis `$this->device()`, dan tiba-tiba muncul _method_ yang entah didefinisikan di mana, entah sejak kapan, dan, yang paling bikin bengong, sukses mengembalikan _response_ data. Di PHP, hal seperti itu dianggap wajar. Di Go, semua yang tadi tersulap itu harus kutulis eksplisit satu per satu. Awalnya terasa seperti kehilangan jalan pintas; lama-lama terasa seperti akhirnya tahu isi dapur hehe.
+Spesifikasi ini jujur, tapi kadang berbicara dalam bahasa misterius. Sistem lama hobi mengulang _query_ yang sama dalam _loop_, padahal bisa digabung menjadi satu. Ada juga sulap khas _framework_: tulis `$this->device()`, lalu muncul _method_ yang entah didefinisikan di mana dan sejak kapan. Yang paling bikin bengong, _method_ itu sukses mengembalikan _response_ data. Di PHP, hal seperti itu dianggap wajar. Di Go, semua yang tersulap tadi harus saya tulis eksplisit satu per satu. Awalnya terasa seperti kehilangan jalan pintas; lama-lama saya jadi tahu isi dapur.
 
 ## Aturan Main: Mana yang Setia, Mana yang Bebas
 
@@ -39,13 +39,13 @@ Parity bukan berarti semua harus kembar. Yang saya pisahkan:
 
 **Bebas berbeda**: cara mengambil datanya. Contoh favorit saya sudah diceritakan di [episode kedua](/writing/2026/hijrah-backend-02/): _endpoint_ yang di PHP menjalankan ratusan _query_ kecil bertingkat, di Go diganti satu _query_ CTE. Hasil akhirnya wajib sama, jalan menuju sana bebas.
 
-Perbedaan ini yang membuat migrasi tetap menarik: kamu tidak sedang menyalin kamus, kamu sedang membangun jembatan baru dengan alun-alun yang sama persis di kedua ujungnya.
+Perbedaan ini membuat migrasi tetap menarik: saya tidak sedang menyalin kamus, melainkan membangun jembatan baru dengan alun-alun yang sama persis di kedua ujungnya.
 
 ## Cerita: "Perbaikan" yang Harus Saya Hapus Sendiri
 
 Ini bagian favorit saya, karena jadi pelajaran mahal.
 
-Ada satu _endpoint_ riwayat perjalanan kendaraan yang responsnya di sistem lama berisi beberapa _field_ tambahan: riwayat alarm, aktivitas _geofence_, dan insiden perilaku mengemudi. Versi Go awal saya mengisi ketiganya dengan semestinya, alarm _speed limit_, SOS, masuk/keluar _geofence_. Lebih kaya, lebih berguna. Saya merasa keren sebentar.
+Ada satu _endpoint_ riwayat perjalanan kendaraan yang responsnya di sistem lama berisi beberapa _field_ tambahan: riwayat alarm, aktivitas _geofence_, dan insiden perilaku mengemudi. Versi Go awal saya mengisi ketiganya dengan semestinya: alarm _speed limit_, SOS, serta aktivitas masuk dan keluar _geofence_. Lebih kaya dan lebih berguna, setidaknya menurut saya saat itu.
 
 Lalu saya telusuri sistem lamanya, dan ketemu pemandangan yang sekarang jadi gambar favorit saya:[^1]
 
@@ -59,7 +59,7 @@ Query aslinya **dikomentari orang**. Tidak dihapus, dikomentari, lalu diganti ar
 
 Keputusannya kalimat yang aneh untuk diucapkan seorang _engineer_: _"hapus perbaikan kita, samakan dengan yang lama: kosongkan."_
 
-Dan rasanya memang aneh. Sengaja menurunkan "kualitas" kode sendiri supaya setia pada sistem yang sedang kamu gantikan. Tapi itulah poinnya: **perbaikan diam-diam adalah racun dalam migrasi**. Kalau suatu hari memang perlu mengisi data alarm itu, dia harus jadi keputusan eksplisit yang terpisah, bukan kejutan yang lolos bareng migrasi. Perbaikan boleh; kejutan tidak boleh hehe~
+Rasanya memang aneh, sengaja menurunkan "kualitas" kode sendiri demi setia pada sistem yang sedang digantikan. Tapi **perbaikan diam-diam adalah racun dalam migrasi**. Kalau suatu hari data alarm itu perlu diisi, keputusannya harus dibuat terpisah, bukan diselipkan ke dalam migrasi.
 
 ## Quirk Kecil yang Wajib Ditiru
 
@@ -67,7 +67,7 @@ Parity juga turun sampai hal yang kelihatannya remeh. Contoh nyata: kalau total 
 
 Plus satu _edge case_: rentang tanggal yang tidak wajar (misalnya tanggal akhir di masa depan). Sistem lama membalas _envelope_ kosong berformat khusus; versi awal saya membalas _array_ polos. _User_ tidak akan pernah tahu bedanya, sampai suatu hari _script_ mereka yang mem-_parse_ _response_ tahu hahaha.
 
-Meniru perilaku aneh secara sadar, lalu menuliskannya di _test_ dengan muka datar, itu pengalaman yang unik. Kamu tahu itu bukan "cara yang benar". Kamu tahu itu "cara yang sudah dipercaya". Dan dalam migrasi, yang kedua menang.
+Meniru perilaku aneh lalu menuliskannya di _test_ dengan muka datar memang terasa unik. Saya tahu itu bukan "cara yang benar", tetapi "cara yang sudah dipercaya". Dalam migrasi, yang kedua menang.
 
 ## Pajak Paritas: Gelondongan _Field_
 
@@ -79,7 +79,7 @@ Konsistensinya memang tidak berhenti di sumber data. Tipe datanya pun ikut berim
 
 Lebih kreatifnya lagi: _field_ yang sama, dari halaman berbeda ke _endpoint_ serupa, sekali dikirim sebagai angka, sekali sebagai _string_. PHP menerima keduanya sambil senyum. Go menolak keduanya sambil menyerahkan _error decoding_ yang panjang hahaha.
 
-Satu lagi yang hampir jadi candaan sesama _developer_: sistem lama gemar membalas hasil kosong dengan HTTP 200 berisi `[]` atau `null`. Padahal bisa saja dikirim kode status yang jujur, sekalian menjelaskan bahwa datanya tidak ada. Tapi _frontend_ sudah bertahun-tahun membangun hidupnya di atas `[]` itu, dan aturan parity bilang: tiru. Jadi sistem Go saya pun ikut melapor "semua aman" sambil membawa kabar kosong hahaha.
+Satu lagi yang hampir jadi candaan sesama _developer_: sistem lama gemar membalas hasil kosong dengan HTTP 200 berisi `[]` atau `null`. Kode status lain bisa menjelaskan bahwa datanya tidak ada, tetapi _frontend_ sudah bertahun-tahun bergantung pada `[]` itu. Aturan parity bilang: tiru. Sistem Go saya pun ikut melapor "semua aman" sambil membawa kabar kosong.
 
 Karena tahu respons saya nanti gelondongan, saya membangun alat buktinya: audit kecil yang memeriksa _frontend_ untuk tiap _field_, mana yang benar-benar dibaca, mana yang cuma numpang lewat. Audit itulah yang jadi kuitansi saat giliran membereskan tiba. Dia juga yang membantu saya saat harus mengosongkan _field_ riwayat alarm di cerita di atas: tidak ada satu pun yang membacanya.
 
@@ -99,7 +99,7 @@ Lucunya: sampai proyek berjalan berbulan-bulan, inspeksi itu tidak pernah datang
 
 Filosofi yang akhirnya benar-benar saya jalani bukan "standar library saja", tapi lebih longgar dan justru lebih menuntut: **setiap dependensi harus bisa menjawab satu pertanyaan, kenapa standar library tidak cukup untuk ini?** _Framework_ HTTP? Standar library memang belum nyaman. _Date/time handling_? Standar library cukup, jadi tidak ada _library_ tambahan. Aturannya bukan soal berapa banyak, tapi soal tiap baris punya alasan.
 
-Pelajaran kecilnya: aturan yang ditegakkan dengan rasa takut akan ditaati, tapi aturan yang ditaati tanpa dipahami tidak akan bertahan. Untungnya yang terakhir terjadi ke saya, dan hasilnya lebih sehat dari aturannya sendiri hahaha.
+Pelajaran kecilnya: aturan yang ditegakkan dengan rasa takut mungkin ditaati, tetapi aturan yang tidak dipahami tidak akan bertahan. Untungnya, saya akhirnya menemukan prinsip yang lebih sehat daripada sekadar mengikuti aturan itu.
 
 ## Pelajaran
 
@@ -108,7 +108,7 @@ Pelajaran kecilnya: aturan yang ditegakkan dengan rasa takut akan ditaati, tapi 
 3. **Pengecualian parity harus sadar dan tercatat.** Default-nya tiru; yang tidak ditiru harus bisa dijelaskan kenapa.
 4. **Aturan dependensi yang baik berisi alasan, bukan angka.** "Standar library saja" terdengar disiplin; "tiap dependensi wajib punya alasan" itu yang benar-benar bisa dijalankan.
 
-Episode berikutnya kita ke dapur _database_: kenapa _query_ yang sudah punya _index_ bagus bisa memilih untuk tidak memakainya, dan kenapa pembungkus sekecil `DATE()` bisa menghukum tabel puluhan juta baris. Sampai ketemu di sana.
+Episode berikutnya kita ke dapur _database_: _query_ ber-_index_ yang memilih tidak memakainya, dan pembungkus `DATE()` yang memperlambat tabel berisi puluhan juta baris.
 
 Sekian. Salam.
 

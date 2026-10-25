@@ -15,11 +15,11 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Cerita ini sebenarnya dimulai sebelum saya diterima kerja.
+Cerita migrasi ini dimulai bahkan sebelum saya resmi bekerja.
 
 Di sebuah perusahaan GPS tracking di Surabaya, salah satu senior tim mendapat mandat me-_rewrite_ sistem eksisting. Sampai hari ini saya tidak tahu persis apa yang dibicarakan di rapat internalnya; yang saya tahu hanya hasilnya: mereka memutuskan pindah ke Go. Dan baru setelah keputusan itu mantap, lowongan pun dibuka.
 
-Jadi posisi saya di rekrutmen itu unik: saya tidak melamar sebuah pekerjaan, saya melamar sebuah keputusan yang sudah diambil orang lain hehe.
+Jadi posisi saya di rekrutmen itu agak unik: saya bukan ikut menentukan arah proyeknya. Saya datang untuk menjalankan keputusan yang sudah dibuat orang lain.
 
 Di _interview_, pertanyaan utamanya wajar: bisa tidak, me-_migrasi_ Laravel ke Go? Sempat ada tawaran tes, semacam _"nanti kami tunjukkan contoh aplikasi kami, coba kerjakan dalam seminggu"_. Tawaran itu akhirnya tidak jadi. Ya sudah, _interview_ pun berjalan seperti biasa, dan saya diterima.
 
@@ -27,19 +27,19 @@ Lalu, entah kapan tepatnya lahirnya, ada satu kesepakatan yang sudah menunggu sa
 
 Tiga bulan. Untuk 370+ _endpoint_.[^2]
 
-Angka itu lahir dari satu keyakinan yang terdengar masuk akal di rapat: migrasi Laravel ke Go itu cepat dan mudah, tinggal pindahin, dan hasilnya langsung siap pakai di _production_. Cukup _export_-import, kan? Yang belum sempat ditanya, kenapa satu-satunya orang di rapat yang paham pekerjaannya, yang tugasnya kan cukup mengiyakan, tidak menambahkan satu kalimat saja: _"sebentar, ini beda kategori"_ hahaha.
+Angka itu lahir dari satu keyakinan yang terdengar masuk akal di rapat: migrasi Laravel ke Go itu cepat dan mudah, tinggal pindahin, dan hasilnya langsung siap pakai di _production_. Cukup _export_-import, kan? Yang belum sempat ditanyakan: kenapa satu-satunya orang di rapat yang paham pekerjaannya, yang tugasnya cukup mengiyakan, tidak menyela dengan satu kalimat saja: _"sebentar, ini beda kategori"_.
 
-Mari hitung bersama: itu sekitar empat _endpoint_ per hari, tujuh hari seminggu, tanpa akhir pekan, tanpa libur nasional, dan tanpa waktu untuk bertanya _"kok bisa ya semantap itu menetapkan angkanya?"_ hahaha. Angka yang indah di _slide_; kurang indah di _keyboard_ hehe~
+Hitungannya sekitar empat _endpoint_ per hari, tujuh hari seminggu, tanpa akhir pekan atau libur nasional. Waktu untuk bertanya _"kok bisa ya semantap itu menetapkan angkanya?"_ pun tak masuk hitungan. Angka yang indah di _slide_, kurang indah di _keyboard_.
 
-Nah, tulisan ini episode pertama dari seri **Hijrah Backend**: catatan personal perjalanan memindahkan backend GPS dari PHP ke Go, perjalanan yang tenggat aslinya sudah lama terbang entah ke planet mana. Kalau Anda cari versi teknisnya (kenapa Go, bagaimana pendekatannya, pelajaran apa yang didapat), itu sudah saya tulis di [tulisan April kemarin](/writing/2026/legacy-php-to-go-migration/). Seri ini isinya cerita di balik layar angka-angka itu: keputusan, kekeliruan, dan hal-hal yang tidak muat di catatan teknis hehe~
+Ini episode pertama seri **Hijrah Backend**, catatan personal tentang perjalanan memindahkan backend GPS dari PHP ke Go. Tenggat aslinya sudah lama lewat. Versi teknisnya (kenapa Go, pendekatan yang dipakai, dan pelajarannya) sudah saya tulis di [tulisan April kemarin](/writing/2026/legacy-php-to-go-migration/). Di seri ini saya bercerita tentang hal-hal yang tidak muat di catatan teknis: keputusan, kekeliruan, dan orang-orang yang menjalankan migrasi itu.
 
 ## Struktur Pasukan (dan Proporsinya)
 
 Awal 2025, tim IT terbagi tiga: dua rekan merawat aplikasi eksisting, dua lagi membangun _backoffice_ admin, dan satu sub-tim khusus migrasi. Sub-tim migrasi beranggotakan dua orang: satu senior yang menyandang mandat, dan satu saya.
 
-Proporsi pengerjaannya, seperti mungkin sudah Anda duga dari nada tulisan ini, tidak sepenuhnya seimbang hahaha.
+Pembagian kerjanya tidak sepenuhnya seimbang.
 
-Dalam praktiknya, seluruh kode Go yang saya ceritakan di seri ini saya tulis sendiri. Kontribusi sang pemegang mandat lebih banyak ke arah menanyakan kabar: _"kok error?"_, _"kok responsnya beda?"_, _"kok makin lemot? Go kan katanya lebih cepat?"_ Pertanyaan-pertanyaan itu sah-sah saja sebagai _feedback_. Hanya saja, sang penanya bukan orang yang membuka _editor_ hehe~
+Dalam praktiknya, seluruh kode Go yang saya ceritakan di seri ini saya tulis sendiri. Kontribusi sang pemegang mandat lebih banyak berupa pertanyaan: _"kok error?"_, _"kok responsnya beda?"_, _"kok makin lemot? Go kan katanya lebih cepat?"_ Semuanya sah sebagai _feedback_. Hanya saja, yang bertanya bukan orang yang membuka _editor_.
 
 Dan saat isu kecepatan itu ramai, saya sempat menimpali dengan satu catatan teknis: menyebutnya _"migrasi Laravel ke Go"_ sebenarnya tidak _apple to apple_. Laravel itu _framework_, Go itu bahasa. Kalau mau adil membandingkan _framework_, bandingkan Laravel dengan CodeIgniter. Kalau mau adil membandingkan bahasa, bandingkan PHP _native_ dengan Go _native_. Yang terjadi di mandat kami: mengambil bahasanya dari satu sisi dan _framework_-nya dari sisi lain, lalu menagih kecepatannya hehe.
 
@@ -51,13 +51,13 @@ Dunia pertama: API berbasis Laravel 8 dengan sekitar 290 _endpoint_, angkanya ja
 
 Datanya juga tidak main-main. Puluhan ribu unit GPS yang _live tracking_, puluhan juta baris data lokasi dan _alert_, semuanya bermuara ke MySQL.
 
-Dan gejalanya sudah terasa sejak minggu-minggu awal. Salah satunya di halaman _dashboard_ estimasi bahan bakar per grup kendaraan. Untuk 30 kendaraan, halaman itu menjalankan ratusan _query_: ambil _device_, ambil tipe _device_-nya, lalu _loop_ tujuh hari ambil ringkasan harian. _Database_-nya kerja rodi, _user_-nya nunggu sambil ngopi. _Hadeh._
+Gejalanya terasa sejak minggu-minggu awal. Di halaman _dashboard_ estimasi bahan bakar per grup kendaraan, misalnya, 30 kendaraan memicu ratusan _query_: ambil _device_, ambil tipe _device_-nya, lalu _loop_ selama tujuh hari untuk mengambil ringkasan harian. _Database_-nya kerja rodi, _user_-nya menunggu sambil ngopi.
 
-Masih ada lagi sih: _endpoint_ yang bisa makan 15 detik sekali panggil. Tapi cerita lengkapnya, lengkap dengan semua hipotesis salah saya, saya simpan buat episode berikutnya. _Stay tuned_ hehe.
+Ada juga _endpoint_ yang bisa makan 15 detik sekali panggil. Saya sempat menyalahkan beberapa hal sebelum menemukan penyebabnya; cerita itu ada di episode berikutnya.
 
 ## Godaan Rewrite Total
 
-Dengan warisan segitu, godaan pertama yang datang itu manis sekali: _"rewrite_ semuanya dari nol aja. Bersih, modern, enak dibaca."
+Dengan warisan sebesar itu, godaan pertama terasa manis: _"rewrite_ semuanya dari nol aja. Bersih, modern, enak dibaca."
 
 _Amit-amit._ Untung godaan itu saya tolak, setelah sempat tergiur sebentar, jujur. _Rewrite_ total itu artinya berjudi dengan perilaku sistem yang selama ini dipercaya puluhan ribu _user_. Perilaku yang kadang aneh, kadang tidak terdokumentasi, tapi sudah jadi kenyataan sehari-hari mereka.
 
@@ -80,15 +80,13 @@ Seri ini berisi delapan episode plus satu epilog. Kalau Anda baca tulisan ini da
 
 ## Penutup
 
-Mandat yang menunggu saya sejak sebelum hari pertama itu tenggangnya tiga bulan. Saat tulisan ini disusun, perjalanan ini sudah jauh melampaui angka itu. Selisihnya bukan kelambanan; itu ukuran jarak antara angka di _slide_ dan realita di _keyboard_. Dan sebagian besar jarak itu saya tempuh sendirian, dengan bantuan Allah, doa keluarga, dan dukungan istri saya. Tanpa semuanya, seri ini tidak akan ada.
+Mandat itu memberi saya tiga bulan. Saat tulisan ini disusun, perjalanan migrasi sudah jauh melewati tenggat tersebut. Jarak antara angka di _slide_ dan kenyataan di _keyboard_ saya lalui dengan bantuan Allah, doa keluarga, dan dukungan istri. Tanpa mereka, catatan ini tidak akan ada.
 
-Episode berikutnya kita masuk ke bagian yang paling sering ditanyakan: _kok bisa sih satu_ endpoint _makan 15 detik?_ Sampai ketemu di sana.
+Di episode kedua, saya kembali ke _endpoint_ yang memakan 15 detik itu. Ternyata masalahnya bukan pada _query_ yang saya curigai.
 
-Oh iah, untuk yang lebih suka versi tutorialnya — membangun backend GPS dari nol dengan kode yang bisa diikuti — saya tulis terpisah di [seri GPS Backend](/writing/2026/memahami-gps-protocol/). Seri Hijrah ini versi kisahnya.
+Untuk yang mencari tutorial membangun backend GPS dari nol, saya menulisnya terpisah di [seri GPS Backend](/writing/2026/memahami-gps-protocol/). Seri Hijrah ini catatan di balik pekerjaan itu.
 
-Terima kasih sudah tersasar ke sini dan membaca hehe. Semoga harimu menyenangkan!
-
-Sekian. Salam.
+Terima kasih sudah membaca. Semoga catatan ini memberi gambaran tentang pekerjaan yang tersembunyi di balik satu angka tenggat.
 
 [^1]: Detail perusahaan sengaja saya anonimkan, nama rekan kerja diganti peran atau inisial fiktif, dan angka-angka dibulatkan secukupnya untuk bercerita. Tulisan ini soal perjalanan teknisnya, bukan soal perusahaannya.
 

@@ -18,7 +18,7 @@ series: "building-akordium-lab"
 series_part: 2
 ---
 
-Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, satu keputusan. Ini laporan pertama yang benar-benar membaca angka — dan minggu-minggu pertama setelah janji itu justru paling menentukan apakah formatnya bertahan.
+Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, dan satu keputusan. Ini laporan pertama yang menyertakan angka. Beberapa minggu pertama setelah janji itu akan menunjukkan apakah format ini bisa saya pertahankan.
 
 > **Status draft**: bagian bertanda _(isi)_ menunggu data Oktober — diisi sebelum rilis 26 November. Kerangka dan narasi evergreen sudah final.
 
@@ -63,8 +63,8 @@ _(isi: 1–3 keputusan bulan ini beserta alasannya. Kandidat yang sudah diambil 
 
 ---
 
-Format kedua kalinya ini masih terasa mahal untuk ditulis jujur — dan itu justru tanda formatnya bekerja. Bulan depan: laporan ketiga, plus evaluasi tengah kuartal untuk menentukan kandidat lanjutan seri (antrean pesan, API layer, deployment).
+Menulis laporan kedua dengan jujur pun masih terasa berat. Bulan depan saya akan menulis laporan ketiga sekaligus mengevaluasi progres di pertengahan kuartal sebelum memilih topik lanjutan seri: antrean pesan, API layer, atau deployment.
 
-Kalau kamu juga sedang membangun sesuatu dan mau saling mengawasi, [kontak saya](/contact/). Ikuti lewat [RSS](/writing/index.xml).
+Kalau kamu juga sedang membangun sesuatu dan ingin saling menjaga komitmen, [hubungi saya](/contact/). Laporan berikutnya bisa diikuti lewat [RSS](/writing/index.xml).
 
 Sekian. Salam.

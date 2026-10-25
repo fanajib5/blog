@@ -21,15 +21,15 @@ series_part: 5
 
 "Kendaraan A masuk area pelabuhan jam 03:00, keluar jam 05:30."
 
-Kalimat sesederhana itu adalah salah satu fitur paling laku dijual di dunia GPS tracking — dan salah satu yang paling sering diimplementasikan dengan salah. Geofencing bukan sekadar menggambar _polygon_ di peta; itu soal mendeteksi _event_ masuk/keluar secara benar dari _stream_ data yang datang tiap 10–30 detik.
+Salah satu fitur yang sering ditawarkan layanan GPS tracking adalah mencatat kendaraan masuk dan keluar area. Meski terdengar sederhana, geofencing juga sering keliru diimplementasikan. Kita tidak hanya menggambar _polygon_ di peta, tetapi juga mendeteksi _event_ masuk dan keluar dari _stream_ data yang datang tiap 10–30 detik.
 
-Di [Part 4](/writing/2026/gps-data-postgresql-timescaledb/) posisi tersimpan rapi di TimescaleDB. Artikel ini menambahkan satu dimensi: **wilayah**. Semua contoh diuji di PostGIS 3.5 (PostgreSQL 16, container `postgis/postgis:16-3.5`).
+Di [Part 4](/writing/2026/gps-data-postgresql-timescaledb/), posisi sudah tersimpan di TimescaleDB. Artikel ini menambahkan satu dimensi: **wilayah**. Semua contoh diuji di PostGIS 3.5 (PostgreSQL 16, container `postgis/postgis:16-3.5`).
 
 ## Geofence Itu Pertanyaan Dalam atau Luar
 
-Masalah inti geofencing sebenarnya satu pertanyaan yang dijawab berulang-ulang: _apakah titik ini di dalam polygon itu?_ PostGIS menjawabnya dengan `ST_Within(titik, polygon)`. Sebelum bicara real-time, mari buktikan dulu fondasinya.
+Inti geofencing adalah menjawab satu pertanyaan untuk setiap titik: _apakah titik ini di dalam polygon itu?_ PostGIS menjawabnya dengan `ST_Within(titik, polygon)`. Kita mulai dengan menguji fondasinya.
 
-Pertama, tabel geofence — polygon dengan SRID 4326 (koordinat lintang/bujur standar GPS) dan index GiST:
+Buat tabel geofence dengan polygon ber-SRID 4326 (koordinat lintang/bujur standar GPS) dan index GiST:
 
 ```sql
 CREATE TABLE geofences (
@@ -40,6 +40,7 @@ CREATE TABLE geofences (
 );
 
 CREATE INDEX idx_geofences_geom ON geofences USING GIST (geom);
+CREATE INDEX idx_geofences_geog ON geofences USING GIST ((geom::geography));
 ```
 
 Untuk demo, saya pakai persegi panjang yang kira-kira membungkus area pelabuhan Tanjung Perak Surabaya (di production, polygon digambar pelanggan di peta dan bisa berbentuk apa pun):
@@ -53,7 +54,7 @@ INSERT INTO geofences (name, geom) VALUES (
 );
 ```
 
-Lalu titik posisi. Trik kecil yang menyenangkan: kalau tabel `positions` masih memakai kolom `lat`/`lon` (seperti skema Part 4), kita bisa menambahkan kolom geometry yang **tercipta otomatis** lewat _generated column_ — tanpa mengubah cara insert sama sekali:
+Berikutnya, buat geometri titik posisi. Jika tabel `positions` masih memakai kolom `lat`/`lon` (seperti skema Part 4), kita bisa menambahkan kolom geometry **tercipta otomatis** lewat _generated column_ tanpa mengubah cara insert:
 
 ```sql
 ALTER TABLE positions ADD COLUMN geom GEOMETRY(Point, 4326)
@@ -78,13 +79,13 @@ FROM positions ORDER BY time;
 (4 rows)
 ```
 
-Fondasi bekerja. Tapi pelanggan tidak membeli daftar `true`/`false` — mereka membeli **event**.
+Fondasi sudah berjalan. Namun, pelanggan tidak membeli daftar `true`/`false`, melainkan **event**.
 
 ## Dalam/Luar Menjadi Event: Masuk dan Keluar
 
-Keanggotaan saja belum cukup. Truk yang berdiri diam di dalam pelabuhan selama 4 jam akan mengirim ratusan titik `inside` — dan dashboard yang menampilkan "masuk" 400 kali itu dashboard yang salah. Yang benar: satu event `ENTER` saat status berubah dari luar ke dalam, satu `EXIT` saat sebaliknya.
+Keanggotaan saja belum cukup. Truk yang berdiri diam di dalam pelabuhan selama 4 jam akan mengirim ratusan titik `inside`. Dashboard yang menampilkan "masuk" 400 kali tentu keliru. Yang dibutuhkan adalah satu event `ENTER` saat status berubah dari luar ke dalam dan satu `EXIT` saat sebaliknya.
 
-Ini murni masalah membandingkan status titik sekarang dengan titik sebelumnya — pekerjaan sempurna untuk _window function_ `LAG`:
+Untuk mengenali perubahan, bandingkan status titik saat ini dengan status sebelumnya. _Window function_ `LAG` cocok untuk itu:
 
 ```sql
 WITH membership AS (
@@ -106,7 +107,7 @@ WHERE prev_inside IS NOT NULL          -- titik pertama: belum ada pembanding
   AND prev_inside IS DISTINCT FROM inside;
 ```
 
-Hasilnya di rute tadi — persis dua baris, persis yang diinginkan pelanggan:
+Rute tadi menghasilkan dua baris:
 
 ```text
  device_id |          time          | event
@@ -115,11 +116,11 @@ Hasilnya di rute tadi — persis dua baris, persis yang diinginkan pelanggan:
          1 | 2026-11-11 05:30:00+07 | EXIT
 ```
 
-(Di production, `PARTITION BY device_id, g.id ORDER BY time` — tiap device punya urutan statusnya sendiri per fence.)
+(Di production, `PARTITION BY device_id, g.id ORDER BY time`, tiap device punya urutan statusnya sendiri per fence.)
 
 ## Real-Time: Pengecekan di Ingest Worker
 
-Query di atas bagus untuk analisis historis. Untuk alert real-time, tempat pengecekannya bukan query massal, melainkan **di titik data masuk** — dan mengikuti arsitektur kita sejak Part 2: listener tidak menyentuh database, ingest worker yang bekerja:
+Query di atas berguna untuk analisis historis. Alert real-time perlu diperiksa **saat data masuk**. Sesuai arsitektur di Part 2, listener tidak menyentuh database; ingest worker yang memeriksa posisi:
 
 ```go
 func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
@@ -148,18 +149,18 @@ func checkGeofences(ctx context.Context, pool *pgxpool.Pool, p Position) {
 }
 ```
 
-Dua detail yang membuat ini efisien untuk ribuan fence:
+Dua detail membantu query ini saat jumlah fence bertambah:
 
-1. **Pre-filter `ST_DWithin` geography 5 km** memakai index GiST untuk memangkas fence yang jauh — `_Within` yang eksak hanya dijalankan untuk kandidat dekat.
-2. **Status sebelumnya tidak di-query dari `positions`** — cukup dari cache (`device_id:fence_id → inside`). Ini informasi sekecil satu bit yang hanya berubah saat event.
+1. **Pre-filter `ST_DWithin` geography 5 km** dapat memakai index ekspresi `idx_geofences_geog` pada `geom::geography` untuk memangkas fence yang jauh. Index `idx_geofences_geom` tetap digunakan untuk operasi geometry seperti `ST_Within`. Planner bisa memilih scan lain bergantung ukuran dan statistik tabel, jadi cek rencana query dengan `EXPLAIN (ANALYZE, BUFFERS)`.
+2. **Status sebelumnya tidak di-query dari `positions`**. Worker cukup membaca cache (`device_id:fence_id → inside`), informasi satu bit yang hanya berubah saat event.
 
-Kenapa bukan _trigger_ PostgreSQL? Bisa juga — tapi trigger mengikat logika bisnis ke schema, sulit dites terpisah, dan menyembunyikan pekerjaan dari pengamat aplikasi. Dengan pola worker, alert notification (push/WhatsApp/email) tinggal fungsi Go biasa.
+Kenapa bukan _trigger_ PostgreSQL? Trigger bisa dipakai, tetapi mengikat logika bisnis ke schema, sulit dites terpisah, dan menyembunyikan pekerjaan dari pengamat aplikasi. Dengan pola worker, notifikasi alert (push/WhatsApp/email) cukup dikirim lewat fungsi Go biasa.
 
 ## POI Radius: geography Bukan geometry
 
-Geofence polygon cocok untuk area berbatas tegas (pelabuhan, gudang, kawasan). Tapi kebutuhan "alert kalau kendaraan mendekati SPBU dalam radius 500 meter" lebih alami dinyatakan sebagai lingkaran — dan di sini ada jebakan klasik PostGIS: **satuan**.
+Geofence polygon cocok untuk area berbatas tegas (pelabuhan, gudang, kawasan). Untuk kebutuhan "alert kalau kendaraan mendekati SPBU dalam radius 500 meter", lingkaran lebih alami. Namun, ada jebakan PostGIS: **satuan**.
 
-`geometry` menghitung dalam derajat; `geography` menghitung di permukaan bumi dalam **meter**. Radius 500 meter yang ditulis sebagai `ST_DWithin(geom, geom, 500)` pada tipe geometry itu 500 _derajat_ — melingkari Indonesia lima kali. Pakai `geography`:
+`geometry` menghitung dalam derajat; `geography` menghitung di permukaan bumi dalam **meter**. Radius 500 meter yang ditulis sebagai `ST_DWithin(geom, geom, 500)` pada tipe geometry berarti 500 _derajat_, cukup untuk melingkari Indonesia lima kali. Untuk radius, pakai `geography`:
 
 ```sql
 CREATE TABLE pois (
@@ -187,23 +188,23 @@ FROM pois;
 (1 row)
 ```
 
-199 meter — masuk radius, dan angkanya masuk akal karena `geography` memperhitungkan kelengkungan bumi.
+Jaraknya 199 meter, masih dalam radius 500 meter. `geography` memperhitungkan kelengkungan bumi.
 
 ## Jebakan yang Sering Menggigit
 
-- **GPS drift di tepi polygon.** Titik GPS menyala-matian di sekitar batas akan menghasilkan event ENTER/EXIT palsu beruntun (truk parkir persis di pagar). Solusi umum: _buffer_ — masukkan hanya jika titik berada 50 m ke dalam polygon (`ST_DWithin(geom, geom, -50)` tidak valid; pakai `ST_Contains(ST_Buffer(geom, -0.0005), point)`), atau minta dua titik berurutan yang konsisten sebelum emit event.
-- **Interval sampling vs kecepatan.** Kendaraan 60 km/jam dengan interval 60 detik berpindah 1 km per titik — rute "melewati" fence kecil bisa terlewat antara dua titik tanpa pernah berada _di dalam_. Untuk fence kritis, evaluasi pergeseran (apakah segmen dua titik memotong batas polygon dengan `ST_Intersects` pada `ST_MakeLine`).
-- **Satuan derajat vs meter** — seperti di atas: `geometry` derajat, `geography` meter. Selalu sadar sedang pakai yang mana.
-- **SRID campur aduk** — `ST_SetSRID(ST_MakePoint(lon, lat), 4326)`: kalau lupa SetSRID, PostGIS menolak membandingkan (atau lebih buruk: diam-diam cocok karena keduanya 0). Perhatikan juga urutannya **lon dulu, lat kemudian** — kebalikan dari kebiasaan manusia bicara "lat-lon".
+- **GPS drift di tepi polygon.** Titik GPS yang berubah-ubah di sekitar batas bisa menghasilkan event ENTER/EXIT palsu beruntun, misalnya saat truk parkir persis di pagar. Salah satu solusi umum adalah _buffer_: masukkan hanya jika titik berada 50 m ke dalam polygon (`ST_DWithin(geom, geom, -50)` tidak valid; pakai `ST_Contains(ST_Buffer(geom, -0.0005), point)`), atau minta dua titik berurutan yang konsisten sebelum emit event.
+- **Interval sampling vs kecepatan.** Kendaraan 60 km/jam dengan interval 60 detik berpindah 1 km antara titik. Rute yang "melewati" fence kecil bisa terlewat di antara dua titik tanpa pernah berada _di dalam_. Untuk fence kritis, evaluasi pergeseran dengan memeriksa apakah segmen dua titik memotong batas polygon memakai `ST_Intersects` pada `ST_MakeLine`.
+- **Satuan derajat vs meter.** `geometry` memakai derajat, sedangkan `geography` memakai meter. Pastikan tipe yang digunakan.
+- **SRID campur aduk.** `ST_SetSRID(ST_MakePoint(lon, lat), 4326)`: jika lupa SetSRID, PostGIS menolak membandingkan geometri (atau lebih buruk, diam-diam cocok karena keduanya 0). Urutannya juga penting: **lon dulu, lat kemudian**, kebalikan dari kebiasaan menyebut "lat-lon".
 
 ## Yang Harus Kamu Pahami Sebelum Lanjut
 
-- Geofence = pertanyaan dalam/luar (`ST_Within`) yang diubah menjadi **event transisi** (`LAG` bandingkan status) — bukan daftar keanggotaan.
+- Geofence = pertanyaan dalam/luar (`ST_Within`) yang diubah menjadi **event transisi** (`LAG` membandingkan status), bukan daftar keanggotaan.
 - Cek real-time di **ingest worker** dengan pre-filter `ST_DWithin` + cache status satu bit; query massal window function untuk analisis historis.
 - `geometry` vs `geography`: derajat vs meter. Radius POI = `geography`.
 - GPS tidak presisi: desain untuk _drift_ (buffer) dan sampling jarang (segmen vs titik).
 
-Data posisi tersimpan dan event wilayah terdeteksi. Yang tersisa dari backend ini: menghidupkan semuanya di layar pelanggan — peta yang bergerak sendiri tanpa di-refresh. Di [Part 6](/writing/2026/real-time-gps-dashboard/) kita bahas real-time dashboard: WebSocket, fan-out, dan pola broadcast.
+Data posisi sudah tersimpan dan event geofence sudah terdeteksi. Di [Part 6](/writing/2026/real-time-gps-dashboard/), kita lanjutkan dengan dashboard GPS real-time yang menampilkan peta tanpa refresh, memakai WebSocket, fan-out, dan pola broadcast.
 
 ## What's Next
 
@@ -214,4 +215,4 @@ Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
 ## CTA
 
-Bagikan artikel ini jika bermanfaat. Untuk diskusi lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Untuk membahas geofencing dengan PostGIS lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).

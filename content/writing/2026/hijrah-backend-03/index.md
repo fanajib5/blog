@@ -15,23 +15,23 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Mari mulai dari laporan paling membingungkan yang pernah saya tangani: ada kendaraan yang sedang parkir, mesin mati, tapi sistem membaca kecepatannya **66 km/jam**. Satelitnya juga ramai, datanya masuk terus. Kalau Anda penasaran bagaimana akhirnya sebuah tanda baca yang salah bisa membuat mobil parkir ngebut, cerita ini untuk Anda hehe~
+Ada kendaraan yang sedang parkir, mesin mati, tetapi sistem membaca kecepatannya **66 km/jam**. Satelitnya ramai dan datanya terus masuk. Belakangan, saya menemukan bahwa satu karakter di kode parser cukup untuk menjelaskan kecepatan itu.
 
 ## Rewind: Januari 2025
 
-Seperti yang dibahas di [episode pertama](/writing/2026/hijrah-backend-01/), mandat migrasi sudah menunggu sejak sebelum saya diterima kerja. Salah satu bagian terbesarnya jatuh ke tangan saya: protokol. Pintu masuk seluruh data armada.
+Seperti diceritakan di [episode pertama](/writing/2026/hijrah-backend-01/), mandat migrasi sudah menunggu sebelum saya diterima kerja. Salah satu pekerjaan terbesarnya adalah menulis ulang parser protokol, pintu masuk bagi seluruh data armada.
 
 Bentuknya begini: puluhan tipe _tracker_ GPS, tiap vendor punya bahasa binernya sendiri, dan sistem lama punya satu _parser_ untuk tiap bahasa itu. Tugas saya menulis ulang semuanya di Go, sambil armada terus berkirim data setiap detik. Tidak ada jendela "kita matikan dulu semalam ya".
 
-Jadi jadwal harian saya Januari 2025: baca _parser_ PHP, tulis _parser_ Go, ulangi. Kantor bahkan membelikan langganan AI _premium_ era itu untuk mempercepat konversi.
+Rutinitas saya sepanjang Januari 2025 sederhana: baca _parser_ PHP, tulis _parser_ Go, ulangi. Kantor bahkan membelikan langganan AI _premium_ yang tersedia saat itu untuk mempercepat konversi.
 
-Jejaknya masih tersimpan sampai sekarang: percakapan pertama dengan sang pemegang mandat tercatat tanggal 2 Januari, jam tiga sore, isinya lokasi folder proyek; dan kalimat kerja pertama saya di sana adalah permintaan konversi file CodeIgniter pertama ke Go. Hasil sprint-nya juga tercatat resmi di grup atasan: _listener_ selesai konversi sepuluh hari lebih cepat dari timeline. Satu-satunya hal di mandat itu yang datang lebih cepat dari jadwal hahaha. Setiap orang punya cara menghabiskan malam-malamnya; cara saya sedang menulis ulang dua puluh satu versi _parser_ hehe~
+Jejaknya masih ada: percakapan pertama dengan pemegang mandat tercatat pada 2 Januari pukul tiga sore, dan isinya lokasi folder proyek. Kalimat kerja pertama saya di sana adalah permintaan untuk mengonversi file CodeIgniter pertama ke Go. Hasil sprint juga tercatat di grup atasan: konversi _listener_ selesai sepuluh hari lebih cepat dari jadwal. Sepertinya itu satu-satunya bagian dari mandat yang selesai lebih awal. Malam-malam saya saat itu diisi dengan menulis ulang 21 versi _parser_.
 
 ## Keberuntungan yang Sering Dilupakan
 
-Sebelum cerita salah pahamnya, catat dulu keberuntungannya: untuk setiap _parser_ Go yang saya tulis, ada kode PHP aslinya yang bisa dibandingkan. _Porting_ jadi soal 1:1, bukan menebak dari spesifikasi protokol.
+Ada satu keuntungan penting: untuk setiap _parser_ Go, tersedia kode PHP asli sebagai pembanding. Jadi _porting_-nya bisa dilakukan 1:1, bukan dengan menebak dari spesifikasi protokol.
 
-Metodenya sederhana tapi ketat: bandingkan offset pembacaan GPS, struktur pembacaan elemen IO (posisi mulai bacanya), dan jumlah cabang _case_-nya, file demi file. Dua puluh satu versi, satu per satu. Bukan sekali layan semua, bukan "kan polanya sama". Karena, seperti akan Anda lihat, pola yang "sama" itulah yang hampir menggagalkan saya hahaha.
+Metodenya sederhana, tetapi harus teliti: bandingkan offset pembacaan GPS, struktur pembacaan elemen IO (posisi mulai baca), dan jumlah cabang _case_, file demi file. Saya memeriksa 21 versi satu per satu, bukan sekaligus atau dengan asumsi "kan polanya sama". Asumsi itu hampir membuat saya salah memperbaiki masalah.
 
 ## Mobil Parkir yang Ngebut
 
@@ -39,11 +39,11 @@ Gejala muncul belakangan, di satu keluarga _parser_: _tracker_ dengan _codec_ te
 
 Teori pertama saya terdengar sangat masuk akal. Di _parser_ itu ada cabang yang menimpa kecepatan hasil pembacaan blok GPS dengan nilai elemen IO bernomor 24. "Nah, IO-24-nya yang salah timpa! Buang saja timpaannya." Maka saya buang, di sembilan _parser_ sekaligus, karena "kan polanya sama".
 
-_Patch_ itu bertahan kurang dari sehari. Setelah dicek ulang: cabang timpaan itu justru benar, versi PHP juga punya, dan membuangnya malah merusak kasus lain. _Revert_ di hari yang sama juga hahaha. Tercatat di riwayat _commit_ dengan anggun: _fix_ jam begitu, _revert_ jam segini.
+_Patch_ itu bertahan kurang dari sehari. Setelah diperiksa ulang, cabang tersebut ternyata benar dan versi PHP juga memilikinya. Menghapusnya justru merusak kasus lain, jadi _patch_ itu saya _revert_ pada hari yang sama. Riwayat _commit_-nya mencatat _fix_ dan _revert_ pada hari itu juga.
 
 ## Detektif Data: Device atau Parser?
 
-Sebelum menuduh lagi, saya pelajari dulu cara membedakan dua tersangka yang sering tertukar: _tracker_-nya yang rusak, atau _parser_-nya yang salah.
+Sebelum menebak lagi, saya pelajari cara membedakan dua kemungkinan yang mudah tertukar: _tracker_ yang bermasalah atau _parser_ yang salah.
 
 Heuristiknya ternyata sederhana dan bisa diandalkan:
 
@@ -55,11 +55,11 @@ Lalu bandingkan paket yang sama di sistem lama dan sistem baru: waktu sama, koor
 
 ## Satu Karakter yang Menggerakkan Mobil
 
-Akar masalahnya akhirnya ketemu, dan ini bagian favorit saya: di kode PHP asli tertulis `startPosition =+ startRecord`.[^1] Ya, `=+`. Di PHP itu dibaca sebagai _assignment_ biasa dengan tanda plus unary di depan angka. Tangan saya yang sudah mulai terbiasa Go menuliskannya kembali sebagai `+=`, yang artinya tambah-terus-assign.
+Akar masalahnya ada di kode PHP asli: `startPosition =+ startRecord`.[^1] Di PHP, `=+` adalah _assignment_ biasa dengan tanda plus unary di depan angka. Saya yang mulai terbiasa menulis Go tanpa sadar mengubahnya menjadi `+=`, yang artinya tambah lalu _assign_.
 
-Beda **satu karakter**. Akibatnya: posisi mulai pembacaan elemen IO bergeser beberapa _byte_, sehingga _parser_ "menemukan" elemen IO yang sebenarnya bukan di posisi itu, termasuk IO-24 yang membawa angka 66. Mobil-mobil yang parkir pun ikut lari tanpa izin mereka hahaha.
+Beda **satu karakter**. Akibatnya, posisi mulai pembacaan elemen IO bergeser beberapa _byte_. _Parser_ lalu "menemukan" elemen IO di posisi yang keliru, termasuk IO-24 yang membawa angka 66. Mobil-mobil yang parkir pun seolah ikut melaju tanpa izin pemiliknya.
 
-Perbaikannya: satu karakter, di dua file. _Commit_-nya berdua hari itu juga, bersama jenasah _band-aid_-nya. Seminggu-squared perjuangan forensic, titiknya ditutup oleh perbedaan antara `=` dan `+=` hehe.
+Perbaikannya hanya satu karakter di dua file. Hari itu juga saya membuat _commit_ untuk perbaikan dan _revert_ _band-aid_-nya. Pada akhirnya, seluruh penelusuran ini mengerucut pada beda antara `=` dan `+=`.
 
 ## Cuci Besi: Mengembalikan 514.380 Baris
 
@@ -67,13 +67,13 @@ Kode sudah benar belum cukup. Data yang sempat salah juga harus pulang.
 
 Untuk rentang dua minggu yang terkontaminasi, saya tarik arsip dari sistem lama, cocokkan per paket, dan perbaiki 514.380 baris lokasi di sistem baru.[^2] Pencocokannya 100%: tidak ada satu baris pun yang gagal dipulangkan. Dan _glitch_ lamanya terverifikasi hilang, di _timestamp_ yang sama, 66 berubah menjadi 9.
 
-Bagian ini tidak glamor dan tidak ada di _tutorial_ mana pun: migrasi bukan cuma soal kode baru yang benar, tapi juga soal membersihkan jejak kode lama yang sempat keliru. Data tidak boleh meninggalkan masa lalu dalam keadaan salah.
+Bagian ini tidak glamor dan jarang masuk _tutorial_: migrasi bukan cuma memastikan kode baru benar, tetapi juga membersihkan data yang telanjur salah. Data lama tidak bisa dibiarkan begitu saja.
 
 ## Jujur Soal Kata "Selesai"
 
-Sprint ini bagian dari periode tiga bulan yang menagih bayarannya ke kesehatan mental saya. Itu fakta, dan saya tulis apa adanya.
+Sprint ini bagian dari periode tiga bulan yang berdampak pada kesehatan mental saya. Saya menuliskannya apa adanya.
 
-Dan soal kata "selesai": waktu itu saya umumkan selesai dengan percaya diri setengah hati, karena verifikasi paritasnya belum 100%. Benar saja, sampai episode ini ditulis pun, sesekali masih ada perbaikan _parser_ yang masuk. Sekarang saya lebih tenang memaknainya: "selesai" itu spektrum, bukan tombol. Yang penting bukan klaimnya; yang penting tiap laporan baru diperlakukan sebagai data, bukan sebagai penghinaan hahaha.
+Waktu itu saya mengumumkan pekerjaan selesai dengan keyakinan yang belum penuh karena verifikasi paritas belum 100%. Ternyata, sampai episode ini ditulis, sesekali masih ada perbaikan _parser_. Sekarang saya memandang "selesai" sebagai spektrum, bukan tombol. Setiap laporan baru saya perlakukan sebagai data yang perlu diperiksa.
 
 ## Pelajaran
 
@@ -83,11 +83,9 @@ Dan soal kata "selesai": waktu itu saya umumkan selesai dengan percaya diri sete
 4. **"Selesai" itu hipotesis sampai diverifikasi.** Dan itu normal; yang tidak normal adalah berhenti memverifikasi.
 5. **Migrasi mencakup data lama.** Kode baru yang benar wajib diikuti pembersihan jejak salah yang sempat tertinggal.
 
-Episode berikutnya kita bedah filosofi yang menopang semua episode sebelumnya: kenapa "yang benar adalah yang lama", dan apa yang terjadi ketika "perbaikan" harus saya hapus sendiri. Sampai ketemu di sana.
+Episode keempat berangkat dari pertanyaan yang muncul di sini: kapan kode lama harus dianggap sebagai acuan, dan apa yang terjadi ketika "perbaikan" justru harus saya hapus sendiri?
 
-Kalau mau versi tutorialnya — menulis _decoder_ GT06 dari nol, tabel _byte_ demi _byte_ dengan CRC yang diuji — ada di [GPS Backend Part 3](/writing/2026/decode-packet-gt06-teltonika/).
-
-Sekian. Salam.
+Untuk tutorial menulis _decoder_ GT06 dari nol, termasuk tabel _byte_ demi _byte_ dengan CRC yang diuji, ada di [GPS Backend Part 3](/writing/2026/decode-packet-gt06-teltonika/).
 
 [^1]: Potongan kode disederhanakan; nama protokol dan _field_ IO dipertahankan secukupnya untuk bercerita.
 

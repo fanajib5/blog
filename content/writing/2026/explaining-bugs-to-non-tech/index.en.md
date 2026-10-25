@@ -17,13 +17,13 @@ _"This is just a small bug, right? Should take 5 minutes."_
 
 Ever heard this one? Or maybe its variants: _"Just change one line of code, right?"_, _"How can it take a whole day to fix this?"_
 
-If you're a developer, you almost certainly have. And that line usually comes from a boss, project manager, or client, someone who doesn't need to know what an N+1 query is, but needs to understand **why something that looks simple takes a non-simple amount of time**.
+If you work as a developer, you may have heard it from a boss, project manager, or client. They don't need to know what an N+1 query is, but they do need to understand **why something that looks simple can take a while**.
 
-This isn't about blaming anyone. It's about **why this communication gap happens and how to bridge it**.
+Let's look at what can happen behind a seemingly simple bug, then how to explain it.
 
 ## Anatomy of "1 Bug = 3 Days"
 
-Here's the story. There's a bug: **report data isn't showing up on the dashboard**. On the surface, it looks simple, just fix the display, right?
+For example, **report data isn't showing up on the dashboard**. At first glance, it looks simple: just fix the display, right?
 
 Turns out, after investigation:
 
@@ -48,27 +48,27 @@ But after inspection, it turns out:
 - The joint rusted because **the attic ventilation is blocked**, so moisture accumulates
 - To fix everything, you have to **open the roof first**, then replace the pipe, then repaint the wall
 
-The homeowner sees a stain. The plumber sees pipes, joints, ventilation, and the roof. Both are looking at the same problem, but at **different depths**.
+The homeowner sees a stain. The plumber sees pipes, joints, ventilation, and the roof. It's the same problem, but each sees something different.
 
-This is exactly what happens between a boss and a developer.
+The same thing happens when a boss and a developer talk about a bug.
 
 ## Three Steps to Explain Technical Problems
 
-After experiencing several miscommunications (and learning from mistakes), I found a pattern that consistently helps. I call it **Translate, Visualize, Connect**.
+After a few communication mix-ups, I found a pattern that helps: **Translate, Visualize, Connect**.
 
 ### 1. Translate: From Technical Language to Risk Language
 
-The most common mistake: explaining technical problems using technical terms.
+Don't stop at technical terms. Explain the impact:
 
 **Not effective:**
 > _"There's an N+1 query on the report endpoint. Every time it loads, it queries the database one by one. If there are 1000 rows, that's 1001 queries. That's why it's slow."_
 
-Your boss doesn't care about the number of queries. What they care about: **what's the business impact?**
+Instead of only naming the number of queries, explain **the business impact**.
 
 **More effective:**
 > _"The system currently fetches data one at a time, but there could be hundreds of records. So the more data, the slower it gets. If left unfixed, when users reach a thousand, the report page could take 30 seconds to load. Users will think the system is broken and leave the app."_
 
-Notice the shift:
+For example:
 
 | Developer Language | Business Language |
 |---|---|
@@ -76,11 +76,11 @@ Notice the shift:
 | 1001 queries | Load time up to 30 seconds |
 | Needs refactoring | If left alone, users will leave |
 
-It doesn't mean you're oversimplifying, you're **translating the consequences**.
+You're not oversimplifying the problem; you're **translating its consequences**.
 
 ### 2. Visualize: Use Analogies, Not Architecture Diagrams
 
-Architecture diagrams are great for fellow developers. For non-technical people, analogies are far more powerful.
+If your listener isn't familiar with architecture diagrams, an everyday analogy can help.
 
 Some analogies I frequently use:
 
@@ -94,15 +94,11 @@ The key: analogies must come from a world that's **familiar** to your listener. 
 
 ### 3. Connect to Their Priorities
 
-Bosses have different priorities than developers. Our priorities: clean code, maintainable, scalable. Their priorities: **deadlines, budget, risk**.
-
-So when explaining, connect to their priorities:
+Connect your explanation to what they need to decide, such as **deadlines, budget, and risk**:
 
 - _"If we fix this now with 2 days, we prevent downtime that could cost 10x more later."_
 - _"This isn't about building new features, it's about making sure existing features don't suddenly stop working."_
 - _"The risk: if left unhandled, report data could be inaccurate. And that report data is what drives business decisions."_
-
-The phrase _"technical debt"_ might not move your boss. But _"if we don't handle this now, we could lose transaction data"_, that gets heard.
 
 ## A Practical Template
 
@@ -130,17 +126,9 @@ Example:
 >
 > **Risk of delaying?** More data could go missing, and the fix could take longer because there's more data to adjust.
 
-Short, clear, and, most importantly, **no technical terms**.
+## From Bug to Impact
 
-## Communication Is a Skill
-
-Many developers, including me, back then, think that if the code is good, the work is done. But the reality is, **if it can't be explained, it won't be supported**. And without support, whether it's time, resources, or trust, even the best code will never get deployed.
-
-Communication isn't a talent. It's a skill that can be trained, exactly like writing code. Every time you explain a technical problem to a non-technical person, you sharpen that skill. It might feel awkward at first. But over time, it becomes a reflex.
-
-And that reflex is incredibly useful, not just at work, but also when teaching. Because teaching, fundamentally, is explaining complex things in an accessible way.
-
-If you're interested in teaching and technical communication, or have similar experiences you'd like to discuss, [get in touch](/contact/).
+The two report examples above show one way to explain a problem: start with the missing data, then describe the impact and the plan to fix it. If you've had a similar experience explaining a technical problem, [get in touch](/contact/).
 
 ---
 

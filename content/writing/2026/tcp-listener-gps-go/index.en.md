@@ -19,28 +19,28 @@ series: "gps-backend-series"
 series_part: 2
 ---
 
-Picture 500 GPS trackers connected to your server simultaneously, each streaming location data every 10–30 seconds, while others only emit a quiet heartbeat when parked. These connections stay alive for hours, occasionally drop without saying goodbye, and sometimes deliver fragmented data in bursts.
+Imagine 500 GPS trackers connected to your server at once. Each sends location data every 10–30 seconds, while some send only a heartbeat when idle. Connections can stay open for hours, drop without notice, or deliver data in fragments.
 
-If you come from the world of HTTP APIs, where one neat request yields one neat response, stepping into TCP feels like moving from delivering individual courier parcels to running a bustling sorting office where the mail never stops flowing.
+If you are used to HTTP APIs, remember that TCP itself does not provide a request-response structure; the listener receives a stream of bytes for the application to interpret.
 
-In [Part 1](/en/writing/2026/memahami-gps-protocol/) we unpacked how these devices communicate: persistent TCP connections exchanging binary packets governed by proprietary vendor protocols. Now, we are going to build the front door: a TCP listener in Go capable of hosting hundreds of concurrent device connections.
+In [Part 1](/en/writing/2026/memahami-gps-protocol/) we covered how devices communicate through persistent TCP connections and binary packets governed by vendor-specific rules. Here, we will build a TCP listener in Go to accept those connections.
 
-The pattern I use in this article is identical to what powers hundreds of live devices in my production systems: zero third-party frameworks, just Go's standard library.
+The pattern here is the same one handling hundreds of devices in my production systems. It uses only Go's standard library, with no third-party frameworks.
 
 ## What We Are Building Today
 
-Our end goal is a lean, robust program that:
+The goal is a small program that:
 
 1. Accepts multiple connections concurrently, assigning one goroutine per connection.
 2. Reassembles raw TCP streams into valid **GT06 frames** (this is where most developers trip up).
 3. Drops zombie connections that went silent without properly closing.
 4. Shuts down cleanly during deploys through graceful shutdown.
 
-What we are intentionally **not** tackling yet: decoding packet payloads (login packets, GPS coordinates, and computing CRC-ITU checksums for valid ACK responses belong to [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/)), database persistence, and message queuing. In fact, a well-architected listener should know nothing about those downstream concerns.
+We will not decode packet payloads, store data in a database, or add a message queue yet. Login and location packets, along with valid ACK responses, require CRC-ITU checksums; that is covered in [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/). The listener's job is to accept and assemble frames, not handle those downstream steps.
 
 ## A Basic TCP Server
 
-Let's begin with the simplest possible baseline:
+Start with a basic server:
 
 ```go
 listener, err := net.Listen("tcp", ":5094")
@@ -59,13 +59,13 @@ for {
 }
 ```
 
-`net.Listen` binds the listening port, and we enter an `Accept` loop where every incoming connection gets handed off to its own goroutine. This highlights Go's distinct advantage for networking: **goroutines are remarkably cheap** (starting with just a few kilobytes of stack space, unlike heavyweight OS threads that consume megabytes). As a result, the "one goroutine per connection" model easily scales across 500, 5,000, or even 50,000 concurrent sockets without breaking a sweat.
+`net.Listen` opens the port, and the `Accept` loop waits for connections. Each one runs in its own goroutine. **Goroutines are cheap**: their initial stack takes a few kilobytes, compared with the megabytes used by OS threads. That makes the "one goroutine per connection" model lightweight for 500, 5,000, or even 50,000 connections.
 
-For a GPS listener, I strongly advise against HTTP. The per-request header overhead, ephemeral handshakes, and HTTP parsing offer zero value for raw binary streams. Your tracker hardware won't be sending a `Content-Type` header anyway.
+For a GPS listener, I do not recommend HTTP: per-request header overhead, ephemeral handshakes, and HTTP parsing add no value for raw binary streams. Your tracker will not send a `Content-Type` header either.
 
 ## The First Pitfall: TCP Is a Stream, Not a Message Bus
 
-This is the single most crucial concept in this article, and the core difference between handling GPS TCP traffic and serving HTTP requests.
+This is the main difference between handling GPS TCP traffic and serving HTTP requests.
 
 HTTP developers take an implicit guarantee for granted: one request equals one self-contained packet. In TCP, **there is no such guarantee**. A call to `conn.Read(buf)` merely asks the OS kernel: "give me whatever bytes are currently in the buffer." That means:
 
@@ -73,9 +73,9 @@ HTTP developers take an implicit guarantee for granted: one request equals one s
 - **Multiple frames can merge into one chunk.** If a device sends two packets back-to-back, a single `Read` may grab both simultaneously.
 - **Garbage bytes happen.** Freshly booted trackers frequently spew random garbage bytes right before transmitting their first valid packet.
 
-If you treat every individual `Read` return value as a complete message, packet decoding will fail intermittently and unpredictably. You will end up blaming hardware glitches for what is actually a socket handling bug. (Ask me how I know.)
+If you treat each `Read` result as a complete message, packet decoding can fail unpredictably. It is easy to mistake a socket handling bug for a hardware problem. (Ask me how I know.)
 
-The remedy is **explicit framing**. We wrap the socket with `bufio.Reader`, synchronize on the GT06 start bits (`0x78 0x78`), read the length indicator, and pull the exact remaining payload size:
+The solution is **explicit framing**. We use `bufio.Reader` to read the stream, find the GT06 start bits (`0x78 0x78`), read the length indicator, and then pull the rest of the frame:
 
 ```go
 // readFrame extracts a single GT06 frame from the stream:
@@ -125,13 +125,13 @@ func readFrame(r *bufio.Reader) ([]byte, error) {
 }
 ```
 
-The secret weapon here is `io.ReadFull`: it **blocks until the destination buffer is completely populated**, seamlessly stitching fragmented packets back together. Meanwhile, `bufio.Reader` buffers unused bytes internally, ensuring coalesced frames are never dropped or skipped.
+`io.ReadFull` **waits until the destination buffer is full**, assembling bytes that arrive in fragments into one frame. `bufio.Reader` keeps unused bytes buffered, so when two frames arrive together, the next frame remains available for the following read.
 
 Remember the framing rule from Part 1: the `len` byte covers everything starting from the protocol number up to the CRC, inclusive. That is why after capturing `lenByte`, we must read exactly `len + 2` additional bytes (payload + CRC + 2 stop bytes).
 
 ## handleConnection: The Frame Processing Loop
 
-With reliable framing in place, our per-connection worker loop becomes remarkably clean:
+With framing in place, the handler reads frames from each connection:
 
 ```go
 func handleConnection(ctx context.Context, conn net.Conn) {
@@ -158,30 +158,30 @@ func handleConnection(ctx context.Context, conn net.Conn) {
 }
 ```
 
-For now, logging the hex representation is plenty. In Part 3, we will replace that `TODO` comment with our real decoder pipeline.
+For now, the handler only logs each frame in hex. In Part 3, we will replace the `TODO` with a decoder.
 
 ## Zombie Sockets and Read Deadlines
 
-Notice the `conn.SetReadDeadline(...)` call above; it is not just boilerplate.
+The `conn.SetReadDeadline(...)` call controls how long the handler waits for data.
 
-GPS trackers running over cellular networks regularly drop offline without performing an orderly TCP handshake (no `FIN` packet): cell towers drop, batteries die, or mobile carriers reset connections silently. Back on the server, you end up with sockets that **appear active but are completely dead** (zombie connections). Leave these unchecked, and zombies will quietly exhaust your operating system's file descriptors.
+GPS trackers on cellular networks can disconnect without sending a TCP closing packet (`FIN`), for example when a signal drops, a battery dies, or a mobile carrier resets the connection. The server may then keep sockets that **appear active but are completely dead**. Without cleanup, these connections accumulate and consume file descriptors.
 
-`SetReadDeadline` fixes this: if no bytes arrive before the deadline expires, the ongoing read operation aborts with an I/O timeout error. The handler loop exits and frees the connection cleanly.
+With `SetReadDeadline`, if no bytes arrive before the deadline, Read returns an I/O timeout error. The handler exits and closes the connection.
 
-There is one critical caveat: **your read deadline must comfortably exceed the device's idle heartbeat interval**. Recall from Part 1 that stationary devices transmit heartbeats only every 2 to 5 minutes. If you configure a tight 90-second timeout, you will prematurely kill healthy devices that are simply parked outside. Here is what I configure in practice:
+**Your read deadline must exceed the device's idle heartbeat interval.** As discussed in Part 1, stationary devices send a heartbeat every 2 to 5 minutes. A 90-second deadline would disconnect a healthy idle device. That is why I set it to:
 
 ```go
 // Must exceed device heartbeat interval (GT06 devices send heartbeats every 2-5 minutes when idle)
 var readTimeout = 10 * time.Minute
 ```
 
-Because we refresh the deadline after every successful frame, active devices remain connected without interruption.
+The deadline resets after every frame, so active devices remain connected.
 
 ## Exiting Gracefully: Graceful Shutdown
 
-Production listeners need frequent restarts during rolling deployments, scaling operations, and routine maintenance. When a container shuts down, it is rarely an instant power kill; the host OS issues an interrupt signal (typically `SIGTERM`), granting your process a brief grace window to wrap up.
+Production listeners may restart during deploys, scaling, or maintenance. When a container or system stops, the OS usually sends a `SIGTERM` signal and gives the process time to shut down before forcing it to exit.
 
-We can take advantage of that window: close the listener socket to reject new incoming handshakes, terminate existing active sockets cleanly, wait for all handler goroutines to finish, and exit cleanly.
+Use that time to close the listener, close active connections, and wait for the handler goroutines to finish before exiting.
 
 ```go
 func main() {
@@ -228,7 +228,7 @@ func main() {
 }
 ```
 
-Here is the supporting `connTracker`, a thread-safe registry tracking open connections so we can close them all at once:
+`connTracker` stores active connections so they can all be closed at once:
 
 ```go
 type connTracker struct {
@@ -261,18 +261,18 @@ func (t *connTracker) CloseAll() {
 }
 ```
 
-The execution flow works as follows: `signal.NotifyContext` maps incoming `SIGTERM` or Ctrl+C signals to `ctx.Done()`. Our background cleanup goroutine reacts by closing the network listener (forcing `Accept` to return an error and breaking the accept loop) and closing all registered connections. Finally, `sync.WaitGroup` guarantees all connection handlers exit before `main` terminates.
+`signal.NotifyContext` turns `SIGTERM` or Ctrl+C into `ctx.Done()`. The cleanup goroutine closes the listener, causing `Accept` to return an error and end the main loop, then closes active connections. `sync.WaitGroup` waits for all handlers to finish before `main` exits.
 
 ## Testing Without Real Hardware
 
-You do not need physical GPS trackers on your desk to verify this implementation. Bash comes equipped with built-in `/dev/tcp` support, which is more than enough to impersonate a GT06 tracker:
+You can try this without a physical tracker. Bash's `/dev/tcp` support is enough to send data as if it came from a GT06 tracker:
 
 ```bash
 exec 3<>/dev/tcp/127.0.0.1/5094
 printf '\x78\x78\x0d\x01\x01\x23\x45\x67\x89\x01\x23\x45\x00\x01\x8c\xdd\x0d\x0a' >&3
 ```
 
-This hex string is the standard GT06 login frame straight out of the protocol datasheet (terminal ID `123456789012345`) that we dissected in [Part 1](/en/writing/2026/memahami-gps-protocol/). I tested the listener above against several real-world scenarios on my local loopback interface:
+This is a GT06 login frame from the protocol datasheet, with terminal ID `123456789012345`, discussed in [Part 1](/en/writing/2026/memahami-gps-protocol/). I tested the program over loopback on my laptop with these scenarios:
 
 | Scenario | Result |
 | --- | --- |
@@ -283,7 +283,7 @@ This hex string is the standard GT06 login frame straight out of the protocol da
 | 20 concurrent connections transmitting simultaneously | 20 frames parsed without race conditions ✓ |
 | `SIGTERM` issued while connections are active | Listener and sockets closed, clean exit ✓ |
 
-Here is the log output covering the server's full lifecycle:
+This is the log output from startup through shutdown:
 
 ```text
 2026/09/12 20:25:31 listening on :5094
@@ -295,12 +295,12 @@ Here is the log output covering the server's full lifecycle:
 
 ## Key Takeaways Before Moving On
 
-- **One goroutine per connection** is the idiomatic pattern for Go TCP servers: lightweight, idiomatic, and capable of holding hundreds of thousands of concurrent sockets.
+- **One goroutine per connection** is a standard pattern for Go TCP servers. Goroutines are lightweight and can hold hundreds of thousands of concurrent sockets.
 - **TCP is a stream.** One `Read` call does not equal one discrete packet. Custom framing (start bits + length headers + `io.ReadFull`) is the only reliable way to read binary network protocols.
-- **Set deadlines higher than heartbeat frequencies.** `SetReadDeadline` cleans up dead sockets, but an overly aggressive timeout will sever connections from healthy, idle hardware.
-- **Shut down cleanly.** `SIGTERM` handlers give you the opportunity to drain sockets and release file descriptors gracefully, especially in modern containerized deployments.
+- **Set deadlines higher than heartbeat intervals.** `SetReadDeadline` cleans up dead sockets, but a short timeout will disconnect healthy, idle devices.
+- **Close connections during shutdown.** `SIGTERM` gives the process a chance to close the listener and active sockets cleanly.
 
-At this stage, our listener reliably captures and delimits frames, but it cannot interpret their payload yet. Equally important: **it does not yet respond with ACK packets**, meaning actual trackers will assume our server is dead and continuously retransmit old packets. Both tasks require computing CRC-ITU checksums and parsing GT06 payloads.
+The listener now captures and separates frames, but does not parse their payloads or respond with ACK packets. Without an ACK, real trackers may assume the server is not responding and continuously retransmit old packets. Both tasks require CRC-ITU checksums and an understanding of GT06 payloads.
 
 ## What's Next
 
@@ -311,4 +311,4 @@ This post is part of the **Building a GPS Backend from Scratch** series.
 
 ## Connect
 
-Share this post if you found it useful. To discuss further, feel free to reach out via [Contact](/contact/) or subscribe via [RSS](/writing/index.xml).
+If you have questions about this GPS listener, reach out via [Contact](/contact/). You can also subscribe via [RSS](/writing/index.xml) to follow the next article.

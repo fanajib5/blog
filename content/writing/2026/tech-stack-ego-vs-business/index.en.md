@@ -21,7 +21,7 @@ _To be what, exactly?_ Our system at the time had two main features, a team of f
 
 I can't blame him. I've been there. And if I'm honest, I still slip into that mindset sometimes. The pull toward shiny new technology is very real, and there's nothing inherently wrong with it, _as long as_ we recognize it as a pull, not a technical decision.
 
-This piece is about the tension between two voices that often argue in my head whenever I have to choose a tech stack: the ego that wants to look sophisticated, and the business voice that only cares whether the system works, delivers value, and doesn't cost a fortune to keep alive.
+Whenever I have to choose a tech stack, I hear two voices pulling in different directions: the ego that wants to look sophisticated, and the business that cares whether the system works and delivers value.
 
 ## When Ego Does the Talking
 
@@ -43,7 +43,7 @@ This one is the most dangerous because it hides behind a cloak of professionalis
 
 Here's a slightly uncomfortable truth that needs to be said: **the business doesn't care if you use PHP or Go, REST or GraphQL, Postgres or MySQL**, as long as the system runs, is fast, is cheap to operate, and can be extended when new requirements come in.
 
-What the business actually cares about:
+In practice, business questions usually come back to things like these:
 
 | Engineer's Question | Business Question |
 |---|---|
@@ -52,19 +52,19 @@ What the business actually cares about:
 | Can this scale to millions of users? | What's the monthly server cost? |
 | Does this use a popular language? | If someone leaves the team, how long does onboarding take? |
 
-Notice how the two columns are talking about completely different things. And we often spend too much time in the left column, while the people paying our salaries are thinking from the right.
+Look at those two columns. The questions are different, but I often catch myself spending more time on the left while the people paying my salary are thinking about the right.
 
 This doesn't mean we should ignore technical concerns. Poor technical choices today become expensive technical debt tomorrow, _and that is also_ a business concern. The point is that **both sides need to be considered**, not just one.
 
 ## A Practical Decision Framework
 
-After choosing wrong a few times (and living with the consequences hehe), I've landed on four questions I now run through before committing to a new stack or architecture:
+After a few wrong turns (and living with the consequences hehe), I now ask myself four questions before committing to a new stack or architecture:
 
 ### 1. Can my team maintain this six months from now?
 
 Not "can I implement this?", but "can the team live with this long-term?" If I leave tomorrow, can someone else continue without a two-week breakdown?
 
-The technology we choose should be understandable by the most junior person on the team[^2]. If not, we're building a knowledge silo, and that's genuinely risky.
+I want the technology we choose to remain understandable to the most junior person on the team[^2]. If not, we're building a knowledge silo, and that's genuinely risky.
 
 ### 2. Does this solve a real problem that exists now, or a hypothetical one that might exist later?
 
@@ -107,13 +107,13 @@ That's what separates a business-driven technical decision from an ego-driven on
 
 ## Ego Isn't Always the Villain
 
-One thing I want to clarify before closing: **developer ego isn't inherently bad**.
+One thing I want to clarify before closing: **developer ego isn't always bad**.
 
 Wanting to learn new technologies is good, that's what keeps us growing. Wanting to write clean, elegant code is good, that's what makes systems easier to maintain. Wanting to push for better solutions is good, that's what drives real innovation.
 
 The problem is when ego **clouds our judgment**, when we choose technology to look smart, not to solve problems. When we build complex systems not because they're needed, but because they're fun to build. When we defend a wrong choice because we don't want to admit a mistake.
 
-Being aware of that difference, I think, is one of the more important marks of maturity in a software engineer.
+For me, being able to tell those motives apart is one of the more important marks of maturity in a software engineer.
 
 That's all from me. Thanks for somehow ending up here and reading this, I hope it's useful hehe~
 

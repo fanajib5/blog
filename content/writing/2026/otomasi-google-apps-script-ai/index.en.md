@@ -17,15 +17,15 @@ tags:
 pillar: "ai-dev"
 ---
 
-In every business, there is a class of tasks that fits an awkward middle ground: too small to build a dedicated app for, yet too frequent to handle manually. Chasing clients whose invoices are about to come due. Summarizing Google Form responses every weekend. Copy-pasting data across spreadsheets. If your day-to-day runs inside Google Workspace, the answer for this type of work has been waiting around for a long time: **Google Apps Script** - JavaScript running on Google's servers, packed with direct access to Sheets, Gmail, and Calendar, completely free for standard accounts.
+Many tasks in Google Workspace are too small to justify a dedicated app, but too frequent to handle manually. Think of reminding clients about upcoming invoices, summarizing Google Form responses every weekend, or copying data between spreadsheets. **Google Apps Script** can automate work like this. It is JavaScript that runs on Google's servers, with direct access to Sheets, Gmail, and Calendar, and it is free for standard accounts.
 
-The issue is not the language, but two practical hurdles: writing boilerplate scripts from scratch is tedious, and debugging inside the Apps Script web editor is painful (tiny log windows, no proper breakpoints, sluggish execution). Throw AI into the equation and you get a sweet combination - **if** you know how to wield it.
+The language is not the main hurdle. Writing a script from scratch is tedious, and debugging in the Apps Script editor is painful: tiny log windows, no proper breakpoints, and sluggish execution. AI can help, provided you use it the right way.
 
-This article is a real-world case study: an automated invoice reminder running off Google Sheets, authored with AI assistance and tested right on my laptop before ever touching Google's editor.
+This article walks through an automated invoice reminder for Google Sheets that I wrote with AI assistance. I tested it on my laptop before opening Google's editor.
 
 ## The Case: Invoice Reminders from a Spreadsheet
 
-The spreadsheet setup is simple, containing five columns:
+The spreadsheet has five columns:
 
 ```text
 A: Client Name     B: Amount      C: Due Date      D: Status   E: Last Reminded
@@ -34,15 +34,15 @@ CV Berkah          1,200,000      11/11/2026       UNPAID
 PT Sejahtera       3,000,000      01/12/2026       UNPAID
 ```
 
-The requirement: once a day, email clients whose invoices are due within ≤ 3 days, then record the reminder date to avoid spamming them. Edge cases that must behave correctly: paid invoices are skipped, overdue ones are not billed repeatedly, and invoices already reminded yesterday are not nagged again today.
+The script needs to email clients once a day when their invoices are due within ≤ 3 days, then record the reminder date to avoid spamming them. It also needs to handle a few edge cases: skip paid invoices, avoid repeatedly billing for overdue ones, and avoid reminding clients again today if they were reminded yesterday.
 
 ## The Workflow Secret: Decouple Logic from Google Services
 
-If you ask an AI "write an Apps Script to send invoice reminders", it will spit out a monolithic blob of code: read sheets, calculate dates, format emails, send them, write back to rows - everything mashed together and **impossible to test** without running it directly in Google. Every fix iteration becomes a mental deployment into Google's online editor, deciphering vague logs.
+If you ask an AI "write an Apps Script to send invoice reminders", it may produce one monolithic block: read the sheet, calculate dates, format emails, send them, and write back to rows. With everything mixed together, it is **impossible to test** without running it in Google. Each round of fixes means copying the code into Google's editor and guessing from the logs.
 
-The proper workflow (and the one I use): ask the AI to split the code into two distinct layers.
+The workflow I use is to ask the AI to split the code into two layers.
 
-**Layer 1 - Pure logic**, plain JavaScript without a single Google service call:
+**Layer 1: Pure logic**, plain JavaScript without any Google service calls:
 
 ```javascript
 function filterDueInvoices(rows, today, leadDays) {
@@ -74,7 +74,7 @@ function composeReminderEmail(inv) {
 }
 ```
 
-**Layer 2 - The Google integration layer**, a thin glue pipeline:
+**Layer 2: Google integration**, a thin layer that connects the services:
 
 ```javascript
 function sendReminders() {
@@ -96,7 +96,7 @@ function sendReminders() {
 }
 ```
 
-Why does this separation matter? Because **layer 1 can be unit tested locally on my laptop** using Node.js and a couple of lightweight mocks:
+With this separation, **layer 1 can be unit tested locally on my laptop** using Node.js and a few lightweight mocks:
 
 ```javascript
 // mock Google services - local test harness only
@@ -111,21 +111,21 @@ global.GmailApp = {
 };
 ```
 
-Then, set up a comprehensive test fixture - six rows of data covering all aforementioned edge cases - and assert the outcomes. That was how this script came together, and local testing paid for itself right away.
+Next, set up a test fixture with six rows covering those edge cases, then assert the outcomes. That is how I put this script together. Local testing was useful right away.
 
 ## What Surfaced During Local Testing
 
-Two bugs slipped past initial inspection but tripped test assertions - both classic perks of this workflow:
+Local tests caught two bugs that were easy to miss when reading the code:
 
-**First, timezone handling on dates.** The initial implementation calculated `new Date('2026-11-12')`, which is parsed as midnight **UTC**. When compared against `today` in WIB (UTC+7), the date arithmetic drifted: an invoice due in 2 days appeared as due in 3 days. A silent, classic pitfall caught purely because the asserted day count mismatched. In Apps Script, always ensure the project's `timeZone` in `appsscript.json` is configured (`"timeZone": "Asia/Jakarta"`). Otherwise, `new Date()` adopts the project script's default timezone rather than your local one.
+**First, timezone handling on dates.** The initial implementation calculated `new Date('2026-11-12')`, which is parsed as midnight **UTC**. Compared with `today` in WIB (UTC+7), the date arithmetic shifted: an invoice due in 2 days appeared due in 3 days. The mismatch showed up in the asserted day count. In Apps Script, make sure the project's `timeZone` in `appsscript.json` is configured (`"timeZone": "Asia/Jakarta"`). Otherwise, `new Date()` follows the project timezone, not your local one.
 
-**Second, hallucinated API signatures.** The AI initially wrote `Utilities_formatDate(...)`, an underscore-style function naming convention that does not exist in Apps Script; the actual method is `Utilities.formatDate(...)`. Small, silly, and exactly the type of slip-up both AI and humans produce when writing APIs from memory without executing them.
+**Second, a service method name.** The AI initially wrote `Utilities_formatDate(...)`, an underscore-style function name that does not exist in Apps Script. The actual method is `Utilities.formatDate(...)`. Both AI and people can make this kind of mistake when writing from memory without running the code.
 
-The final result of the local suite: 2 out of 6 rows passed the filter (exactly as intended), emails rendered as `Rp7.500.000` and `12 November 2026`, and every assertion turned green.
+The local tests ultimately passed 2 out of 6 rows through the filter, as intended. Emails rendered as `Rp7.500.000` and `12 November 2026`, and every assertion passed.
 
 ## Going Live: Triggers and Final Gotchas
 
-In the Apps Script editor (Extensions -> Apps Script from your spreadsheet), paste both layers, then configure a time-driven trigger to run `sendReminders` every morning.
+From the spreadsheet, open the Apps Script editor (Extensions -> Apps Script) and paste both layers. Then configure a time-driven trigger to run `sendReminders` every morning.
 
 ```javascript
 // run once manually to set up a daily 07:00 AM trigger
@@ -138,23 +138,23 @@ function setupTrigger() {
 }
 ```
 
-Three final gotchas to keep in mind before production:
+Before using it, check three things:
 
-- **Email quota limits.** Free Gmail accounts are capped at ~100 emails/day via `GmailApp` (Workspace accounts enjoy higher allowances). Invoice reminders are low-volume daily pings, so this is safe - just do not repurpose this setup for blast campaigns to hundreds of recipients.
-- **Row write-backs.** Storing the reminder timestamp back to the correct row requires careful index mapping. `getValues()` yields a zero-indexed array; when writing via `sheet.getRange(row, 5).setValue(today)`, remember the actual sheet row requires `+1` for the header and `+1` for Sheets' 1-based indexing.
-- **Failures must be observable.** Wrap `GmailApp.sendEmail` inside a `try/catch` and log to `console.error`. A silent trigger failure is worse than doing work manually: you assume reminders were sent when in fact nothing happened.
+- **Email quota limits.** Free Gmail accounts are capped at ~100 emails/day via `GmailApp` (Workspace accounts have higher allowances). These reminders go out in small numbers each day, so the quota should be fine. Do not use this setup for blast campaigns to hundreds of recipients.
+- **Row write-backs.** To record the reminder timestamp in the right row, map the array index carefully. `getValues()` yields a zero-indexed array. When writing with `sheet.getRange(row, 5).setValue(today)`, use the actual sheet row number. Add `+1` for the header and `+1` because Sheets uses 1-based indexing.
+- **Failures must be observable.** Wrap `GmailApp.sendEmail` in a `try/catch` and log to `console.error`. A silent trigger failure is worse than doing the work manually: you think reminders were sent when they were not.
 
-## Proven Prompting Patterns
+## Writing the Prompt
 
-To wrap things up, here is the AI prompting playbook that made this workflow effortless:
+Here are a few things I included in the prompt:
 
-1. **Provide a real data schema** (column names plus 3 sample rows) rather than vague conceptual descriptions. AI writes code far more reliably against concrete shapes.
-2. **Explicitly request two distinct layers**: "separate pure business logic from Google service invocations so it can be tested with Node.js". Without this prompt constraint, the AI will bundle everything together.
-3. **List edge cases as clear bullet points**: already paid, overdue, 3-day dedup window. AI will not guess your business deduplication rules on its own - policies must be specified upfront.
-4. **Test first, deploy later.** Once logic passes local tests, paste it into Google's script editor. The only parts left to verify live are the glue plumbing (sheet IDs, permission scopes, trigger execution).
+1. **Provide a real data schema** (column names and three sample rows), not a vague description. Concrete data shapes help the AI produce more accurate code.
+2. **Explicitly request two layers**: "separate pure business logic from Google service invocations so it can be tested with Node.js". Without this instruction, the code may end up bundled together.
+3. **List the edge cases**: already paid, overdue, and a 3-day dedup window. The AI will not guess your deduplication rules; spell out the business policy.
+4. **Test first, paste later.** After the logic passes local tests, copy it into Google's script editor. The remaining live checks are the integration details, such as sheet IDs, permissions, and trigger timing.
 
-This philosophy closely mirrors the principles from my [earlier article](/en/writing/2026/workflow-ai-assisted-development/): AI generates, verification decides. Google Sheets is just one playground - swap it for Google Forms, Calendar, or Drive, and the blueprint remains identical.
+This approach follows the principle in my [earlier article](/en/writing/2026/workflow-ai-assisted-development/): AI generates, verification decides. This example uses Google Sheets, but the same workflow can also use Google Forms, Calendar, or Drive.
 
 ## Call to Action
 
-Feel free to share this post if you found it helpful. For further conversations, reach out via [Contact](/en/contact/) or subscribe to the [RSS feed](/en/writing/index.xml).
+If you found this article useful, feel free to share it. To discuss this workflow, reach out via [Contact](/en/contact/) or subscribe to the [RSS feed](/en/writing/index.xml).

@@ -19,7 +19,7 @@ Waktu itu saya lagi _nge-debug_ satu _bug_ di sistem GPS _tracker_ yang sudah ja
 
 Bukan _bug_-nya yang bikin saya berpikir ulang. Tapi **waktu yang dibutuhkan untuk menemukan dua baris itu**. Rasanya seperti mencari jarum di tumpukan jerami, tapi jarumnya ternyata ada di kantong celana sendiri hehe~
 
-_Nganu_, tulisan ini bukan tentang bahasa pemrograman tertentu atau solusi teknis tertentu. Ini catatan pribadi tentang **proses berpikir** di balik keputusan migrasi _tech stack_, kapan saatnya, kapan belum, dan bagaimana saya menilainya dari sisi yang bukan cuma teknis. Soalnya sering banget kan denger diskusi teknis yang ujung-ujungnya jadi debat bahasa pemrograman A vs B, padahal masalahnya bukan di situ hahaha.
+_Nganu_, tulisan ini bukan tentang bahasa atau solusi teknis tertentu. Saya ingin mencatat **proses berpikir** di balik keputusan migrasi _tech stack_: kapan perlu, kapan belum, dan bagaimana menilainya dari sisi bisnis juga. Diskusi teknis sering berakhir jadi debat bahasa A vs B, padahal belum tentu itu sumber masalahnya.
 
 ## Kondisi Sistem Saat Itu
 
@@ -29,7 +29,7 @@ Proyek GPS _tracker_ yang saya tangani bukan proyek kecil. Angkanya kurang lebih
 - **33 _database entity_** yang saling berhubungan
 - **~194.000 baris kode** yang sudah ditulis bertahun-tahun oleh beberapa _developer_[^2]
 
-Tapi angka-angka itu sebenarnya bukan masalahnya. _Ya ampun_, jumlah baris kode itu memang terlihat banyak, tapi percaya deh itu bukan yang bikin pusing. Masalahnya ada di **gejala-gejala** yang muncul:
+Tapi bukan angka-angka itu yang menjadi masalah. Jumlah baris kode memang terlihat banyak; yang mengganggu justru **gejala-gejala** yang muncul:
 
 ### 1. Fitur Baru yang Seharusnya Cepat, Jadi Lambat
 
@@ -59,7 +59,7 @@ Dari sisi bisnis, ini artinya **tim jadi konservatif**. Fitur yang sebenarnya am
 
 ## Pertanyaan-Pertanyaan yang Saya Ajukan
 
-Setelah sadar bahwa gejala-gejala di atas bukan _normal_, saya mulai mengajukan pertanyaan-pertanyaan ini ke diri saya sendiri. Bukan pertanyaan teknis, tapi pertanyaan yang membantu saya memahami **apakah masalahnya bisa diselesaikan tanpa migrasi**.
+Setelah melihat gejala-gejala itu, saya mulai bertanya pada diri sendiri: **apakah masalahnya bisa diselesaikan tanpa migrasi?**
 
 ### "Apakah Masalahnya di _Tool_ atau di Cara Kita Pakai?"
 
@@ -71,7 +71,7 @@ Dalam kasus GPS _tracker_ ini, jawabannya: **keduanya**. Cara kode ditulis meman
 
 Pertanyaan kedua: kalau kita _invest_ waktu untuk merapikan arsitektur di _tech stack_ yang ada, apakah hasilnya sepadan?
 
-Di kasus ini, saya _calculate_ kasar: untuk _refactor_ 370+ _endpoint_ dengan arsitektur yang _proper_ di PHP, butuh waktu yang hampir sama dengan migrasi ke _stack_ baru. Bedanya, kalau _refactor_ di PHP, kita tetap _stuck_ dengan beberapa _limitation_ fundamental (_type safety_, _concurrency_, _deployment complexity_). Kalau migrasi, kita _unlock_ hal-hal baru.
+Di kasus ini, hitungan kasar saya: _refactor_ 370+ _endpoint_ dengan arsitektur yang _proper_ di PHP akan memakan waktu hampir sama dengan migrasi ke _stack_ baru. Bedanya, setelah _refactor_ di PHP, kita tetap _stuck_ dengan beberapa _limitation_ fundamental (_type safety_, _concurrency_, _deployment complexity_). Migrasi memberi kita kemampuan baru.
 
 Tapi ini **kasus saya**, _ya_. Bukan berarti _refactor_ selalu salah. Kalau sistemnya lebih kecil, atau kalau _limitation_ _stack_-nya tidak terlalu menghambat, _refactor_ adalah pilihan yang jauh lebih bijak. Jangan sampai karena baca tulisan ini terus langsung migrasi semua sistem tanpa pikir panjang. Nanti malah jadi seperti cerita _horor_ yang pernah saya dengar, 2 tahun migrasi, eh akhirnya balik lagi ke sistem lama hahaha.
 
@@ -109,7 +109,7 @@ Kalau setelah migrasi, angka-angka ini membaik, maka migrasi berhasil. Kalau tid
 
 ## Kerangka Berpikir: Bukan Soal Bahasa, Soal Momentum
 
-Setelah melewati proses tanya-jawab di atas, saya menyimpulkan kerangka berpikir sederhana: **tiga kondisi yang harus dipenuhi** sebelum migrasi masuk akal.
+Dari pertanyaan-pertanyaan itu, saya merangkum **tiga kondisi yang harus dipenuhi** sebelum migrasi masuk akal.
 
 ### 1. Masalahnya Struktural, Bukan Masalah _Skill_
 
@@ -125,7 +125,7 @@ Migrasi butuh waktu, energi, dan fokus. Kalau tim sedang di _peak season_, atau 
 
 ---
 
-Kalau ketiga kondisi terpenuhi: **migrasi masuk akal**. Kalau satu saja tidak terpenuhi: lebih baik _refactor_, atau tahan dulu sampai kondisinya mendukung.
+Kalau ketiga kondisi terpenuhi, **migrasi masuk akal**. Kalau satu saja belum terpenuhi, lebih baik _refactor_ atau menunggu sampai kondisinya mendukung.
 
 ## Keputusan dan Apa yang Terjadi
 
@@ -133,13 +133,13 @@ Saya memutuskan untuk migrasi. Bukan keputusan dalam semalam, tapi proses bebera
 
 Hasilnya? _Alhamdulillah_. Fitur baru yang dulu butuh dua minggu sekarang bisa dikirim dalam hitungan hari. _Bug_ _production_ menurun. Onboarding _developer_ baru lebih cepat. Dan yang paling penting: _deploy_ tidak lagi ditakuti. Sekarang _deploy_ di hari Jumat sore pun... _yah_, masih agak deg-degan sih, tapi nggak separah dulu hahaha.
 
-Untuk detail teknis bagaimana migrasi dilakukan, pendekatan per-_module_, _pattern_ yang dipakai, dan pelajaran teknisnya, ada di [catatan terpisah](/writing/2026/legacy-php-to-go-migration/) yang saya tulis khusus untuk sisi implementasinya.
+Pendekatan per-_module_, _pattern_ yang dipakai, dan pelajaran teknisnya saya bahas di [catatan terpisah](/writing/2026/legacy-php-to-go-migration/).
 
 ## Pelajaran
 
 ### 1. Kumpulkan Data Dulu, Keputusan Kemudian
 
-Jangan migrasi karena "kayaknya sih butuh" atau karena _tech stack_ baru lagi _trending_[^4]. Kumpulkan datanya, berapa lama fitur baru dikirim, berapa sering _bug_ muncul, berapa lama onboarding. Kalau datanya mendukung, keputusannya jauh lebih mudah dijual ke _stakeholder_. Percayalah, bilang ke atasan _"kita harus migrasi karena Go itu keren"_ itu nggak akan berhasil. Tapi kalau bilang _"fitur yang dulu 2 hari sekarang 2 minggu, ini datanya"_, baru deh ngobrol hehe.
+Jangan migrasi karena "kayaknya sih butuh" atau karena _tech stack_ baru lagi _trending_[^4]. Kumpulkan data: berapa lama fitur baru dikirim, seberapa sering _bug_ muncul, dan berapa lama onboarding. Dengan data konkret, kita bisa menjelaskan alasan keputusan ini ke _stakeholder_ dengan lebih mudah. Bilang ke atasan _"kita harus migrasi karena Go itu keren"_ nggak akan berhasil. Tapi kalau bilang _"fitur yang dulu 2 hari sekarang 2 minggu, ini datanya"_, baru deh ngobrol hehe.
 
 ### 2. Migrasi Itu Keputusan Bisnis, Bukan Cuma Teknis
 
@@ -147,7 +147,7 @@ Sering kali diskusi migrasi _stuck_ di "bahasa A lebih baik dari bahasa B". Pada
 
 ### 3. _Refactor_ vs Migrasi Bukan Binary
 
-Bukan pilihan antara "refactor semua" atau "migrasi semua". Kadang jawabannya _refactor_ dulu, kemudian migrasi bertahap. Kadang jawabannya _refactor_ saja sudah cukup. Konteks dan skala sistem menentukan. _Life is not always black and white_, begitu juga dengan keputusan teknis hehe~
+Bukan pilihan antara "refactor semua" atau "migrasi semua". Kadang jawabannya _refactor_ dulu, kemudian migrasi bertahap. Kadang _refactor_ saja sudah cukup. Konteks dan skala sistem menentukan; keputusan teknis jarang hitam-putih hehe~
 
 ### 4. Hitung Juga Biaya Tidak Berbuat Apa-apa
 
@@ -155,9 +155,9 @@ Kita sering fokus pada "berapa biaya migrasi" dan lupa bertanya "berapa biaya ka
 
 ## Penutup
 
-Keputusan migrasi _tech stack_ itu personal, tergantung pada konteks, tim, _timeline_, dan banyak faktor lain. Tidak ada _framework_ yang bisa menjawab semua situasi. Tapi dengan mengajukan pertanyaan yang tepat dan mengumpulkan data yang cukup, keputusan yang diambil jauh lebih masuk akal daripada mengikuti _hype_.
+Keputusan migrasi _tech stack_ tetap personal, karena bergantung pada konteks, tim, _timeline_, dan faktor lainnya. Tidak ada _framework_ yang berlaku untuk semua situasi. Pertanyaan yang tepat dan data yang cukup membantu kita mengambil keputusan tanpa sekadar mengikuti _hype_.
 
-Semoga catatan ini bermanfaat buat yang lagi galau mau migrasi atau nggak. Kalau kamu sedang menghadapi dilema serupa dan ingin mendiskusikannya, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
+Semoga catatan ini berguna kalau kamu sedang menimbang migrasi. Kalau ingin mendiskusikan dilema serupa, [hubungi saya](/contact/), atau lihat [layanan](/services/) yang bisa saya bantu.
 
 [^1]: Sistem GPS _tracker_ yang sudah berjalan sejak beberapa tahun lalu, dengan berbagai penambahan fitur dan _patch_ di sana-sini.
 

@@ -21,7 +21,7 @@ _Biar apa?_ Sistem kami saat itu punya dua fitur utama, satu tim kecil berisi em
 
 Saya tidak menyalahkan beliau. Saya pun pernah begitu. Dan kalau jujur, kadang masih. Godaan memilih teknologi yang keren memang nyata, dan tidak ada salahnya, _selama_ kita sadar itu godaan, bukan keputusan teknis.
 
-Tulisan ini tentang tegangan antara dua suara yang sering bertengkar di kepala saya ketika harus memilih _tech stack_: suara ego yang ingin terlihat canggih, dan suara bisnis yang hanya peduli apakah sistemnya jalan dan menghasilkan nilai.
+Setiap kali harus memilih _tech stack_, saya merasa ada dua suara yang saling tarik-menarik: ego yang ingin terlihat canggih, dan bisnis yang hanya peduli apakah sistemnya berjalan dan menghasilkan nilai.
 
 ## Ketika Ego Berbicara
 
@@ -43,7 +43,7 @@ Nah, yang ini paling berbahaya karena terselubung dalam jubah profesionalisme. K
 
 Ini kenyataan yang sedikit pahit tapi perlu dikatakan: **bisnis tidak peduli kamu pakai PHP atau Go, REST atau GraphQL, Postgres atau MySQL**, selama sistemnya berjalan, cepat, murah untuk dioperasikan, dan mudah dikembangkan ketika ada kebutuhan baru.
 
-Yang benar-benar dipedulikan bisnis:
+Dalam praktiknya, pertanyaan bisnis biasanya berkisar di hal-hal ini:
 
 | Pertanyaan Engineer | Pertanyaan Bisnis |
 |---|---|
@@ -52,19 +52,19 @@ Yang benar-benar dipedulikan bisnis:
 | Apakah ini bisa _scale_ sampai jutaan _user_? | Berapa biaya _server_ tiap bulannya? |
 | Apakah ini pakai bahasa yang populer? | Kalau ada yang keluar tim, berapa lama onboarding _developer_ baru? |
 
-Perhatikan betapa kedua kolom itu bicara hal yang sama sekali berbeda. Dan seringkali kita terlalu fokus di kolom kiri, sementara yang membayar gaji kita berpikir dari kolom kanan.
+Coba lihat dua kolom itu. Pertanyaannya berbeda, tapi saya sering lebih sibuk memikirkan kolom kiri, sementara orang yang membayar gaji saya memikirkan kolom kanan.
 
 Bukan berarti kita harus abaikan aspek teknis. Pilihan teknis yang buruk hari ini bisa jadi hutang teknis yang mahal besok, _dan itu juga_ kekhawatiran bisnis. Maksudnya, **kedua sisi perlu dipertimbangkan**, bukan cuma satu.
 
 ## Cara Memilih yang Tidak Menyakitkan
 
-Setelah beberapa kali salah pilih (dan menanggung akibatnya hehe), saya punya empat pertanyaan yang sekarang selalu saya ajukan sebelum memutuskan _stack_ atau arsitektur baru:
+Setelah beberapa kali salah pilih (dan menanggung akibatnya hehe), saya punya empat pertanyaan yang sekarang saya ajukan sebelum memutuskan _stack_ atau arsitektur baru:
 
 ### 1. Apakah tim saya bisa _maintain_ ini dalam 6 bulan?
 
 Bukan "bisakah saya _implement_ ini?", tapi "bisakah tim saya hidup bersama ini dalam jangka panjang?" Kalau saya yang pergi besok, apakah orang lain bisa melanjutkan tanpa _breakdown_ dua minggu pertama?
 
-Teknologi yang kita pilih harus bisa dipahami oleh orang yang paling junior di tim[^2]. Kalau tidak, kita sedang membangun _knowledge silo_, dan itu berbahaya.
+Saya ingin teknologi yang dipilih tetap bisa dipahami oleh orang yang paling junior di tim[^2]. Kalau tidak, kita sedang membangun _knowledge silo_, dan itu berbahaya.
 
 ### 2. Apakah ini memecahkan masalah nyata yang sudah ada, atau masalah yang mungkin ada nanti?
 
@@ -107,13 +107,13 @@ Itu yang membedakan keputusan teknis berbasis bisnis dengan keputusan berbasis e
 
 ## Ego Itu Tidak Selalu Buruk
 
-Satu hal yang ingin saya luruskan sebelum menutup tulisan ini: **ego sebagai _developer_ tidak selalu negatif**.
+Satu hal yang ingin saya luruskan sebelum menutup tulisan ini: **ego sebagai _developer_ tidak selalu buruk**.
 
 Ingin mempelajari teknologi baru itu bagus, itu yang membuat kita berkembang. Ingin menulis kode yang _clean_ dan _elegant_ itu bagus, itu yang membuat sistem lebih mudah dirawat. Ingin _push_ untuk solusi yang lebih baik itu bagus, itu yang menggerakkan inovasi.
 
 Yang bermasalah adalah ketika ego itu **mengaburkan judgment kita**, ketika kita memilih teknologi untuk terlihat pintar, bukan untuk memecahkan masalah. Ketika kita membangun sistem yang kompleks bukan karena dibutuhkan, tapi karena _fun_ untuk dibangun. Ketika kita mempertahankan pilihan yang salah karena tidak mau mengakui kekeliruan.
 
-Menyadari perbedaan itu, menurut saya, adalah salah satu kematangan penting seorang _software engineer_.
+Menurut saya, kemampuan membedakan keduanya adalah salah satu tanda penting kematangan seorang _software engineer_.
 
 Sekian. Semoga bermanfaat dan terima kasih sudah tersasar ke sini hehe~
 

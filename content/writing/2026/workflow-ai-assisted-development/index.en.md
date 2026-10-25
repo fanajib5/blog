@@ -23,15 +23,15 @@ First: I asked the AI assistant to continue some content work. It worked diligen
 
 Second: in an article covering GPS protocols, the AI wrote out sample packets from a "datasheet" with utter confidence: serial numbers, CRC values, all the way to a 16-digit IMEI (IMEIs have 15 digits; it couldn't even manage basic digit counting). Wrong byte order, wrong values, wrong length. And it stood by its answer until my test suite flatly rejected it. Only after brute-forcing every CRC variant against the original datasheet PDF did the correct answer emerge, from the exact same machine, once handed actual _receipts_ to verify against.
 
-Those two stories are two sides of the same coin, and this post is about the coin itself: **how to work with AI coding agents without becoming a casualty of their own strengths.**
+Those two incidents changed how I work with AI coding agents. My takeaway: **the output is only useful once I know how to check it.**
 
-## Shifting the Mental Model
+## What Changed in My Approach
 
-The wrong way to use AI: treating it as a _confident autocomplete_, accepting its output, copy-pasting, and moving on. The right way, in my experience: treat it as a **junior engineer who is blazingly fast, extraordinarily well-read, and structurally overconfident**.
+I no longer treat AI as a _confident autocomplete_: accept its output, copy it, and move on. In my experience, it makes more sense to treat it as a **junior engineer who is very fast, widely read, and capable of being very sure while wrong**.
 
-A junior like that is immensely valuable if you are a senior willing to do the review. And that fundamentally shifts my job as a backend developer: I used to write code and occasionally ask for a review; now **the AI writes and I verify**. My working hours have shifted from typing to reading, testing, and making decisions.
+For me, an assistant like that is useful as long as I still review its work. As a backend developer, I used to write code and occasionally ask for a review; now **the AI writes and I verify**. My work has shifted from typing to reading, testing, and making decisions.
 
-The practical consequence: the skill gaining the most value is not "prompt engineering", it is **verification**. The ability to write tests that cannot be fooled, track down authoritative sources, and spot when a fluent answer is completely hollow.
+That is why I rely less on "prompt engineering" than on **verification**: writing tests, finding trustworthy sources, and checking whether a fluent answer is actually correct.
 
 ## My Daily Stack
 
@@ -39,44 +39,44 @@ Not a sponsored pitch, just context. Here is what actually lives on my workstati
 
 **CLI Agents (Kilo Code, Claude Code).** I find myself far more productive with an agent running in the terminal than an IDE plugin: it composes cleanly with `git`, `docker`, `psql`, and whatever local dev server is running. Every non-trivial task ends up in the shell; an agent living directly in the shell needs no bridge.
 
-**Serena (MCP, semantic navigation).** For large Laravel or Go codebases, finding definitions and symbol references via LSP is far more precise than plain grep, and vastly more economical on the _context window_. An agent reading 3 targeted symbols performs significantly better than one ingesting 3 entire files.
+**Serena (MCP, semantic navigation).** In large Laravel or Go codebases, LSP helps me find symbol definitions and references directly. It is more precise than text search with grep, and the agent can read only the relevant symbols instead of loading many files into context.
 
-**Memory server (per-project knowledge graph).** This is the answer to the first incident above. AI has no native cross-session memory, so I gave it one: architectural decisions, resolved incidents, and traps previously encountered are stored as a per-project graph and queried at the start of each task. Since introducing this protocol, "rewriting what already exists" has practically vanished.
+**Memory server (per-project knowledge graph).** This is my answer to the first incident. I store architectural decisions, resolved incidents, and previously encountered traps in a per-project graph, then query it at the start of each task. Since then, I have repeated work far less often.
 
-**Living documentation (context7).** Framework APIs move faster than model training cutoffs. Before writing code touching version-specific APIs, I direct the agent to fetch up-to-date documentation. The subtlest hallucination is an API that used to be correct _in the past_.
+**Living documentation (context7).** Before writing code that uses a specific API version, I ask the agent to read the current documentation. This helps avoid answers that rely on an API that used to be correct.
 
-**Thinking checkpoints (sequential thinking).** For multi-layer debugging (a Dockerfile clashing with a reverse proxy clashing with environment variables), I enforce an explicit reasoning chain that can be revised mid-stream. It does not make the AI smarter; it simply makes it harder for the model to jump to reckless conclusions.
+**Thinking checkpoints (sequential thinking).** When debugging several interacting layers, such as a Dockerfile, reverse proxy, and environment variables, I use an explicit reasoning process that can be revised along the way. It does not make the AI smarter, but it helps me hold off on a conclusion until each layer has been checked.
 
-## A Proven Workflow (and Why It Works)
+## The Routine I Use
 
-The [GPS Backend](/en/writing/2026/memahami-gps-protocol/) series running on this blog serves as the clearest benchmark for this workflow: six technical deep-dives, with all code written and verified collaboratively alongside the AI. The pattern looks like this:
+The [GPS Backend](/en/writing/2026/memahami-gps-protocol/) series on this blog gives me a concrete example: six technical articles with code written and verified alongside AI. While working on them, I used this routine:
 
-1. **Plan first, generate second.** One roadmap document plus one master doc acting as the _single source of truth_. An AI working without a map produces scattered output that looks great in isolation but falls apart as a whole.
-2. **Consult memory before starting.** Review past decisions and prior failures. Fifty thousand well-targeted context tokens easily outperform five million noisy ones.
-3. **Verify means run, not read.** A strict rule: sample code must execute before it enters an article. The GT06 decoder was tested with 13 assertions against datasheet vectors. The TimescaleDB SQL ran inside a container populated with 155,000 rows. The WebSocket was benchmarked with 50 concurrent clients plus one intentionally sabotaged client. The results were telling: bugs that were _invisible_ upon code review (data races around `RLock`, off-by-one speed offsets, timeouts conflicting with heartbeat intervals) were all caught simply because the code was executed.
-4. **Log decisions upon completion.** Lessons learned flow straight back into memory. The next session picks up right here, rather than starting from scratch.
+1. **Plan first, generate second.** One roadmap and one master doc serve as the _single source of truth_. This map keeps each article aligned with the series, rather than merely looking good on its own.
+2. **Consult memory before starting.** I review earlier decisions and failures so a new session does not repeat them. Relevant context is more useful than a lot of unrelated context.
+3. **Verify means run, not read.** A strict rule: sample code must execute before it enters an article. The GT06 decoder was tested with 13 assertions against datasheet vectors. The TimescaleDB SQL ran inside a container populated with 155,000 rows. The WebSocket was benchmarked with 50 concurrent clients plus one intentionally sabotaged client. Those tests caught bugs that were _invisible_ upon code review (data races around `RLock`, off-by-one speed offsets, timeouts conflicting with heartbeat intervals).
+4. **Log decisions upon completion.** I add what I learned to memory so the next session can continue from decisions already made.
 
-Pay attention to step 3. That is the core of everything. Unexecuted code is merely a hypothesis, regardless of who authored it, human or machine.
+Step 3 matters most to me. Code that has not been run is still a hypothesis, whoever wrote it.
 
-## AI Failure Modes (and Mitigations)
+## Patterns I Watch For
 
-Four recurring failure patterns I encounter most:
+I see four patterns recur in my sessions, along with the ways I address them:
 
-**Confident hallucinations.** The datasheet incident earlier is the most dangerous variety: wrong yet fluent, wrapped in polished formatting. Mitigation: factual claims must bring _receipts_: test vectors, source links, or reproducible machine outputs. "The AI said so" is never an acceptable source.
+**Confident hallucinations.** The datasheet example above was wrong, but presented in a convincing format. For factual claims, I look for _receipts_: test vectors, source links, or reproducible machine outputs. "The AI said so" is not a source.
 
-**Amnesia.** Without external memory, every session starts from a blank slate, endlessly duplicating work. Mitigation: memory protocols alongside status files (roadmaps tracking item-level status). It is cheap, and it transforms the AI from a guesser into a successor.
+**Amnesia.** When a session lacks earlier context, it can repeat work that is already done. I save decisions in memory and track work status in the roadmap so I can see what has been completed.
 
-**Yes-boss syndrome.** Ask for a solution, and it hands you one, even when five distinct approaches exist with conflicting trade-offs. Mitigation: demand alternatives and their respective trade-offs before executing, especially for architectural choices. A great agent pushes back with options, rather than quietly conforming to a single path.
+**Yes-boss syndrome.** When a decision has consequences, I ask for several options and their trade-offs before choosing. That lets me assess the alternatives instead of simply accepting the first solution.
 
-**Context bloat.** Shoveling a massive problem all at once degrades generation quality silently along the way. Mitigation: decompose into atomic tasks backed by SSoT documents, exactly the way we break down an epic into tickets, for the exact same reason.
+**Context bloat.** A large task is easier to handle when it is split into parts that can be checked one at a time. I use reference documents to keep those parts connected.
 
 ## So, Is This Cheating?
 
 The question inevitably comes up: writing technical articles with AI assistance, is that cheating?
 
-My stance: what matters is not who types the keys, but **who owns the responsibility for the answers**. The GPS series was written with AI assistance, and I disclose it openly, because every claim can be audited: the CRC was brute-force verified, the SQL queries have `EXPLAIN ANALYZE` metrics, and the numbers reflect actual benchmarks. If anything, this workflow raises the bar higher than writing purely from memory (remember the second story? the AI was the one being confidently wrong, but the exact same trap catches humans who skip verification).
+My stance: what matters is not who types the keys, but **who is responsible for the content**. I disclose that the GPS series was written with AI assistance because its claims can be checked: the CRC was brute-force verified, the SQL has `EXPLAIN ANALYZE` results, and the numbers come from actual tests. AI can be confidently wrong, but people can fall into the same trap when they rely on memory and skip verification.
 
-If you want to adopt this approach, begin with just one discipline: **refuse to settle until the code actually runs**. Everything else (memory, living docs, reasoning checkpoints) will follow naturally once you catch an AI drafting a 16-digit IMEI with a straight face.
+If you want to start, choose one habit: **do not treat code as correct until it has been run**. Memory, documentation, and checkpoints help me, but they all start with being willing to check the output, even when an AI confidently writes a 16-digit IMEI.
 
 ## What's Next
 
@@ -84,4 +84,4 @@ I will follow up with another practical piece on AI: automating Google Apps Scri
 
 ## CTA
 
-Share this article if you found it useful. For further discussion, visit [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).
+If you spot an error in the packet examples or test results, [contact me](/en/contact/). You can also subscribe via [RSS](/en/writing/index.xml) to follow future articles.

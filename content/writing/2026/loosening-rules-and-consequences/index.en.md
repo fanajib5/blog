@@ -13,7 +13,7 @@ tags:
   - notes
 ---
 
-_So anyway_, in the middle of April I typed out a fairly long message in a WhatsApp group for my students. It was about [GitHub Education](https://education.github.com/pack), a GitHub program that gives free access to a collection of developer tools for enrolled students and educators.
+In the middle of April, I typed out a fairly long message in a WhatsApp group for the students I teach as a lecturer. It was about [GitHub Education](https://education.github.com/pack), a GitHub program that gives free access to a collection of developer tools for enrolled students and educators.
 
 Among those tools: GitHub Copilot. An AI assistant well-known in developer circles as a useful coding partner, with autocomplete, code review, and even writing chunks of code on its own.
 
@@ -23,74 +23,64 @@ I ended the message with a line that, thinking about it now, pretty accurately d
 
 I signed it off as "greetings from your fellow Gen-Z faculty, first generation," and laughed a little typing that hahaha.
 
-This piece is a reflection on that moment.
-
 ## What I Did (and Why)
 
-The short version: I recommended students register their campus email for GitHub Education. The process is straightforward: sign up, verify active student status, and they get access to various services for free. Including GitHub Copilot with 300 prompt credits per month and access to a range of AI models inside it.
+I recommended students register their campus email for GitHub Education. The process is straightforward: sign up, verify active student status, and they get access to various services for free, including GitHub Copilot with 300 prompt credits per month and access to a range of AI models inside it.
 
 One note I made clear: Copilot is not a tool to outsource your assignments to AI wholesale. It's a learning partner, so you don't have to go through what I did, which was marathoning StackOverflow threads and YouTube tutorials from Indonesian creators, Western creators, and every Indian tutorial channel I could find hahaha.
 
-That was it. No written ban, no formal consequences, no monitoring system. Just a reminder, and trust.
-
-That's what I mean by loosening the rules: not erasing the rules, but handing the boundary over to each person's own conscience.
+I gave them a reminder, but no written ban, formal consequences, or monitoring system. I shared the access and left the decision about how to use it to each student. That's what I mean by loosening the rules.
 
 ## I Used to Be a Student Too
 
-Before I come across as overly idealistic about this trust thing, let me be honest for a second: I know exactly what some students might do with this access.
-
-Because I've been in their position.
+I know what some students might do with this access because I've been in their position.
 
 Back in my master's program, my thesis supervisor gave me remarkable freedom in how I worked. Not much was required, not much was restricted. The essence was: _you set the direction, I guide you_[^1].
 
-And what did I do with that freedom? I put it off. Repeatedly. For months. With various reasons that, looking back now, all sound like fairly weak excuses hehe~
+I used that freedom to put off my thesis. Repeatedly, for months. Looking back, the reasons I gave myself all sound like weak excuses hehe~
 
 It wasn't a matter of being unable. It's that when the constraints loosen, the temptation to use that space for other things becomes very real. Webtoons read cover to cover. Games played until late at night. The thesis? That can wait.
 
-So when I gave students Copilot access with nothing more than a verbal reminder, I wasn't blind to the possibilities. I was, in fact, very aware of them.
+So when I gave students Copilot access with just a reminder, I knew some might use it as a shortcut.
 
 ## So Why Do It Anyway?
 
-Because refusing to give access doesn't mean closing off access.
+I recommended it because refusing to give students access doesn't mean they won't find these tools themselves.
 
-GitHub Copilot already exists. AI already exists. Curious students will find their way to these tools regardless, with or without guidance from their instructors. The only difference is whether they find them with some understanding of the limits, or with none at all.
+Curious students will find them with or without guidance from their instructors. To me, the difference is whether they do so with some understanding of the limits or with none at all.
 
-There's a line from that message I want to expand on:
+One line in my message put my concern plainly:
 
 > _We won't be fully replaced by AI — at least not yet. But we might be replaced by someone who knows how to get the most out of AI in their work and life._
 
-That's not meant to scare anyone. It's a reality I'm already seeing in the field. Two people with equal technical ability, but one is noticeably more skilled at using AI as a tool: the difference in speed and output quality is significant.
+I wasn't trying to scare them. I've seen this in the field: two people with equal technical ability, but one is more skilled at using AI as a tool. Their speed and output quality differ significantly.
 
-If I can give students an early start on understanding how to work alongside AI, that's more valuable than blocking access over concerns that, ultimately, can't be fully prevented anyway.
+I thought giving students an early start on working alongside AI was more valuable than blocking access because of concerns I couldn't fully prevent anyway.
 
 ## Loosening and Its Consequences
 
-But back to the core of it: giving leeway isn't without stakes.
+Giving them leeway still carries risks.
 
-When I said _"I'm treating you as adults"_, I wasn't washing my hands of responsibility. I was transferring responsibility, consciously, to the person who would be making the choices. And those are different things.
+When I said _"I'm treating you as adults"_, I wasn't washing my hands of responsibility. I was consciously leaving the decision about using Copilot to each student.
 
-Transferring responsibility to someone mature enough to hold it is a form of respect, not negligence.
+To me, trusting them with that decision is not negligence. I consider them old enough to take responsibility for their choices.
 
-The consequences go both ways.
+Students who use Copilot as a learning companion, a way to explore concepts, or a way to understand things faster can benefit from it. They'll have a meaningful head start when they enter the workforce.
 
-For students who use it well — as a learning companion, as a tool for exploring concepts, and as a way to accelerate understanding — the benefit is real. They'll have a meaningful head start when they enter the workforce.
+Students who use it as a shortcut, completing assignments without understanding them or handing everything off to AI without reflection, will face consequences too. They may not show up immediately. They can surface in a job interview, while solving a problem in the field, or when students have to modify code without understanding it or knowing where it came from.
 
-For those who use it as a shortcut — completing assignments without understanding them, handing everything off to AI without reflection — the consequences are equally real. They just don't arrive immediately. They usually show up later: during a job interview, solving a problem in the field, or when they have to modify code they don't actually understand and have no idea where it came from.
-
-I can't protect them from those consequences. Not because I don't care, but because that's part of the process of learning to be an adult who owns their own choices.
+I can't protect them from those consequences. I care, but facing them is part of learning to take responsibility for their own choices.
 
 ## On Being a Teacher Who Isn't That Much Older
 
-There's something slightly absurd about that moment, looking back. I called myself "Gen-Z faculty, first generation," and honestly, it's both accurate and a little ridiculous hahaha.
+Calling myself "Gen-Z faculty, first generation" felt accurate and a little absurd hahaha.
 
-Because truthfully, the gap between my experience as a student and my position now as an instructor isn't that wide. I still clearly remember what it felt like to sit on the other side: sleep-deprived, half-understanding things, and occasionally looking for shortcuts.
+The gap between my student days and my position as an instructor isn't that wide. I remember what it felt like to sit on the other side: sleep-deprived, half-understanding things, and occasionally looking for shortcuts.
 
-Maybe that's why I lean toward trust over prohibition. Not out of naivety, but because I know that rules rarely change behavior on their own. What changes behavior is experiencing consequences firsthand, and if you're lucky, a little bit of understanding that arrives just before those consequences do.
+Maybe my experience putting off my thesis is why I lean toward trust over prohibition. I know how freedom can turn into months of delay. I also know a ban won't automatically stop students from finding AI tools. At least I want them to understand the tools they use before facing the consequences.
 
-So yes, I gave that leeway. With open eyes, and with the full awareness that what comes next isn't entirely up to me.
+I gave them that leeway knowing what comes next isn't entirely up to me.
 
 I hope they use it well. 🙏
-
-That's all. Take care.
 
 [^1]: I wrote more about that master's program experience somewhere, if anyone's curious hehe.

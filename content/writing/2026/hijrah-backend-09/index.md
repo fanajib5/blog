@@ -15,37 +15,37 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Seri ini sudah ditutup di [episode lalu](/writing/2026/hijrah-backend-08/). Tapi setiap perjalanan panjang selalu punya satu cerita yang tidak muat di badan utama, dan cerita ini memang terjadi setelah hampir semua episode lain ditulis. Anggap saja adegan pasca-kredit di film: layar sudah gelap, lampu sudah nyala, tapi ada satu adegan lagi hehe.
+Seri ini sudah ditutup di [episode lalu](/writing/2026/hijrah-backend-08/). Namun ada satu cerita yang tidak sempat masuk ke bagian utama. Kejadiannya berlangsung setelah hampir semua episode lain ditulis. Anggap saja adegan pasca-kredit: layar sudah gelap, lampu sudah menyala, tapi masih ada satu adegan lagi hehe.
 
-Ini kisah tentang mesin _database_ yang diminta pindah haluan dua kali. Dan soal siapa yang pegang kemudi saat itu: bukan saya, dan Anda mungkin sudah bisa menebak hahaha.
+Ini kisah tentang mesin _database_ yang dua kali diminta pindah haluan. Soal siapa yang memegang kemudi, bukan saya. Mungkin Anda sudah bisa menebak hahaha.
 
 ## Visi Awal: Satu PostgreSQL untuk Semua
 
-Arah awalnya jelas dan tertulis. Di grup atasan, awal 2025, kalimatnya keluar dengan mantap:[^1] _cloud_ plus Go plus PostgreSQL adalah keharusan. Satu mesin untuk semuanya, satu dialek SQL, satu antrian yang perlu dipelajari. Secara visi, itu indah, dan saya jujur saja ikut antusias.
+Arah awalnya jelas dan tertulis. Pada awal 2025, di grup atasan, pesannya disampaikan dengan mantap:[^1] _cloud_ plus Go plus PostgreSQL adalah keharusan. Satu mesin untuk semuanya, satu dialek SQL, satu antrean teknologi yang perlu dipelajari. Visinya terdengar bagus, dan saya ikut antusias.
 
-Kerjaannya juga nyata: konversi skema dari MySQL, perbaikan tipe data yang tidak punya padanan langsung, _import_ data yang konflik di sana-sini, sampai membangun ulang modelnya di Go. Sampai satu fitur yang membuat saya bangga: pembaruan _real-time_ antar aplikasi dibangun di atas _LISTEN_/_NOTIFY_ bawaan PostgreSQL.[^2] Tidak butuh _message broker_ tambahan untuk kasus itu; _database_-nya sendiri yang mengetuk pintu. Rakus sedikit, tapi rakusnya teknis hehe~
+Pekerjaannya nyata: mengonversi skema dari MySQL, memperbaiki tipe data yang tidak punya padanan langsung, mengimpor data yang berkonflik, lalu membangun ulang modelnya di Go. Ada satu fitur yang membuat saya bangga: pembaruan _real-time_ antar aplikasi dengan _LISTEN_/_NOTIFY_ bawaan PostgreSQL.[^2] Untuk itu, kami tidak perlu _message broker_ tambahan; _database_-nya sendiri yang mengetuk pintu. Sedikit rakus, tapi rakus secara teknis hehe~
 
 ## Pulang, Nak
 
-Lalu, sekitar setahun kemudian, arah angin berubah. Keputusan datang: sistem warisan tetap MySQL, dan data domain utama kembali ke MySQL. PostgreSQL tidak dihapus; dia dipindahkan ke pangkalan yang lebih cocok: data _time-series_ lokasi, yang memang paling rakus dan paling butuh partisi waktu.
+Sekitar setahun kemudian, arah angin berubah. Keputusannya: sistem warisan tetap memakai MySQL dan data domain utama kembali ke MySQL. PostgreSQL tidak dihapus, melainkan dialihkan ke tempat yang lebih cocok: data lokasi _time-series_, yang paling rakus dan paling membutuhkan partisi waktu.
 
-Dari kacamata bisnis, keputusan itu punya logikanya: data yang sama tidak perlu dirawat di dua mesin dengan dua aturan, dan sistem warisan yang masih hidup memang bertahan lebih lama dari rencana siapa pun. Saya tidak berdebat dengan logikanya.
+Dari kacamata bisnis, keputusan itu masuk akal. Data yang sama tidak perlu dirawat di dua mesin dengan dua aturan, sementara sistem warisan masih bertahan jauh melampaui rencana siapa pun. Saya tidak mempermasalahkan logikanya.
 
-Tapi biayanya mendarat ke tempat yang sama seperti biasa: ke meja saya.
+Namun, biaya peralihannya mendarat di tempat yang sama: meja saya.
 
-Aplikasi yang sudah lahir dan tumbuh di dialek PostgreSQL tiba-tiba harus hidup di dialek MySQL: sintaks yang beda, perilaku _standard library_ SQL yang beda, tipe yang beda nama dan beda mood. _Error_ bermunculan di tempat yang kemarin masih hijau. Optimasi _LISTEN_/_NOTIFY_ yang sudah jadi? Menganggur. Dan saya? Saya mengerjakan hal yang sama untuk kedua kalinya, dengan tangan yang sudah hafal jalan yang salah hehe~
+Aplikasi yang lahir dan tumbuh dengan dialek PostgreSQL tiba-tiba harus memakai dialek MySQL: sintaksnya berbeda, perilaku _standard library_ SQL-nya berbeda, begitu juga nama dan perilaku tipenya. _Error_ bermunculan di bagian yang sehari sebelumnya masih hijau. Optimasi _LISTEN_/_NOTIFY_ yang sudah selesai? Menganggur. Saya pun mengerjakan ulang hal yang sama, dengan tangan yang sudah hafal jalan yang salah hehe~
 
 ## Yang Tersisa dari Dua Dunia
 
-Hasil akhirnya terlihat seperti damai setelah duel: MySQL memegang data domain, PostgreSQL memegang data lokasi. Dua mesin, dua peran, tidak saling mengganggu. Bukan arsitektur yang lahir dari gambar rapi di _whiteboard_; dia lahir dari dua keputusan besar yang berbalik arah, dan _deployment_ yang harus tetap hidup di antara keduanya.
+Hasil akhirnya tampak seperti damai setelah duel: MySQL memegang data domain, PostgreSQL memegang data lokasi. Dua mesin, dua peran, tanpa saling mengganggu. Arsitektur ini tidak lahir dari gambar rapi di _whiteboard_. Ia terbentuk dari dua keputusan besar yang berbalik arah, sementara _deployment_ harus tetap hidup di antaranya.
 
-Kalau Anda bertanya mana yang benar: keduanya benar, di waktunya masing-masing. Visi awal benar sebagai visi; keputusan balik benar sebagai keseimbangan biaya. Yang tidak benar adalah mengira arah arsitektur tidak akan pernah berubah, lalu membangun segalanya tanpa rencana cadangan. Itu kesalahan saya, dan dia saya bayar tunai hahaha.
+Kalau ditanya mana yang benar, keduanya benar pada waktunya. Visi awal punya alasannya sendiri; keputusan untuk berbalik juga masuk akal dari sisi biaya. Kesalahan saya adalah mengira arah arsitektur tidak akan berubah, lalu membangun semuanya tanpa rencana cadangan. Saya membayar kesalahan itu tunai hahaha.
 
 ## Dan Frontend? Sama Saja
 
-Supaya adil, warisan yang tidak konsisten itu ternyata tidak berhenti di _backend_. Saat mulai menyentuh _frontend_ v3 (yang port tipis dari v2), luka-lama yang sama tercium lagi dari sisi seberang: _field_ yang sumbernya berpindah-pindah, konvensi penamaan yang berganti-ganti era, dan kode yang membuat saya, seorang _backend engineer_ biasa, bisa mencium bau _spaghetti_ tanpa perlu jago _frontend_ hehe~
+Warisan yang tidak konsisten itu ternyata tidak berhenti di _backend_. Saat mulai menyentuh _frontend_ v3, yang merupakan port tipis dari v2, saya mencium masalah lama dari sisi seberang: _field_ dengan sumber yang berpindah-pindah, konvensi penamaan dari era yang berbeda, dan kode yang membuat saya, _backend engineer_ biasa, bisa mencium bau _spaghetti_ tanpa jago _frontend_ hehe~
 
-Tapi itu cerita untuk seri lain, mungkin. Yang ini sudah cukup panjang.
+Mungkin itu cerita untuk seri lain. Yang ini sudah cukup panjang.
 
 ## Pelajaran Epilog
 
@@ -54,9 +54,7 @@ Tapi itu cerita untuk seri lain, mungkin. Yang ini sudah cukup panjang.
 3. **Satu data, satu rumah.** Dua mesin boleh, asal perannya tidak tumpang tindih. Yang melelahkan bukan jumlahnya, tapi tumpang tindihnya.
 4. **Keputusan di atas gaji Anda tetap keputusan yang harus dijalani.** Tugas kita bukan menang di rapat; tugas kita memastikan sistem tetap hidup setelah rapat selesai, sambil menyimpan catatan biayanya hehe.
 
-Dengan ini, benar-benar tutup. Terima kasih sudah membaca sampai adegan pasca-kredit. Semoga armada kalian (kalau punya) selalu bicara, dan mesin databasenya tidak pindah haluan.
-
-Sekian. Salam.
+Sampai di sini adegan pasca-kreditnya. Terima kasih sudah membaca. Semoga armada Anda, kalau punya, selalu mengirim kabar dan mesin databasenya tidak pindah haluan.
 
 [^1]: Kutipan dan urutan kejadian disajikan dari ingatan dan catatan pribadi, dengan istilah teknis disederhanakan; nama pihak dan _provider_ tidak disebut, konsisten dengan episode-episode sebelumnya.
 
