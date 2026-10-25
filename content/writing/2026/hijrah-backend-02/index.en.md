@@ -15,15 +15,15 @@ tags:
 series: "Hijrah Backend"
 ---
 
-In [the previous episode](/en/writing/2026/hijrah-backend-01/) I mentioned an endpoint that took 15 seconds per call. This is the full story, because hunting its cause turned out to be one of the most educational debugging sessions I've ever had. Not because it was hard, but because I was wrong repeatedly, and confidently hehe~
+In [the previous episode](/en/writing/2026/hijrah-backend-01/) I mentioned an endpoint that took 15 seconds per call. What made the investigation memorable wasn't its technical complexity; it was how confidently I settled on several wrong explanations.
 
 ## One Click, Seventeen Seconds
 
-The victim: a fuel-estimation-per-vehicle-group endpoint. One click on the dashboard, then you wait. About 17 seconds, every single time. For a dashboard people open daily, that felt like dial-up loading hahaha.
+One click on the fuel-estimation-per-vehicle-group endpoint, then a wait of about 17 seconds. For a dashboard people open every day, it felt like waiting on dial-up.
 
 For weeks, the investigation had a soundtrack: _"Faiq, why is it erroring?" "Faiq, why is it slow?"_ Relax, sir, I am tracing it hehe.
 
-Some context before the curtain rises: this endpoint runs one CTE query[^1] against a device-summary table holding tens of millions of rows. From there, the first theory walked in wearing its most confident face.
+The endpoint runs one CTE query[^1] against a device-summary table holding tens of millions of rows. I had my first suspect.
 
 ## Suspect #1: The Query, Obviously
 
@@ -35,11 +35,11 @@ Seventy-eight milliseconds. The endpoint: 17,000 milliseconds. Suspect #1, dismi
 
 ## Suspect #2: Geography
 
-Now for the embarrassing-but-important part: the architecture I inherited ran the application in a European cloud region while its main database lived in Indonesia. Thousands of kilometers apart, and every MySQL query paid a toll of about 190 milliseconds one way. Users in Indonesia, database in Indonesia, data taking a scenic route through Europe. Which best practice suggested this again? hahaha.
+This part is embarrassing, but important: the architecture I inherited ran the application in a European cloud region while its main database lived in Indonesia. Thousands of kilometers apart, every MySQL query paid a toll of about 190 milliseconds one way. The users and database were both in Indonesia, but the data took a detour through Europe.
 
 With that setup, theory two sounded very reasonable: a small connection pool making requests queue up for expensive round-trips. So I enlarged the pool, added timeouts, tuned idle connections. Deployed with hope.
 
-Result: 16.57 seconds became 15.64 seconds. And even that, I suspected, was noise. Suspect #2... not caught. Sigh.
+Result: 16.57 seconds became 15.64 seconds. I suspected the drop was just noise. The pool change hadn't explained the problem.
 
 ## Suspect #3: Connection Age
 
@@ -49,7 +49,7 @@ This theory wasn't entirely wrong, the mismatch was real, and fixing it was wort
 
 ## The Logs Speak, Every Theory Collapses
 
-That night I opened the application logs. And there, the answer had been sitting politely for weeks:
+That night I opened the application logs:
 
 ```text
 GetGasEstimationByGroups query failed: invalid connection
@@ -57,7 +57,7 @@ GetGasEstimationByGroups query failed: invalid connection
 
 Not a slow 200. **A failing 500.** The endpoint wasn't stingy with time, it was erroring out, the database driver auto-retrying, each retry paying the cross-continent reconnect cost, failing again, until giving up. The frontend retried too. And to the user, all of it looked like... "slowness".
 
-Once the perspective flipped, clues that had been gaping became readable:
+After that, two clues I'd missed became clear:
 
 1. CTE queries always failed; simple queries in the same pool always succeeded.
 2. The same gas query, run through the CLI, sailed through in 0.7 seconds.
@@ -93,11 +93,7 @@ Oh, and those two "wrong" fixes along the way (pool size and connection lifetime
 3. **Asymmetry is a golden clue.** What always fails vs. what always succeeds, once you underline that line, the cause reveals itself.
 4. **"Slow" is sometimes really "failing repeatedly".** Odd latency always deserves suspicion of stacked retries.
 
-One closing note: as of writing this, the lighter endpoints in that system still carry a floor of about 2-3 seconds, thanks to the same transcontinental architecture. That's an architecture story I'm saving for the final episode. Stay tuned again hehe.
-
-Next episode we switch stages: from databases to the binary packets sent by GPS trackers, and how I ported dozens of protocol parsers without corrupting data for a live fleet. See you there.
-
-Cheers.
+As I write this, the lighter endpoints in that system still have a floor of about 2-3 seconds because of the same transcontinental architecture. The remaining latency is a story of its own.
 
 [^1]: CTE (Common Table Expression), a way to write layered queries with named sub-results, starting with `WITH`. Pleasant to read; occasionally makes the database think very hard.
 

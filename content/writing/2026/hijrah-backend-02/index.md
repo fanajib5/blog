@@ -15,15 +15,15 @@ tags:
 series: "Hijrah Backend"
 ---
 
-Di [episode sebelumnya](/writing/2026/hijrah-backend-01/) saya menyinggung soal satu _endpoint_ yang bisa makan 15 detik sekali panggil. Episode ini cerita lengkapnya, karena perjalanan mencari penyebabnya adalah salah satu _debugging_ paling mengedukasi yang pernah saya alami. Bukan karena rumit, tapi karena saya salah berulang kali dengan penuh percaya diri hehe~
+Di [episode sebelumnya](/writing/2026/hijrah-backend-01/) saya menyebut _endpoint_ yang bisa makan 15 detik sekali panggil. Yang membuat penyelidikannya berkesan bukan kerumitan teknis, melainkan betapa yakinnya saya pada beberapa jawaban yang ternyata salah.
 
 ## Sebuah Klik, ±17 Detik
 
-Korbannya: _endpoint_ estimasi bahan bakar per grup kendaraan. Satu klik di _dashboard_, lalu menunggu. ±17 detik lebih sedikit, setiap kali. Untuk ukuran _dashboard_ yang diakses tiap hari, itu terasa seperti _loading_ jaman _dial-up_ hahaha.
+Satu klik pada _endpoint_ estimasi bahan bakar per grup kendaraan, lalu menunggu sekitar 17 detik. Untuk _dashboard_ yang dibuka tiap hari, rasanya seperti menunggu koneksi _dial-up_.
 
 Dan selama berminggu-minggu penyelidikan, ada _soundtrack_-nya: _"Faiq, kok error?" "Faiq, kok lemot?"_ Tenang, Mas, lagi saya telusuri hehe.
 
-Sebelum lanjut: _endpoint_ ini menjalankan satu _query_ ber-CTE[^1] ke tabel ringkasan perangkat yang isinya puluhan juta baris. Dari sini, teori pertama langsung muncul dengan wajah paling percaya diri.
+_Endpoint_ ini menjalankan satu _query_ ber-CTE[^1] ke tabel ringkasan perangkat yang berisi puluhan juta baris. Saya langsung punya tersangka.
 
 ## Tersangka Pertama: Query-nya Tentu Saja
 
@@ -35,11 +35,11 @@ Tujuh puluh delapan milidetik. _Endpoint_-nya: 17.000 milidetik. Tersangka perta
 
 ## Tersangka Kedua: Geografi
 
-Nah, ini bagian yang memalukan sekaligus penting: arsitektur yang saya terima waktu itu menempatkan aplikasi di _region cloud_ Eropa, sementara _database_ utamanya di Indonesia. Jaraknya ribuan kilometer, dan setiap _query_ MySQL membayar tol sekitar 190 milidetik satu arah. _User_ di Indonesia, _database_ di Indonesia, tapi datanya muter dulu ke Eropa. _Best practice_ mana yang bilang begitu? hahaha.
+Bagian ini agak memalukan, tapi penting: aplikasi yang saya terima berjalan di _region cloud_ Eropa, sementara _database_ utamanya berada di Indonesia. Jaraknya ribuan kilometer; setiap _query_ MySQL membayar tol sekitar 190 milidetik satu arah. _User_ dan _database_ sama-sama di Indonesia, tetapi datanya harus memutar lewat Eropa.
 
 Dengan kondisi seperti itu, teori kedua terdengar sangat masuk akal: _pool_ koneksi yang kecil bikin _request_ ngantri tiket _round-trip_ mahal. Saya besarkan _pool_-nya, tambah _timeout_, rapikan _idle connection_. _Deploy_ dengan harapan.
 
-Hasilnya: 16,57 detik menjadi 15,64 detik. Itu pun saya curigai cuma _noise_. Tersangka kedua... tidak tertangkap. _Hadeh._
+Hasilnya: 16,57 detik menjadi 15,64 detik. Saya curiga penurunan itu cuma _noise_. Perubahan _pool_ belum menjelaskan masalahnya.
 
 ## Tersangka Ketiga: Umur Koneksi
 
@@ -49,7 +49,7 @@ Teori ini tidak sepenuhnya salah, ketimpangannya nyata, dan perbaikannya memang 
 
 ## Log Bicara, Semua Teori Bubar
 
-Malam itu saya buka log aplikasi. Dan di sana, jawabannya sudah lama duduk manis:
+Malam itu saya buka log aplikasi:
 
 ```text
 GetGasEstimationByGroups query failed: invalid connection
@@ -57,7 +57,7 @@ GetGasEstimationByGroups query failed: invalid connection
 
 Bukan 200 yang lambat. **500 yang gagal.** _Endpoint_-nya tidak pelit waktu, dia _error_, lalu _database driver_ mencoba ulang otomatis, tiap percobaan membayar biaya sambungan ulang di jalur transbenua, gagal lagi, dan begitu terus sampai menyerah. _Frontend_ ikut mencoba ulang. _User_ melihat semuanya sebagai... "lambat".
 
-Begitu sudut pandangnya berubah, petunjuk yang tadinya menganga jadi terbaca:
+Setelah itu, dua petunjuk yang sebelumnya saya lewatkan jadi jelas:
 
 1. _Query_ ber-CTE selalu gagal, _query_ sederhana di _pool_ yang sama selalu sukses.
 2. _Query_ gas yang sama, lewat CLI, sukses mulus 0,7 detik.
@@ -93,11 +93,7 @@ Oh iya, dua "perbaikan salah" di tengah jalan (ukuran _pool_ dan umur koneksi) t
 3. **Asimetri adalah petunjuk emas.** Mana yang selalu gagal vs mana yang selalu sukses, begitu digarisbawahi, penyebabnya ketahuan sendiri.
 4. **"Lambat" kadang sesungguhnya "gagal berkali-kali".** _Latency_ yang aneh selalu layak dicurigai sebagai _retry_ yang menumpuk.
 
-Satu catatan penutup: sampai episode ini ditulis, _endpoint_-endpoint ringan di sistem itu masih punya _floor_ sekitar 2-3 detik karena arsitektur transbenua yang sama. Itu cerita arsitektur yang saya simpan untuk episode penutup. _Stay tuned_ lagi deh hehe.
-
-Episode berikutnya kita pindah panggung: dari _database_ ke paket-paket biner yang dikirim _tracker_ GPS, dan bagaimana saya mem-_port_ puluhan _parser_ protokol tanpa merusak data armada yang sedang jalan. Sampai ketemu di sana.
-
-Sekian. Salam.
+Sampai tulisan ini dibuat, _endpoint_-endpoint ringan di sistem itu masih punya _floor_ sekitar 2-3 detik karena arsitektur transbenua yang sama. Penyebab latensi sisanya masih menjadi cerita tersendiri.
 
 [^1]: CTE (_Common Table Expression_), cara menulis _query_ bertingkat dengan sub-hasil yang diberi nama, diawali kata `WITH`. Enak dibaca, kadang bikin _database_ mikir keras.
 
