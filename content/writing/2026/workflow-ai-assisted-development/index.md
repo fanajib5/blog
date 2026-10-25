@@ -39,7 +39,7 @@ Bukan iklan — cuma konteks. Ini yang benar-benar terpasang di mesin kerja saya
 
 **Agent CLI (Kilo Code, Claude Code).** Saya lebih produktif dengan agent di terminal daripada plugin IDE: dia bisa dikomposisikan dengan `git`, `docker`, `psql` — dan dengan server dev yang sedang jalan. Semua pekerjaan non-trivial berakhir di shell; agent yang hidup di shell tidak butuh jembatan.
 
-**Serena (MCP, navigasi semantik).** Di codebase Laravel/Go yang besar, saya menggunakannya untuk mencari definisi dan referensi simbol lewat LSP, bukan membuka banyak file untuk menelusurinya dengan grep.
+**Serena (MCP, navigasi semantik).** Di codebase Laravel/Go yang besar, LSP membantu saya menemukan definisi dan referensi simbol secara langsung. Hasilnya lebih presisi daripada pencarian teks dengan grep, dan agent cukup membaca simbol yang relevan tanpa memasukkan banyak file ke context.
 
 **Memory server (knowledge graph per project).** Ini jawaban saya untuk kejadian pertama. Saya simpan keputusan arsitektur, insiden yang sudah terpecahkan, dan jebakan yang pernah ditemui sebagai graph per project, lalu mencarinya di awal tiap tugas. Sejak itu, saya jauh lebih jarang mengulang pekerjaan yang sudah ada.
 
@@ -74,7 +74,7 @@ Ada empat pola yang berulang di sesi saya, beserta cara saya menghadapinya:
 
 Pertanyaan yang pasti muncul: menulis artikel dengan bantuan AI — itu curang?
 
-Posisi saya: yang penting bukan siapa yang mengetik, tetapi **siapa yang bertanggung jawab atas isinya**. Saya menyatakan bahwa seri GPS ditulis dengan bantuan AI karena klaim-klaimnya bisa diperiksa: CRC diverifikasi dengan brute-force, SQL punya hasil `EXPLAIN ANALYZE`, dan angkanya berasal dari pengujian sungguhan. Bagi saya, memakai AI tidak mengurangi tanggung jawab untuk memeriksa semuanya.
+Posisi saya: yang penting bukan siapa yang mengetik, tetapi **siapa yang bertanggung jawab atas isinya**. Saya menyatakan bahwa seri GPS ditulis dengan bantuan AI karena klaim-klaimnya bisa diperiksa: CRC diverifikasi dengan brute-force, SQL punya hasil `EXPLAIN ANALYZE`, dan angkanya berasal dari pengujian sungguhan. AI memang bisa salah dengan yakin, tetapi manusia juga bisa jatuh ke jebakan yang sama saat mengandalkan ingatan dan melewatkan verifikasi.
 
 Kalau ingin mulai, pilih satu kebiasaan: **jangan menganggap kode benar sebelum menjalankannya**. Memory, dokumentasi, dan checkpoint membantu pekerjaan saya, tetapi semuanya berawal dari kesediaan memeriksa hasilnya — termasuk ketika AI menulis IMEI 16 digit dengan yakin.
 

@@ -39,7 +39,7 @@ Not a sponsored pitch, just context. Here is what actually lives on my workstati
 
 **CLI Agents (Kilo Code, Claude Code).** I find myself far more productive with an agent running in the terminal than an IDE plugin: it composes cleanly with `git`, `docker`, `psql`, and whatever local dev server is running. Every non-trivial task ends up in the shell; an agent living directly in the shell needs no bridge.
 
-**Serena (MCP, semantic navigation).** In large Laravel or Go codebases, I use it to find definitions and symbol references through LSP, rather than opening many files to trace them with grep.
+**Serena (MCP, semantic navigation).** In large Laravel or Go codebases, LSP helps me find symbol definitions and references directly. It is more precise than text search with grep, and the agent can read only the relevant symbols instead of loading many files into context.
 
 **Memory server (per-project knowledge graph).** This is my answer to the first incident. I store architectural decisions, resolved incidents, and previously encountered traps in a per-project graph, then query it at the start of each task. Since then, I have repeated work far less often.
 
@@ -74,7 +74,7 @@ I see four patterns recur in my sessions, along with the ways I address them:
 
 The question inevitably comes up: writing technical articles with AI assistance, is that cheating?
 
-My stance: what matters is not who types the keys, but **who is responsible for the content**. I disclose that the GPS series was written with AI assistance because its claims can be checked: the CRC was brute-force verified, the SQL has `EXPLAIN ANALYZE` results, and the numbers come from actual tests. Using AI does not lessen my responsibility to check the work.
+My stance: what matters is not who types the keys, but **who is responsible for the content**. I disclose that the GPS series was written with AI assistance because its claims can be checked: the CRC was brute-force verified, the SQL has `EXPLAIN ANALYZE` results, and the numbers come from actual tests. AI can be confidently wrong, but people can fall into the same trap when they rely on memory and skip verification.
 
 If you want to start, choose one habit: **do not treat code as correct until it has been run**. Memory, documentation, and checkpoints help me, but they all start with being willing to check the output—including when an AI confidently writes a 16-digit IMEI.
 
