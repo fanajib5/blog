@@ -19,17 +19,17 @@ series: "gps-backend-series"
 series_part: 6
 ---
 
-Semua komponen backend GPS sudah berdiri dari lima artikel sebelumnya: [protokol](/writing/2026/memahami-gps-protocol/), [TCP listener](/writing/2026/tcp-listener-gps-go/), [decoder](/writing/2026/decode-packet-gt06-teltonika/), [TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/), [geofencing](/writing/2026/geofencing-postgis/). Data masuk, tersimpan, dan event wilayah terdeteksi.
+Lima artikel sebelumnya membangun backend GPS ini tahap demi tahap: [protokol](/writing/2026/memahami-gps-protocol/), [TCP listener](/writing/2026/tcp-listener-gps-go/), [decoder](/writing/2026/decode-packet-gt06-teltonika/), [TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/), dan [geofencing](/writing/2026/geofencing-postgis/). Data masuk, tersimpan, dan event wilayah terdeteksi.
 
-Tapi pelanggan tidak melihat tabel — mereka melihat **peta yang bergerak sendiri**. Artikel penutup seri ini menyatukan semuanya: WebSocket untuk push real-time, Redis pub/sub sebagai jembatan dari ingest worker, dan Leaflet.js di browser. Semua kode di bawah saya uji end-to-end: server Go + Redis di lokal, lalu halaman dashboard dibuka di browser sungguhan dan posisi dikirim lewat `PUBLISH`.
+Pelanggan tidak melihat tabel. Mereka melihat **peta yang bergerak sendiri**. Artikel penutup seri ini menyatukan semuanya: WebSocket untuk push real-time, Redis pub/sub sebagai jembatan dari ingest worker, dan Leaflet.js di browser. Semua kode di bawah saya uji end-to-end: server Go + Redis di lokal, lalu halaman dashboard dibuka di browser sungguhan dan posisi dikirim lewat `PUBLISH`.
 
 ## Polling Dulu, Baru Bicara WebSocket
 
-Cara paling naif membuat dashboard "real-time": _polling_ — JavaScript menanya `GET /api/positions` setiap 2 detik. Aritmetikanya cepat memburuk: 30 _request_/menit per klien. Dashboard operator dengan 20 tab terbuka = 600 _request_/menit yang isinya 90% tidak berubah. Ditambah _latency_ rata-rata setengah interval polling — posisi "sekarang" selalu telat 1 detik.
+Cara paling naif membuat dashboard "real-time" adalah _polling_: JavaScript menanya `GET /api/positions` setiap 2 detik. Aritmetikanya cepat memburuk: 30 _request_/menit per klien. Dashboard operator dengan 20 tab terbuka menghasilkan 600 _request_/menit, padahal 90% isinya tidak berubah. _Latency_ rata-rata juga setengah interval polling, jadi posisi "sekarang" selalu telat 1 detik.
 
-Pilihan sesudahnya dua: **SSE** (Server-Sent Events, satu arah via HTTP) atau **WebSocket** (dua arah, _upgrade_ dari HTTP). Jujur saja: kalau kebutuhan hanya mengirim posisi ke browser, SSE sudah cukup dan lebih sederhana. Tapi ingat Part 1 — server GPS juga perlu _mengirim perintah ke arah sebaliknya_ suatu hari (request posisi sekarang, ubah interval, sampai engine-cut). Untuk seri ini kita pasang WebSocket sejak awal.
+Ada dua pilihan berikutnya: **SSE** (Server-Sent Events, satu arah via HTTP) atau **WebSocket** (dua arah, _upgrade_ dari HTTP). Kalau kebutuhannya hanya mengirim posisi ke browser, SSE sudah cukup dan lebih sederhana. Namun, seperti dibahas di Part 1, server GPS juga perlu _mengirim perintah ke arah sebaliknya_ suatu hari nanti (request posisi sekarang, ubah interval, sampai engine-cut). Untuk seri ini kita pasang WebSocket sejak awal.
 
-Arsitektur finalnya:
+Arsitektur akhirnya seperti ini:
 
 ```text
 [Tracker] → [Listener] → [Queue] → [Ingest Worker] ──┬──▶ [PostgreSQL]
@@ -43,7 +43,7 @@ Ingest worker tidak tahu ada browser; ia hanya `PUBLISH`. Hub tidak tahu ada dev
 
 ## Hub: Registry Klien dan Broadcast
 
-Jantungnya kecil — registry klien, satu channel broadcast, dan kebijakan untuk klien lambat:
+Hub ini terdiri dari registry klien, satu channel broadcast, dan kebijakan untuk menangani klien lambat:
 
 ```go
 type client struct {
@@ -104,7 +104,7 @@ func (h *Hub) Broadcast(msg []byte) {
 Dua keputusan desain yang tersembunyi di sini:
 
 1. **`send` per klien dengan buffer, bukan tulis langsung ke koneksi.** `Broadcast` tidak pernah menyentuh _network_ — ia hanya memasukkan pesan ke antrean tiap klien. Satu goroutine _writer_ per koneksi yang mengosongkannya. Tanpa ini, satu browser dengan jaringan buruk membekukan broadcast untuk semua orang.
-2. **Klien yang antreuannya meluap didrop.** Dashboard real-time itu _stateless-friendly_: klien yang didrop cukup _reconnect_ dan menyegarkan posisi dari cache. Kehilangan klien lambat lebih murah daripada mengorbankan klien sehat.
+2. **Klien yang antreuannya meluap didrop.** Dashboard real-time ini cocok dengan pola _stateless-friendly_: klien yang didrop cukup _reconnect_ dan menyegarkan posisi dari cache. Mengakhiri koneksi yang lambat lebih murah daripada mengorbankan klien sehat.
 
 (Di versi pertama kode ini, saya menulis `delete` map di dalam `RLock` — data race yang tidak kelihatan sampai diteliti ulang: menulis map di bawah _read lock_. Versi di atas sudah memisahkan: kumpulkan kandidat drop di `RLock`, eksekusi drop di `Lock`. `-race` mode akan menangkap ini — jalankan selalu.)
 
@@ -156,11 +156,11 @@ func bridge(ctx context.Context, hub *Hub, rdb *redis.Client) {
 }
 ```
 
-Lima baris yang memisahkan dua dunia. Ingest worker (yang sama yang menyimpan ke TimescaleDB dan mengecek geofence di Part 5) menutup siklusnya dengan `rdb.Publish(ctx, "positions:live", jsonPosition)` — dan opsional `SET device:last:<id>` untuk cache posisi terakhir, yang dipakai menghidrasi klien yang baru tersambung supaya peta tidak kosong menunggu titik berikutnya.
+Ingest worker yang menyimpan data ke TimescaleDB dan mengecek geofence di Part 5 menerbitkan posisi dengan `rdb.Publish(ctx, "positions:live", jsonPosition)`. Worker juga dapat menjalankan `SET device:last:<id>` untuk menyimpan posisi terakhir. Klien yang baru tersambung bisa mengambilnya dari cache agar petanya tidak kosong sambil menunggu titik berikutnya.
 
 ## Browser: Leaflet + Reconnect
 
-Sisi klien — peta, marker per device, dan koneksi yang menyembuhkan diri:
+Di browser, Leaflet menampilkan peta dan marker per device. Koneksi WebSocket akan tersambung ulang jika terputus:
 
 ```html
 <div id="map"></div>
@@ -207,7 +207,7 @@ Tiga lapis pengujian, semua di laptop saya (loopback, Redis lokal, browser Chrom
 | Klien lambat (buffer 4 KB, tidak pernah membaca) + klien sehat, 300 pesan 64 KB dikirim | Klien sehat menerima **300/300**; klien lambat **didrop** oleh hub (`klien lambat didrop` di log server)                |
 | Browser sungguhan: 3 posisi (2 device) di-`PUBLISH`                                     | Status `terhubung · 3 posisi`; **2 marker** di peta — marker device yang sama berpindah via `setLatLng`, bukan duplikat |
 
-Baris terakhir itu poin yang paling sering salah: dashboard pemula membuat marker baru di setiap pesan — 500 device × posisi per 10 detik = peta tak terbaca dalam satu menit. Kuncinya dictionary `markers` dengan `device_id` sebagai kunci.
+Pada skenario browser, setiap device memiliki satu marker yang posisinya diperbarui saat pesan baru datang. Jika dashboard membuat marker baru untuk setiap pesan, 500 device yang mengirim posisi setiap 10 detik akan membuat peta tak terbaca dalam satu menit. Dictionary `markers` memakai `device_id` sebagai kunci agar marker yang sama bisa diperbarui.
 
 ## Jebakan yang Tersisa di Production
 
@@ -217,7 +217,7 @@ Baris terakhir itu poin yang paling sering salah: dashboard pemula membuat marke
 
 ## Yang Harus Kamu Pahami
 
-- **Pisahkan dunia**: ingest hanya `PUBLISH`, hub hanya broadcast — Redis di tengah. Setiap bagisan bisa diskalakan sendiri.
+- **Pisahkan dunia**: ingest hanya `PUBLISH`, hub hanya broadcast, dan Redis menghubungkan keduanya. Setiap bagian bisa diskalakan sendiri.
 - **Satu writer goroutine per koneksi** + buffer per klien + drop kebijakan untuk yang lambat.
 - **Latest-wins**: marker per `device_id` di-update, bukan dibuat ulang; klien baru dihidrasi dari cache posisi terakhir.
 - **Reconnect itu bagian dari protokol** — klien yang didrop harus bisa kembali dan menyegarkan diri tanpa intervensi.
@@ -226,8 +226,8 @@ Baris terakhir itu poin yang paling sering salah: dashboard pemula membuat marke
 
 Dengan dashboard ini, keenam artikel menyusun satu backend GPS utuh: dari byte mentah di socket sampai titik bergerak di peta pelanggan. Seluruh seri akan dikompilasi menjadi **ebook gratis "Membangun GPS Backend dengan Go"** — pantau [RSS](/writing/index.xml) atau [hubungi saya](/contact/) untuk info rilisnya.
 
-Seri lanjutan yang sudah masuk kandidat: antrean pesan (RabbitMQ/Kafka), API layer dengan Fiber + pgx, dan deployment Coolify — kalau salah satu itu yang kamu tunggu, [bilang saja](/contact/).
+Seri lanjutan yang sudah masuk kandidat: antrean pesan (RabbitMQ/Kafka), API layer dengan Fiber + pgx, dan deployment Coolify. Kalau salah satu topik itu yang kamu tunggu, [bilang saja](/contact/).
 
 ## CTA
 
-Bagikan artikel ini jika bermanfaat. Untuk diskusi lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Kalau ingin membahas pilihan WebSocket, Redis, atau cara marker diperbarui di dashboard ini, kunjungi [Contact](/contact/) atau ikuti tulisan berikutnya lewat [RSS](/writing/index.xml).
