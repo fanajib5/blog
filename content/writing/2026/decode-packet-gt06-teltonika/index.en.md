@@ -19,15 +19,15 @@ series: "gps-backend-series"
 series_part: 3
 ---
 
-In [Part 2](/en/writing/2026/tcp-listener-gps-go/), we built a listener that tidies up incoming TCP streams into complete frames. Now comes the real "archaeology" work: parsing the contents inside those frames. Raw bytes like `0x78 0x78 0x0D 0x01 ...` need to be transformed into meaningful telemetry, something like `IMEI 123456789012345, position -7.2575, 112.7521, heading 180°`.
+In [Part 2](/en/writing/2026/tcp-listener-gps-go/), we built a listener that assembles incoming TCP streams into complete frames. Now we can inspect their contents. Bytes like `0x78 0x78 0x0D 0x01 ...` need to become useful information, such as `IMEI 123456789012345, position -7.2575, 112.7521, heading 180°`.
 
-Before diving in, an honest confession: while writing this article, I was initially convinced that the login packet example from the GT06 datasheet was `... 6C 00 01 8C ...`, and that the CRC implementation was just standard CRC-CCITT. **Both assumptions were flat wrong.** I only realized this when my code rejected the datasheet's own example. The full story is detailed below, and it underscores the most vital lesson in binary protocols: never trust your memory. Trust test vectors.
+While writing this article, I was convinced that the GT06 datasheet's login packet example was `... 6C 00 01 8C ...` and that its CRC could use standard CRC-CCITT. **Both assumptions were wrong.** I realized this when my code rejected the datasheet's own example. It was a reminder that with binary protocols, test vectors are more reliable than memory.
 
-This article focuses on GT06 (dissected inside and out) and then examines Teltonika (its architecture and contrasting design choices). All code below has been validated against official examples from the Concox GT06 v1.8.1 datasheet and the decoder structure of [Traccar](https://www.traccar.org/)[^traccar], an open-source engine battle-tested in production for years.
+We'll examine GT06 in detail, then look at Teltonika's structure and how its design differs. All code below has been validated against official examples from the Concox GT06 v1.8.1 datasheet and the decoder structure of [Traccar](https://www.traccar.org/)[^traccar], an open-source engine used in production for years.
 
 ## Trap #1: GT06's "CRC-ITU" Isn't the CRC-CCITT You Think It Is
 
-The GT06 datasheet casually states: the CRC field contains a *CRC-ITU value*. The most common reference for CRC-ITU is CRC-16/CCITT using polynomial 0x1021. That is precisely where the trap lies: there are over a dozen CRC variants using that exact polynomial, differing by initial values (*init*), processing direction (*reflected*), and final XOR masks (*xor-out*).
+The GT06 datasheet says that the CRC field contains a *CRC-ITU value*. The most common reference for CRC-ITU is CRC-16/CCITT using polynomial 0x1021. But more than a dozen CRC variants use that polynomial, with different initial values (*init*), processing directions (*reflected*), and final XOR masks (*xor-out*).
 
 I brute-forced all common 0x1021 variants against the official datasheet sample, a login packet `78 78 0D 01 01 23 45 67 89 01 23 45 00 01 8C DD 0D 0A`, whose CRC is listed as `0x8CDD`:
 
@@ -37,7 +37,7 @@ I brute-forced all common 0x1021 variants against the official datasheet sample,
 | XMODEM                | 0x0000 | no        | 0x0000     | `0x55F9` ❌     |
 | X25                   | 0xFFFF | **yes**   | **0xFFFF** | **`0x8CDD` ✅** |
 
-The verdict: **the X25 variant**, processed *reflected* with a final XOR of `0xFFFF`. Plus another surprise: the scope does not start at the protocol number. It spans **from the length byte up through the serial number (inclusive)**, exactly matching the subtle wording in the WD-209 datasheet when read carefully: *"from packet length to information serial number (including)"*.
+The result is **the X25 variant**, processed *reflected* with a final XOR of `0xFFFF`. The CRC scope also does not start at the protocol number. It spans **from the length byte up through the serial number (inclusive)**, matching the WD-209 datasheet wording: *"from packet length to information serial number (including)"*.
 
 Here is the implementation in Go:
 
@@ -61,7 +61,7 @@ func crcITU(data []byte) uint16 {
 }
 ```
 
-Here is an interesting production note: Traccar, the most widely deployed open-source GPS tracking server in the world, **does not validate inbound CRCs for GT06 at all**. Why? Because the market is flooded with clones and OEM GT06 variants whose CRC calculations deviate slightly from the spec. For this article, our design decision is to validate CRC strictly (and drop corrupt packets as recommended by the datasheet). Just don't be surprised if cheap third-party devices get rejected down the road: that is the messy reality of budget hardware protocols.
+In production, Traccar, the most widely deployed open-source GPS tracking server in the world, **does not validate inbound CRCs for GT06**. The market includes GT06 clones and OEM variants with slightly different CRC calculations. Here, we validate CRC strictly and drop corrupt packets as the datasheet recommends. Those differences can cause some cloned devices to be rejected.
 
 ## Frame Parser with CRC Validation
 
@@ -140,7 +140,7 @@ The most common position packet uses protocol `0x12`. Here is the GPS payload br
 | +15    | 1    | Speed          | km/h                                      |
 | +16    | 2    | Course + flags | see breakdown below                       |
 
-Two traps often trip developers up here:
+Keep two details in mind:
 
 1. **Coordinates are not decimal degrees.** The raw integer value must be divided by `60 × 30,000 = 1,800,000`. For instance, Surabaya at -7.2575° is stored as `7.2575 × 60 × 30,000 = 13,063,500` -> `00 C7 55 4C`.
 2. **Hemisphere signs (south/west) are not stored in the numbers**, all coordinate values are positive integers. Signs reside in the status *flags* bits within the course bytes.
@@ -178,9 +178,9 @@ Testing the decoder without physical hardware: I constructed a synthetic `0x12` 
 
 > Note: following the GPS block, a real `0x12` packet contains cellular base station (LBS) data for positioning fallback when GPS fix is lost, alongside terminal status info. We can parse that later as needed; for building core tracking capabilities, the GPS segment is all we need.
 
-## Teltonika: A Cleaner Engineering Philosophy
+## Teltonika: A Different Packet Design
 
-Teltonika approaches the exact same problem with architectural choices that feel significantly more refined:
+Teltonika handles the same needs with a different packet format and flow. The differences show up in its handshake, data batches, coordinates, and acknowledgements:
 
 **1. Handshake first, data later.** A new connection begins with an identification packet: 2 bytes of length (`00 0F`) + 15 ASCII digits of IMEI + `\r\n`. The server responds with a single byte: `01` (IMEI accepted) or `00` (rejected):
 
@@ -233,7 +233,7 @@ func crc16IBM(data []byte) uint16 {
 }
 ```
 
-Their acknowledgement design is also the cleanest among all protocols: the server simply replies with the **count of records received** as a 4-byte integer. If 1 record was received, return `00 00 00 01`. If the count does not match what the device transmitted, it triggers a clean retry, avoiding per-packet sequence serial numbers entirely.
+To confirm receipt, the server replies with the **count of records received** as a 4-byte integer. For one record, it returns `00 00 00 01`. The device retransmits if the count does not match, so per-packet serial numbers are not needed.
 
 ## Test Results
 
@@ -248,14 +248,14 @@ All code in this article passes 13 targeted assertions[^tests]:
 | Teltonika handshake with `356307042441013`                              | ✓      |
 | AVL Codec 8: valid CRC, correct coordinates & speed                     | ✓      |
 
-## What You Should Take Away Before Moving On
+## Checks to Keep in Mind
 
-- **CRC variants trigger the most insidious bugs in binary protocols.** GT06's "CRC-ITU" turned out to be the X25 variant, with a calculation scope that includes the length byte: two subtle details that will each independently break validation if missed.
-- **Never rely on memory: trust test vectors.** Official examples in datasheets serve as ground truth. When your code and the datasheet clash, one of them is wrong; systematically verify which one.
-- **BCD and coordinate units differ wildly across manufacturers**: minutes × 30,000 in GT06 versus degrees × 10⁷ in Teltonika. Always write round-trip tests for unit conversions.
-- **Traccar skips inbound CRC validation for GT06 and Teltonika**: a pragmatic choice born from quirky firmware clones in the wild. Strict validation is mathematically correct, but keep your error handling configurable (drop vs. log) when weird hardware shows up in production.
+- **Verify the CRC variant and scope against a datasheet vector.** Both determine whether GT06 validation succeeds.
+- **Test IMEI decoding and the ACK against a login example.** Check the BCD result and response bytes against the packet serial.
+- **Use a round-trip test for coordinate conversion.** GT06 uses minutes × 30,000, while Teltonika uses degrees × 10⁷.
+- **Account for device differences when validating CRCs.** Traccar skips inbound CRC validation for GT06 and Teltonika because of firmware clones; decide whether a mismatch should cause a packet to be dropped or logged.
 
-By Part 4, our coordinate stream is flowing smoothly. Next comes the persistence bottleneck: storing incoming positions. When a single tracker reports every 10 seconds, 500 active trackers generate 4.3 million points per day. A vanilla PostgreSQL table will buckle under that write volume without optimization; that is where TimescaleDB steps in.
+The next step is storing the decoded positions. If 500 trackers report every 10 seconds, they generate 4.3 million points per day. A plain PostgreSQL table will struggle with that volume without optimization; Part 4 looks at TimescaleDB for this workload.
 
 ## What's Next
 
@@ -266,7 +266,7 @@ This post is part of the **Building a GPS Tracking Backend from Scratch** series
 
 ## CTA
 
-Share this post if you found it useful. For questions or discussions, head over to [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).
+If you get different results when testing GT06 or Teltonika packets, discuss them via [Contact](/en/contact/). Subscribe via [RSS](/en/writing/index.xml) to follow the next article.
 
 [^traccar]: Traccar's decoder source code for [GT06](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java) and [Teltonika](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java) is a gold standard for production-tested behavior. I used it to cross-verify field layouts and unit scaling factors.
 
