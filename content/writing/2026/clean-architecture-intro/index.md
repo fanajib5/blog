@@ -12,17 +12,15 @@ tags:
   - arsitektur
 ---
 
-Saya pernah nulis kode yang saat itu _sense banget_. Logikanya jelas, alurnya rapi, _variabel_-nya deskriptif. Tiga bulan kemudian, buka lagi file yang sama, _"ini tadi mau ngapain sih?"_
+Saya pernah menulis kode yang terasa masuk akal saat dibuat. Logikanya jelas, alurnya rapi, nama variabelnya deskriptif. Tiga bulan kemudian, saya membuka file yang sama dan bertanya, _"ini tadi mau ngapain sih?"_
 
-_Nganu_, kalau kamu pernah merasakan hal yang sama, selamat datang. Kamu tidak sendirian hehe.
+Di sini saya mengenalkan **Clean Architecture** lewat contoh dari proyek GPS _tracker_ yang pernah saya tangani. Saya fokus pada idenya, bukan istilah-istilah yang bikin pusing.
 
-Tulisan ini bukan kuliah formal tentang arsitektur _software_. Ini catatan saya tentang **Clean Architecture**, dijelaskan dengan cara yang saya sendiri pengen dulu dengar waktu masih kuliah, bukan dengan istilah-istilah yang bikin pusing.
+## Mengenali "_Spaghetti Code_"
 
-## Apa Itu "_Spaghetti Code_" dan Kenapa Kita Semua Pernah Menulisnya
+_Spaghetti code_ bukan istilah teknis formal. Istilah ini menggambarkan **kode yang saling terikat dan sulit dipisahkan**, seperti mie spaghetti yang sulit diambil sehelai tanpa menarik yang lain.
 
-_Spaghetti code_ itu bukan istilah teknis yang formal. Tapi semua _developer_ tahu apa artinya: **kode yang saling terikat dan sulit dipisahkan**, seperti mie spaghetti yang nggak bisa kamu ambil satu helai tanpa menarik yang lain.
-
-Contoh _nyata_ dari proyek GPS _tracker_ yang pernah saya tangani. Dulu, ada satu _function_ yang kurang lebih begini (ini pseudo-code, ya):
+Di proyek GPS _tracker_ yang pernah saya tangani, ada satu _function_ yang kurang lebih seperti ini:
 
 ```
 function handleUpdatePosition(request):
@@ -72,15 +70,11 @@ Bisa dilihat? Satu _function_ nangkap **semua**, baca database, olah logika bisn
 └─────────────────────────────────────────────────┘
 ```
 
-Intinya: **ubah satu hal, risiko hal lain ikut rusak**.
-
 ## Clean Architecture: Intinya Sederhana Kok
 
-Istilah "Clean Architecture" populer lewat Robert C. Martin (_Uncle Bob_). Tapi tenang aja, kamu tidak perlu baca bukunya untuk mulai memahami idenya.
+Robert C. Martin (_Uncle Bob_) memopulerkan istilah "Clean Architecture". Gagasan utamanya sederhana: **kode yang penting (logika bisnis) tidak boleh bergantung pada detail teknis (database, _framework_, API).**
 
-Intinya cuma satu kalimat: **kode yang penting (logika bisnis) tidak boleh tergantung pada detail teknis (database, _framework_, API).**
-
-Kenapa? Karena logika bisnis itu yang **tidak berubah**, aturan cara menghitung jarak, cara menentukan kendaraan aktif, cara menentukan batas kecepatan. Database, _framework_, cara kirim email, itu **detail** yang bisa berubah.
+Logika bisnis biasanya lebih stabil daripada detail teknis. Contohnya aturan menghitung jarak, menentukan kendaraan aktif, dan menetapkan batas kecepatan. Database, _framework_, dan cara mengirim email adalah **detail** yang bisa berubah.
 
 ### Aturan Ketergantungan (_Dependency Rule_)
 
@@ -111,17 +105,17 @@ Kenapa? Karena logika bisnis itu yang **tidak berubah**, aturan cara menghitung 
 └──────────────────────────────────────────────────────┘
 ```
 
-Aturannya sederhana: **panah hanya boleh mengarah ke dalam**. _Entity_ tidak tahu apa-apa tentang database. _Use Case_ tidak tahu cara kirim email. _Infrastructure_ yang tahu detail teknis.
+**Panah hanya boleh mengarah ke dalam.** _Entity_ tidak tahu tentang database, dan _Use Case_ tidak tahu cara mengirim email. _Infrastructure_ menangani detail teknis.
 
-Ini artinya: kalau kamu mau ganti database dari MySQL ke PostgreSQL, _Entity_ dan _Use Case_ **tidak berubah sama sekali**. Yang berubah cuma _Infrastructure_.
+Kalau kontrak _repository_ tetap sama, mengganti MySQL dengan PostgreSQL tidak mengharuskan perubahan pada _Entity_ atau _Use Case_. Implementasi di _Infrastructure_ yang berubah.
 
 ### Tiga Layer yang Penting
 
-Untuk mahasiswa, saya rasa tiga layer ini yang paling penting dipahami:
+Tiga _layer_ ini membantu menjelaskan pembagian tanggung jawabnya:
 
 **1. Entity, Aturan Bisnis Inti**
 
-Ini yang **tidak boleh berubah** terlepas dari teknologi apa pun yang kamu pakai. Di proyek GPS _tracker_, contohnya:
+Ini berisi aturan bisnis inti yang tidak bergantung pada teknologi tertentu. Di proyek GPS _tracker_, contohnya:
 
 ```
 class Vehicle:
@@ -136,7 +130,7 @@ class Vehicle:
             lastActivation = now()
 ```
 
-Perhatikan: tidak ada _database query_, tidak ada _HTTP request_, tidak ada _framework_. Ini murni **aturan bisnis**, apakah kendaraan _speeding_, bagaimana cara mengaktifkan kendaraan. Bahkan kalau besok ganti bahasa pemrograman, logika ini tetap sama.
+Di sini tidak ada _database query_, _HTTP request_, atau _framework_. Isinya aturan bisnis: apakah kendaraan _speeding_ dan bagaimana mengaktifkannya.
 
 **2. Use Case, Apa yang Sistem Lakukan**
 
@@ -161,13 +155,13 @@ class UpdatePositionUseCase:
             alertService.sendSpeedAlert(vehicle)
 ```
 
-Perhatikan: _use case_ memanggil `vehicleRepository` dan `alertService`, tapi **tidak tahu** apakah itu pakai MySQL, PostgreSQL, kirim via email atau SMS. Dia cuma tahu _"cari kendaraan"_, _"simpan"_, _"kirim alert"_.
+_Use case_ memanggil `vehicleRepository` dan `alertService`, tetapi **tidak tahu** apakah implementasinya memakai MySQL atau PostgreSQL, atau mengirim alert lewat email atau SMS. Yang diketahuinya hanya _"cari kendaraan"_, _"simpan"_, dan _"kirim alert"_.
 
-Ini kekuatan utama Clean Architecture: **kamu bisa mengganti database tanpa menyentuh use case**.
+Selama kontrak _repository_ tidak berubah, database dapat diganti tanpa mengubah _use case_.
 
 **3. Infrastructure, Detail Teknis**
 
-Di sinilah detail implementasi berada, database, API, _framework_, _email service_, dll.
+Di sinilah detail implementasi berada: database, API, _framework_, dan _email service_.
 
 ```
 class MySQLVehicleRepository:
@@ -194,11 +188,11 @@ Ini bagian yang **boleh berubah**. Kalau mau ganti MySQL ke PostgreSQL, ubah di 
 
 ## Langkah demi Langkah: Terapkan di GPS Tracker
 
-Sekarang mari kita bandingkan kode _spaghetti_ di awal dengan versi yang sudah "clean":
+Berikut versi "clean" dari kode _spaghetti_ di awal:
 
 ### Before: Spaghetti
 
-Satu _function_ nangkap semua, baca DB, olah logika, kirim notifikasi, _generate_ laporan. Semua menyatu.
+Satu _function_ menangani semuanya: membaca database, menjalankan logika, mengirim notifikasi, dan membuat laporan.
 
 ### After: Clean
 
@@ -257,19 +251,13 @@ class EmailAlertService:
 | _Onboarding_ _developer_ baru | Baca satu _function_ panjang | Baca per _layer_, mulai dari _Entity_ |
 | Efek samping perubahan | _Domino effect_ | Terisolasi per _layer_ |
 
-Perhatikan: **setiap layer bisa di-_test_ sendiri**. `Vehicle` bisa di-_test_ tanpa database. `UpdatePositionUseCase` bisa di-_test_ dengan _mock repository_. `MySQLVehicleRepository` bisa di-_test_ secara terpisah.
+Setiap _layer_ bisa diuji sendiri: `Vehicle` tanpa database, `UpdatePositionUseCase` dengan _mock repository_, dan `MySQLVehicleRepository` secara terpisah.
 
-## Kenapa Ini Penting Buat Kamu
+## Clean Architecture untuk Proyek Kecil
 
-Bukan Cuma Buat Proyek Besar
+Mungkin kamu berpikir, _"Ini kan buat proyek gede. Skripsi saya cuma aplikasi kecil."_ Untuk aplikasi kecil, Clean Architecture memang bisa _overkill_. Namun, memisahkan logika bisnis dari detail teknis tetap berguna, terutama saat kode perlu diuji atau detail implementasinya berubah.
 
-Mungkin kamu berpikir, _"Ini kan buat proyek gede. Skripsi saya cuma aplikasi kecil."_ Betul, untuk aplikasi kecil, Clean Architecture bisa _overkill_. Tapi prinsipnya tetap berlaku:
-
-- **Pisahkan yang penting dari detail teknis**: ini bukan soal jumlah _layer_, ini soal _mindset_
-- **Tulis kode yang bisa di-_test_**: bahkan di proyek kecil, ini _save time_ saat _debugging_
-- **Pikirkan dulu, tulis kemudian**: Clean Architecture itu soal **memikirkan** apa yang penting sebelum mulai ngode
-
-Untuk skripsi, dosen _pasti_ akan tanya _"kenapa kamu _design_ sistem seperti ini?"_ Kalau kamu bisa jawab _"karena logika bisnis saya tidak tergantung pada database"_, itu jawaban yang jauh lebih kuat daripada _"karena tutorial yang saya ikuti seperti itu"_.
+Saat menjelaskan rancangan skripsi, dosen mungkin bertanya _"kenapa kamu _design_ sistem seperti ini?"_ Jawaban _"karena logika bisnis saya tidak tergantung pada database"_ lebih jelas daripada _"karena tutorial yang saya ikuti seperti itu"_.
 
 ### Kapan Boleh Tidak Pakai Clean Architecture
 
@@ -279,33 +267,33 @@ Clean Architecture bukan _silver bullet_. Ada saatnya tidak perlu:
 - **_Script_ kecil**: kalau cuma 50 baris untuk _scrape data_, tidak perlu _layer-layeran_.
 - **Belajar dasar dulu**: kalau belum nyaman dengan OOP atau _design pattern_, pelajari itu dulu. Clean Architecture butuh fondasi tersebut.
 
-Intinya: **gunakan ketika kompleksitas sudah membutuhkannya**, bukan karena kedengarannya keren.
+Gunakan saat kompleksitas proyek membutuhkannya, bukan karena namanya terdengar keren.
 
 ## Pelajaran
 
 ### 1. _Spaghetti Code_ Itu Normal, Tinggal di Situ yang Tidak Normal
 
-Semua _developer_ pernah nulis spaghetti code, termasuk yang sudah senior. Yang membedakan adalah: sadar kalau kodenya sudah _spaghetti_, dan tahu cara memperbaikinya.
+_Spaghetti code_ bisa muncul saat kode tumbuh tanpa pemisahan tanggung jawab. Langkah awal memperbaikinya adalah mengenali bagian-bagian yang sudah saling terikat.
 
 ### 2. Pisahkan "Apa" dari "Bagaimana"
 
-Apa yang sistem lakukan (_business logic_) harus terpisah dari bagaimana sistem melakukannya (_database_, _API_, _framework_). Ini inti Clean Architecture.
+Pisahkan apa yang sistem lakukan (_business logic_) dari cara melakukannya (_database_, _API_, _framework_). Itulah inti Clean Architecture.
 
 ### 3. _Test_-ability Itu Indikator Arsitektur yang Baik
 
-Kalau kamu sulit menulis _unit test_ untuk kode kamu, itu sinyal bahwa arsitekturnya perlu dipikirkan ulang. Kode yang baik itu mudah ditest.
+Kesulitan menulis _unit test_ bisa menjadi sinyal bahwa pemisahan tanggung jawab perlu ditinjau ulang. Dalam contoh ini, _Entity_ dan _Use Case_ dapat diuji tanpa menghubungi database atau layanan email.
 
 ### 4. Jangan Dogmatis
 
-Clean Architecture itu _tool_, bukan agama. Kalau konteksnya tidak membutuhkan, tidak perlu dipaksakan. Yang penting paham prinsipnya dan tahu kapan mengaplikasikannya.
+Clean Architecture itu _tool_, bukan agama. Pahami prinsipnya, lalu gunakan jika konteks proyek memang membutuhkannya.
 
 ## Penutup
 
-Clean Architecture, pada intinya, bukan soal jumlah _layer_ atau pattern yang fancy. Ini soal **menulis kode yang bisa dipahami, diubah, dan di-_test_, oleh diri kamu sendiri maupun orang lain**. Bahkan kalau itu 3 bulan kemudian hehe.
+Clean Architecture bukan soal jumlah _layer_ atau _pattern_ yang _fancy_. Tujuannya memisahkan tanggung jawab agar kode lebih mudah dipahami, diubah, dan diuji, termasuk saat kamu membukanya lagi beberapa bulan kemudian.
 
 Kalau kamu tertarik melihat bagaimana Clean Architecture ini diterapkan di proyek nyata (migrasi dari PHP ke Go, 370+ _endpoint_), saya punya [catatan terpisah](/writing/2026/legacy-php-to-go-migration/) untuk sisi implementasinya.
 
-Kalau ada pertanyaan atau mau diskusi lebih lanjut, [hubungi saya](/contact/). Atau lihat [layanan](/services/) yang bisa saya bantu.
+Kontak saya ada di [hubungi saya](/contact/); [layanan](/services/) memuat pilihan bantuan yang saya tawarkan.
 
 ---
 
