@@ -14,13 +14,13 @@ tags:
 
 Saya pernah menulis kode yang terasa masuk akal saat dibuat. Logikanya jelas, alurnya rapi, nama variabelnya deskriptif. Tiga bulan kemudian, saya membuka file yang sama dan bertanya, _"ini tadi mau ngapain sih?"_
 
-Di sini saya mengenalkan **Clean Architecture** lewat contoh dari proyek GPS _tracker_ yang pernah saya tangani. Saya fokus pada idenya, bukan istilah-istilah yang bikin pusing.
+Di proyek GPS _tracker_ yang pernah saya tangani, satu _function_ membaca database, mengubah status dan posisi kendaraan, mengirim notifikasi, lalu membuat laporan.
 
 ## Mengenali "_Spaghetti Code_"
 
 _Spaghetti code_ bukan istilah teknis formal. Istilah ini menggambarkan **kode yang saling terikat dan sulit dipisahkan**, seperti mie spaghetti yang sulit diambil sehelai tanpa menarik yang lain.
 
-Di proyek GPS _tracker_ yang pernah saya tangani, ada satu _function_ yang kurang lebih seperti ini:
+Kira-kira begini bentuk _function_-nya (pseudocode):
 
 ```
 function handleUpdatePosition(request):
@@ -293,7 +293,7 @@ Clean Architecture bukan soal jumlah _layer_ atau _pattern_ yang _fancy_. Tujuan
 
 Kalau kamu tertarik melihat bagaimana Clean Architecture ini diterapkan di proyek nyata (migrasi dari PHP ke Go, 370+ _endpoint_), saya punya [catatan terpisah](/writing/2026/legacy-php-to-go-migration/) untuk sisi implementasinya.
 
-Kontak saya ada di [hubungi saya](/contact/); [layanan](/services/) memuat pilihan bantuan yang saya tawarkan.
+Kalau ingin membahas penerapannya atau mencari bantuan, [hubungi saya](/contact/) atau lihat [layanan](/services/) yang saya tawarkan.
 
 ---
 

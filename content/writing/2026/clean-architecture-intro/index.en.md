@@ -14,13 +14,13 @@ tags:
 
 I once wrote code that made sense at the time. The logic was clear, the flow was neat, and the variable names were descriptive. Three months later, I opened the same file and wondered, _"what was this even supposed to do?"_
 
-Here, I introduce **Clean Architecture** through an example from a GPS tracker project I once worked on. I'll focus on the idea, not jargon.
+On a GPS tracker project I worked on, one function queried the database, updated a vehicle's status and position, sent notifications, and generated reports.
 
 ## Recognizing "Spaghetti Code"
 
 Spaghetti code isn't a formal technical term. It describes **code that's tangled and hard to separate**, like spaghetti noodles that are difficult to pick up one at a time.
 
-In a GPS tracker project I worked on, one function looked roughly like this:
+Here's roughly what that function looked like (pseudocode):
 
 ```
 function handleUpdatePosition(request):
@@ -293,7 +293,7 @@ Clean Architecture isn't about the number of layers or fancy patterns. It separa
 
 If you're interested in seeing how Clean Architecture was applied in a real project (migrating from PHP to Go, 370+ endpoints), I have a [separate write-up](/writing/2026/legacy-php-to-go-migration/) for the implementation side.
 
-Use [get in touch](/en/contact/) to reach me; the [services](/en/services/) page describes what I offer.
+To discuss applying these ideas or ask for help, [get in touch](/en/contact/) or browse my [services](/en/services/).
 
 ---
 
