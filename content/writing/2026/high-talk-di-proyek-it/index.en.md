@@ -21,15 +21,15 @@ And ironically, I run into this type most often in IT projects.
 
 ## Why Are They Like This?
 
-Honestly, I've been wondering about this for a while. After collecting enough bitter-and-sweet experiences across various projects, here are my conclusions.
+I've wondered about this for a while. Across the projects I've worked on, I've noticed three possible reasons.
 
 **First, they're too deep in their field.**
 
-People who've spent years immersed in microservices, event-driven architecture, CQRS, or distributed tracing sometimes forget that not everyone wakes up and goes to sleep with those same terms. They speak like they're writing technical documentation, detailed, precise, and utterly confusing if you don't have enough context yet hehe.
+People who've spent years immersed in microservices, event-driven architecture, CQRS, or distributed tracing sometimes forget that not everyone wakes up and goes to sleep with those same terms. They speak like they're writing technical documentation: detailed, precise, and utterly confusing if you don't have enough context yet hehe.
 
 **Second, they want to appear competent.**
 
-This one's a bit sensitive. Sometimes, the overuse of technical jargon isn't a habit, it's a choice. Showing off, plainly put. The longer the acronym that rolls off their tongue, the higher they feel their position is. At least in their own head~~
+This one's a bit sensitive. Sometimes, overusing technical jargon isn't a habit but a choice. Showing off, plainly put. The longer the acronym that rolls off their tongue, the higher they feel their position is. At least in their own head~~
 
 **Third, the topic is genuinely hard.**
 
@@ -41,7 +41,7 @@ The difference is: someone who **truly understands** can simplify it. Someone wh
 
 ## The Case in IT Projects: Teammates and Bosses
 
-I've experienced this firsthand. In one app development project, a senior backend teammate would always open every explanation with ten new terms. Even for something that could've been said in one sentence.
+I've experienced this firsthand. In one app development project, a senior backend teammate always opened explanations with ten new terms, even for something that could've been said in one sentence.
 
 _"We need to redesign the flow because there's tight coupling between the domain service and infrastructure layer that's killing testability and will become a bottleneck in the message broker when we try to scale horizontally."_
 
@@ -49,30 +49,30 @@ _"We need to redesign the flow because there's tight coupling between the domain
 
 The actual point? We need to separate some parts of the codebase so it's easier to maintain. But it took a full paragraph of jargon to get there haha.
 
-It gets even trickier when the _high-talker_ is your **boss**. Because with a peer, you can still cut in with a light joke. A manager carries a different dynamic. One wrong move and you risk coming across as rude or unprofessional.
+When the _high-talker_ is your **boss**, the situation gets trickier. You can still cut in with a light joke when it's a peer, but one wrong move with a manager can come across as rude or unprofessional.
 
 I once sat through a regular meeting where a manager, full of enthusiasm, explained the technical direction of a project for 30 minutes, with barely any pause for questions. And I walked out, or more precisely, clicked "Leave Meeting", with one burning question: _"So... what are we actually doing tomorrow?"_
 
-## The Feynman Technique: A Secret Weapon
+## The Feynman Technique
 
-This is when I started getting more serious about something called the [Feynman Technique](https://fs.blog/feynman-technique/).
+I started learning more about the [Feynman Technique](https://fs.blog/feynman-technique/).
 
 The core is simple: if you can't explain a concept to someone who knows absolutely nothing about it, then you don't truly understand it yourself.
 
-In an IT project context, this technique is useful from both directions.
+In an IT project, the technique has two sides.
 
 **As a listener**, you can ask your teammate or manager to re-explain using a simpler analogy. Some phrases that work well:
 
 - _"Could you give me an analogy first, as if I'm a high schooler just starting to learn coding?"_
 - _"Could you give me a real example from our case before going into the theory?"_
 
-Someone who genuinely understands will take on that challenge happily. They'll often be glad someone is actually listening. But if they become even more confused when asked to simplify... well, that says quite a lot haha.
+Someone who understands can usually answer. If they get even more confused when asked to simplify, maybe the original explanation wasn't helping haha.
 
 **As a speaker**, this technique trains you to avoid falling into the same habit. Before explaining something to your team, ask yourself: _if my teammate who just started learning a month ago heard this, would they understand?_
 
 If the answer is no, simplify first.
 
-A concrete example. Instead of saying:
+For example, instead of saying:
 
 > _"We need to implement Dependency Injection so the coupling is loose and unit tests can be mocked."_
 
@@ -80,11 +80,11 @@ Try:
 
 > _"Imagine your car needs fuel. Usually you fill it up yourself. But with this approach, the car just says 'I need fuel' and someone else provides it. The car doesn't need to know where the fuel comes from. That's the whole idea."_
 
-Much easier to digest, and the message still lands.
+This analogy is easier to digest, and the message still lands.
 
 ## How to Deal With It
 
-From experience, a few approaches tend to work, and one that's best avoided.
+When an explanation gets hard to follow, a few approaches can bring the conversation back to the case at hand.
 
 **What works:**
 
@@ -100,14 +100,10 @@ From experience, a few approaches tend to work, and one that's best avoided.
 
 Don't pretend to understand just to keep the peace. Including peace with yourself. Because it only delays the problem. And problems delayed in IT projects tend to compound, then multiply, then turn into a bug you discover a week before the deadline haha.
 
-## Closing: We've All Climbed Before
+## I've Been a _High-Talker_, Too
 
-One thing I've realized after dealing with this communication style enough times: I've been the _high-talker_ myself.
+After running into this communication style a few times, I realized I've been a _high-talker_ myself.
 
 There were periods where I was extremely enthusiastic about something I'd just learned, whether it was clean architecture, hexagonal patterns, or whatever concept I'd just found on some foreign blog, and I'd bring it up at every opportunity. Even though not everyone needed to hear it right then. And honestly, I probably hadn't fully mastered it myself~~
 
-So this post isn't about judging anyone. It's more of a reminder, for myself, and maybe for you who've stumbled upon this and are reading along, that good communication isn't about how many terms you know. It's about how confident you are that the other person actually understood what you meant.
-
-If needed, bring a stepladder. Or better yet: don't make anyone need one in the first place hehe.
-
-That's all. Cheers.
+I'm not writing this to judge anyone. I need the reminder myself: a term I've just learned doesn't have to come up in every conversation.

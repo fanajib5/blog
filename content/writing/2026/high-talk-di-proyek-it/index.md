@@ -21,15 +21,15 @@ Dan ironisnya, saya paling sering bertemu tipe ini justru di proyek IT.
 
 ## Kenapa Mereka Seperti Ini?
 
-Jujur, saya sudah bertanya-tanya soal ini cukup lama. Dan setelah mengumpulkan berbagai pengalaman pahit-manis di berbagai proyek, saya punya beberapa kesimpulan.
+Saya sudah cukup lama bertanya-tanya kenapa bisa begitu. Di beberapa proyek yang saya alami, ada tiga kemungkinan.
 
 **Pertama, mereka terlalu dalam di bidangnya.**
 
-Orang yang sudah lama berkutat dengan _microservices_, _event-driven architecture_, _CQRS_, atau _distributed tracing_ itu kadang lupa bahwa tidak semua orang tidur dan bangun dengan istilah yang sama. Mereka bicara seperti menulis dokumentasi teknis, detail, akurat, dan sangat membingungkan kalau kamu belum punya konteks yang cukup hehe.
+Orang yang sudah lama berkutat dengan _microservices_, _event-driven architecture_, _CQRS_, atau _distributed tracing_ kadang lupa bahwa tidak semua orang tidur dan bangun dengan istilah yang sama. Mereka bicara seperti menulis dokumentasi teknis: detail, akurat, dan sangat membingungkan kalau kamu belum punya konteks yang cukup hehe.
 
 **Kedua, mereka ingin terlihat kompeten.**
 
-Ini yang agak sensitif. Ada kalanya, penggunaan istilah teknis yang berlebihan itu bukan karena kebiasaan, tapi karena pilihan. _Show off_, simpelnya. Semakin panjang akronim yang keluar dari mulutnya, semakin tinggi posisi yang dia rasakan. Setidaknya di kepalanya sendiri~~
+Yang ini agak sensitif. Ada kalanya penggunaan istilah teknis yang berlebihan bukan karena kebiasaan, tapi pilihan. _Show off_, simpelnya. Semakin panjang akronim yang keluar dari mulutnya, semakin tinggi posisi yang dia rasakan. Setidaknya di kepalanya sendiri~~
 
 **Ketiga, topiknya memang susah.**
 
@@ -41,7 +41,7 @@ Bedanya adalah: orang yang **benar-benar paham** biasanya bisa menyederhanakan. 
 
 ## Kasusnya di Proyek IT: Rekan dan Atasan
 
-Kasus konkretnya saya pernah alami langsung. Di satu proyek pembuatan aplikasi, seorang rekan satu tim, yang cukup senior soal _backend_, selalu mengawali setiap penjelasannya dengan sepuluh istilah baru. Bahkan untuk hal yang mestinya bisa dijelaskan dalam satu kalimat.
+Saya pernah mengalami ini langsung. Di satu proyek pembuatan aplikasi, seorang rekan satu tim yang cukup senior soal _backend_ selalu mengawali penjelasannya dengan sepuluh istilah baru, bahkan untuk hal yang mestinya bisa dijelaskan dalam satu kalimat.
 
 _"Kita perlu redesign flow-nya karena ada tight coupling antara domain service dan infrastructure layer yang bikin testability-nya jelek dan nanti waktu kita mau scale horizontally bakal jadi bottleneck di message broker."_
 
@@ -49,30 +49,30 @@ _"Kita perlu redesign flow-nya karena ada tight coupling antara domain service d
 
 Intinya? Kita perlu pisahkan beberapa bagian kode supaya lebih gampang di-_maintain_. Tapi butuh satu paragraf penuh istilah untuk sampai ke sana haha.
 
-Yang lebih menantang lagi adalah kalau _high-talker_-nya adalah **atasan**. Karena kalau rekan sebaya masih bisa kita potong dengan candaan ringan, atasan punya dinamika yang berbeda. Salah-salah malah dianggap tidak sopan atau tidak profesional.
+Kalau _high-talker_-nya **atasan**, situasinya lebih rumit. Rekan sebaya masih bisa kita potong dengan candaan ringan, tetapi salah bicara kepada atasan bisa dianggap tidak sopan atau tidak profesional.
 
 Saya pernah menghadiri _meeting_ rutin di mana seorang atasan, dengan penuh semangat, menjelaskan arah teknis proyek selama 30 menit tanpa jeda yang cukup untuk pertanyaan. Dan saya keluar dari ruangan itu, atau lebih tepatnya, keluar dari Zoom Meeting, dengan satu pertanyaan besar: _"Jadi, kita mau ngapain besok?"_
 
-## Teknik Feynman: Senjata Rahasia
+## Teknik Feynman
 
-Di sinilah saya mulai berkenalan lebih serius dengan yang namanya [Teknik Feynman](https://fs.blog/feynman-technique/).
+Saya lalu mulai mengenal [Teknik Feynman](https://fs.blog/feynman-technique/) lebih serius.
 
 Intinya simpel: kalau kamu tidak bisa menjelaskan sebuah konsep kepada seseorang yang sama sekali tidak tahu apa-apa, berarti kamu sendiri belum benar-benar menguasainya.
 
-Dalam konteks proyek IT, teknik ini berguna dari dua arah.
+Di proyek IT, teknik ini bisa dilihat dari dua sisi.
 
 **Sebagai pendengar**, kamu bisa minta rekan atau atasan untuk menjelaskan ulang dengan analogi yang lebih sederhana. Contoh kalimat yang cukup ampuh:
 
 - _"Bisa dianalogikan dulu, Mas/Pak, seolah-olah saya anak SMA yang baru belajar coding?"_
 - _"Bisa kasih contoh nyata dari kasus kita dulu sebelum masuk ke teorinya?"_
 
-Orang yang benar-benar paham akan menerima tantangan itu dengan senang hati. Bahkan biasanya malah _happy_ karena ada yang mau dengerin. Kalau dia malah tambah bingung saat diminta menyederhanakan... nah, itu pertanda yang cukup jelas haha.
+Orang yang paham biasanya bisa menjawabnya. Kalau dia malah tambah bingung saat diminta menyederhanakan, mungkin penjelasan awalnya memang belum membantu haha.
 
 **Sebagai pembicara**, teknik ini melatih kita sendiri untuk tidak terjebak dalam kebiasaan yang sama. Sebelum menjelaskan sesuatu ke tim, coba tanya diri sendiri dulu: _kalau teman saya yang baru sebulan belajar coding mendengar ini, apakah dia akan mengerti?_
 
 Kalau jawabannya tidak, maka sederhanakan dulu.
 
-Contoh konkretnya seperti ini. Daripada bilang:
+Contohnya, daripada bilang:
 
 > _"Kita butuh implementasi Dependency Injection supaya coupling-nya loose dan unit test-nya bisa di-mock."_
 
@@ -80,11 +80,11 @@ Coba bilang:
 
 > _"Bayangin mobilmu haus bensin. Biasanya kamu sendiri yang harus isi bensin. Tapi dengan cara ini, mobilnya cukup bilang 'butuh bensin', dan orang lain yang kasih. Mobilnya nggak perlu tahu dari mana bensinnya datang. Nah, itu intinya."_
 
-Jauh lebih mudah dicerna, dan pesannya tetap sampai.
+Analogi ini lebih mudah dicerna, dan pesannya tetap sampai.
 
 ## Cara Menghadapinya
 
-Dari pengalaman, ada beberapa pendekatan yang cukup berhasil, dan satu yang sebaiknya dihindari.
+Kalau penjelasan mulai sulit diikuti, ada beberapa cara untuk membawanya kembali ke kasus yang sedang dibahas.
 
 **Yang berhasil:**
 
@@ -100,14 +100,10 @@ Dari pengalaman, ada beberapa pendekatan yang cukup berhasil, dan satu yang seba
 
 Jangan pura-pura paham demi menjaga perasaan semua orang. Termasuk perasaan diri sendiri. Karena itu cuma menunda masalah. Dan masalah yang ditunda di proyek IT biasanya berbunga, lalu beranak-pinak, lalu jadi _bug_ yang kamu temukan seminggu sebelum _deadline_ haha.
 
-## Penutup: Kita Semua Pernah Mendaki
+## Saya Juga Pernah Jadi _High-Talker_
 
-Satu hal yang saya sadari setelah cukup banyak berhadapan dengan tipe komunikasi seperti ini: saya sendiri pun pernah jadi _high-talker_-nya.
+Setelah beberapa kali berhadapan dengan cara komunikasi seperti ini, saya sadar saya sendiri pun pernah jadi _high-talker_.
 
 Ada masa-masa di mana saya sangat antusias dengan sesuatu yang baru dipelajari, entah itu _clean architecture_, _hexagonal pattern_, atau konsep apa pun yang baru saya temukan dari blog luar, dan langsung menyebutkannya di setiap kesempatan. Padahal tidak semua orang butuh mendengar itu saat itu juga. Dan mungkin saya sendiri pun belum benar-benar menguasainya~~
 
-Jadi, tulisan ini bukan untuk menghakimi siapa pun. Lebih ke pengingat, untuk saya sendiri dan mungkin juga untuk kamu yang tersasar ke sini dan membaca ini, bahwa komunikasi yang baik bukan soal seberapa banyak istilah yang kita tahu. Tapi seberapa yakin kita bahwa orang lain benar-benar mengerti apa yang kita maksud.
-
-Kalau perlu, sediakan tangga lipat. Atau lebih baik lagi: jangan bikin orang lain butuh tangga lipat hehe.
-
-Sekian. Salam.
+Saya menulis ini bukan untuk menghakimi siapa pun. Saya juga perlu mengingatkan diri sendiri bahwa istilah yang baru saya pelajari belum tentu perlu saya bawa ke setiap obrolan.
