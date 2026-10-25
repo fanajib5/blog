@@ -41,9 +41,9 @@ Kalau ditanya kenapa tidak _refactor_ saja di PHP, jawabannya: **bisa saja**. Na
 
 ### 1. _Type Safety_ Menghemat Waktu _Debug_
 
-PHP bersifat _dynamically typed_[^2], sehingga banyak _bug_ baru diketahui saat _runtime_. _Static typing_ di Go dapat menangkap _error_ saat _compile time_. _Bug_ yang sebelumnya baru terlihat di _production_ bisa diketahui ketika _build_.
+PHP bersifat _dynamically typed_[^2], sehingga banyak _bug_ baru diketahui saat _runtime_. _Static typing_ di Go dapat menangkap _error_ terkait tipe saat _compile time_, sebelum error tersebut mencapai _production_.
 
-### 2. _Concurrency_ untuk _Free_
+### 2. _Concurrency_ Lebih Mudah
 
 Sistem ini menangani banyak _request_ sekaligus, mulai dari _tracking GPS real-time_ hingga _report generation_. Dibandingkan pendekatan lain yang pernah saya coba, _goroutine_ membuat _concurrent programming_ lebih sederhana. Saat pertama kali menggunakannya, saya sempat berpikir, _"Kok bisa sesederhana ini?"_
 

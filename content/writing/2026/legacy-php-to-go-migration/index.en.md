@@ -41,7 +41,7 @@ If you ask why not just refactor in PHP, the answer is **absolutely possible**. 
 
 ### 1. Type Safety Saves Debug Time
 
-PHP is dynamically typed[^2], so many bugs only surface at runtime. Go's static typing can catch errors at compile time. Bugs that used to appear in production can now be caught during the build.
+PHP is dynamically typed[^2], so many bugs only surface at runtime. Go's static typing can catch type-related errors at compile time, before they reach production.
 
 ### 2. Concurrency for Free
 
