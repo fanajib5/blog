@@ -18,36 +18,36 @@ series: "building-akordium-lab"
 series_part: 1
 ---
 
-This is the first post in a series I call **Building Akordium Lab** - monthly dispatches on building a software company out of Surabaya, written as I go, not after the victory lap.
+This is the first post in **Building Akordium Lab**, a monthly account of building a software company in Surabaya. I am writing as I go, not after a victory lap.
 
-Why write in public? Two reasons. First, I learn best by writing: if it is not documented, the experience simply evaporates. Second, I envy the folks building small businesses out in the open: open startups, indie hackers, developers selling their own products. They own their narrative and community. I want that too, in my own version.
+Why write in public? I have two reasons. First, I learn best by writing. If I do not document an experience, it fades. Second, I envy people who build small businesses in public: open startups, indie hackers, and developers selling their own products. They shape their own narrative and community. I want to try that too, in my own way.
 
-Oh, and one disclaimer: this series is not a success story. It is a process log. The numbers and conclusions here might be wrong, and part of the fun later on will be rereading these posts a year from now while shaking my head.
+One disclaimer: this is not a success story; it is a process log. The numbers and conclusions might be wrong. Part of the fun will be rereading these posts a year from now and shaking my head.
 
 ## Why Start
 
-I am a backend developer. My day-to-day work involves PHP/Laravel, increasingly more Go, PostgreSQL, and systems that must stay alive around the clock, including a GPS tracking system handling vehicle locations for thousands of units every day. Work I genuinely enjoy.
+I am a backend developer. My day-to-day work involves PHP/Laravel, and lately more Go and PostgreSQL. I also work on systems that need to stay up around the clock, including a GPS tracking system that handles locations for thousands of vehicles every day. I enjoy this work.
 
-Yet the career pattern of "project comes in -> build it -> ship it -> gone" began feeling wasteful. Every project produces hard-won knowledge - architecture decisions, trade-offs, mistakes, how to fix an incident at 2 AM - and all of it evaporates the moment the contract closes. One unit of work, one output. No compounding assets.
+But the pattern of "project comes in -> build it -> ship it -> gone" began to feel wasteful. Every project leaves me with knowledge about architecture, trade-offs, decisions, mistakes, and fixing a 2 AM incident. It all evaporates when the contract closes. One piece of work, one output. Nothing accumulates.
 
-So I designed Akordium Lab around a single principle: **one piece of work must produce multiple assets.** A client project should yield articles, libraries, templates, case studies, and, when feasible, products. Out of everything I have planned for the next 12 months, this is the one non-negotiable rule.
+That is why I designed Akordium Lab around one principle: **one piece of work must produce multiple assets.** A client project should yield articles, libraries, templates, case studies, and, when feasible, products. Of all my plans for the next 12 months, this is the rule I will not compromise on.
 
 ## What Is on the Table (September 2026)
 
-To keep things honest, here is the baseline inventory - the state of affairs at the end of September 2026, right as this content strategy kicked off:
+Here is the starting inventory: the state of things at the end of September 2026, when this content strategy got underway.
 
 **Already live:**
 
 - **[akordium.id](https://akordium.id)** - the company landing page, listing services and portfolio.
-- **najib.id** - this personal blog. Two content tracks are currently in flight: the [Hijrah Backend narrative series](/en/writing/2026/hijrah-backend-01/) (a 9-episode story migrating 370+ endpoints) that just came out, and the [GPS Backend tutorial series](/en/writing/2026/memahami-gps-protocol/) kicking off this week; the rest is a mix of older posts (2019-2023) and a few other 2026 pieces.
-- **Several internal products** at varying stages, ranging from tools in active use to concepts that exist only as business design documents.
-- **DukunGPS** - an open-core GPS tracking platform plan that I take most seriously: the business design was finished and approved in July 2026, waiting on execution. Its foundation is the production GPS fleet tracking experience I share in the [GPS Backend series](/en/writing/2026/memahami-gps-protocol/).
+- **najib.id** - this personal blog. Two content tracks are underway: the [Hijrah Backend narrative series](/en/writing/2026/hijrah-backend-01/), a 9-episode story about migrating 370+ endpoints that just came out, and the [GPS Backend tutorial series](/en/writing/2026/memahami-gps-protocol/) starting this week. The rest is a mix of older posts (2019-2023) and a few other 2026 pieces.
+- **Several internal products** at different stages, from tools in active use to concepts that exist only in business design documents.
+- **DukunGPS** - the open-core GPS tracking platform plan I take most seriously. Its business design was completed and approved in July 2026; execution is next. The foundation is my production GPS fleet tracking experience, which I share in the [GPS Backend series](/en/writing/2026/memahami-gps-protocol/).
 
 **Freshly organized this month:**
 
-- **Internal documentation system** (HQ) - a single home for SOPs, product specs, and content strategy. Previously scattered across chats, memory, and random docs.
-- **12-week content roadmap** - GPS Backend Series as the flagship, AI workflow articles, and this Building Akordium Lab series.
-- **GPS series master doc** - all technical material for the GPS series compiled into one single source of truth before being split into articles. Like I said: one unit of work, multiple assets.
+- **Internal documentation system** (HQ) - one place for SOPs, product specs, and content strategy. Before this, they were scattered across chats, memory, and random docs.
+- **12-week content roadmap** - with GPS Backend Series as the flagship, plus AI workflow articles and this Building Akordium Lab series.
+- **GPS series master doc** - all technical material for the series goes into one source before I split it into articles. The same principle applies: one unit of work, multiple assets.
 
 **Not yet there:** a steady readership (newsletter/RSS subscribers are still in the single digits), product revenue (still zero - development consulting services keep the lights on), and name recognition beyond my immediate circle.
 
@@ -55,13 +55,13 @@ To keep things honest, here is the baseline inventory - the state of affairs at 
 
 Three decisions that might differ from typical software agencies:
 
-1. **Backend first, keep it simple first.** Go + PostgreSQL + modular monolith. No microservices on day one, no Kubernetes out of FOMO. Complexity is bought when needed, not when trendy - a lesson carried over from the production system migrations I write about on this blog.
-2. **Open core for products.** DukunGPS is modeled after Traccar: open source core (Apache 2.0), paid enterprise features. Open source becomes the engine for trust and distribution, not a CSR gesture.
-3. **Write everything down.** Every architectural decision, every solved problem, every mistake. The personal blog serves as the authority engine, akordium.id as the conversion engine. They feed each other rather than compete.
+1. **Backend first, keep it simple.** Go + PostgreSQL + modular monolith. No microservices on day one and no Kubernetes out of FOMO. I will add complexity when it is needed, not because it is trendy. That lesson also comes from the production system migrations I write about on this blog.
+2. **Open core for products.** DukunGPS is designed on the Traccar model: an open source core (Apache 2.0) with paid enterprise features. Open source should build trust and distribution, not serve as a CSR gesture.
+3. **Write everything down.** Every architectural decision, every solved problem, every mistake. The personal blog builds authority; akordium.id converts that attention. They support each other rather than compete.
 
 ## 12-Month Targets
 
-To keep myself accountable, I broke down the targets into measurable milestones:
+To keep myself accountable, I broke the targets into measurable milestones:
 
 | Target | Metric |
 | --- | --- |
@@ -71,17 +71,17 @@ To keep myself accountable, I broke down the targets into measurable milestones:
 | DukunGPS crosses Phase 0-1 milestone | open-source core repo released + early community |
 | Contributors/leads generated from content | prospective client mentions "read the blog first" |
 
-What I am **not** targeting in these 12 months: product revenue replacing consulting services. Realistically, that takes 2-3 years. This year is about building assets and distribution.
+What I am **not** targeting in these 12 months is product revenue that replaces consulting services. Realistically, that is a 2-3 year goal. This year is about building assets and distribution.
 
 ## Mistakes This Month
 
-Yesterday's content planning session almost produced a funny little accident: my AI assistant and I almost **rewrote an article that had already been written** - an old draft sat quietly in a folder without either of us remembering it. Not just once, almost twice.
+Yesterday's content planning session nearly caused a funny little mishap. My AI assistant and I almost **rewrote an article that had already been written**. The old draft was sitting in a folder, forgotten by both of us. We nearly did it again.
 
-The takeaway: unwritten memory does not exist. Now all content plans live in a single roadmap with per-article status tracking, plus cross-session memory for the AI assistant. Very meta, but the principle "document it or lose it" proved true even for the documentation process itself.
+The lesson: if I do not write something down, it is easy to forget. Now every content plan lives in one roadmap with a status for each article, plus cross-session memory for the AI assistant. A little meta, but "document it or lose it" applies to the documentation process too.
 
 ## Metrics to Report Monthly
 
-Every Building Akordium Lab post will report the same set of metrics so progress can be compared over time:
+Every Building Akordium Lab post will report the same five metrics so I can compare progress over time:
 
 1. Published content vs planned
 2. Product progress (DukunGPS and companions)
@@ -89,13 +89,13 @@ Every Building Akordium Lab post will report the same set of metrics so progress
 4. One mistake + one lesson learned
 5. Key decisions made that month
 
-I will hold off on financial figures for now - there is nothing exciting to share yet, and I have not decided how open I want to be on that front. We will see.
+I will hold off on financial figures for now. There is nothing exciting to share yet, and I have not decided how open I want to be about them. I will revisit that later.
 
 ---
 
-That is the starting baseline. The desk is cleared, the roadmap is written, and the GPS series starts publishing next week.
+That is where Akordium Lab stood at the end of September. The 12-week roadmap is in place, and the GPS Backend series starts publishing next week.
 
-If you are building something too - a product, an agency, anything - I would love to hear your story. [Reach out here](/en/contact/), or follow along via [RSS](/en/writing/index.xml).
+If you are also building a product or an agency, I would love to hear your story. [Get in touch here](/en/contact/), or follow the next posts via [RSS](/en/writing/index.xml).
 
 Next month: the first report.
 
