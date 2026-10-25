@@ -18,7 +18,7 @@ series: "building-akordium-lab"
 series_part: 2
 ---
 
-Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, dan satu keputusan. Ini laporan pertama yang benar-benar membaca angka. Beberapa minggu pertama setelah janji itu akan menunjukkan apakah format ini bisa saya pertahankan.
+Di [BAL #1](/writing/2026/building-akordium-lab-01/) saya menjanjikan laporan bulanan dengan format tetap: konten vs rencana, progres produk, metrik, satu kesalahan, dan satu keputusan. Ini laporan pertama yang menyertakan angka. Beberapa minggu pertama setelah janji itu akan menunjukkan apakah format ini bisa saya pertahankan.
 
 > **Status draft**: bagian bertanda _(isi)_ menunggu data Oktober — diisi sebelum rilis 26 November. Kerangka dan narasi evergreen sudah final.
 
