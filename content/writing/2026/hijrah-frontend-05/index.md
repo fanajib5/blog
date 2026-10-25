@@ -14,48 +14,48 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-Ini episode terakhir berseri _frontend_. Dan sesuai tradisi penutup di [seri sebelah](/writing/2026/hijrah-backend-09/), episode ini bukan pesta kemenangan; melainkan inventaris akhir: apa yang sudah beres, apa yang sengaja belum, dan apa yang dipelajari dari tinggal di gedung yang dua sisinya akhirnya dihuni satu orang yang sama hehe~
+Ini episode terakhir seri _frontend_. Seperti penutup [seri sebelah](/writing/2026/hijrah-backend-09/), saya tidak ingin menjadikannya pesta kemenangan. Saya ingin mencatat apa yang selesai, apa yang memang belum dikerjakan, dan apa yang saya pelajari setelah akhirnya mengurus kedua sisi gedung ini.
 
 ## Inventaris Akhir yang Jujur
 
-Empat episode lalu kita membuka gedung _frontend_ warisan. Saat pintu ditutup kembali, begini isinya:
+Empat episode lalu, kita mulai membongkar gedung _frontend_ warisan. Setelah port selesai, inilah inventarisnya:
 
-- **76 halaman pindah, 76 halaman hidup.** Port 1:1 tanpa buang satu halaman pun, dan semua _link_ internal antar halaman tetap mengerti jalan pulangnya.
-- **Dua _library_ UI tetap berdamai.** Seratus satu _file_ untuk si mayoritas, tiga belas untuk si pemegang monopoli kalender, dan tetap nol _file_ yang memergoki mereka berbagi kamar.
-- **194 bekas luka tipe terukur.**[^1] Seratus sembilan puluh empat jaring pengaman kecil yang jujur mengaku dirinya angsuran, bukan arsitektur.
-- **Tiga era styling hidup berdampingan**,[^2] satu jenazah _backup_ mendapat penghormatan terakhir yang layak, dan _standardisasi_ resmi menunggu di ruang epilog.
+- **76 halaman dipindahkan dan tetap hidup.** Port 1:1 tanpa meninggalkan satu halaman pun. Semua _link_ internal antarhalaman masih menuju ke tempat yang benar.
+- **Dua _library_ UI tetap dipakai.** Ada 101 _file_ untuk yang mayoritas dan 13 untuk pemegang komponen kalender. Seperti sebelumnya, tidak ada _file_ yang memakai keduanya.
+- **194 bekas luka tipe sudah terukur.**[^1] Ada 194 jaring pengaman kecil yang masih berupa angsuran, belum menjadi arsitektur.
+- **Tiga era _styling_ masih ada**,[^2] satu _backup_ sudah dipensiunkan, dan _standardisasi_ menunggu giliran.
 
-Tidak ada di daftar itu yang berbunyi "semuanya rapi". Dan justru itu kejujurannya: gedung ini tidak selesai direnovasi; gedung ini **selesai dipindahkan**. Dua hal yang berbeda, dan membedakan keduanya adalah pelajaran terbesar dari dua seri hehe~
+Daftar ini tidak mengatakan bahwa semuanya sudah rapi. Gedung ini **selesai dipindahkan**, bukan selesai direnovasi. Membedakan dua hal itu menjadi pelajaran terbesar dari kedua seri.
 
 ## Dua Sisi Satu Gedung
 
-Kalau kedua seri ini dibaca berdampingan, satu polanya tidak mungkin terlewat: **pelajarannya sama, cuma pakainya beda**.
+Kalau kedua seri dibaca berdampingan, ada satu pola yang terlihat: **pelajarannya sama, masalahnya berbeda**.
 
-Di _backend_, warisan berupa _query_ yang tak sargable dan _prepared statement_ yang terbunuh di _tunnel_. Di _frontend_, warisan berupa _field_ yang berpendapat soal tipe dan dua _library_ yang berdamai lewat garis demarkasi. Di kedua sisi, solusinya juga sama persis: ukur dulu, pindahkan dengan setia, catat yang dibatalkan, dan jangan pernah memperbaiki sambil memindahkan.
+Di _backend_, kami menemukan _query_ yang tidak sargable dan _prepared statement_ yang terputus di _tunnel_. Di _frontend_, ada _field_ dengan tipe yang tidak sesuai dan dua _library_ yang dipisahkan oleh garis demarkasi. Cara menanganinya serupa di kedua sisi: ukur dulu, pindahkan dengan setia, catat yang dibatalkan, dan jangan memperbaiki sambil memindahkan.
 
-Bahkan penjaganya sama. Di kedua gedung, yang membesarkan kode bukan kebijakan arsitektur yang indah, melainkan **waktu dan darurat**. Karena itu pula, saya tidak pernah bisa membenci bau _spaghetti_ yang saya cium di gedung ini: dia bau yang sama dengan gedung sebelah, bau tempat yang terus bertugas meski penjaganya berganti-ganti hehe~
+Kondisi di kedua gedung juga terbentuk oleh hal yang sama: **waktu dan keadaan darurat**, bukan kebijakan arsitektur yang rapi. Karena itu saya tidak bisa membenci _spaghetti_ di gedung ini. Kode itu tetap melayani penggunanya meski penjaganya berganti.
 
 ## Yang Dirawat, yang Menunggu
 
-Supaya setia pada tradisi daftar utang, ini pembagiannya:
+Berikut pembagian hal-hal yang kami catat:
 
-**Yang dirawat mulai sekarang**: garis demarkasi _library_ (nol _file_ campuran), kontrak tipe di pintu masuk, dan kebiasaan mencatat warisan yang dibawa, seperti empat episode ini.
+**Yang dirawat mulai sekarang**: batas antarlibrary (tidak ada _file_ campuran), kontrak tipe di pintu masuk, dan kebiasaan mencatat warisan yang dibawa, seperti dalam empat episode ini.
 
-**Yang menunggu gilirannya**: _TypeScript_ (keputusan besar yang belum waktunya), standardisasi penamaan lintas era (epilog, bukan koper), dan _refactor_ struktur internal (satu keputusan satu waktu, dengan data pemakaian di tangan).
+**Yang menunggu giliran**: _TypeScript_ (keputusan besar yang belum waktunya), standardisasi penamaan lintas era, dan _refactor_ struktur internal setelah ada data pemakaian.
 
-**Yang dibatalkan dan tidak menyesal**: migrasi _state management_. Dia sudah masuk daftar yang tidak jadi, dan daftar itu bagian dari arsip yang sehat hahaha.
+**Yang dibatalkan tanpa penyesalan**: migrasi _state management_. Rencana ini sudah masuk daftar yang tidak jadi, dan daftar itu juga bagian dari arsip yang sehat.
 
 > Akhirnya, setelah ikut berjibaku merawat _web app_ v3 ini, saya semakin merasa menjadi turis di sini. Hati menolak, tapi tuntutan terus jalan, dan _production_ harus tetap lancar.
 
-Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya bercanda soal visa turis yang dicabut dan diganti KTP penduduk. Jawaban jujurnya ternyata begini: KTP-nya terbit, tapi hati masih sering membawa paspor hehe~
+Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya bercanda soal visa turis yang dicabut dan diganti KTP penduduk. Kenyataannya, KTP-nya memang terbit, tetapi hati saya masih sering membawa paspor.
 
 ## Penutup Dua Seri
 
-Dengan episode ini, dua seri Hijrah akhirnya berdiri utuh: [satu _backend_](/writing/2026/hijrah-backend-01/), satu _frontend_, dua sisi satu gedung yang sama, yang melayani puluhan ribu _user_ setiap hari tanpa pernah sekali pun minta diacungi jempol.
+Dengan episode ini, dua seri Hijrah selesai: [satu _backend_](/writing/2026/hijrah-backend-01/) dan satu _frontend_. Keduanya membahas dua sisi gedung yang sama, yang melayani puluhan ribu _user_ setiap hari tanpa pernah meminta diacungi jempol.
 
-Kalau Anda sedang berdiri di depan gedung warisan Anda sendiri, _backend_ atau _frontend_ atau yang lain: ukur dulu, pindahkan dengan setia, rawat diri Anda, dan izinkan beberapa warisan menunggu gilirannya dengan tenang. Gedung tidak perlu selesai direnovasi supaya layak dihuni.
+Kalau Anda sedang menghadapi gedung warisan sendiri, entah _backend_, _frontend_, atau yang lain, mulailah dengan mengukur. Pindahkan dengan setia, catat apa yang belum dikerjakan, dan rawat diri sendiri. Tidak semua hal harus selesai sekaligus.
 
-Terima kasih sudah mengikuti sampai episode terakhir. Semoga gedung Anda bertugas lama, dan penjaganya berganti dengan tenang.
+Terima kasih sudah mengikuti seri ini sampai akhir. Semoga gedung Anda terus melayani dengan baik, meski penjaganya berganti.
 
 Sekian. Salam.
 

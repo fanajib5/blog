@@ -15,52 +15,50 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-In [episode two](/en/writing/2026/hijrah-frontend-02/) I mentioned the numbers: one UI library is used across 101 files, the other survives in 13. This episode digs deeper into them, because inside are two findings that made me laugh alone in front of a screen hehe~
+In [episode two](/en/writing/2026/hijrah-frontend-02/) I mentioned the numbers: one UI library is used in 101 files, the other in just 13. This time I looked more closely at how they are used. I found two things worth sharing, including one that made me laugh at my screen hehe.
 
-Finding one: the two **never meet in a single file**. Finding two: the less popular library holds the most sought-after goods in town. In order, then.
+First, the two **never meet in a single file**. Second, the less-used library has the components people look for most. Here's what I found.
 
 ## Two Civilizations with a Demarcation Line
 
-The first civilization is the majority library: it provides the _paginator_, _button_, _skeleton_, _card_, and even an image _galleria_. It is the foundation of nearly every page; its call can be heard in one hundred and one files.[^1]
+The first library is used on more pages. It provides the _paginator_, _button_, _skeleton_, _card_, and even an image _galleria_. Nearly every page uses one of its components; 101 files call it.[^1]
 
-The second civilization is smaller, but holds a monopoly. It keeps the _DatePicker_, _TimePicker_, and _Select_, the most sought-after components in town whenever a page needs a report with a calendar. Thirteen files depend on it, mostly report pages.
+The second library appears in only 13 files, mostly report pages. But the _DatePicker_, _TimePicker_, and _Select_ are available only there. When a report needs a calendar, those are the components people look for.
 
-And what made me relieved and impressed at once: after checking one by one, **zero files use both at the same time**. The two civilizations coexist without ever sharing a room. A demarcation line, written in no document anywhere, yet perfectly honored, by whom and since when, nobody knows hehe~
-
-Lines like this are usually born not from policy but from experience: once, someone tried mixing the two, watched the styles eat each other alive, and the whole team never tried it again. Demarcation with trauma as its notary hahaha.
+After checking the files one by one, I found that **none use both libraries at once**. They coexist behind a boundary I couldn't find documented anywhere. I don't know when that boundary took shape, but the pattern still holds across the files I checked.
 
 ## A Dictionary in the Reducer's Pocket
 
-The second finding is my favorite. One of those libraries needs a _locale_: calendar labels in Indonesian. Fair enough; everyone deserves a calendar in their own language. What's unusual is where the locale gets imported: **inside a _reducer_**.
+This second finding is my favorite. One library needs a _locale_ so its calendar labels appear in Indonesian. That makes sense. What surprised me was where the locale is imported: **inside a _reducer_**.
 
-The data caretaker, who should be busy with numbers and statuses, turns out to carry the presentation layer's dictionary in its pocket. Three different reducers, the same dictionary three times.
+Reducers usually handle data such as numbers and statuses. Here, three different reducers each carry the same dictionary for the presentation layer.
 
-For what? Perhaps so the labels are available when the _state_ is assembled. Perhaps it just came along with an ancient copy-paste. Nobody knows for sure, and does it matter? This is the map-versus-old-town problem: clean architecture lives in a stranger's head, while reality is a city that grew wild but works. A reducer carrying a dictionary is absurd, but it has been pointing people the right way for years, so let it carry its dictionary hahaha.
+Why is the locale there? Perhaps so its labels are available when the _state_ is assembled, or perhaps it came along with an old copy-paste. I couldn't find the answer. The import feels out of place, but it has worked for years. For this port, I made a note of it rather than moving it.
 
 ## Three Eras of Styling
 
-The next layer: how these components dress. The repo has three generations living in peace:
+There are three generations of _styling_ in the repo:
 
-1. **Classic _global CSS_**: forty-eight stylesheets silently influencing anyone who happens to share a _class_ name. The blind-trust era.
-2. **UI library defaults**: each civilization's theme, occasionally seeping into the other's territory.
-3. **Tailwind**: the new generation, with its own _config_, plus one fix document at the repo root that I already told you about in [episode one](/en/writing/2026/hijrah-frontend-01/), a monument to a cured illness.
+1. **Classic _global CSS_**: 48 stylesheets that can affect other elements with the same _class_ name.
+2. **UI library defaults**: each library's theme, sometimes bleeding into the other's territory.
+3. **Tailwind**: the new generation with its own _config_, plus a fix document at the repo root that I mentioned in [episode one](/en/writing/2026/hijrah-frontend-01/).
 
-The three eras don't erase each other. First-era pages still dress first-era, and so on, like a street with colonial, modern, and contemporary architecture in one row. Messy? Depends who you ask. Full of character? Without debate hahaha.
+All three are still in use. Older pages keep their old styling, while others use a UI library or Tailwind. The result isn't uniform, but that's the _frontend_ we ported.
 
 ## What We Did (and Didn't)
 
-To stay faithful to tradition: while this thin port ran, we **standardized nothing** from the list above. No library migration, no separating reducers from their dictionaries, no removing styling eras.
+During the thin port, we **didn't standardize** any of the above. We didn't migrate libraries, separate reducers from their locale, or remove any styling era.
 
-What we guarded was the demarcation line itself: zero mixed files, an unwritten rule we've now officially written down. Because large-scale standardization during a house move is the _frontend_ edition of [episode four's](/en/writing/2026/hijrah-backend-04/) rule violation. Standardization is real and good; its place is the epilogue, not the suitcase hehe~
+What we kept was the boundary between the libraries: no files mixing the two. We've now written down the rule that used to be unwritten. Large-scale standardization during a move would be the _frontend_ version of [episode four's](/en/writing/2026/hijrah-backend-04/) rule violation. Standardization still matters, but it's better left until after the port.
 
 ## Lessons
 
-1. **Two cohabiting libraries are history, not sin.** As long as the demarcation line is clear, they get along better than many teams.
-2. **Forbid mixing at the file level; it's the cheapest effective demarcation.** No tooling required; just discipline and shared trauma.
-3. **Layer leakage is a clue.** A UI dictionary in a reducer's pocket is funny to read, and it shows exactly where the layer boundary leaks. Laugh first, write it down after.
-4. **Standardizing is the epilogue.** Don't combine moving house with a total renovation; the suitcase will tear mid-journey.
+1. **Two libraries can coexist.** What matters is having a clear boundary between them.
+2. **Start with a simple file-level rule.** We don't need special tooling to keep the two from mixing.
+3. **A locale import in a reducer points to a leaky layer boundary.** For now, it's enough to note it because the code still works.
+4. **Keep the port separate from standardization.** Move first; larger changes can come later.
 
-Next episode is the series finale: two sides of one building, what changed after backend and frontend both moved, and which inheritances we chose to keep feeding. See you there.
+The next episode closes the series. I'll look at the two sides of one building, what changed after both the _backend_ and _frontend_ moved, and which inheritances we chose to keep. See you there.
 
 Cheers.
 
