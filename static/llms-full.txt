@@ -1,0 +1,84 @@
+# najib.id — Konten Lengkap (llms-full.txt)
+
+Situs pribadi dan portofolio Faiq Najib Al-Aziz. File ini berisi ringkasan komprehensif seluruh halaman dan tulisan untuk diindeks langsung oleh agen berbasis RAG. Setiap artikel tersedia juga sebagai Markdown melalui header `Accept: text/markdown`.
+
+## Struktur Situs
+- https://najib.id/ — Homepage
+- https://najib.id/projects/ — Proyek & portofolio
+- https://najib.id/services/ — Layanan
+- https://najib.id/writing/ — Arsip tulisan
+- https://najib.id/teaching/ — Pengajaran & mentoring
+- https://najib.id/about/ — Tentang penulis
+- https://najib.id/contact/ — Kontak
+
+Bahasa: Indonesia (default), English. Lisensi: CC BY-NC 4.0.
+
+## Arsip Tulisan (Writing)
+
+### 2026
+- **Catatan Keputusan: Kapan Tech Stack Harus Dimigrasi** — https://najib.id/writing/2026/tech-stack-migration-decision/ — Kapan tech stack lama perlu dimigrasi, kapan cukup di-refactor, dan cara membaca sinyalnya dari sisi bisnis.
+- **Pemilihan Tech Stack: Antara Ego dan Bisnis** — https://najib.id/writing/2026/tech-stack-ego-vs-business/ — Godaan memilih teknologi yang keren vs kebutuhan nyata proyek.
+- **Migrasi Legacy PHP ke Go: Kenapa, Bagaimana, dan Pelajarannya** — https://najib.id/writing/2026/legacy-php-to-go-migration/ — Migrasi backend PHP (CodeIgniter 3 dan Laravel) ke Go, satu endpoint demi satu endpoint.
+- **Memahami GPS Protocol: Cara Komunikasi Device Tracker** — https://najib.id/writing/2026/memahami-gps-protocol/ — GPS tracker mengirim posisi lewat TCP socket dengan protokol binary; format packet Teltonika dan GT06, kenapa bukan HTTP.
+- **Workflow AI-Assisted Development: Kilo, Claude Code, dan Teman-Temannya** — https://najib.id/writing/2026/workflow-ai-assisted-development/ — Bekerja bareng AI coding agent sehari-hari: memory lintas sesi, verifikasi, dan pelajaran.
+
+### Hijrah Backend (seri migrasi GPS PHP → Go)
+- **Hijrah Backend (1): Hari Pertama Disodori Warisan 370+ Endpoint** — https://najib.id/writing/2026/hijrah-backend-01/
+- **Hijrah Backend (2): Anatomi Endpoint 15 Detik** — https://najib.id/writing/2026/hijrah-backend-02/
+- **Hijrah Backend (3): Mem-port Puluhan Parser Protokol GPS Tanpa Menghentikan Armada** — https://najib.id/writing/2026/hijrah-backend-03/
+- **Hijrah Backend (4): Kode Lama sebagai Executable Spec** — https://najib.id/writing/2026/hijrah-backend-04/
+- **Hijrah Backend (5): Query yang Bilang 'Pakai Index-ku'** — https://najib.id/writing/2026/hijrah-backend-05/
+- **Hijrah Backend (6): Merapikan Monolith, Pesawatnya Tetap Terbang** — https://najib.id/writing/2026/hijrah-backend-06/
+- **Hijrah Backend (7): Dari Paket TCP ke Time-Series Database** — https://najib.id/writing/2026/hijrah-backend-07/
+- **Hijrah Backend (8): Refleksi 18 Bulan (Lebih atau Kurang)** — https://najib.id/writing/2026/hijrah-backend-08/
+- **Hijrah Backend (9): Epilog, MySQL, PostgreSQL, Lalu MySQL Lagi** — https://najib.id/writing/2026/hijrah-backend-09/
+
+### Hijrah Frontend (seri migrasi frontend)
+- **Hijrah Frontend (1): Ketika Backend Engineer Disuruh Menyentuh Frontend** — https://najib.id/writing/2026/hijrah-frontend-01/
+- **Hijrah Frontend (2): Port Tipis dan Warisan yang Ikut Naik** — https://najib.id/writing/2026/hijrah-frontend-02/
+- **Hijrah Frontend (3): Type Chaos, Angka, String Kosong, dan Halaman yang Berbeda Pendapat** — https://najib.id/writing/2026/hijrah-frontend-03/
+- **Hijrah Frontend (4): Dua Library UI, Dua Era Penamaan** — https://najib.id/writing/2026/hijrah-frontend-04/
+- **Hijrah Frontend (5): Dua Sisi Satu Gedung** — https://najib.id/writing/2026/hijrah-frontend-05/
+
+### GPS & IoT / Database
+- **Menyimpan Data GPS dengan PostgreSQL + TimescaleDB** — https://najib.id/writing/2026/gps-data-postgresql-timescaledb/ — Hypertable, continuous aggregate, compression policy untuk jutaan titik GPS.
+- **Geofencing dengan PostGIS: Deteksi Masuk-Keluar Real-Time** — https://najib.id/writing/2026/geofencing-postgis/ — Polygon geofence, ST_Within, event entry/exit, POI radius geography.
+- **Decode Packet: GT06 & Teltonika Protocol** — https://najib.id/writing/2026/decode-packet-gt06-teltonika/ — Mengurai packet binary GPS tracker di Go: CRC-ITU GT06, IMEI BCD, koordinat, AVL Teltonika.
+- **Membangun TCP Listener untuk GPS Device di Go** — https://najib.id/writing/2026/tcp-listener-gps-go/ — TCP server concurrent untuk ratusan GPS tracker.
+- **Membangun Real-Time GPS Dashboard** — https://najib.id/writing/2026/real-time-gps-dashboard/ — WebSocket, Redis pub/sub, Leaflet.js.
+
+### Backend & Arsitektur
+- **Clean Architecture: Dari Spaghetti Code ke Kode yang Bisa Dibaca Ulang** — https://najib.id/writing/2026/clean-architecture-intro/
+- **Best Practice Membangun API di Laravel dan Go: Catatan dari Proyek Nyata** — https://najib.id/writing/2026/laravel-go-api-best-practice/
+- **Monolith Modular Dulu, Microservice Nanti: Filosofi Kesederhanaan di Backend** — https://najib.id/writing/2026/monolith-modular-dulu-microservice-nanti/
+- **Tangga Lipat di Proyek IT** — https://najib.id/writing/2026/high-talk-di-proyek-it/
+- **Kenapa Satu Bug Bisa Tiga Hari?** — https://najib.id/writing/2026/explaining-bugs-to-non-tech/
+
+### Otomasi & RPA
+- **Otomasi Proses Bisnis dengan RPA UiPath: Mulai dari yang Membosankan Dulu** — https://najib.id/writing/2026/business-process-automation-with-rpa-uipath/
+- **Otomasi Proses Bisnis dengan RPA UiPath: Ketika Selisih Rp8 Miliar Mulai Terlihat Normal** — https://najib.id/writing/2026/miss-calculation-in-business-process-automation/
+- **Otomasi Google Apps Script dengan Bantuan AI** — https://najib.id/writing/2026/otomasi-google-apps-script-ai/
+
+### Akordium Lab (perusahaan)
+- **Building Akordium Lab #1: Mulai dari Nol yang Tidak Benar-Benar Nol** — https://najib.id/writing/2026/building-akordium-lab-01/
+- **Building Akordium Lab #2: Bulan Pertama yang Sebenarnya** — https://najib.id/writing/2026/building-akordium-lab-02/
+
+### Bahasa & Lainnya
+- **Buffalo Itu Kertas: Belajar Bahasa Lewat Terjemahan Berbasis Asosiasi** — https://najib.id/writing/2026/buffalo-itu-kertas-terjemahan-berbasis-asosiasi/
+- **Kelonggaran Aturan dan Konsekuensinya** — https://najib.id/writing/2026/loosening-rules-and-consequences/
+
+### 2023
+- **Sidang akhir daring dan jadi angkatan lulusan pandemi** — https://najib.id/writing/2023/first-experience-of-online-thesis-defense/
+- **Catatan Git: instalasi, konfigurasi, dan contohnya** — https://najib.id/writing/2023/git-installation-and-configuration/
+- **Catatan VPS: set up VPS pertama yang bukan pertama** — https://najib.id/writing/2023/set-up-first-but-not-first-vps/
+- **The End of the Wicked: A Rhyme** — https://najib.id/writing/2023/the-end-of-wicked-a-rhyme/
+- **Sidang tesis. Lika-liku perjalanan gelar ketiga** — https://najib.id/writing/2023/thesis-defense-and-the-third-degrees-journey/
+
+### 2019
+- **City of Angels** — https://najib.id/writing/2019/city-of-angels-a-rhyme/
+
+## Endpoint untuk Agen
+Setiap URL di atas dapat diminta dengan header `Accept: text/markdown` untuk menerima representasi Markdown murni (tanpa boilerplate HTML), siap dikonsumsi LLM dan pipeline RAG.
+
+Deskripsi API terbaca mesin: https://najib.id/openapi.json
+Ringkasan singkat: https://najib.id/llms.txt

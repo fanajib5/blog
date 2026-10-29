@@ -1,6 +1,6 @@
 # Situs-ku
 
-Ini adalah repository situs pribadi yang dibangun dengan [Hugo](https://gohugo.io) dengan versi 0.131.0.
+Ini adalah repository situs pribadi yang dibangun dengan [Hugo](https://gohugo.io) dengan versi 0.169.0.
 
 ## Notes
 
