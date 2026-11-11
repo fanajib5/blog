@@ -41,21 +41,21 @@ Dari sisi bisnis, ini berarti **kecepatan deliver value ke _user_ menurun**. Fit
 
 _Kalau di lokal aman, tapi di production error, di mana harusnya saya cari?_ (pertanyaan yang sering bikin saya begadang sambil _scrolling Stack Overflow_ hahaha)
 
-Ini _classic symptom_ dari sistem yang tightly coupled. Kode yang berjalan di satu _environment_ tidak berjalan sama di _environment_ lain karena ada _side effect_ yang tidak terduga. _Debug_-nya bukan soal logika, tapi soal _mengapa_ konteks _production_ berbeda dari ekspektasi. Pernah waktu itu saya sampai _remote_ ke _server production_ jam 2 pagi cuma buat _check_ satu environment variable yang ternyata... memang belum di-_set_. _Facepalm_.
+Ini _classic symptom_ dari sistem yang tightly coupled. Kode yang berjalan di satu _environment_ tidak berjalan sama di _environment_ lain karena ada _side effect_ yang tidak terduga. _Debug_-nya jadi soal _mengapa_ konteks _production_ berbeda dari ekspektasi. Pernah waktu itu saya sampai _remote_ ke _server production_ jam 2 pagi cuma buat _check_ satu environment variable yang ternyata... memang belum di-_set_. _Facepalm_.
 
-Dari sisi bisnis, ini artinya **tidak ada kepastian**. Client bisa _get_ laporan yang salah di pagi hari, dan tidak ada yang tahu kenapa sampai siang.
+Bagi bisnis, artinya **tidak ada kepastian**. Client bisa _get_ laporan yang salah di pagi hari, dan tidak ada yang tahu kenapa sampai siang.
 
 ### 3. _Onboarding_ _Developer_ Baru Makin Lama
 
 Dulu, _developer_ baru bisa mulai _contribute_ dalam seminggu. Saat itu, butuh hampir sebulan baru mereka nyaman _ngode_ tanpa takut merusak sesuatu. Bukan karena mereka kurang _skill_, tapi karena _codebase_ butuh **context** yang banyak untuk dipahami. Saya masih ingat ekspresi salah satu _developer_ baru waktu dia baru pertama kali buka _codebase_-nya. Mukanya... _yah_, seperti orang yang baru bangun tidur terus langsung disuruh lari marathon hehe~
 
-Dari sisi bisnis, ini berarti **biaya menambah kapasitas tim meningkat**. Setiap _developer_ baru butuh waktu lebih lama sebelum jadi produktif.
+Di sisi biaya, **menambah kapasitas tim jadi lebih mahal**. Setiap _developer_ baru butuh waktu lebih lama sebelum jadi produktif.
 
 ### 4. _Fear_ Setiap _Deploy_
 
 Setiap kali mau _deploy_, ada _feeling_ "semoga kali ini tidak ada yang _break_". Bukan karena tidak ada _testing_, tapi karena _testing_ yang ada tidak _cover_ semua _edge case_. Dan di sistem yang tightly coupled, satu perubahan kecil bisa punya efek _domino_. Seperti menarik satu benang di sweater, eh taunya yang lain ikut rontok juga. _Deploy_ di hari Jumat sore? _Amit-amit jabang bayi_, jangan sampai hahaha.
 
-Dari sisi bisnis, ini artinya **tim jadi konservatif**. Fitur yang sebenarnya aman ditunda karena takut efek sampingnya. Inovasi melambat bukan karena kurang ide, tapi karena takut _break_.
+Terakhir, **tim jadi konservatif**. Fitur yang sebenarnya aman ditunda karena takut efek sampingnya. Inovasi melambat karena takut _break_, padahal idenya tidak kurang.
 
 ## Pertanyaan-Pertanyaan yang Saya Ajukan
 

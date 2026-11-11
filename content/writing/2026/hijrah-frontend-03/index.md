@@ -29,7 +29,7 @@ Tiap halaman mengirim dengan gayanya sendiri, _backend_ menerima saja, dan hidup
 
 Lalu _backend_-nya pindah ke Go. Pandangannya soal tipe berbeda: **tipe adalah kontrak**. Kalau kontraknya meminta angka, yang dikirim harus angka. _String_ kosong yang mengaku angka ditolak di pintu, lengkap dengan _error decoding_ yang panjang dan sama sekali tidak lucu.
 
-Go tidak menciptakan _chaos_; ia hanya berhenti memaafkannya. Tiga kebiasaan yang sebelumnya tidak bermasalah berubah menjadi pelanggaran:
+Masalah tipe ini sudah ada sejak lama. Yang berubah, Go tidak lagi memaafkannya. Tiga kebiasaan yang sebelumnya tidak bermasalah berubah menjadi pelanggaran:
 
 1. Ada nilainya? Kirim **angka**. Tidak ada nilainya? Kirim **_string_ kosong**.[^2]
 2. Halaman lain untuk fungsi serupa mengirim **_string_**, dari sananya.
@@ -39,7 +39,7 @@ Tidak ada penjahatnya. Setiap halaman konsisten dengan caranya sendiri. _Chaos_ 
 
 ## Bekasnya Ternyata Bisa Dihitung
 
-Yang paling menarik, _chaos_ ini bukan cuma bisa diceritakan. Jumlahnya juga bisa dihitung.
+Yang paling menarik, _chaos_ ini juga bisa dihitung, tidak hanya diceritakan.
 
 Saat menyisir _repo_ baru, saya menemukan hampir dua ratus pemanggilan `String()` di berbagai halaman, ditambah lebih dari dua puluh `Number()`.[^1] Sebagian memang punya kegunaan sendiri. Sebagian lain adalah **bekas luka** dari era _chaos_: jaring pengaman agar nilai dengan tipe yang tidak pasti tetap bisa diproses.
 
@@ -47,7 +47,7 @@ Jaring pengaman itu bukan kesalahan. Mereka membantu transisi tetap berjalan. Ta
 
 ## Biar Kontraknya Jelas
 
-Solusi jangka panjangnya bukan menambah jaring pengaman ke-400. Pertanyaannya perlu diubah: bukan lagi _"nilai ini bentuknya apa hari ini?"_, melainkan _"kontraknya bilang apa?"_
+Solusi jangka panjangnya adalah mengubah pertanyaannya, dari _"nilai ini bentuknya apa hari ini?"_ menjadi _"kontraknya bilang apa?"_ Jaring pengaman tambahan tidak akan menjawabnya.
 
 Satu _field_ punya satu tipe yang dijanjikan, lalu semua halaman yang mengirimnya mengikuti kontrak itu. _String_ kosong yang mengaku angka bisa ditolak lebih awal, di tempat yang dapat menjelaskan masalahnya. Daftar kontrak yang sederhana dan tertulis itu mungkin bisa mengakhiri perdebatan yang selama ini dibiarkan _frontend_.
 

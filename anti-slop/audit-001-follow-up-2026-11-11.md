@@ -2,7 +2,7 @@
 
 **Tanggal:** 2026-11-11  
 **Laporan asal:** [audit-001-2026-11-11.md](audit-001-2026-11-11.md)  
-**Otorisasi:** Pemilik menyetujui rekomendasi 1 sampai 5. Rekomendasi 6 tidak dikerjakan.
+**Otorisasi:** Pemilik menyetujui rekomendasi 1 sampai 5, lalu meminta rekomendasi 6 dikerjakan juga.
 
 ## Yang diubah
 
@@ -39,13 +39,24 @@ Ditulis ulang tanpa angka baru, di versi Indonesia dan Inggris:
 - `hijrah-backend-07`: "hehe/hahaha" dari 8 menjadi 4. Yang dipertahankan menempel pada lelucon atau pengakuan salah.
 - Sapaan "Anda" menjadi "kamu" di `hijrah-backend-09` dan `hijrah-frontend-01`.
 
+### 6. Pola "bukan X, tapi Y" dan aforisme (versi Indonesia)
+
+Dikurangi di tempat pola itu menggantikan pernyataan langsung atau berulang. Satu pola per artikel dipertahankan bila menjadi inti argumen.
+
+- `miss-calculation-in-business-process-automation`: sekitar delapan pola menjadi dua. "Buat saya" di awal kalimat dihapus (tersisa dalam bentuk "yang menarik buat saya"). Aforisme berhuruf tebal ("Manusia bisa terbiasa dengan risiko") menjadi klausa biasa. Pengulangan momen Rp8 miliar di bagian penutup dihapus; momen itu tetap diceritakan di pembuka dan bagian tengah.
+- `tech-stack-migration-decision`: "Dari sisi bisnis" dari empat kali menjadi satu, tiga lainnya diganti pembuka berbeda. "Debug-nya bukan soal logika, tapi..." dan "bukan karena kurang ide, tapi..." disederhanakan.
+- `hijrah-frontend-03`: aforisme "Go tidak menciptakan chaos; ia hanya berhenti memaafkannya" ditulis lebih lugas. "Jaring pengaman ke-400" dihapus karena angka itu tidak sejalan dengan hitungan 194.
+- `hijrah-backend-06`: "bukan sekadar sesuatu yang harus diingat" dihapus karena mengulang kalimat sebelumnya.
+- `business-process-automation-with-rpa-uipath`: penutup "bukan soal menggantikan manusia, tapi..." menjadi pernyataan langsung.
+
+Tidak diubah: `explaining-bugs-to-non-tech` (pola "bukan menyederhanakan, tapi menerjemahkan" adalah tesis artikelnya) dan `tech-stack-ego-vs-business` (pola itu inti sikapnya). Versi Inggris tidak diubah untuk rekomendasi ini.
+
 ## Tidak dikerjakan, dan alasannya
 
 - **Penyatuan footnote disclaimer.** Setiap footnote memuat catatan spesifik (misalnya orde besaran kapasitas dan tanggal sensus) dan dirujuk dari badan teks. Menghapusnya berisiko memutus rujukan atau membuang caveat yang bermakna.
 - **Sudut "saya" berbasis pengalaman di `realtime-pipeline-reliability`.** Isi artikel tetap prinsip. Anekdot atau keputusan nyata harus datang dari penulis; saya tidak mengarangnya.
 - **Angka 194 di Hijrah Frontend 03 dan 05.** Rincian "hampir dua ratus `String()` ditambah lebih dari dua puluh `Number()`" tidak bisa dicocokkan tanpa repo sumber, jadi angkanya tidak diubah.
 - **Bagian "Catatan" bernomor di `hijrah-backend-02` sampai `05`, rekap di artikel lain, dan versi Inggris seri Hijrah.** Di luar yang disebut audit.
-- **Rekomendasi 6** (pola "bukan X, tapi Y").
 
 ## Verifikasi
 

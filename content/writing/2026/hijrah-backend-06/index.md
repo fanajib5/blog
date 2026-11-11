@@ -31,7 +31,7 @@ Saya tidak butuh proses yang terpisah. Yang saya butuhkan batas tanggung jawab y
 
 Aturan modulnya sederhana:[^2] satu folder untuk satu domain, misalnya `geofence`, lalu repository dan _usecase_ tinggal di sana. Folder `api` jadi pintu keluarnya, berisi interface yang boleh dipakai dari luar. Batasnya dijaga **_compiler_**, bukan sekadar janji di README.
 
-Dinding _compile-time_ itu kuncinya. Aturan modul yang hanya tertulis di README mudah dilanggar saat sprint sibuk. Namun, jika repo internal modul tidak bisa diimpor dari luar folder-nya, _build_ langsung merah. Pelanggaran arsitektur jadi sesuatu yang tidak bisa di-_commit_, bukan sekadar sesuatu yang harus diingat.
+Dinding _compile-time_ itu kuncinya. Aturan modul yang hanya tertulis di README mudah dilanggar saat sprint sibuk. Namun, jika repo internal modul tidak bisa diimpor dari luar folder-nya, _build_ langsung merah. Pelanggaran arsitektur jadi sesuatu yang tidak bisa di-_commit_.
 
 ## Sensus Dulu, Pindah Kemudian
 
