@@ -70,7 +70,7 @@ tabWidth = 4
 [outputs]
   home = ["html", "rss", "markdown"]
   section = ["html", "rss", "markdown"]
-  page = ["html", "markdown"]
+  page = ["html", "markdown", "json"]
 
 [params]
 description = "Faiq Najib Al-Aziz – Backend Developer spesialis Go dan PostgreSQL, migrasi legacy PHP ke Go, arsitektur sistem scalable."

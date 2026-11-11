@@ -1,6 +1,6 @@
 ---
 title: "Hijrah Frontend (2): The Thin Port and the Inheritance That Boarded"
-description: "Episode 2 of the Hijrah Frontend series: 76 pages in, 76 pages out. Why zero pages were left behind, what the first opened boxes contained, and one big plan that chose not to happen."
+description: "Episode 2 of the Hijrah Frontend series: 76 pages in, 76 pages out. Why nothing got left behind, what was in the first boxes I opened, and one big plan that never happened."
 author: "Faiq Najib Al-Aziz"
 date: 2026-09-23T09:00:02+07:00
 lastmod: 2026-09-23T21:28:00+07:00
@@ -15,52 +15,50 @@ tags:
 series: "Hijrah Frontend"
 ---
 
-The move from [episode one](/en/writing/2026/hijrah-frontend-01/) is finished, and handover day has arrived. The manifest is short and boring, exactly like the best moving manifests: **seventy-six boxes in, seventy-six boxes out. Zero pages left behind.**
+The move from [episode one](/en/writing/2026/hijrah-frontend-01/) is finally done. On handover day, the manifest had just one important number: **seventy-six boxes in, seventy-six boxes out. Not a single page left behind.**
 
-That's not luck. That's a decision. And this episode is about that decision: what we deliberately carried over, what turned out to board without an invitation, and one big plan that chose not to happen hehe~
+Nothing got left behind because that's what we decided. Some things were brought on purpose, some boarded without an invitation, and one big plan was dropped in the end. Let me tell you one by one.
 
 ## Why Zero Pages Were Left Behind
 
-If you've ever moved houses, you know the most liberating moment: deciding "just throw this one away". A frontend migration has the same moment with a bigger temptation, because discarding pages feels like tidying up the product at the same time.
+If you've ever moved house, you know the relief of saying, "just throw this one away". A frontend migration has the same temptation. Deleting a page feels like tidying up the product while you're at it.
 
-God forbid, again. Deciding a page's life or death during a house move is two decisions fused into one: move, and reshape the product's scope. [The neighboring series](/en/writing/2026/hijrah-backend-04/) already paid the tuition for that combination. So the rule was simple: **seventy-six in, seventy-six out**, page by page, one at a time, no discard script.
+The catch: deciding whether a page lives or dies during a move means making two decisions at once, migrating the app and changing the product's scope. [The neighboring series](/en/writing/2026/hijrah-backend-04/) already taught me how expensive that combination is. So the rule was clear: **seventy-six in, seventy-six out**, checked page by page, with no script for throwing things away.
 
-The result is boringly verified: the new repo counts 76 pages, the old repo counts 76, and the folder lists match one by one. Even the pages whose names raise eyebrows, like the demo and docs and special-purpose routes, boarded too. Not because they matter; because discarding them wasn't a decision for this phase hahaha.
+The result isn't dramatic, but the numbers match: the new repo has 76 pages, same as the old one, and the folder lists line up one by one. Pages with names that make you wonder, like demo, docs, and special-purpose routes, came along too. Not because every one of them matters, but because deciding to delete them wasn't part of this phase.
 
-## The First Boxes We Opened
+## The First Boxes I Opened
 
-The first two boxes: the two UI libraries that have long cohabited. In the new house, the count is honest and measurable: one library is used across **101 files**, while the other survives in just **13 files**.[^1]
+The first boxes I opened held the two UI libraries that have lived side by side for a long time. In the new house, the count is easy to see: one library appears in **101 files**, while the other survives in just **13 files**.[^1]
 
-Those numbers tell their own story: an era of dominance and an era of leftovers, side by side inside one application, without open warfare. Both still had to be carried, because removing a library means touching every file that imports it, and touching every file while moving houses violates [episode four's](/en/writing/2026/hijrah-backend-04/) rules.
+The numbers show two eras: one library dominated, the other arrived later, and both live in the same app without open warfare. We brought both. Removing a library means changing every file that imports it, and changing every file during a move breaks the rules from [episode four](/en/writing/2026/hijrah-backend-04/).
 
-One more wire boarded: the legacy state management connection. In the new app router it's down to a single connection point, but that one live point is still the heart for the pages that use it. Cut it now? Also not this moment's authority hahaha.
+The legacy state management connection came along too. Only one connection point is left in the new app router, but it's still the heart of the pages that use it. Cutting it now means changing something else again, and that's not this move's job.
 
-## Carried Consciously, Recorded
+## Carried Knowingly, Written Down
 
-Beyond the big boxes, some small inheritances were consciously noted while boarding:
+A few smaller pieces of inheritance also got noted as they boarded:
 
-- **JSX without types**: this country doesn't speak _TypeScript_ yet. Not this episode's decision; it's on record for another decision, another day.[^2]
-- **Two eras of naming**: some things are titled with capital letters, others follow a different taste. We didn't standardize during the move; standardizing is the epilogue's job, not the suitcase's.
-- **One `page.backup`**: one page brought along its own backup corpse. I laughed when I found it, because [it has a sibling](/en/writing/2026/hijrah-backend-04/) in the neighboring building hahaha.
+- **JSX without types**: this country doesn't speak _TypeScript_ yet. Not this episode's decision, just noted for another decision on another day.[^2]
+- **Two eras of naming**: some names start with capital letters, others follow a different taste. We didn't standardize during the move. Standardizing is the epilogue's job, not the suitcase's.
+- **One `page.backup`**: one page brought along its own backup corpse. I laughed when I found it, because [it has a sibling](/en/writing/2026/hijrah-backend-04/) in the building next door hahaha.
 
-The note is simple: inheritance carried consciously has a different fate from inheritance that slips through. The conscious kind has a record, a reason, and a turn for cleanup later. The slipping kind tends to multiply.
+There's a difference between bringing something knowingly and discovering it after the move. The first has a note, a reason, and a turn for cleanup later. The second is easy to miss, and then it multiplies.
 
 ## The Big Plan That Didn't Happen
 
-To stay fair to the honest tradition of the neighboring series: one big plan chose to withdraw before it started, namely replacing the legacy state management with something new.
+Like in the neighboring series, there's one plan worth recording even though it never ran: replacing the legacy state management with a new one.
 
-It wasn't canceled because it failed; priorities shifted toward what users would actually feel. And I'm at peace with that: a plan canceled before it consumes resources isn't a failure, it's _quality control_ on your own plans hehe~
+It wasn't dropped because it failed. Priorities shifted toward work users would feel more. Calling off a plan before it eats your energy is a kind of _quality control_ for your own plans. Well... let's call it that hehe.
 
-## Lessons
+## Takeaways
 
-1. **Move 1:1 first, decide scope later.** Discarding pages while moving is two decisions in one breath; separate them.
-2. **Count the boxes with numbers.** 76 to 76, 101 to 13; those figures keep the inheritance conversation from turning into a taste war.
-3. **Two cohabiting libraries are two eras, not two choices.** Don't judge the old one; it has won more battles than the new one.
-4. **A plan canceled before burning cost is a win.** Record it on the didn't-happen list, head held high.
+1. **Move 1:1 first, decide scope later.** Deleting pages during a move means two decisions at once.
+2. **Count what's in the boxes.** The 76-to-76 and 101-to-13 numbers make the inheritance concrete, not just a matter of taste.
+3. **Two libraries living together mark two different eras.** Each has its own reason for still being in the app.
+4. **A plan canceled before it burns resources is also a good decision.** Write down why, so it's clear when to revisit it.
 
-Next episode we open the thorniest box: _type chaos_, where the same field gets sent as a number, an empty string, and a plain string, depending on which page is doing the sending. See you there.
-
-Cheers.
+The next box doesn't contain a library, but inconsistent data types: the same field sent as a number, an empty string, or a plain string depending on the page. That's where the _type chaos_ starts to show.
 
 [^1]: File, page, and library usage figures were measured directly from the repo as this episode was written, with internal details separated out for storytelling.
 

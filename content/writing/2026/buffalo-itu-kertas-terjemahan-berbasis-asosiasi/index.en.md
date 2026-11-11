@@ -14,7 +14,7 @@ tags:
   - personal
 ---
 
-My wife just told me something, and I genuinely didn't know who to laugh at.
+My wife told me a story, and I wasn’t sure who I was supposed to laugh at.
 
 So my mother-in-law teaches English tutoring classes. One day, one of her students was practicing some exercises. The conversation went something like this (in Javanese, roughly translated):
 
@@ -26,59 +26,47 @@ So my mother-in-law teaches English tutoring classes. One day, one of her studen
 >
 > Student B: "I am! Buffalo paper. So it means paper."
 
-I went quiet for a moment after hearing this. Not because I was confused, but because in that silence I realized: _the logic actually checks out_. And that was the more confusing part.
+I went quiet for a second. Not because I was confused, but because _the logic actually checked out_. Somehow that made me even more confused.
 
-## The Brain's Cache Is Too Powerful
+## The Brain's _Cache_ Is Really Strong
 
-If you've ever tried learning a foreign language, you know the feeling: the brain doesn't store words like a dictionary. It stores them more like a cluttered folder.
+If you've learned another language, you might know this feeling. The brain doesn't store words as neatly as a dictionary. It's more like a folder that's already crammed with stuff.
 
-The student hears the word _"buffalo"_. The brain immediately runs a search. And the first result that comes up isn't an image of a large furry animal roaming the North American prairies — it's... **buffalo paper**. That's what he'd encountered most. That's what was closest. That's what was most _relevant_ to his brain.
+When the student hears _"buffalo"_, his brain searches its associations. The first result isn't a large furry animal on the North American prairie. It's... **buffalo paper**. Fair enough, that's what he had seen most often. To him, it was the most _relevant_ answer hehe.
 
-This phenomenon has a name. Linguists and language researchers call it _**association-based translation**_: the idea that humans translate words not from a dictionary, but from the memory most strongly associated with that word.[^1] And that memory isn't always correct. But it always _feels_ correct.
+Linguists and language researchers call this _**association-based translation**_: people translate words using the memory most strongly associated with them, rather than a dictionary definition.[^1] The memory may be wrong, but it can feel very convincing.
 
-## This Isn't Just About Kids
+## Grown-Ups Do This Too
 
-Before you smile too quickly and say, _"well, of course, he's just a child"_ — hold on.
+Before smiling and saying, _"well, he's just a kid"_, hold on. I've misunderstood words too, and maybe you have as well.
 
-Let me share a few examples that are a little closer to home.
+Take _"deadline"_. If you've never heard it used at work, _dead_ means dead and _line_ means line. So, the death line? There's a logic to that guess. That isn't what it means at work, of course.
 
-**First example.** Have you ever heard someone think _"deadline"_ literally meant "already dead"? From the perspective of someone who'd never worked in an environment using the term — it makes sense. _Dead_ means dead. _Line_ means line. So _deadline_: the death line? By association, reasonable. By context, not so much.
+Some people new to work might think _"overtime"_ means extra time to rest. _Over_ means extra, _time_ means time. Yes, extra time to keep working, sadly haha.
 
-**Second example.** The word _"overtime"_ is sometimes understood as "extra time for rest" by people newly entering the workforce. _Over_ = extra. _Time_ = time. So extra time? _Yes — extra time to keep working._ But what the brain pictures can be the exact opposite haha.
+And here's mine. I used to think _"hardware"_ was a stationery brand because there was a shop near my house called _"Toko Hardware"_. It did sell hard goods. I was still a bit confused about that well into high school. Go ahead and laugh, I do too now.[^2]
 
-**Third example, and this is the most ironic one.** Me. I once thought _"hardware"_ was a brand of stationery. Because near my house there was a shop called _"Toko Hardware"_ — and they did sell hard goods. I was still a bit confused about this well into high school. _Feel free to laugh._[^2]
+## Why Does the Brain Do This?
 
-## Why Our Brains Do This
+It's not an evolutionary bug. The brain seems to be saving itself some work.
 
-This isn't an evolutionary bug. It's a feature.
+The brain prefers a shortcut over checking every possibility. When it hears a word, it seems to ask its _cache_: _"where have I seen this before? What was the context?"_ The association that comes back first is often the one it uses.[^3]
 
-The human brain is designed to be efficient, not accurate. When you hear or read a word, it doesn't open an internal dictionary with one official definition. It throws a question to its own _cache_: _"where have I encountered this word before? In what context? With whom?"_ And whatever answer comes back fastest — that's what gets used.[^3]
+The student who answered _"paper"_ wasn't stupid. He just hadn't come across enough uses of the word. So far, _"buffalo"_ meant paper in his experience. That was the association he had.
 
-The student who answered _"paper"_ wasn't being stupid. His brain was working perfectly. What happened was simply: his input data wasn't diverse enough. He hadn't encountered the word _"buffalo"_ outside the context of paper often enough. So the only association he had was buffalo paper.
+How many adults do the same thing without noticing? I could be one of them.
 
-And if you think about it further: **how many adults are doing the exact same thing, without realizing it?**
+Some assumptions we hold tightly may just be the first association that got into our heads. Not necessarily the truth, maybe just old _cache_ we never updated.
 
-Plenty of assumptions we hold firmly turn out to be nothing more than the first association that ever entered our heads. Not truth. Just old _cache_ that was never updated.
+## That "Paper" Answer Got Me Thinking
 
-## Lessons That Don't Feel Like Lessons
+That answer got me thinking about context. A word can mean different things, and the sentence around it helps us figure out which meaning fits. The first association isn't always right, either, even when it feels familiar. That can happen with language and with decisions. _Though that might be a bit heavy for a post that started with buffalo paper._
 
-The student's story actually holds something surprisingly deep for a conversation that happened in a tutoring session.
-
-First: **context is king**. One word can have many meanings. Which one applies depends entirely on the context of the sentence, not on memorized definitions.
-
-Second: **the first association isn't the best association**. Our brains frequently trick us by serving up the _familiar_ answer rather than the _correct_ one. This applies to language, but also to a lot of life decisions. _Though that's probably too heavy a topic for a post that started with a buffalo story._
-
-Third: **if you're teaching, don't immediately correct with judgment**. The _"be serious!"_ response in the story was understandable, but the student's logic was coherent within his own world. A more effective response is to gently redirect while respecting the logic: _"Yes, there is buffalo paper, but in English, buffalo is the animal — the big one, like a cow but wilder."_ Simple. And it doesn't make the kid feel stupid.
+And if you're teaching, maybe don't rush to make a kid feel foolish. The _"be serious!"_ response made sense, but so did the student's logic. You can explain it without making him feel stupid: _"Yes, there is buffalo paper. In English, buffalo is the animal, the one we call kerbau."_
 
 ---
 
-My wife told me the story while holding back laughter. I laughed along too.
-
-But afterward, I couldn't stop thinking: _how many other things have I "translated" based on a first association, and never questioned again?_
-
-Probably a lot. Probably more than I'd like to think. And maybe some of you reading this right now are thinking the same thing.
-
-That's all. Cheers.
+My wife was trying not to laugh when she told me the story. I laughed too, obviously. Then I started wondering: how many other things have I "translated" from a first association and never questioned again? Probably a lot. I have no idea how many. Hehe.
 
 [^1]: The more common term in the literature is _lexical association_ or _associative meaning_. But "association-based translation" felt like the most accurate way to describe what happens when someone translates a word based on contextual memory rather than its core meaning.
 

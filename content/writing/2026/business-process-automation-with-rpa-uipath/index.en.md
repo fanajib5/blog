@@ -1,6 +1,6 @@
 ---
 title: "Business Process Automation with UiPath RPA: Start with the Boring Work First"
-description: "Field notes from implementing UiPath RPA for business process automation, from repetitive tasks to practical lessons learned."
+description: "My notes on automating daily copy-paste work with UiPath RPA, plus a few things I only realized later."
 author: "Faiq Najib Al-Aziz"
 date: 2026-03-12
 lastmod: 2026-09-11T09:28:00+07:00
@@ -14,70 +14,70 @@ tags:
   - uipath
 ---
 
-I still remember the phase where every morning looked exactly the same: open the same files, check the same data, and send the same report format. Day one felt normal. Day three got boring. By day ten, I was thinking, _"Is this really human work, or just copy-paste with extra steps?"_ hehe.
+Every morning, I opened the same files, checked the same data, and sent a report in the same format. Day one felt normal. By day three, it was getting boring. By day ten, I was asking myself, _"Is this really human work, or just copy-paste with extra steps?"_ hehe.
 
-That was when I started seriously exploring **RPA (Robotic Process Automation)**, especially with **UiPath**. Not because it was trendy, but because we had a real operational problem: too many repetitive tasks consuming team hours for very little business value.
+That routine got me seriously looking at **RPA (Robotic Process Automation)**, especially **UiPath**. Not because I was chasing a trend. Our team had a real problem: a lot of repetitive work was eating time, and done by hand it added very little value.
 
-This is not a click-by-click UiPath Studio tutorial. These are practical notes from my early implementation: what worked, what was painful, and what I wish we had prepared earlier.
+This is not a click-by-click guide to UiPath Studio (the internet has plenty of those). I just want to write down my early experience automating business processes: what went well, what gave me a headache, and what I should have prepared from the start.
 
 ## Why This Process Needed Automation
 
-At that time, several operational workflows had the same pattern:
+At that time, several operational workflows followed the same pattern:
 
 - Collect data from email attachments (mostly Excel)
 - Validate required fields
 - Re-enter the data into internal systems
 - Produce daily recap reports for supervisors
 
-Technically, nothing looked "hard." But the volume was high and the flow repeated all the time. The impact became visible:
+Each step was simple, but the volume was decent and it never stopped repeating. After a while, it showed:
 
-1. **Too much time spent on repetitive work**
-2. **High human error rate** on small details (typos, wrong column mapping)
-3. **Longer lead time** whenever workload increased
-4. **Team fatigue** because energy was burned on administrative tasks
+1. **Time vanished into repetitive work**
+2. **Human error** on small things (typos, wrong column mapping)
+3. **Lead time ballooned** whenever the workload went up
+4. **The team was tired**, because all the energy went to administrative work
 
-At that point, the question was no longer _"Can we do this manually?"_ but _"How long are we willing to pay premium effort for automatable work?"_
+At that point the question was no longer _"Can we do this manually?"_ but _"How long are we going to keep paying so much effort for work that can be automated?"_
 
 ## Why We Chose UiPath
 
-I reviewed a few automation options, and UiPath was the most practical choice for our context at that time.
+I looked at a few automation options. Given our team's situation back then, UiPath was the most realistic one.
 
-### 1. A Friendlier Learning Curve
+### 1. A Friendly Learning Curve
 
-For teams that are not full-time software engineers, UiPath's visual workflow model helps you start faster. You still need solid logic, but the entry barrier is lower.
+For a team that does not code full-time, UiPath's visual workflows make it easier to start. The logic still has to be tidy, but getting in is less scary than writing code from scratch.
 
-### 2. Better Fit for Existing Legacy Flows
+### 2. It Plugs Into Existing Processes
 
-We did not have the luxury to redesign every system end-to-end. UiPath helped us bridge old processes while keeping daily operations running.
+We could not redesign every system from scratch. UiPath helped us bridge the old processes, so daily operations kept running.
 
-### 3. Faster Time to Value
+### 3. Faster Implementation
 
-For repetitive, rule-based use cases, results became visible quickly. That speed mattered a lot when aligning expectations with non-technical stakeholders.
+For repetitive cases with clear rules, results showed up quickly. This also helped convince non-technical stakeholders, since they trust results more than slides hehe.
 
-UiPath is not always the right answer for every case. If your environment is clean and API-first, custom automation can be a better fit. But for our conditions back then, UiPath was the most reasonable trade-off.
+UiPath is obviously not the answer for every case. If a process is already API-first and the systems are tidy, custom automation can be a better fit. But for our conditions at the time, it was the most sensible trade-off.
 
-## Implementation Approach We Used
+## How I Went About It
 
-I intentionally avoided starting from the most complex process. We started with the most repetitive workflow and the most stable set of rules.
+I did not start with the most complicated process. I picked the workflow that repeated most often and had the most stable rules.
 
-### 1. Pick the Right Process First
+### 1. Pick the Process First
 
-My initial criteria were simple:
+My criteria were simple:
 
 - High frequency
 - Clear rules
-- Small week-to-week changes
-- Noticeable manual-error impact
+- Rarely changes from week to week
+- Manual mistakes actually hurt
 
-This matters. If you start with a process whose rules keep changing, your bot becomes fragile quickly and trust drops just as quickly.
+This matters. If the rules keep changing, the bot gets "fragile" fast and the team's trust goes with it.
 
 ### 2. Map the As-Is Flow in Detail
 
-Before building any robot, I documented every manual step in detail: input source, validation logic, failure cases, and expected outputs.
+Before building a robot, I wrote down every manual step: incoming data, validation, failure cases, and the final output.
 
-That phase exposed an important reality: many steps existed only in operators' heads and were never documented. Skip this step, and automation projects usually stall midway.
+Nah, this is where I realized a lot of steps only lived "in the operators' heads" and had never been documented. Without those notes, the bot could get stuck halfway.
 
-### 3. Build Small Bots, Test Fast
+### 3. Small Bots, Quick Tests
 
 Instead of one giant bot for everything, I split it into small modules:
 
@@ -86,55 +86,55 @@ Instead of one giant bot for everything, I split it into small modules:
 - System entry module
 - Reporting and notification module
 
-This made debugging easier and maintenance cleaner. If one piece failed, we did not have to dismantle the entire workflow.
+Debugging and maintenance got easier. If one part acted up, I did not have to tear everything apart.
 
-### 4. Design Exception Handling from Day One
+### 4. Exception Handling from Day One
 
-This is usually underestimated. Failures are guaranteed:
+People often brush this off, but failures will come:
 
 - Input file format changes
 - Required fields are empty
 - Target system is slow or times out
 - Credentials are invalid
 
-If your bot only works in ideal scenarios, that is not automation, that is a demo. I treated errors as normal events and built clear logging plus safe retry behavior from the start.
+If a bot only works in ideal scenarios, that is not automation, that is a demo. From the start I went with "errors are normal", and made sure the bot had clear logs and could retry safely.
 
-## Outcomes We Actually Felt
+## After the Bot Ran
 
-After several stable cycles, the impact was clear:
+After a few stable cycles, this is what we felt:
 
 - Daily processing time dropped significantly
 - Manual input errors decreased
 - Internal SLA became easier to maintain
-- Operations team had more room for analytical work instead of repetitive data entry
+- The operations team had room for analysis, not just data entry
 
-The biggest shift was mindset. Initially, some people worried, _"Will bots replace our jobs?"_ In reality, bots took repetitive tasks while people moved toward higher-value tasks that require judgment and context.
+What changed most was how the team saw the bot. At first some people worried, _"Will bots replace our jobs?"_ Once it was running, the bot took the repetitive stuff and the team could focus on things that need judgment and context.
 
-## Lessons That Keep Being Useful
+## What I Used Most
 
-### 1. Automation Is a Process Project, Not Just a Tool Project
+### 1. It Is a Process Project, Not Just a Tool Project
 
-If the business process is messy, even the best tool will produce messy outcomes. Fix the flow first, then automate it.
+If the process is a mess, even the fanciest tool will not tidy it up. Clean up the workflow first, then automate.
 
-### 2. Do Not Chase Complexity in the First Sprint
+### 2. Do Not Chase the Complicated Stuff at First
 
-Small wins beat ambitious plans that never finish. Start with simple but impactful use cases.
+A small win that ships beats a big plan that never finishes. Start with a simple use case that still makes a difference.
 
-### 3. Logging and Documentation Are Lifesavers
+### 3. Logs and Documentation Are Lifesavers
 
-When a bot fails during busy hours, clear logs are worth more than pretty diagrams. Good documentation also speeds up handovers.
+When a bot fails at peak hours, clear logs help more than pretty diagrams. Workflow documentation also makes handovers to other teams easier.
 
-### 4. Involve Operational Users Early
+### 4. Bring Operational Users in Early
 
-They run the process daily. Their insights are often more accurate than technical assumptions. Early involvement also improves adoption.
+They run the process every day. Their insight is often more accurate than the technical team's guesses (mine included). Bringing them in early also makes adoption smoother.
 
 ## Closing
 
-For me, UiPath RPA was never about "replacing people." It was about giving people their time back for work that actually needs human thinking. Repetitive tasks still need to be done, but not always manually.
+For me, UiPath RPA is not about "replacing people", but about giving them time back for work that is more worthwhile. Repetitive work still has to get done, it just does not always have to be done by hand.
 
-If you want the messier field version of this story, I also wrote a [separate case study](/en/writing/2026/miss-calculation-in-business-process-automation/) about how a miscalculation in a bond workpaper of around Rp8 billion reminded me that overly manual processes can slowly dull our sensitivity to risk.
+For another example from the field, I wrote a [separate case study](/en/writing/2026/miss-calculation-in-business-process-automation/). There, a miscalculation of around Rp8 billion in a bond workpaper made me realize that overly manual processes can dull our sense of risk.
 
-If you're evaluating a business process automation initiative and want to discuss a practical implementation approach, [get in touch](/en/contact/). Or check out my [services](/en/services/) to see how I can help.
+If you're deciding whether a process is a good fit for automation and want to chat about how to approach it, [get in touch](/en/contact/). Details of the [services](/en/services/) I can help with are here as well.
 
 ---
 

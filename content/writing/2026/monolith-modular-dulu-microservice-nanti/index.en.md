@@ -1,6 +1,6 @@
 ---
 title: "Modular Monolith First, Microservices Later: A Philosophy of Backend Simplicity"
-description: "Microservices are not a badge of architectural maturity. They are a solution to organizational problems that not every team actually has. Here is why the modular monolith remains my default choice, and when it makes sense to graduate."
+description: "Why the modular monolith is still my default, and what kind of problem might make microservices worth the cost."
 author: "Faiq Najib Al-Aziz"
 date: 2026-11-24
 lastmod: 2026-11-24
@@ -17,73 +17,63 @@ tags:
 pillar: "backend"
 ---
 
-There is an interview question I hear more and more often, and every time I hear it, I feel like asking back: "why isn't your system on microservices yet?" Delivered not as an inquiry, but as an accusation. As if architecture were a ladder of prestige: starting from the embarrassing monolith, climbing up to the decent "modular monolith", and graduating to demigod status once your database tables are split across twenty services tied together by a service mesh.
+Lately I keep hearing this interview question: "why isn’t your system on microservices yet?" Sometimes it sounds less like a question and more like a test of whether I am cool enough. As if a monolith were embarrassing, a modular monolith respectable, and you only made it once everything was split into some number of services. But what problem are we trying to solve?
 
-My stance in this article is simple, and I will defend it with practical experience rather than dogma: **a modular monolith is the correct default choice for the vast majority of backends, and microservices are the answer to problems you must actually have before paying to solve them.**
+My current choice is this: **a modular monolith is a sensible starting point for many backends. Microservices are useful when the problem they solve actually exists.** This is not a rule for everyone, just what I have concluded from the systems I have worked on.
 
-## A System That Pays Its Bills
+## A System I Work On
 
-To keep this from sounding like abstract theory, here is the system I run: a GPS fleet tracking backend that continuously ingests real-time location data from device fleets, stores millions of telemetry points per day in TimescaleDB, serves hundreds of API endpoints, plus billing and geofencing. Workloads that textbook theory routinely claims "definitely require microservices."
+The system I have in mind is a GPS fleet tracking backend. It receives positions from many devices, stores millions of points per day in TimescaleDB, serves hundreds of API endpoints, and handles billing and geofencing. When I describe it, someone usually says, "that must need microservices."
 
-The architecture? **A single Go binary.**
+And its architecture is **a single Go binary**. (Yes, just one.)
 
-Inside, there is strict discipline: packages like `listener`, `decoder`, `ingest`, `api`, and `ws`. Clear module boundaries, communication through explicit internal contracts, and clean usecase/repository layers. Deploying it takes a single container, observability needs just one log stream, and debugging requires one distributed trace at most. And that system, exactly as recounted in my [GPS Backend series](/en/writing/2026/memahami-gps-protocol/), effortlessly handles the very workload people worry can only survive on a fleet of separate services.
+That one binary has packages like `listener`, `decoder`, `ingest`, `api`, and `ws`. They have clear boundaries, explicit internal contracts, and separate usecase/repository layers. It deploys as one container. When something goes wrong, I do not have to look through logs from several services at once. I write more about it in my [GPS Backend series](/en/writing/2026/memahami-gps-protocol/).
 
-Not because we are anti-microservice. But because we did the math.
+We are not against microservices. We just try to count the costs first.
 
 ## What Microservices Actually Buy You
 
-Microservices rarely solve technical problems that cannot be solved within a monolith. What they almost always solve are **organizational problems**:
+Microservices are not the only way to solve technical problems. Often their biggest benefit is for **organizational problems**:
 
-- Multiple teams stepping on each other's deployments -> deployment independence
-- Codebases too massive to fit into one team's collective head -> ownership boundaries
-- Conway's law already fracturing the organization -> architecture reflecting team structure
+Usually the problem shows up when teams keep blocking each other's deployments, a codebase becomes too large for one team to own, or the organization is already split along Conway's law. At that point, clearer ownership boundaries can help.
 
-Those are real problems, for companies with dozens or hundreds of engineers. If your team has five people and you deploy twice a week, you do not have those problems. What you have is an aspiration to have them, and that aspiration is paid for today with the **distributed system tax**: network failures between services you now have to handle, data consistency that is no longer free, distributed tracing that requires its own dedicated infrastructure, deployment pipelines multiplied by the number of services, and a single bug that once took one stack trace to find now scattered across five different log aggregators.
+Those are real problems in large organizations. But if you have a team of five and deploy twice a week, you may not have them yet. You may be paying in advance for a future problem, through the **distributed system tax**: handling network failures, keeping data consistent, setting up tracing, maintaining a deployment pipeline for every service, and finding bugs spread across several logs.
 
-That tax is no myth. It is a monthly bill that arrives right when a small engineering team is at its busiest trying to build product value.
+Those extra costs keep showing up, even when a small team should be busy building the product.
 
 ## A Modular Monolith Is Not a Sloppy Monolith
 
-Let's be honest: advocating for a monolith is **not** the same as defending an unbounded, spaghetti codebase. A decaying monolith, with 2,000-line controllers where every file imports everything else, is the quickest way to ensure you will one day *genuinely need* microservices, simply because nobody can touch anything without breaking everything.
+I am not defending a monolith where everything imports everything else and controllers are 2,000 lines long. That kind of codebase makes changes painful. A team might decide it needs microservices, when the original problem was that nobody kept the module boundaries in check.
 
-What I advocate for is a **modular monolith**: module boundaries enforced just as strictly as service boundaries, minus the network latency and wire serialization in between.
+I prefer the **modular monolith**. Its boundaries are clear and enforced, but communication between modules stays in-process. No extra network hop for every call.
 
-- Modules interact through explicit interfaces, never by reaching into another module's database tables
-- Each module can be read, tested, and understood in isolation
-- Dependencies flow strictly in one direction (such as usecase -> repository, never cyclical)
+In my project, modules communicate through explicit interfaces instead of casually reaching into other domains' tables. I also try to keep each module understandable on its own and dependencies flowing one way, for example usecase -> repository, not back and forth.
 
-Proof that these boundaries are real, from that very same tracking project: migrating from Laravel to Go was done **without a big-bang rewrite**. Both backends ran in parallel, with endpoints migrated route by route through a reverse proxy. This was possible precisely because module boundaries and contracts were clean from the start. Boundaries that can move across runtimes can just as easily move across services when the time comes.
+There is proof in that same tracking project: migrating from Laravel to Go was done **without a big-bang rewrite**. Both backends ran in parallel, and endpoints moved route by route through a reverse proxy. That worked because the module boundaries and contracts were clean from the start. Boundaries that can move across runtimes can later move across services.
 
-## When I Will Actually Graduate
+## When I Would Split the System
 
-"Microservices later" is not a hollow excuse. There are concrete signals that would prompt me to split a system, and none of them involve "because that is the current trend":
+For me, "microservices later" does not mean never. There are conditions that would make me consider splitting the system. None of them is "because it is trendy":
 
 1. **Deployments are genuinely stepping on each other**: Different teams must release distinct components at different cadences, and cross-team coordination bottlenecks surface every single week.
 2. **Severely skewed workload profiles**: One module demands fundamentally different resource tiers (for example, heavy computation jobs that merit scaling independently from lightweight HTTP APIs).
 3. **Failure isolation has proven genuinely painful**: Crashes in one non-critical module repeatedly bring down the entire system, and not because of a bug that can simply be patched.
 4. **The organization is already structurally divided**: Distinct teams with autonomous ownership, independent release schedules, or entirely different target runtimes.
 
-When those signals arrive, the playbook is not starting over from scratch, but applying the **strangler pattern**: extract the most mature module into the first standalone service, point the proxy to route traffic, and let the rest follow when needed. Here is the catch: extraction is cheap only if module boundaries are already well defined. A tangled ball of yarn inside a monolith will not magically turn into clean microservices; you will only distribute your chaos across the network.
+If one of those conditions shows up, I do not have to start from scratch. I can use the **strangler pattern**, extract the module that is most ready, and route traffic through a proxy. The rest can follow if needed. Extraction is easier when the module boundaries are already clear. A messy monolith does not magically become clean microservices; the mess just moves onto the network.
 
-So the right sequence is not "monolith first, microservices once you are a senior engineer." The sequence is: **modular first, distributed only when required**. A clean modular monolith is the runway toward proper microservices, not its adversary.
+So my order is: **make modules clear first, distribute them when there is a reason**. A modular monolith is not the enemy of microservices. It can be a calmer place to start.
 
-## Healthy Room for Agreement
+## When Microservices Make Sense From Day One
 
-To keep this from being a one-sided polemic: there are circumstances where microservices are genuinely warranted from day one, and I would choose them without hesitation:
+There are also situations where microservices make sense from day one. Regulations might require personal data to stay in a particular jurisdiction or tenants might need physical isolation. The system might also need several runtimes with different lifecycles, like a pipeline running Python, Go, and JVM components. Or the product might be a multi-team platform from the start, such as a marketplace with independent business units.
 
-- Hard organizational boundaries mandated by compliance or regulation (personal data restricted to specific jurisdictions, independent audit silos, tenants requiring physical hardware isolation)
-- Polyglot systems that are inherently federated runtimes by design, such as an ingestion pipeline running Python ML models, Go network handlers, and JVM batch jobs simultaneously with disparate lifecycles
-- The business product is explicitly a multi-team platform on day one (a large-scale marketplace with independent business units)
+Those are **real external constraints**, not imagined optimizations. If your need comes from team structure, regulation, or different runtimes, microservices may be right. If the reason is just to look modern, it may be worth sitting down and asking what problem you are trying to solve.
 
-Notice the pattern: all of these are **real external constraints**, not imaginary technical optimizations. As long as your justification can be formulated in a single sentence where the subject is "team / regulation / runtime", microservices make total sense. If the subject is "to look modern", head straight back to the drawing board.
+## Why I Pick This for Now
 
-## Closing Thoughts
+I once wrote that [choosing a tech stack is a business decision, not an ego trip](/en/writing/2026/tech-stack-ego-vs-business/). For the system I work on now, I prefer a modular monolith because I do not have a strong reason to add the operational work. If the need changes, I can reconsider. At least clear module boundaries leave that option open.
 
-I once wrote that [choosing a tech stack is a business decision, not an ego trip](/en/writing/2026/tech-stack-ego-vs-business/) and system architecture is simply the large-scale version of that same statement. Microservices are paid for with complexity; modular monoliths are paid for with discipline. For the teams and challenges most of us deal with, discipline is vastly cheaper. Moreover, you can convert discipline into architectural complexity whenever you genuinely need it, but you can rarely do the reverse.
+## Want to Talk?
 
-Complexity purchased prematurely does not disappear. It merely waits to collect its monthly bill during the very months you are busiest building what truly matters.
-
-## CTA
-
-Share this article if you found it useful. For further discussions, check out [Contact](/en/contact/) or subscribe via [RSS](/en/writing/index.xml).
+If you've split a system for different reasons, you can [contact me](/en/contact/). You can also subscribe to [RSS](/en/writing/index.xml) to follow future posts.

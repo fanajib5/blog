@@ -2,9 +2,9 @@
 	<main class="wrapper">
 		<h1>{{.Title | markdownify}}</h1>
 		{{ if .Content -}}
-		<div class="content">
+		<article class="content">
 			{{ .Content }}
-		</div>
+		</article>
 		{{- end }}
 
 		{{ with .Params.comments -}}

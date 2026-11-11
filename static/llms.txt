@@ -1,0 +1,32 @@
+# najib.id
+
+> Situs pribadi dan portofolio Faiq Najib Al-Aziz — backend developer spesialis Go dan PostgreSQL, migrasi legacy PHP/Laravel ke Go, dan arsitektur sistem scalable.
+
+## Site Overview
+- **Home**: https://najib.id — halaman utama, perkenalan singkat, dan call-to-action.
+- **Projects**: https://najib.id/projects/ — daftar proyek dan portofolio.
+- **Services**: https://najib.id/services/ — layanan konsultasi dan pengembangan perangkat lunak (end-to-end).
+- **Writing**: https://najib.id/writing/ — arsip tulisan seputar arsitektur, backend Go, PostgreSQL, migrasi, GPS/IoT, dan pengalaman engineer.
+- **Teaching**: https://najib.id/teaching/ — pengajaran dan mentoring.
+- **About**: https://najib.id/about/ — tentang penulis dan latar belakang.
+- **Contact**: https://najib.id/contact/ — kontak dan channel sosial (GitHub, LinkedIn, Telegram, email).
+
+Bahasa situs: Indonesia (default) dan English.
+Lisensi konten: CC BY-NC 4.0.
+
+## Content Endpoints untuk Agen AI
+Setiap halaman tersedia dalam representasi Markdown (ringkas, tidak ada tag dekoratif HTML) untuk agen AI / LLM crawler / RAG. Kirim header `Accept: text/markdown` pada URL halaman, contoh:
+
+- https://najib.id/writing/        → arsip tulisan (Markdown)
+- https://najib.id/writing/legacy-php-to-go-migration/  → satu artikel (Markdown)
+- https://najib.id/about/         → halaman About (Markdown)
+- https://najib.id/projects/      → daftar proyek (Markdown)
+
+Artefak Markdown hasil build juga tersedia langsung, misal `/index.md`, `/writing/index.md`, `/writing/<slug>/index.md`.
+
+OpenAPI (deskripsi API terbaca mesin): https://najib.id/openapi.json
+Ringkasan layanan/status: https://najib.id/api/status
+Sitemap XML: https://najib.id/sitemap.xml
+RSS feed: https://najib.id/index.xml
+
+Versi lengkap dari seluruh konten: https://najib.id/llms-full.txt

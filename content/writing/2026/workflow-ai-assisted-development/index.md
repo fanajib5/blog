@@ -1,10 +1,10 @@
 ---
 title: "Workflow AI-Assisted Development: Kilo, Claude Code, dan Teman-Temannya"
-description: "Cara saya bekerja bareng AI coding agent sehari-hari — bukan review fitur, tapi workflow nyata: memory lintas sesi, verifikasi ala receipt, dan pelajaran dari AI yang percaya diri sambil salah."
+description: "Cerita cara saya bekerja bareng AI coding agent sehari-hari: memory lintas sesi, verifikasi ala receipt, dan pelajaran dari AI yang percaya diri padahal salah."
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-13
 lastmod: 2026-10-13
-draft: true
+draft: false
 toc: true
 comments: true
 images:
@@ -17,71 +17,71 @@ tags:
 pillar: "ai-dev"
 ---
 
-Dua kejadian dari sesi kerja saya belakangan ini, keduanya benar-benar terjadi, keduanya melibatkan AI yang sama:
+Ada dua kejadian di sesi kerja saya belakangan ini. Dua-duanya benar-benar terjadi, dan dua-duanya melibatkan AI yang sama.
 
-Pertama: saya minta asisten AI melanjutkan pekerjaan konten. Dia bekerja gigih — menyusun roadmap, menulis master doc, lalu mendraft artikel pembuka sebuah seri. Rapi, meyakinkan, dan **sepenuhnya duplikat**: draft artikel itu sebenarnya sudah ada, ditulis minggu sebelumnya, tergeletak diam di folder. AI tidak tahu — karena tidak ada yang mengingatnya.
+Pertama: saya minta asisten AI melanjutkan pekerjaan konten. Dia bekerja gigih: menyusun roadmap, menulis master doc, lalu mendraft artikel pembuka sebuah seri. Rapi, meyakinkan, dan **ternyata duplikat semua**. Draft artikel itu sudah ada, saya tulis minggu sebelumnya, tergeletak diam di folder. AI tidak tahu karena tidak ada yang mengingatkannya.
 
-Kedua: dalam artikel tentang protokol GPS, AI menuliskan contoh paket dari "datasheet" dengan percaya diri total: nomor serial, nilai CRC, sampai IMEI 16 digit (IMEI itu 15 digit — dia bahkan gagal di arithmetic digit). Salah urutan byte, salah nilai, salah panjang. Dan dia akan mempertahankannya sampai kode uji menolaknya mentah-mentah. Setelah brute-force semua varian CRC terhadap PDF datasheet asli, barulah jawaban yang benar muncul — dari mesin yang sama, setelah diberi _receipt_ untuk diverifikasi.
+Kedua: di artikel tentang protokol GPS, AI menuliskan contoh paket dari "datasheet" dengan percaya diri penuh: nomor serial, nilai CRC, sampai IMEI 16 digit (IMEI itu 15 digit, hitung digit saja dia gagal hahaha). Urutan byte salah, nilai salah, panjang salah. Dan dia akan terus mempertahankannya sampai kode uji menolaknya mentah-mentah. Setelah semua varian CRC saya _brute-force_ terhadap PDF datasheet aslinya, barulah mesin yang sama memberi jawaban benar, itu pun setelah dikasih _receipt_ untuk diverifikasi.
 
-Dua cerita itu adalah dua sisi dari satu koin, dan artikel ini tentang koinnya: **bagaimana bekerja dengan AI coding agent tanpa jadi korban kekuatannya sendiri.**
+Dua kejadian itu mengubah cara saya bekerja dengan AI coding agent. Intinya: **hasilnya baru berguna setelah saya tahu cara memeriksanya.**
 
-## Pergeseran Mental Model
+## Yang Berubah dalam Cara Kerja Saya
 
-Cara salah memakai AI: menjadikannya _autocomplete yang percaya diri_ — terima output, salin-tempel, lanjut. Cara yang benar menurut pengalaman saya: perlakukan dia sebagai **junior engineer yang sangat cepat, sangat luas bacaannya, dan overconfident secara struktural**.
+Saya sudah tidak memperlakukan AI sebagai _autocomplete yang percaya diri_: terima output, salin, lanjut. Dari pengalaman saya, lebih masuk akal menganggapnya **junior engineer yang cepat banget, banyak baca, dan bisa yakin luar biasa padahal keliru**.
 
-Junior seperti itu luar biasa berguna kalau kamu senior yang mau review. Dan itu menggeser pekerjaan saya sebagai backend developer: dulu saya menulis kode dan sesekali minta review; sekarang **AI yang menulis dan saya yang memverifikasi**. Jam kerja saya bergeser dari mengetik ke membaca, menguji, dan memutuskan.
+Buat saya, AI seperti itu berguna selama hasilnya tetap saya review. Sebagai backend developer, dulu saya menulis kode dan sesekali minta review. Sekarang **AI yang menulis, saya yang memverifikasi**. Kerjaan saya bergeser dari mengetik ke membaca, menguji, dan memutuskan.
 
-Konsekuensi praktisnya: skill yang paling naik nilainya bukan "prompt engineering" — tapi **verifikasi**. Kemampuan menulis uji yang tidak bisa dibohongi, menemukan sumber otoritatif, dan mengenali kapan jawaban yang fasih itu kosong.
+Makanya yang paling saya andalkan bukan "prompt engineering", tapi **verifikasi**: menulis uji, mencari sumber yang bisa dipercaya, dan memeriksa apakah jawaban yang terdengar fasih itu memang benar.
 
 ## Stack Harian Saya
 
-Bukan iklan — cuma konteks. Ini yang benar-benar terpasang di mesin kerja saya, dan kenapa masing-masing ada:
+Bukan iklan, cuma konteks. Ini yang benar-benar terpasang di mesin kerja saya, plus alasannya:
 
-**Agent CLI (Kilo Code, Claude Code).** Saya lebih produktif dengan agent di terminal daripada plugin IDE: dia bisa dikomposisikan dengan `git`, `docker`, `psql` — dan dengan server dev yang sedang jalan. Semua pekerjaan non-trivial berakhir di shell; agent yang hidup di shell tidak butuh jembatan.
+**Agent CLI (Kilo Code, Claude Code).** Saya lebih produktif dengan agent di terminal daripada plugin IDE. Dia bisa dikomposisikan dengan `git`, `docker`, `psql`, dan server dev yang sedang jalan. Semua pekerjaan non-trivial ujung-ujungnya di shell, jadi agent yang tinggal di shell tidak butuh jembatan.
 
-**Serena (MCP, navigasi semantik).** Untuk codebase Laravel/Go yang besar, mencari definisi dan referensi simbol lewat LSP jauh lebih presisi daripada grep — dan jauh lebih hemat _context window_. Agent yang membaca 3 simbol relevan bekerja lebih baik daripada yang membaca 3 file penuh.
+**Serena (MCP, navigasi semantik).** Di codebase Laravel/Go yang besar, LSP membantu saya menemukan definisi dan referensi simbol langsung. Hasilnya lebih presisi daripada pencarian teks pakai grep, dan agent cukup membaca simbol yang relevan tanpa memasukkan banyak file ke context.
 
-**Memory server (knowledge graph per project).** Ini jawaban dari cerita pertama di pembuka. AI tidak punya memori antar sesi secara bawaan — jadi saya berikan: keputusan arsitektur, insiden yang sudah terpecahkan, dan jebakan yang pernah ketemu, tersimpan sebagai graph per project dan dicari di awal tiap tugas. Sejak protokol ini jalan, "menulis ulang yang sudah ada" praktis hilang.
+**Memory server (knowledge graph per project).** Ini jawaban saya untuk kejadian pertama. Keputusan arsitektur, insiden yang sudah terpecahkan, dan jebakan yang pernah ketemu saya simpan sebagai graph per project, lalu saya cari di awal tiap tugas. Sejak itu saya jauh lebih jarang mengulang kerjaan yang sudah ada.
 
-**Dokumentasi hidup (context7).** API framework berubah lebih cepat dari training data. Sebelum menulis kode yang menyentuh API versi spesifik, agent-nya saya arahkan untuk menarik dokumentasi terkini. Halusinasi paling halus bentuknya adalah API yang _dulu_ benar.
+**Dokumentasi hidup (context7).** Sebelum menulis kode yang menyentuh API versi tertentu, saya suruh agent baca dokumentasi terbaru. Lumayan menghindarkan jawaban yang memakai API yang _dulu_ benar.
 
-**Checkpoint berpikir (sequential thinking).** Untuk debugging multi-layer — Dockerfile yang bertabrakan dengan proxy yang bertabrakan dengan env — saya paksa proses reasoning eksplisit yang bisa direvisi di tengah jalan. Bukannya AI jadi lebih pintar; jadinya lebih sulit baginya untuk loncat ke kesimpulan.
+**Checkpoint berpikir (sequential thinking).** Saat debugging beberapa lapisan yang saling memengaruhi, seperti Dockerfile, reverse proxy, dan environment variable, saya pakai proses reasoning eksplisit yang bisa direvisi di tengah jalan. AI-nya tidak jadi lebih pintar, tapi saya jadi bisa menahan kesimpulan sampai tiap lapisan dicek.
 
-## Workflow yang Terbukti (dan Alasannya)
+## Rutinitas yang Saya Pakai
 
-Seri [GPS Backend](/writing/2026/memahami-gps-protocol/) yang sedang berjalan di blog ini adalah eksperimen paling sempurna dari workflow itu — enam artikel teknis, semua kodenya ditulis dan diverifikasi dalam sesi bersama AI. Polanya:
+Seri [GPS Backend](/writing/2026/memahami-gps-protocol/) di blog ini jadi contoh konkretnya: enam artikel teknis dengan kode yang ditulis dan diverifikasi bareng AI. Waktu mengerjakannya, pola saya begini:
 
-1. **Rencana dulu, baru generasi.** Satu dokumen roadmap + satu master doc sebagai _single source of truth_. AI yang bekerja tanpa peta menghasilkan konten acak yang bagus-bagus sendirian.
-2. **Cek memory sebelum mulai.** Apa yang sudah diputuskan, apa yang sudah pernah gagal. Lima puluh ribu token context yang tepat sasaran mengalahkan lima juta yang acak.
-3. **Verifikasi = jalankan, bukan baca.** Aturan keras: kode contoh wajib dieksekusi sebelum masuk artikel. Decoder GT06 diuji 13 asersi terhadap vektor datasheet. SQL TimescaleDB dijalankan di container dengan 155 ribu baris. WebSocket diuji 50 klien konkuren plus satu klien sengaja disabotase. Hasilnya menakjubkan: bug yang _tidak terlihat_ dari membaca kode (data race di `RLock`, off-by-one offset kecepatan, timeout yang bertabrakan dengan interval heartbeat) semuanya ketangkap karena kode dinyalakan.
-4. **Catat keputusan setelah selesai.** Hal yang dipelajari kembali ke memory — sesi berikutnya mulai dari titik ini, bukan dari nol.
+1. **Rencana dulu, baru generate.** Satu dokumen roadmap dan satu master doc jadi _single source of truth_. Peta ini menjaga tiap artikel tetap nyambung dengan seri, bukan cuma kelihatan bagus sendirian.
+2. **Cek memory sebelum mulai.** Saya tinjau keputusan dan kegagalan sebelumnya supaya sesi baru tidak mengulanginya. Context yang tepat sasaran lebih berguna daripada context yang banyak tapi acak.
+3. **Verifikasi itu menjalankan, bukan membaca.** Aturan keras: kode contoh wajib dieksekusi sebelum masuk artikel. Decoder GT06 diuji 13 asersi terhadap vektor datasheet. SQL TimescaleDB dijalankan di container dengan 155 ribu baris. WebSocket diuji 50 klien konkuren plus satu klien yang sengaja disabotase. Pengujian itu menangkap bug yang _tidak kelihatan_ kalau cuma baca kode (data race di `RLock`, off-by-one offset kecepatan, timeout yang bertabrakan dengan interval heartbeat).
+4. **Catat keputusan setelah selesai.** Hal yang saya pelajari saya masukkan ke memory supaya sesi berikutnya bisa lanjut dari keputusan yang sudah dibuat.
 
-Perhatikan langkah 3. Itu inti semuanya. Kode yang tidak dijalankan itu hipotesis — tidak peduli siapa yang menulisnya, manusia atau mesin.
+Langkah 3 yang paling penting buat saya. Kode yang belum dijalankan masih hipotesis, siapa pun yang menulisnya.
 
-## Pola Kegagalan AI (dan Mitigasinya)
+## Pola yang Saya Waspadai
 
-Empat pola yang paling sering saya temui:
+Ada empat pola yang berulang di sesi saya, dan cara saya menghadapinya:
 
-**Halusinasi yang percaya diri.** Contoh datasheet di pembuka adalah kelas paling berbahaya: salah tapi fasih, dengan format yang meyakinkan. Mitigasi: klaim faktual harus punya _receipt_ — vektor uji, tautan sumber, atau output mesin yang bisa direproduksi. "AI bilang begitu" bukan sumber.
+**Halusinasi yang percaya diri.** Contoh datasheet di awal tadi salah, tapi disajikan dengan format yang meyakinkan. Untuk klaim faktual, saya cari _receipt_: vektor uji, tautan sumber, atau output mesin yang bisa direproduksi. "Kata AI begitu" bukan sumber.
 
-**Amnesia.** Tanpa memory eksternal, tiap sesi mulai dari nol dan mengulang pekerjaan yang sudah ada. Mitigasi: memory protocol + file status (roadmap dengan status per item) — murah, dan mengubah AI dari penebak jadi pewaris.
+**Amnesia.** Kalau sesi tidak membawa konteks sebelumnya, pekerjaan yang sudah ada bisa terulang. Keputusan saya simpan di memory dan status kerjaan di roadmap supaya kelihatan apa yang sudah beres.
 
-**Yes-boss syndrome.** Minta satu solusi, dia kasih satu solusi — padahal ada lima dengan trade-off berbeda. Mitigasi: minta opsi beserta trade-off-nya sebelum eksekusi, terutama untuk keputusan arsitektur. Agent yang baik akan melawanmu dengan pilihan, bukan menurut dengan satu jawaban.
+**Yes-boss syndrome.** Kalau keputusannya punya konsekuensi, saya minta beberapa opsi beserta trade-off-nya sebelum memilih. Jadi saya bisa menilai pilihan, bukan cuma menerima solusi pertama.
 
-**Context yang penuh sesak.** Masalah besar dimasukkan sekaligus = kualitas luruh diam-diam di tengah jalan. Mitigasi: pecah jadi tugas atom + SSoT documents — sama seperti kita memecah epic jadi ticket, alasan sama.
+**Context yang penuh sesak.** Tugas besar lebih gampang ditangani kalau dipecah jadi bagian yang bisa dicek satu-satu. Saya pakai dokumen acuan supaya bagian-bagiannya tetap nyambung.
 
 ## Jadi, Ini Curang atau Bukan?
 
-Pertanyaan yang pasti muncul: menulis artikel dengan bantuan AI — itu curang?
+Pertanyaan yang pasti muncul: menulis artikel dibantu AI, itu curang?
 
-Posisi saya: yang penting bukan siapa yang mengetik, tapi **siapa yang menanggung jawaban**. Artikel seri GPS tadi ditulis AI-assisted, dan saya tulis begitu adanya — karena setiap klaimnya bisa ditagih: CRC-nya diverifikasi brute-force, SQL-nya punya hasil `EXPLAIN ANALYZE`, angkanya hasil uji sungguhan. Workflow-nya justru menaikkan standar dibanding saya menulis sendiri dari ingatan (ingat cerita kedua? yang percaya diri sambil salah itu AI; yang sama akan terjadi pada manusia yang malas memverifikasi).
+Pendapat saya: yang penting bukan siapa yang mengetik, tapi **siapa yang bertanggung jawab atas isinya**. Saya bilang terang-terangan bahwa seri GPS ditulis dibantu AI karena klaimnya bisa diperiksa: CRC diverifikasi dengan brute-force, SQL punya hasil `EXPLAIN ANALYZE`, dan angkanya dari pengujian sungguhan. AI memang bisa salah dengan yakin, tapi manusia juga bisa jatuh ke jebakan yang sama kalau cuma mengandalkan ingatan dan melewatkan verifikasi.
 
-Kalau kamu mau mulai, mulai dari satu hal saja: **puas hanya ketika kodenya jalan**. Sisanya — memory, dokumen hidup, checkpoint — menyusul alami setelah kejadian pertama kali AI menuliskan IMEI 16 digit dengan wajah lurus.
+Kalau mau mulai, pilih satu kebiasaan saja: **jangan anggap kode benar sebelum dijalankan**. Memory, dokumentasi, dan checkpoint membantu kerjaan saya, tapi semuanya bermula dari mau memeriksa hasilnya, termasuk saat AI dengan yakin menulis IMEI 16 digit.
 
 ## What's Next
 
-Saya akan menulis lanjutan praktik AI ini — otomasi Google Apps Script dengan bantuan AI untuk pekerjaan operasional non-koding. Ikuti lewat [RSS](/writing/index.xml) atau [hubungi saya](/contact/) kalau ada workflow AI yang mau kamu tanyakan.
+Saya berencana menulis lanjutan soal AI ini: otomasi Google Apps Script dengan bantuan AI untuk kerjaan operasional non-koding. Ikuti lewat [RSS](/writing/index.xml) atau [hubungi saya](/contact/) kalau ada workflow AI yang mau ditanyakan.
 
 ## CTA
 
-Bagikan artikel ini jika bermanfaat. Untuk diskusi lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Kalau menemukan kekeliruan pada contoh paket atau hasil pengujian, [hubungi saya](/contact/). Boleh juga subscribe [RSS](/writing/index.xml) untuk mengikuti tulisan berikutnya.
