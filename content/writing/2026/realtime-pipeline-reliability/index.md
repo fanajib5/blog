@@ -4,7 +4,7 @@ description: "Cara memikirkan kegagalan, retry, backpressure, dan observability 
 author: "Faiq Najib Al-Aziz"
 date: 2026-10-24
 lastmod: 2026-10-24
-draft: true
+draft: false
 toc: true
 comments: true
 images: []
