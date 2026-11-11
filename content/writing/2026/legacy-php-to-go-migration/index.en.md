@@ -103,7 +103,7 @@ A few numbers from the project:
 - **33 entities** converted from MySQL to PostgreSQL[^5]
 - **194K+ lines** of PHP transformed into a cleaner Go architecture
 - **More consistent response times**: no more unexpected spikes
-- **Test coverage increased significantly**: from almost nothing to a respectable number
+- **Test coverage rose from almost nothing**
 - **Faster developer onboarding**: clear code structure lets new developers contribute sooner
 
 One benefit that doesn't show up in the numbers is a calmer deployment process. I no longer go into a deploy hoping nothing breaks. It can still be nerve-wracking, but it doesn't keep me up at night.

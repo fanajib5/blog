@@ -203,13 +203,13 @@ Intinya, `ST_Within` memberi status dalam/luar, lalu `LAG` membantu membaca peru
 
 Posisi sudah tersimpan dan event geofence sudah terdeteksi. Di [Part 6](/writing/2026/real-time-gps-dashboard/), saya lanjut ke dashboard GPS real-time yang menampilkan peta tanpa refresh, dengan WebSocket, fan-out, dan pola broadcast.
 
-## What's Next
+## Selanjutnya dalam Seri Ini
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
 - Sebelumnya: [Part 4: Menyimpan Data GPS dengan PostgreSQL + TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/)
 - Selanjutnya: [Part 6: Membangun Real-Time GPS Dashboard](/writing/2026/real-time-gps-dashboard/)
 
-## CTA
+Kalau ada yang ingin dibahas soal geofencing dengan PostGIS, ngobrol saja lewat [Contact](/contact/). Mau ikut artikel berikutnya? Subscribe [RSS](/writing/index.xml).
 
-Untuk membahas geofencing dengan PostGIS lebih lanjut, kunjungi [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Sekian. Salam.

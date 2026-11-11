@@ -59,7 +59,7 @@ for {
 }
 ```
 
-`net.Listen` membuka port, lalu _loop_ `Accept` menerima koneksi. Setiap koneksi ditangani _goroutine_ sendiri. **Goroutine itu murah**: stack awalnya cuma beberapa kilobyte, bukan megabyte seperti thread OS. Jadi pola "satu goroutine per koneksi" tetap ringan di 500, 5.000, bahkan 50.000 koneksi.
+`net.Listen` membuka port, lalu _loop_ `Accept` menerima koneksi. Setiap koneksi ditangani _goroutine_ sendiri. **Goroutine itu murah**: stack awalnya cuma beberapa kilobyte, bukan megabyte seperti thread OS. Jadi pola "satu goroutine per koneksi" tetap ringan saat koneksinya banyak.
 
 Untuk GPS listener, saya tidak menyarankan HTTP: ada overhead _header_ per request, koneksi berumur pendek, dan _parsing_ HTTP tidak berguna untuk paket _binary_ mentah. Lagipula device kamu tidak kirim `Content-Type` hehe.
 
@@ -295,7 +295,7 @@ Berikut output log dari saat server mulai hingga berhenti:
 
 ## Catatan Sebelum Lanjut
 
-- **Goroutine per koneksi** itu pola standar untuk TCP server di Go. Goroutine ringan, ratusan ribu koneksi pun masih sanggup.
+- **Goroutine per koneksi** itu pola standar untuk TCP server di Go. Goroutine ringan, jadi satu goroutine per koneksi tetap masuk akal. Batas sebenarnya bergantung pada memori, _file descriptor_, dan beban kerja, jadi ukur dulu sebelum menyebut angka.
 - **TCP adalah stream.** Satu `Read` ≠ satu paket. Framing manual (start bit + length + `io.ReadFull`) satu-satunya cara yang benar untuk membaca protokol binary.
 - **Deadline > interval heartbeat.** SetReadDeadline membantu membersihkan koneksi yang putus, tapi nilai yang terlalu pendek akan memutus device sehat.
 - **Tutup koneksi saat shutdown.** `SIGTERM` memberi kesempatan untuk menutup listener dan koneksi aktif dengan rapi.

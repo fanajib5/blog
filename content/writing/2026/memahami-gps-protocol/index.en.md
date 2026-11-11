@@ -290,6 +290,4 @@ Next up: [Part 2: Building a High-Performance GPS TCP Listener in Go](/en/writin
 
 If you want to jump straight to reading packets, [Part 3](/en/writing/2026/decode-packet-gt06-teltonika/) covers the details of parsing GT06 and Teltonika binary frames.
 
-## CTA
-
 For questions or discussion, head to [Contact](/en/contact/) or subscribe to [RSS](/en/writing/index.xml).

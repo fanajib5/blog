@@ -53,10 +53,9 @@ Batalnya bukan karena gagal. Prioritasnya bergeser ke kerjaan yang dampaknya leb
 
 ## Catatan Akhir
 
-1. **Pindahkan dulu 1:1, putuskan cakupan belakangan.** Menghapus halaman saat pindahan berarti dua keputusan sekaligus.
-2. **Hitung isi kotaknya.** Angka 76 ke 76 dan 101 ke 13 bikin obrolan soal warisan lebih konkret, tidak cuma soal selera.
-3. **Dua _library_ yang hidup berdampingan menandai dua era.** Masing-masing punya alasan kenapa masih ada di aplikasi.
-4. **Rencana yang dibatalkan sebelum menghabiskan biaya itu juga keputusan yang bagus.** Catat alasannya supaya jelas kapan perlu dibuka lagi.
+Menghapus halaman saat pindahan berarti dua keputusan sekaligus, jadi pindahkan dulu 1:1 dan putuskan cakupan belakangan. Menghitung isi kotaknya (76 ke 76 dan 101 ke 13) membuat obrolan soal warisan lebih konkret, tidak cuma soal selera. Dua _library_ yang hidup berdampingan menandai dua era, dan masing-masing punya alasan kenapa masih ada di aplikasi.
+
+Rencana yang dibatalkan sebelum menghabiskan biaya juga keputusan yang bagus. Catat alasannya supaya jelas kapan perlu dibuka lagi.
 
 Kotak berikutnya isinya bukan _library_, tapi tipe data yang tidak seragam. Satu _field_ yang sama bisa dikirim sebagai angka, _string_ kosong, atau _string_ biasa, tergantung halaman yang mengirimnya. Di situlah _type chaos_ mulai kelihatan.
 

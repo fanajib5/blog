@@ -264,8 +264,6 @@ This post is part of the **Building a GPS Tracking Backend from Scratch** series
 - Previous: [Part 2 - Building a High-Throughput GPS TCP Listener in Go](/en/writing/2026/tcp-listener-gps-go/)
 - Next: [Part 4 - Storing High-Throughput GPS Data with PostgreSQL and TimescaleDB](/en/writing/2026/gps-data-postgresql-timescaledb/)
 
-## CTA
-
 If you get different results when testing GT06 or Teltonika packets, let's talk via [Contact](/en/contact/). Subscribe via [RSS](/en/writing/index.xml) to catch the next article.
 
 [^traccar]: Traccar's decoder source code for [GT06](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java) and [Teltonika](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java) is a gold standard for production-tested behavior. I used it to cross-verify field layouts and unit scaling factors.

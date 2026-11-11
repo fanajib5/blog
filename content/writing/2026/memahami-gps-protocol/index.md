@@ -282,7 +282,7 @@ Sebelum lanjut, pastikan sudah paham:
 - **Beda protokol tiap brand**: binary vs text, GT06 vs Teltonika vs MQTT
 - **Kesalahpahaman umum**: IMEI duplikat, TCP "hidup" tapi device mati, timezone tidak konsisten
 
-## What's Next
+## Selanjutnya dalam Seri Ini
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
@@ -290,6 +290,6 @@ Selanjutnya: [Part 2: Membangun TCP Listener untuk GPS Device di Go](/writing/20
 
 Kalau mau langsung ke urusan baca packet, [Part 3](/writing/2026/decode-packet-gt06-teltonika/) membahas detail parsing GT06 dan Teltonika binary.
 
-## CTA
+Kalau ada yang ingin didiskusikan soal protokol GPS, mampir ke [Contact](/contact/). Mau ikut artikel berikutnya? Subscribe [RSS](/writing/index.xml).
 
-Buat diskusi, mampir ke [Contact](/contact/) atau subscribe [RSS](/writing/index.xml).
+Sekian. Salam.

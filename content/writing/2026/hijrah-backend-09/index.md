@@ -17,7 +17,7 @@ series: "Hijrah Backend"
 
 Seri ini sudah ditutup di [episode lalu](/writing/2026/hijrah-backend-08/). Namun ada satu cerita yang tidak sempat masuk ke bagian utama. Kejadiannya berlangsung setelah hampir semua episode lain ditulis. Anggap saja adegan pasca-kredit: layar sudah gelap, lampu sudah menyala, tapi masih ada satu adegan lagi hehe.
 
-Ini kisah tentang mesin _database_ yang dua kali diminta pindah haluan. Soal siapa yang memegang kemudi, bukan saya. Mungkin Anda sudah bisa menebak hahaha.
+Ini kisah tentang mesin _database_ yang dua kali diminta pindah haluan. Soal siapa yang memegang kemudi, bukan saya. Mungkin kamu sudah bisa menebak hahaha.
 
 ## Rencana Awalnya: PostgreSQL untuk Semua
 
@@ -49,12 +49,11 @@ Mungkin itu cerita untuk seri lain. Yang ini sudah cukup panjang.
 
 ## Catatan dari Epilog Ini
 
-1. **Pikirkan biaya pulangnya juga.** Migrasi _database_ bisa jadi perjalanan pulang-pergi kalau arah keputusan berubah.
-2. **Fleksibilitas dialek SQL ada ongkosnya.** Kalau ingin pindah mesin dengan mudah, hati-hati memakai fitur khasnya (iya, termasuk _LISTEN_/_NOTIFY_-ku). Kalau mau memakainya, ya jangan sekaligus menjanjikan semuanya gampang dipindah.
-3. **Satu data, satu rumah.** Dua mesin tidak masalah kalau perannya jelas. Yang bikin repot itu data yang tumpang tindih.
-4. **Keputusan di atas gaji kita tetap harus dijalani.** Setelah rapat selesai, sistemnya harus tetap hidup. Saya cuma berharap biaya perubahannya ikut dicatat hehe.
+Pelajarannya mulai dari biaya pulang: migrasi _database_ bisa jadi perjalanan pulang-pergi kalau arah keputusan berubah. Fleksibilitas dialek SQL juga ada ongkosnya. Kalau ingin pindah mesin dengan mudah, hati-hati memakai fitur khasnya (iya, termasuk _LISTEN_/_NOTIFY_-ku), dan kalau mau memakainya, jangan sekaligus menjanjikan semuanya gampang dipindah.
 
-Nah, itu tadi adegan pasca-kreditnya. Terima kasih sudah ikut sampai sini. Semoga armada Anda, kalau punya, rajin mengirim kabar. Dan semoga mesin databasenya tidak mendadak pindah haluan hehe.
+Dua mesin tidak masalah kalau perannya jelas. Yang bikin repot itu data yang tumpang tindih, jadi satu data cukup punya satu rumah. Keputusan di atas gaji kita juga tetap harus dijalani: setelah rapat selesai, sistemnya harus tetap hidup. Saya cuma berharap biaya perubahannya ikut dicatat.
+
+Nah, itu tadi adegan pasca-kreditnya. Terima kasih sudah ikut sampai sini. Semoga armadamu, kalau punya, rajin mengirim kabar. Dan semoga mesin databasenya tidak mendadak pindah haluan hehe.
 
 [^1]: Kutipan dan urutan kejadian disajikan dari ingatan dan catatan pribadi, dengan istilah teknis disederhanakan; nama pihak dan _provider_ tidak disebut, konsisten dengan episode-episode sebelumnya.
 

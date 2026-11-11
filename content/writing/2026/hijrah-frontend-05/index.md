@@ -22,7 +22,7 @@ Empat episode lalu, saya mulai membongkar gedung _frontend_ warisan. Port-nya se
 
 - **76 halaman dipindahkan dan tetap hidup.** Port 1:1 tanpa meninggalkan satu halaman pun. Semua _link_ internal antarhalaman masih menuju ke tempat yang benar.
 - **Dua _library_ UI tetap dipakai.** Ada 101 _file_ untuk yang mayoritas dan 13 untuk pemegang komponen kalender. Seperti sebelumnya, tidak ada _file_ yang memakai keduanya.
-- **194 bekas luka tipe sudah terukur.**[^1] Ada 194 jaring pengaman kecil yang masih berupa angsuran, belum menjadi arsitektur.
+- **194 bekas luka tipe sudah terukur.**[^1] Itu jaring pengaman yang tersebar di halaman-halaman, belum menjadi kontrak tipe di satu pintu masuk.
 - **Tiga era _styling_ masih ada**,[^2] satu _backup_ sudah dipensiunkan, dan _standardisasi_ menunggu giliran.
 
 Angka-angka ini bukan tanda gedungnya sudah rapi. **Pindahan selesai, renovasi belum.** Saya sempat mencampuradukkan dua hal itu, padahal jelas beda pekerjaan.
@@ -37,8 +37,6 @@ Dua sistem ini juga tumbuh karena waktu dan keadaan darurat, bukan karena seseor
 
 ## Yang Saya Catat untuk Nanti
 
-Biar tidak semuanya menumpuk di kepala, saya pisahkan catatannya seperti ini:
-
 Mulai sekarang, saya jaga batas antarlibrary supaya tidak ada _file_ campuran, kontrak tipe di pintu masuk, dan kebiasaan mencatat warisan yang kami bawa.
 
 _TypeScript_, penamaan lintas era, dan _refactor_ struktur internal masih menunggu giliran. Saya ingin melihat data pemakaian dulu sebelum mengubah struktur.
@@ -47,7 +45,7 @@ Migrasi _state management_ batal, dan saya tidak menyesal. Rencana yang tidak ja
 
 > Setelah ikut berjibaku merawat _web app_ v3 ini, saya malah makin merasa seperti turis. Hati masih protes, tapi _production_ tetap harus jalan.
 
-Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya bercanda soal visa turis yang dicabut dan diganti KTP penduduk. Kenyataannya, KTP-nya memang terbit, tetapi hati saya masih sering membawa paspor.
+Di [episode pertama](/writing/2026/hijrah-frontend-01/) saya mengaku datang ke _frontend_ seperti turis. Port-nya sekarang selesai, tapi perasaan itu belum pergi.
 
 ## Nah, Selesai Juga
 

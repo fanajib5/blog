@@ -65,10 +65,9 @@ Masih ada utang teknis yang belum selesai, seperti yang saya ceritakan di [episo
 
 ## Catatan Saya
 
-1. **Sensus sebelum pindah.** Angka konsumen dan _method_ yang benar-benar dipakai itu yang menentukan bentuk pintu modul, bukan tebakan, bukan selera.
-2. **Dinding yang dijaga _compiler_ lebih kuat daripada kesepakatan verbal.** Aturan arsitektur yang tidak bisa dilanggar tanpa _build_ merah adalah satu-satunya aturan yang bertahan di sprint sibuk.
-3. **Pindahan _byte-identik_ membuat _review_ murah.** Pisahkan "memindahkan" dari "memperbaiki", campurkannya, dan keduanya sama-sama jadi susah dicek.
-4. **Pengecualian antar modul itu wajar, asal sadar dan tercatat.** Seragam sempurna itu indah di diagram; proyek hidup butuh pintu yang kebijakannya jelas.
+Dua hal yang paling saya pegang dari episode ini. Pertama, angka konsumen dan _method_ yang benar-benar dipakai menentukan bentuk pintu modul, bukan tebakan atau selera, jadi sensus dulu baru pindah. Kedua, pindahan _byte-identik_ membuat _review_ murah karena "memindahkan" dan "memperbaiki" dipisah. Kalau dicampur, keduanya sama-sama susah dicek.
+
+Aturan arsitektur juga lebih awet kalau dijaga _compiler_: pelanggaran yang membuat _build_ merah lebih sulit lolos di _sprint_ sibuk daripada kesepakatan verbal. Pengecualian antarmodul tetap wajar selama sadar dan tercatat, karena proyek hidup butuh pintu yang kebijakannya jelas.
 
 Di episode berikutnya, saya keluar dari _dashboard_ dan ikut paket TCP dari _tracker_ GPS sampai masuk menjadi baris di _database time-series_.
 

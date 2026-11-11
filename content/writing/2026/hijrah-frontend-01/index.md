@@ -51,14 +51,14 @@ Jadi untuk _frontend_, tampilan dan perilakunya kami pertahankan dulu. Struktur 
 
 ## Rencana Episode
 
-Seri **Hijrah Frontend** ini rencananya lima episode (yang pertama sedang Anda baca):
+Seri **Hijrah Frontend** ini rencananya lima episode (yang pertama sedang kamu baca):
 
 2. **Port tipis dan warisan yang ikut naik**: apa saja yang terbawa dari rumah lama, secara sadar.
 3. **Type chaos: angka, _string_ kosong, dan halaman yang berbeda pendapat**: satu _field_ yang sama dikirim dengan tipe berbeda-beda tergantung halamannya, lalu bagaimana itu diterima di dunia yang _strict_.
 4. **Dua _library_ UI, dua era penamaan**: warisan yang hidup berdampingan, dan konvensi yang berganti setiap ganti tukang.
 5. **Dua sisi satu gedung**: penutup, refleksi, dan apa yang berubah setelah gedung sebelah jadi rumah sendiri.
 
-Kalau Anda datang dari seri _backend_: selamat datang kembali, gedungnya masih sama, cuma pindah lantai. Kalau baru mampir, boleh mulai dari [episode pembuka seri sebelah](/writing/2026/hijrah-backend-01/), atau langsung di sini saja. Cerita ini tetap bisa dinikmati sendiri kok, hehe~
+Kalau kamu datang dari seri _backend_: selamat datang kembali, gedungnya masih sama, cuma pindah lantai. Kalau baru mampir, boleh mulai dari [episode pembuka seri sebelah](/writing/2026/hijrah-backend-01/), atau langsung di sini saja. Cerita ini tetap bisa dinikmati sendiri kok, hehe~
 
 ## Tetangga Baru Gedung Sebelah
 

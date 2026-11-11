@@ -22,7 +22,7 @@ Sistem GPS bisa terlihat sehat karena server menerima koneksi dan beberapa titik
 
 Karena itu, reliability bukan sekadar menjaga proses tetap hidup. Kita perlu tahu data apa yang berhasil diterima, apa yang belum diproses, apa yang gagal, dan tindakan apa yang aman dilakukan ketika salah satu komponen tidak tersedia.
 
-Artikel ini membahas prinsip yang dapat diterapkan pada pipeline ingestion GPS. Contoh kode adalah potongan ilustratif—bukan implementasi lengkap—dan tidak menyatakan hasil produksi atau jaminan availability.
+Saya tulis ini sebagai kerangka berpikir untuk pipeline ingestion GPS. Contoh kode di sini ilustrasi, bukan implementasi lengkap, dan tidak menyatakan hasil produksi atau jaminan availability.
 
 ## Petakan alur dan batas kegagalan
 
@@ -38,7 +38,7 @@ Tracker
   -> pembaruan status yang dibaca operator
 ```
 
-Setiap panah adalah batas yang perlu dipahami. Koneksi TCP dapat terputus. Frame dapat belum lengkap atau tidak valid. Worker dapat tertahan. Database dapat menolak koneksi atau menulis lebih lambat dari laju masuk. Consumer dashboard bisa terputus tanpa mengganggu ingestion—atau justru tanpa batas menghabiskan resource jika desainnya tidak membatasi klien.
+Setiap panah adalah batas yang perlu dipahami. Koneksi TCP dapat terputus. Frame dapat belum lengkap atau tidak valid. Worker dapat tertahan. Database dapat menolak koneksi atau menulis lebih lambat dari laju masuk. Consumer dashboard bisa terputus tanpa mengganggu ingestion, atau justru menghabiskan resource tanpa batas jika desainnya tidak membatasi klien.
 
 Tanyakan pada setiap tahap:
 
@@ -56,13 +56,13 @@ Retry berguna untuk kegagalan sementara, misalnya koneksi downstream yang sebent
 
 Sebelum retry, bedakan setidaknya:
 
-1. **Error sementara** — mungkin pulih setelah menunggu atau membangun ulang koneksi.
-2. **Error permanen untuk pesan itu** — perlu dicatat, diperbaiki, atau dikarantina; retry tanpa perubahan hanya mengulang kegagalan.
-3. **Error yang hasilnya tidak diketahui** — downstream mungkin sudah melakukan pekerjaan tetapi balasan tidak sampai.
+1. **Error sementara:** mungkin pulih setelah menunggu atau membangun ulang koneksi.
+2. **Error permanen untuk pesan itu:** perlu dicatat, diperbaiki, atau dikarantina. Retry tanpa perubahan hanya mengulang kegagalan.
+3. **Error yang hasilnya tidak diketahui:** downstream mungkin sudah melakukan pekerjaan tetapi balasan tidak sampai.
 
 Untuk kategori ketiga, tentukan idempotensi. Jika protokol menyediakan nomor urut atau identitas pesan, gunakan informasi tersebut sesuai semantiknya. Jika tidak ada identitas stabil, jangan mengklaim deduplikasi sempurna; pilih dan dokumentasikan kompromi yang sesuai dengan dampak duplikasi.
 
-Hindari retry rapat tanpa batas. Gunakan batas percobaan atau waktu, jeda yang meningkat, dan variasi jeda agar banyak worker tidak mencoba kembali serempak. Setelah batas tercapai, kegagalan perlu terlihat dan mengikuti kebijakan—misalnya masuk antrean durable untuk ditinjau, menolak koneksi agar sumber mencoba ulang, atau mengirim pesan ke jalur karantina. Pilihan bergantung pada kemampuan perangkat dan risiko kehilangan atau duplikasi data.
+Hindari retry rapat tanpa batas. Gunakan batas percobaan atau waktu, jeda yang meningkat, dan variasi jeda agar banyak worker tidak mencoba kembali serempak. Setelah batas tercapai, kegagalan perlu terlihat dan mengikuti kebijakan, misalnya masuk antrean durable untuk ditinjau, menolak koneksi agar sumber mencoba ulang, atau mengirim pesan ke jalur karantina. Pilihan bergantung pada kemampuan perangkat dan risiko kehilangan atau duplikasi data.
 
 Pseudocode berikut menunjukkan urutannya, bukan API siap pakai:
 
@@ -81,7 +81,7 @@ if still failing:
     emit a visible failure and apply the documented recovery policy
 ```
 
-Hal pentingnya bukan rumus delay tertentu. Yang penting adalah retry punya batas, error dapat diklasifikasikan, dan kontrak acknowledgement tidak membuat pengirim mengira data aman padahal hanya tersimpan di memori.
+Retry perlu punya batas, error perlu bisa diklasifikasikan, dan kontrak acknowledgement tidak boleh membuat pengirim mengira data aman padahal hanya tersimpan di memori.
 
 ## Backpressure: kapasitas harus punya batas
 
@@ -101,7 +101,7 @@ default:
 }
 ```
 
-`Packet` dan `ErrOverloaded` adalah placeholder konseptual, bukan tipe dari aplikasi ini. Channel tersebut berada di memori: jika proses berhenti sebelum worker menyimpan paket, isi antrean dapat hilang. Jangan menyebutnya durable queue.
+`Packet` dan `ErrOverloaded` adalah placeholder konseptual, bukan tipe dari aplikasi ini. Channel tersebut berada di memori: jika proses berhenti sebelum worker menyimpan paket, isi antrean dapat hilang.
 
 Saat penuh, beberapa pilihan yang mungkin adalah:
 
@@ -133,7 +133,7 @@ Gunakan identitas perangkat sebagai label dengan hati-hati. Label ber-cardinalit
 
 Bayangkan sebuah consumer penyimpanan melambat sementara listener masih menerima paket. Antrean berbatas mulai terisi. Dengan hanya metrik jumlah koneksi, sistem mungkin tampak sehat. Dengan metrik usia item tertua dan latensi penulisan, operator dapat melihat bahwa data tertahan sebelum sampai ke penyimpanan.
 
-Tim kemudian menjalankan kebijakan overload yang telah dipilih—misalnya menahan pembacaan atau mengirim data ke antrean durable—dan mencatat apakah paket dapat diproses setelah downstream pulih. Ini hanya skenario sintetis untuk menjelaskan cara berpikir; tidak menggambarkan kejadian atau hasil pada sistem klien tertentu.
+Tim kemudian menjalankan kebijakan overload yang telah dipilih, misalnya menahan pembacaan atau mengirim data ke antrean durable, dan mencatat apakah paket dapat diproses setelah downstream pulih. Ini skenario sintetis untuk menjelaskan cara berpikir.
 
 ## Uji perilaku saat sistem tertekan
 
@@ -160,4 +160,6 @@ Untuk tiap skenario, tentukan hasil yang diharapkan: data ditolak, ditunda, dico
 - Jalur error terlihat dan memiliki pemilik tindak lanjut.
 - Kegagalan penting diuji dengan skenario yang dapat diulang.
 
-Ketahanan pipeline adalah kombinasi kontrak data, kebijakan overload, pemulihan, dan kemampuan operator memahami keadaan sistem. Jika tim sedang menilai integrasi atau pilot sistem armada, [hubungi Akordium Lab untuk mendiskusikan workflow dan batas implementasinya](https://akordium.id/contact).
+Kalau tim kamu sedang menilai integrasi atau pilot sistem armada, [hubungi Akordium Lab untuk mendiskusikan workflow dan batas implementasinya](https://akordium.id/contact).
+
+Sekian. Salam.

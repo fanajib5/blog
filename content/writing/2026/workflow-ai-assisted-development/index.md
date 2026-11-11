@@ -78,10 +78,10 @@ Pendapat saya: yang penting bukan siapa yang mengetik, tapi **siapa yang bertang
 
 Kalau mau mulai, pilih satu kebiasaan saja: **jangan anggap kode benar sebelum dijalankan**. Memory, dokumentasi, dan checkpoint membantu kerjaan saya, tapi semuanya bermula dari mau memeriksa hasilnya, termasuk saat AI dengan yakin menulis IMEI 16 digit.
 
-## What's Next
+## Berikutnya
 
-Saya berencana menulis lanjutan soal AI ini: otomasi Google Apps Script dengan bantuan AI untuk kerjaan operasional non-koding. Ikuti lewat [RSS](/writing/index.xml) atau [hubungi saya](/contact/) kalau ada workflow AI yang mau ditanyakan.
+Saya berencana menulis lanjutan soal AI ini: otomasi Google Apps Script dengan bantuan AI untuk kerjaan operasional non-koding. Ikuti lewat [RSS](/writing/index.xml).
 
-## CTA
+Kalau menemukan kekeliruan pada contoh paket atau hasil pengujian, atau ada workflow AI yang mau ditanyakan, [hubungi saya](/contact/).
 
-Kalau menemukan kekeliruan pada contoh paket atau hasil pengujian, [hubungi saya](/contact/). Boleh juga subscribe [RSS](/writing/index.xml) untuk mengikuti tulisan berikutnya.
+Sekian. Salam.

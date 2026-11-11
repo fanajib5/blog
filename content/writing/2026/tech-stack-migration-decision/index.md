@@ -117,7 +117,7 @@ Kalau masalahnya cuma "kita belum _paham_ cara pakai _tool_ ini dengan baik", ma
 
 ### 2. Biaya _Inaction_ Sudah Terukur dan Nyata
 
-Bukan _feeling_ "kayaknya sih makin lambat", tapi **data**. Fitur yang dulu 2 hari sekarang 2 minggu. _Bug_ _production_ naik 30% dalam 6 bulan. Onboarding makan 4 minggu bukan 1 minggu. Kalau datanya tidak ada, kumpulkan dulu. Jangan migrasi berdasarkan _assumption_.
+Bukan _feeling_ "kayaknya sih makin lambat", tapi **data**. Ukur berapa lama fitur dikerjakan dulu dan sekarang, bagaimana tren _bug_ _production_ per bulan, dan berapa minggu _onboarding_ _developer_ baru. Kalau datanya tidak ada, kumpulkan dulu. Jangan migrasi berdasarkan _assumption_.
 
 ### 3. Tim Punya Kapasitas untuk Menjalankan
 

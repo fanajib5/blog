@@ -59,7 +59,7 @@ for {
 }
 ```
 
-`net.Listen` opens the port, and the `Accept` loop waits for connections. Each one runs in its own goroutine. **Goroutines are cheap**: the initial stack is a few kilobytes, compared with the megabytes of an OS thread. So the "one goroutine per connection" model stays lightweight at 500, 5,000, or even 50,000 connections.
+`net.Listen` opens the port, and the `Accept` loop waits for connections. Each one runs in its own goroutine. **Goroutines are cheap**: the initial stack is a few kilobytes, compared with the megabytes of an OS thread. So the "one goroutine per connection" model stays lightweight when connections pile up.
 
 For a GPS listener, I do not recommend HTTP: per-request header overhead, short-lived connections, and HTTP parsing that is useless for raw binary packets. Your tracker will not send a `Content-Type` header either, hehe.
 
@@ -295,7 +295,7 @@ This is the log output from startup through shutdown:
 
 ## Notes Before Moving On
 
-- **One goroutine per connection** is the standard pattern for Go TCP servers. Goroutines are light enough to hold hundreds of thousands of sockets.
+- **One goroutine per connection** is the standard pattern for Go TCP servers. Goroutines are light, so one goroutine per connection stays reasonable. The real limit depends on memory, file descriptors, and workload, so measure before quoting a number.
 - **TCP is a stream.** One `Read` call does not equal one packet. Custom framing (start bits + length + `io.ReadFull`) is the only reliable way to read binary protocols.
 - **Set deadlines higher than heartbeat intervals.** `SetReadDeadline` cleans up dead sockets, but a short timeout will disconnect healthy, idle devices.
 - **Close connections during shutdown.** `SIGTERM` gives the process a chance to close the listener and active sockets cleanly.

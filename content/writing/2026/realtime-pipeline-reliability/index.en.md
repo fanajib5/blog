@@ -22,7 +22,7 @@ A GPS system can look healthy because the server accepts connections and some lo
 
 Reliability is therefore more than keeping a process alive. We need to know what data has been received, what is still being processed, what failed, and which actions are safe when a component is unavailable.
 
-This article covers principles for GPS ingestion pipelines. The code examples are illustrative fragments, not complete implementations, and they do not claim production results or guaranteed availability.
+I wrote this as a way of thinking about GPS ingestion pipelines. The code examples are illustrative fragments, not complete implementations, and they do not claim production results or guaranteed availability.
 
 ## Map the flow and failure boundaries
 
@@ -38,7 +38,7 @@ Tracker
   -> status update shown to an operator
 ```
 
-Each arrow is a boundary to understand. A TCP connection can drop. A frame can be incomplete or invalid. Workers can stall. A database can reject connections or write more slowly than data arrives. A dashboard consumer can disconnect without affecting ingestion—or consume unbounded resources if client handling is not constrained.
+Each arrow is a boundary to understand. A TCP connection can drop. A frame can be incomplete or invalid. Workers can stall. A database can reject connections or write more slowly than data arrives. A dashboard consumer can disconnect without affecting ingestion, or consume unbounded resources if client handling is not constrained.
 
 Ask at each stage:
 
@@ -56,13 +56,13 @@ Retries can help with temporary failures, such as a downstream connection that i
 
 Before retrying, distinguish at least:
 
-1. **Temporary errors** — may recover after a delay or a new connection.
-2. **Permanent errors for this message** — need to be recorded, corrected, or quarantined; retrying without a change repeats the failure.
-3. **Unknown outcomes** — downstream work may have succeeded even though its response did not arrive.
+1. **Temporary errors:** may recover after a delay or a new connection.
+2. **Permanent errors for this message:** need to be recorded, corrected, or quarantined. Retrying without a change repeats the failure.
+3. **Unknown outcomes:** downstream work may have succeeded even though its response did not arrive.
 
 For the third category, define idempotency. If the protocol provides a sequence number or message identity, use it according to its semantics. If there is no stable identity, do not claim perfect deduplication; choose and document a trade-off suitable for the impact of duplicates.
 
-Avoid unlimited, rapid retries. Use an attempt or time budget, increasing delays, and jitter so many workers do not retry in lockstep. Once the limit is reached, the failure must remain visible and follow a policy—for example, a durable queue for review, rejecting a connection so the source can retry, or routing the message to quarantine. The right choice depends on device capabilities and the risks of data loss or duplication.
+Avoid unlimited, rapid retries. Use an attempt or time budget, increasing delays, and jitter so many workers do not retry in lockstep. Once the limit is reached, the failure must remain visible and follow a policy, for example a durable queue for review, rejecting a connection so the source can retry, or routing the message to quarantine. The right choice depends on device capabilities and the risks of data loss or duplication.
 
 This pseudocode shows the sequence, not a ready-to-use API:
 
@@ -81,7 +81,7 @@ if still failing:
     emit a visible failure and apply the documented recovery policy
 ```
 
-The important point is not a particular delay formula. Retries need limits, errors need classification, and the acknowledgement contract must not make the sender believe data is safe when it only exists in memory.
+Retries need limits, errors need classification, and the acknowledgement contract must not make the sender believe data is safe when it only exists in memory.
 
 ## Backpressure: capacity needs a boundary
 
@@ -101,7 +101,7 @@ default:
 }
 ```
 
-`Packet` and `ErrOverloaded` are conceptual placeholders, not types from this application. The channel is in memory: if the process stops before a worker stores the packet, its contents can be lost. Do not call it a durable queue.
+`Packet` and `ErrOverloaded` are conceptual placeholders, not types from this application. The channel is in memory: if the process stops before a worker stores the packet, its contents can be lost.
 
 When the queue is full, possible choices include:
 
@@ -133,7 +133,7 @@ Use device identity as a metric label carefully. High-cardinality labels can mak
 
 Imagine a storage consumer slowing down while the listener continues to receive packets. A bounded queue starts filling. With only a connection-count metric, the system may look healthy. Queue-age and write-latency signals can reveal that data is stalled before it reaches storage.
 
-The team then applies its selected overload policy—such as pausing reads or writing to a durable queue—and records whether packets can be processed after the downstream service recovers. This is a synthetic scenario to illustrate the reasoning; it does not describe an incident or result from a specific client system.
+The team then applies its selected overload policy, such as pausing reads or writing to a durable queue, and records whether packets can be processed after the downstream service recovers. This is a synthetic scenario to illustrate the reasoning.
 
 ## Test behavior under pressure
 
@@ -160,4 +160,5 @@ For each scenario, define the expected result: reject, delay, retry, quarantine,
 - Error paths are visible and have an owner for follow-up.
 - Important failures are tested with repeatable scenarios.
 
-Pipeline resilience combines data contracts, overload policy, recovery, and an operator's ability to understand system state. If your team is evaluating an integration or fleet-system pilot, [contact Akordium Lab to discuss the workflow and implementation boundaries](https://akordium.id/contact).
+If your team is evaluating an integration or fleet-system pilot, [contact Akordium Lab to discuss the workflow and implementation boundaries](https://akordium.id/contact).
+

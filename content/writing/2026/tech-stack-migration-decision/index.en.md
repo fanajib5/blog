@@ -117,7 +117,7 @@ If the problem is just "we don't know how to use this tool well", then the solut
 
 ### 2. The Cost of Inaction Is Measured and Real
 
-Not a feeling of "it seems like it's getting slower", but **data**. Features that used to take 2 days now take 2 weeks. Production bugs increased 30% in 6 months. Onboarding takes 4 weeks instead of 1. If the data isn't there, collect it first. Don't migrate based on assumptions.
+Not a feeling of "it seems like it's getting slower", but **data**. Measure how long features took before and now, the monthly trend of production bugs, and how many weeks onboarding a new developer takes. If the data isn't there, collect it first. Don't migrate based on assumptions.
 
 ### 3. The Team Has the Capacity to Execute
 

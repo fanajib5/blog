@@ -257,16 +257,16 @@ Semua kode di artikel ini lolos 13 asersi[^uji]:
 
 Berikutnya adalah menyimpan posisi yang sudah didekode. Kalau 500 device mengirim posisi tiap 10 detik, jumlahnya 4,3 juta titik per hari. Tabel PostgreSQL biasa bakal kewalahan tanpa optimasi, jadi Part 4 membahas TimescaleDB.
 
-## What's Next
+## Selanjutnya dalam Seri Ini
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
 - Sebelumnya: [Part 2: Membangun TCP Listener untuk GPS Device di Go](/writing/2026/tcp-listener-gps-go/)
 - Selanjutnya: [Part 4: Menyimpan Data GPS dengan PostgreSQL + TimescaleDB](/writing/2026/gps-data-postgresql-timescaledb/)
 
-## CTA
-
 Kalau hasil ujimu berbeda saat mencoba packet GT06 atau Teltonika, ngobrol saja lewat [Contact](/contact/). Mau ikut artikel berikutnya? Subscribe [RSS](/writing/index.xml).
+
+Sekian. Salam.
 
 [^traccar]: Source code decoder Traccar untuk [GT06](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java) dan [Teltonika](https://github.com/traccar/traccar/blob/master/src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java) adalah referensi perilaku yang teruji production. Saya pakai untuk memverifikasi layout field dan satuan koordinat.
 

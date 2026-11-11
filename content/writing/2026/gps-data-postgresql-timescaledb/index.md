@@ -33,7 +33,7 @@ TimescaleDB itu ekstensi PostgreSQL, bukan database lain yang harus dipelihara t
 2. **Continuous aggregates**: ringkasan yang dihitung di belakang layar secara bertahap, bukan dihitung ulang tiap query.
 3. **Compression policy**: data lama dikompresi otomatis jadi format kolom, jauh lebih kecil, dan tetap bisa di-query.
 
-Alternatif yang sering dibandingkan adalah Cassandra (operasional berat, tidak ada SQL penuh), InfluxDB (bahasa query sendiri, relasi lemah), dan ClickHouse (kencang untuk analitik, tapi bukan PostgreSQL sehingga perlu dua sistem). Untuk GPS tracking yang membutuhkan _operational query_ (posisi terbaru, history rute) **dan** analitik ringan dalam satu sistem, TimescaleDB cocok. Di production, hypertable ini menampung jutaan titik per hari dan membuat reporting yang sebelumnya memakan menit selesai dalam hitungan detik.
+Alternatif yang sering dibandingkan adalah Cassandra (operasional berat, tidak ada SQL penuh), InfluxDB (bahasa query sendiri, relasi lemah), dan ClickHouse (kencang untuk analitik, tapi bukan PostgreSQL sehingga perlu dua sistem). Untuk GPS tracking yang membutuhkan _operational query_ (posisi terbaru, history rute) **dan** analitik ringan dalam satu sistem, TimescaleDB cocok. Di bagian continuous aggregate nanti, saya tunjukkan selisih waktu query-nya pada data uji.
 
 ## Setup: Tabel Device dan Hypertable Positions
 
@@ -184,20 +184,20 @@ Di pengujian ini, ukuran chunk sehari turun dari 2856 kB menjadi **24 kB**. Data
 
 - **Pisahkan registry dan time-series.** `devices` adalah tabel biasa; `positions` hypertable. Jangan campur.
 - **Selalu batasi rentang waktu di query.** Index `(device_id, time DESC)` hanya menolong query yang tahu mau periode apa.
-- **Continuous aggregate untuk reporting agregat.** Ringkas data di belakang layar agar dashboard tidak menghitung semuanya dari awal. Di sistem production yang saya tangani, pola ini membantu memangkas waktu reporting dari menit menjadi detik.
+- **Continuous aggregate untuk reporting agregat.** Ringkas data di belakang layar agar dashboard tidak menghitung semuanya dari awal. Di uji lokal tadi, query ringkasan turun dari 158 ms ke 0,5 ms pada dataset kecil.
 - **Pikirkan compression dan retention sejak awal.** Memutuskan berapa lama data disimpan adalah urusan bisnis juga. Jangan tunggu sampai storage penuh baru bertanya, "ini data tahun lalu masih perlu?"
 
 Nah, koordinatnya sudah tersimpan dan bisa di-query. Tapi GPS tracking juga perlu menjawab pertanyaan seperti "kendaraan saya sudah keluar area kirim belum?" Di [Part 5](/writing/2026/geofencing-postgis/), saya lanjut ke geofencing dengan PostGIS, polygon, `ST_Contains`, dan deteksi kendaraan masuk atau keluar area.
 
-## What's Next
+## Selanjutnya dalam Seri Ini
 
 Artikel ini bagian dari seri **Membangun GPS Backend dari Nol**.
 
 - Sebelumnya: [Part 3: Decode Packet: GT06 & Teltonika Protocol](/writing/2026/decode-packet-gt06-teltonika/)
 - Selanjutnya: [Part 5: Geofencing dengan PostGIS](/writing/2026/geofencing-postgis/)
 
-## CTA
-
 Kalau ingin membahas penyimpanan data GPS dengan PostgreSQL atau TimescaleDB, [hubungi saya](/contact/). Kamu juga bisa mengikuti tulisan berikutnya lewat [RSS](/writing/index.xml).
+
+Sekian. Salam.
 
 [^ts]: Semua SQL di artikel ini diuji di TimescaleDB 2.30.0 (PostgreSQL 16, container Docker `timescale/timescaledb:latest-pg16`) dengan 155.523 baris data sintetis. Skrip lengkapnya bisa direplikasi dengan `docker run` + SQL di atas.

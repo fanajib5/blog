@@ -17,7 +17,7 @@ series: "Hijrah Backend"
 
 Setiap detik, armada mengirim kabar. Puluhan ribu _tracker_ GPS mengirim paket TCP berisi posisi, status mesin, dan kekuatan sinyal. Sistem harus menerima semuanya sepanjang hari, tanpa kampanye "ayo hemat kirim data" hahaha.
 
-Di [episode pertama](/writing/2026/hijrah-backend-01/) saya sempat cerita bahwa sistem lama menerima paket dan menulisnya ke _database_ dalam layanan yang sama. Sekarang tugasnya dipisah: _listener_ menerima dan menerjemahkan paket, antrean menampungnya, lalu _consumer_ menulis ke _database_. Di episode ini saya ceritakan alurnya, termasuk kesalahan yang baru kelihatan setelah jalan hehe~
+Di [episode pertama](/writing/2026/hijrah-backend-01/) saya sempat cerita bahwa sistem lama menerima paket dan menulisnya ke _database_ dalam layanan yang sama. Sekarang tugasnya dipisah: _listener_ menerima dan menerjemahkan paket, antrean menampungnya, lalu _consumer_ menulis ke _database_. Di episode ini saya ceritakan alurnya, termasuk kesalahan yang baru kelihatan setelah jalan.
 
 ## Kenapa Ada Antrean di Tengah Jalan
 
@@ -33,7 +33,7 @@ Sistem lama tidak punya urusan dengan antrean mati, karena ia langsung melakukan
 
 Koneksi _broker_ putus tanpa peringatan, lalu data posisi kendaraan pelanggan ikut hilang begitu saja. Infrastrukturnya bersin, datanya yang tumbang.
 
-Saya memperbaikinya bertahap. Koneksi yang cuma tersendat diberi _retry_ selama beberapa detik. Kalau _broker_ tetap mati, masalahnya harus kelihatan di log _error_, bukan diam-diam menunggu ada yang menemukan peringatan berminggu-minggu kemudian. Lalu saya pasang _backpressure_. Antrean menampung sekitar 8 ribu paket;[^2] kalau penuh, `Send()` ikut menunggu. _Listener_ melambat dan _tracker_ mencoba lagi lewat TCP. Jadi, **data tidak hilang, cuma telat datang**. Membuat sumber menunggu ternyata lebih murah daripada kehilangan paket hehe.
+Saya memperbaikinya bertahap. Koneksi yang cuma tersendat diberi _retry_ selama beberapa detik. Kalau _broker_ tetap mati, masalahnya harus kelihatan di log _error_, bukan diam-diam menunggu ada yang menemukan peringatan berminggu-minggu kemudian. Lalu saya pasang _backpressure_. Antrean menampung sekitar 8 ribu paket;[^2] kalau penuh, `Send()` ikut menunggu. _Listener_ melambat dan _tracker_ mencoba lagi lewat TCP. Jadi, **data tidak hilang, cuma telat datang**. Membuat sumber menunggu ternyata lebih murah daripada kehilangan paket.
 
 Komentar di kode producer sekarang mencatat alurnya: antrean penuh → `Send()` blok → _listener_ melambat → _device_ mencoba lagi. Dulu terlihat seperti _bug_, ternyata bisa jadi pengaman.
 
@@ -49,9 +49,9 @@ Dari kejadian ini saya belajar bahwa pilihan `continue` atau `return` di _loop_ 
 
 Tahap terakhir menyimpan data lokasi, yang selalu terkait waktu dan tempat. Untuk itu saya memakai PostgreSQL dengan ekstensi _time-series_. Tabel lokasi menjadi _hypertable_ yang dipartisi otomatis berdasarkan waktu.
 
-Ada dua hal yang tidak saya dapatkan di sistem lama. Pertama, **kompresi**: _chunk_ lama dikompresi otomatis. Kini lebih dari seratus _chunk_ disimpan dengan cara itu, dan _index_ tertentu bisa dibangun langsung di atas data terkompresi tanpa membongkarnya. Kedua, **retensi otomatis**: kebijakan mingguan membuang data yang melewati batas usia. Dulu, data lama dibersihkan secara manual, sambil berdoa. Sekarang _database_-nya yang mengurus jadwal hehe~
+Ada dua hal yang tidak saya dapatkan di sistem lama. Pertama, **kompresi**: _chunk_ lama dikompresi otomatis. Kini lebih dari seratus _chunk_ disimpan dengan cara itu, dan _index_ tertentu bisa dibangun langsung di atas data terkompresi tanpa membongkarnya. Kedua, **retensi otomatis**: kebijakan mingguan membuang data yang melewati batas usia. Dulu, data lama dibersihkan secara manual, sambil berdoa. Sekarang _database_-nya yang mengurus jadwal.
 
-Sekarang kalau ada yang bertanya kapan data lama dibersihkan, saya tinggal menunjuk policy-nya hehe.
+Kalau ada yang bertanya kapan data lama dibersihkan, saya tinggal menunjuk policy-nya.
 
 ## Catatan Saya
 

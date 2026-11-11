@@ -82,6 +82,4 @@ If you want to start, pick just one habit: **don't treat code as correct until y
 
 I plan to write a follow-up on AI practice: automating Google Apps Script with AI help for non-coding operational work. Follow along via [RSS](/en/writing/index.xml) or [reach out](/en/contact/) if there's an AI workflow you'd like to ask about.
 
-## CTA
-
 If you spot an error in the packet examples or test results, [contact me](/en/contact/). You're also welcome to subscribe via [RSS](/en/writing/index.xml) to follow future posts.

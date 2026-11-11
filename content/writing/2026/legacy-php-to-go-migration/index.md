@@ -103,7 +103,7 @@ Ini beberapa angka dari proyeknya:
 - **33 _entity_** dikonversi dari MySQL ke PostgreSQL[^5]
 - **194K+ baris kode** PHP ditransformasi menjadi arsitektur Go yang lebih bersih
 - **_Response time_ lebih konsisten**: tidak ada lagi _spike_ yang tidak terduga
-- **_Test coverage_ meningkat signifikan**: dari hampir tidak ada menjadi angka yang pantas
+- **_Test coverage_ naik dari hampir tidak ada**
 - **_Developer onboarding_ lebih cepat**: struktur kode yang jelas membuat _developer_ baru bisa _contribute_ lebih cepat
 
 Hal yang tidak tercatat dalam angka, tetapi terasa, adalah lebih tenangnya proses _deploy_. Saya tidak lagi berharap semoga tidak ada yang rusak. _Deploy_ tetap membuat sedikit gugup, tetapi tidak sampai mengganggu tidur.

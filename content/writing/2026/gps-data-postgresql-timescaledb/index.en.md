@@ -33,7 +33,7 @@ TimescaleDB is a PostgreSQL extension, not another database to maintain separate
 2. **Continuous aggregates**: materialized summaries computed incrementally in the background, rather than recalculated from scratch on every query.
 3. **Compression policies**: older data gets compressed automatically into a columnar format, shrinking storage footprints drastically while remaining fully queryable.
 
-Common alternatives include Cassandra (heavy operational overhead, lacks full SQL), InfluxDB (proprietary query language, poor relational joins), and ClickHouse (fast for analytics, but not PostgreSQL, so it requires two systems). For GPS tracking that needs operational queries (latest vehicle position, trip breadcrumbs) **and** lightweight analytics in one engine, TimescaleDB is a good fit. In production, this hypertable setup handles millions of points a day and cuts reporting runtimes from minutes to sub-second responses.
+Common alternatives include Cassandra (heavy operational overhead, lacks full SQL), InfluxDB (proprietary query language, poor relational joins), and ClickHouse (fast for analytics, but not PostgreSQL, so it requires two systems). For GPS tracking that needs operational queries (latest vehicle position, trip breadcrumbs) **and** lightweight analytics in one engine, TimescaleDB is a good fit. In the continuous aggregate section below, I show the query-time difference on the test data.
 
 ## Setup: Device Table and Positions Hypertable
 
@@ -184,7 +184,7 @@ In this test, a one-day chunk shrank from 2,856 kB to **24 kB**. The synthetic d
 
 - **Keep registry and time-series data apart.** `devices` is a standard relational table; `positions` is a hypertable. Don't mix them together.
 - **Always bound queries by time.** The `(device_id, time DESC)` index only helps when your query specifies which time range it cares about.
-- **Use continuous aggregates for reporting.** Summarize in the background so the dashboard does not have to calculate everything again. In the production system I work on, this pattern helped take reporting from minutes to seconds.
+- **Use continuous aggregates for reporting.** Summarize in the background so the dashboard does not have to calculate everything again. In the local test above, the summary query dropped from 158 ms to 0.5 ms on a small dataset.
 - **Think about compression and retention early.** How long to keep data is a business decision too. Do not wait until storage is full to ask, "do we still need last year's data?"
 
 The coordinates are stored and queryable now. Fleet tracking also needs to answer questions like "Did my vehicle leave the delivery zone?" In [Part 5](/en/writing/2026/geofencing-postgis/), I will get into geofencing with PostGIS, polygons, `ST_Contains`, and detecting when a vehicle enters or leaves an area.
@@ -195,8 +195,6 @@ This post is part of the **Building a GPS Backend from Scratch** series.
 
 - Previous: [Part 3 - Decode Packet: GT06 & Teltonika Protocol](/en/writing/2026/decode-packet-gt06-teltonika/)
 - Next: [Part 5 - Geofencing with PostGIS](/en/writing/2026/geofencing-postgis/)
-
-## CTA
 
 For questions about storing GPS data with PostgreSQL or TimescaleDB, [contact me](/en/contact/). You can also subscribe to [RSS](/en/writing/index.xml) to follow future posts.
 

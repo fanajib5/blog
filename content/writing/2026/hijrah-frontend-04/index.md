@@ -53,10 +53,7 @@ Yang kami jaga cuma batas antarlibrary: satu _file_ tidak mencampur keduanya. Ke
 
 ## Catatan Saya
 
-1. **Dua _library_ bisa berdampingan.** Yang penting, batas pemakaiannya jelas.
-2. **Mulai dari aturan sederhana di level _file_.** Kami tidak membutuhkan _tooling_ khusus untuk menjaga agar keduanya tidak tercampur.
-3. **Import _locale_ di _reducer_ menunjukkan batas lapisan yang kurang rapi.** Untuk sekarang, cukup catat dulu karena kode itu masih berfungsi.
-4. **Pisahkan port dari standardisasi.** Pindahkan dulu; perbaikan besar bisa menyusul.
+Dua _library_ bisa berdampingan selama batas pemakaiannya jelas, dan aturan sederhana di level _file_ sudah cukup untuk menjaganya tanpa _tooling_ khusus. Import _locale_ di _reducer_ menunjukkan batas lapisan yang kurang rapi, tapi untuk sekarang cukup dicatat karena kodenya masih berfungsi. Seperti di episode-episode sebelumnya, pisahkan port dari standardisasi: pindahkan dulu, perbaikan besar menyusul.
 
 Episode berikutnya jadi penutup seri. Saya akan melihat dua sisi gedung yang sama, apa yang berubah setelah _backend_ dan _frontend_ dipindahkan, dan warisan mana yang kami putuskan untuk dipelihara. Sampai jumpa di sana.
 
